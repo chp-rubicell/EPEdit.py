@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from .utilities import fieldname_to_key
+from .utilities import fieldname_to_key, parse_fieldvalue_str
 
 from dataclasses import dataclass
 from typing import Union, List, Tuple, Literal, Optional
@@ -11,9 +11,9 @@ import re
 class FieldProps:
     """"""
     name: str
-    type: Literal['string', 'int', 'float']
+    type: Literal['str', 'int', 'float']
     units: Union[str, None]
-    default: Optional[Union[str, int, float]] # default value
+    default: Optional[Union[str, int, float]] = None # default value
 
 @dataclass
 class ExtensibleProps:
@@ -35,13 +35,13 @@ def parse_IDDClass_str(class_str: str, verbose: bool = False) -> ClassProps:
     #? get top-level class info
     class_info_str_match = re.search(r'[^\s,]+,(?:\r\n|\r|\n)(?: *\\.*(?:\r\n|\r|\n))+', class_str)  # Version, \~~, \~~
     if class_info_str_match:
-        class_info_str = class_info_str_match.group(0)
+        class_info_str = str(class_info_str_match.group(0))
     else:
         raise ValueError('No class info found!')
     
     classname_match = re.search(r'([^\s,]+),', class_info_str)
     if classname_match:
-        classname = classname_match.group(1)
+        classname = str(classname_match.group(1))
     else:
         raise ValueError
 
@@ -76,7 +76,7 @@ def parse_IDDClass_str(class_str: str, verbose: bool = False) -> ClassProps:
 
         fieldname_match = re.search(r'\\field (.+)(?:\r\n|\r|\n)', field_str)
         if fieldname_match:
-            fieldname = fieldname_match.group(1)
+            fieldname = str(fieldname_match.group(1))
             fieldkey = fieldname_to_key(fieldname)
         else:
             print(f'> No fieldName match for "{classname}" - {fieldidx}!')
@@ -85,7 +85,51 @@ def parse_IDDClass_str(class_str: str, verbose: bool = False) -> ClassProps:
             fieldname = fieldcode
             fieldkey = fieldcode
             print(f'  using "{fieldcode}" instead.')
-        print(fieldname, fieldkey)
+
+        #? field type
+        fieldtype_match = re.search(r'\\type ([^\s,]+)(?:\r\n|\r|\n)', field_str)
+        if fieldtype_match:
+            fieldtype_raw = str(fieldtype_match.group(1))
+        else:
+            fieldtype_raw = ''  # default to str
+        #* integer, real, alpha, choice, object-list, external-list, node
+        fieldtype = 'int' if fieldtype_raw == 'integer' else 'float' if fieldtype_raw == 'real' else 'str'
+
+        #? field units
+        fieldunits_match = re.search(r'\\units (.+)(?:\r\n|\r|\n)', field_str)
+        if fieldunits_match:
+            fieldunits = str(fieldunits_match.group(1))
+        else:
+            fieldunits = None
         
+        #? default value
+        defaultvalue_match = re.search(r'/\\default (.+)(?:\r\n|\r|\n)', field_str)
+        if defaultvalue_match:
+            classprop.last_default_field_idx = fieldidx
+            defaultvalue_str = str(defaultvalue_match.group(1))
+            defaultvalue = parse_fieldvalue_str(defaultvalue_str)
+            if (
+                isinstance(defaultvalue, str)
+                and (
+                    defaultvalue.lower() == 'autosize'
+                    or defaultvalue.lower() == 'autocalculate'
+                )
+            ):
+                defaultvalue = defaultvalue.title()
+        else:
+            defaultvalue = None
+        
+        #? create FieldProps object
+        fieldprop = FieldProps(
+            name    = fieldname,
+            type    = fieldtype,
+            units   = fieldunits,
+            default = defaultvalue
+        )
+        
+        #? extensible
+        #TODO
+
+        setattr(classprop, fieldkey, fieldprop)
 
     return classprop
