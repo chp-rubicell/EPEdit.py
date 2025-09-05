@@ -128,6 +128,10 @@ def parse_IDDClass_str(class_str: str, verbose: bool = False) -> ClassProps:
         )
         
         #? extensible
+        # start of extensible
+        if classprop.extensible and re.search(r'\\begin-extensible', field_str):
+            classprop.extensible.start_idx = fieldidx
+        # if extensible field
         #TODO
 
         setattr(classprop, fieldkey, fieldprop)
