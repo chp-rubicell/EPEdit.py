@@ -8,7 +8,8 @@ if len(sys.argv) == 1:
 
 # Define extensions separately to give the C++ file special instructions
 ext_modules = [
-    Extension("utils", sources=["utils.pyx"], language="c++"),
+    Extension('utils', sources=['utils.pyx'], language='c++'),
+    Extension('idd', sources=['idd.pyx'], language='c++'),
 ]
 
 setup(
