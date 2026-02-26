@@ -76,17 +76,17 @@ Version,
 /[^\s,]+,(?:\r\n|\r|\n)(?: *\\.*(?:\r\n|\r|\n))+(?: *[^\s,]+ *[,;](?: *\\.*(?:\r\n|\r|\n))+)+/g
 """
 
-#+ —— Parse ——————
+#+ —— Helper functions ——————
 
-cdef struct HeaderFieldMatchResult:
+cdef struct MatchFieldsResult:
     string header_string
     vector[string] field_strings
 
-cdef HeaderFieldMatchResult match_fields(string class_string):
+cdef MatchFieldsResult match_fields(string class_string):
     """Splits the raw IDD string into the Header and a vector of Field Blocks."""
     #? Logic mimics regex: / *[^\s,]+ *[,;](?: *\\.*(?:\r\n|\r|\n))*/g
 
-    cdef HeaderFieldMatchResult result
+    cdef MatchFieldsResult result
     cdef size_t cursor = 0 # beginning of the "unprocessed" text
     cdef size_t length = class_string.length()
     cdef size_t sep_pos = 0 # separator (,/;) positions
@@ -134,12 +134,86 @@ cdef HeaderFieldMatchResult match_fields(string class_string):
     return result
 
 def test_match_fields(str s):
-    cdef HeaderFieldMatchResult result = match_fields(s.encode("utf-8"))
+    cdef MatchFieldsResult result = match_fields(s.encode("utf-8"))
     print("-----------")
     print(result.header_string.decode("utf-8"))
     for field in result.field_strings:
         print("-----------")
         print(field.decode("utf-8"))
+
+cdef string extract_tag(string& block, string tag):
+    # Finds "\tag <value>\r\n"
+    # Tag should include the backslash, e.g., "\\field "
+
+    cdef size_t start_pos = block.find(tag)
+    if start_pos == npos:
+        return string()
+
+    start_pos += tag.length()
+    cdef size_t end_pos = block.find(b"\n", start_pos)
+    if end_pos == npos:
+        end_pos = block.length()
+
+    # Handle \r if present
+    if end_pos > start_pos and block[end_pos - 1] == b"\r":
+        return utils.trim(block.substr(start_pos, end_pos - start_pos - 1))
+
+    return utils.trim(block.substr(start_pos, end_pos - start_pos))
+
+def test_extract_tag(str block, str tag):
+    cdef string c_block = block.encode("utf-8")
+    print(extract_tag(c_block, tag.encode("utf-8")).decode("utf-8"))
+    print(c_block.decode("utf-8"))
+
+cdef struct ExtensibleNameMatchResult:
+    string prefix
+    string suffix
+    cbool success
+
+cdef ExtensibleNameMatchResult match_extensible_name(string& fieldname):
+    """
+    'Field 1' -> 'Field ' + n + ''
+    'Vertex 1 X-coordinate' -> 'Vertex ' + n + ' X-coordinate'
+    """
+    cdef ExtensibleNameMatchResult result
+    result.success = False
+    cdef string number = b""
+
+    cdef size_t pos = 0
+    cdef size_t length = fieldname.length()
+
+    # prefix
+    while pos < length and not isdigit(fieldname[pos]):
+        result.prefix.push_back(fieldname[pos])
+        pos += 1
+
+    # number
+    while pos < length and isdigit(fieldname[pos]):
+        number.push_back(fieldname[pos])
+        pos += 1
+
+    # suffix
+    if pos < length:
+        result.suffix = fieldname.substr(pos, length - pos)
+
+    if number.empty():
+        result.prefix = fieldname + string(b" ")
+        result.suffix = b""
+    else:
+        result.success = True
+
+    return result
+
+def test_match_extensible_name(str s):
+    cdef fieldname = s.encode("utf-8")
+    cdef ExtensibleNameMatchResult result = match_extensible_name(fieldname)
+    print(result.prefix.decode("utf-8"))
+    print(result.suffix.decode("utf-8"))
+    print(result.success)
+    print(fieldname.decode("utf-8"))
+
+#+ —— Parsing class info ——————
+
 
 cdef ClassProps parse_idd_class_string(string class_string, cbool verbose = False):
     """
@@ -149,7 +223,7 @@ cdef ClassProps parse_idd_class_string(string class_string, cbool verbose = Fals
     cdef size_t sep_pos # for tracking position of separators (,/;)
 
     #? Parse class_string into header_string and field_strings
-    cdef HeaderFieldMatchResult match_result = match_fields(class_string)
+    cdef MatchFieldsResult match_result = match_fields(class_string)
 
     #? ClassProps result
     cdef ClassProps classProps
@@ -162,7 +236,7 @@ cdef ClassProps parse_idd_class_string(string class_string, cbool verbose = Fals
         classProps.name = utils.trim(match_result.header_string.substr(0, sep_pos))
     else:
         if verbose:
-            print(
+            print("> No fieldName match for '{classProps.name.decode('utf-8')}' - {field_idx}. Using {fieldname.decode('utf-8')}")
         classProps.name = utils.trim(match_result.header_string) # fallback
 
     #? Check for \default in header
@@ -201,15 +275,15 @@ cdef ClassProps parse_idd_class_string(string class_string, cbool verbose = Fals
             # if has extensibles, and all first extensible fields are processed
             break
 
-        field_string = match_result.field_strings[i]
+        field_string = match_result.field_strings[field_idx]
 
         #? Parse field info from field_string
-        fieldname = utils.extract_tag(field_string, b"\\field ")
+        fieldname = extract_tag(field_string, b"\\field ")
         if fieldname.empty():
             # fallback to using field code (e.g., N1)
             sep_pos = field_string.find_first_of(b",;")
             if sep_pos != npos:
-                fieldname = trim(field_string.substr(0, sep_pos))
+                fieldname = utils.trim(field_string.substr(0, sep_pos))
             else:
                 fieldname = to_string(field_idx)
             if verbose:

@@ -13,12 +13,13 @@ import utils
 
 # print(utils.test_fieldname_to_key("  U-Value "))
 
-# utils.test_extract_tag(r"\memo Determines which Heat Balance Algorithm will be used ie.", "memo")
-
-utils.test_match_extensible_name("Field 1")
-utils.test_match_extensible_name("Vertex 1 X-coordinate")
-
 import idd
+
+idd.test_extract_tag(r"\memo Determines which Heat Balance Algorithm will be used ie.", "memo")
+
+idd.test_match_extensible_name("Field 1")
+idd.test_match_extensible_name("Vertex 1 X-coordinate")
+idd.test_match_extensible_name("Vertex  X-coordinate")
 
 test_class_str = r"""HeatBalanceAlgorithm,
        \memo Determines which Heat Balance Algorithm will be used ie.
