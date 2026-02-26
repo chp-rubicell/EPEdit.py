@@ -114,12 +114,39 @@ cdef string extract_tag(string& block, string tag):
 
     return trim(block.substr(start_pos, end_pos - start_pos))
 
-cdef pair[string, string] match_extensible_name(string& fieldname):
+cdef pair[string, string] match_extensible_name(string& fieldname, cbool verbose):
     """
-    "Field 1" -> "Field " + n + ""
-    "Vertex 1 X-coordinate" -> "Vertex " + n + " X-coordinate"
+    'Field 1' -> 'Field ' + n + ''
+    'Vertex 1 X-coordinate' -> 'Vertex ' + n + ' X-coordinate'
     """
-    cdef int pos = fieldname.length() - 1
+    cdef string prefix = ""
+    cdef string number = ""
+    cdef string suffix = ""
+
+    cdef size_t pos = 0
+    cdef size_t length = fieldname.length()
+
+    # prefix
+    while pos < length and not isdigit(fieldname[pos]):
+        prefix.push_back(fieldname[pos])
+        pos += 1
+
+    # number
+    while pos < length and isdigit(fieldname[pos]):
+        number.push_back(fieldname[pos])
+        pos += 1
+
+    # suffix
+    if pos < length:
+        suffix = fieldname.substr(pos, length - pos)
+
+    if number.empty():
+        if verbose:
+            print("> No extensible pattern matched!")
+        # fallback logic
+        return pair[string, string](fieldname + string(b" "), string(b""))
+
+    return pair[string, string](prefix, suffix)
 
 # --- Python Wrapper Functions ---
 
@@ -151,3 +178,8 @@ def test_extract_tag(str block, str tag):
     cdef string c_block = block.encode("utf-8")
     print(extract_tag(c_block, tag.encode("utf-8")).decode("utf-8"))
     print(c_block.decode("utf-8"))
+
+def test_match_extensible_name(str s):
+    cdef fieldname = s.encode("utf-8")
+    print(match_extensible_name(fieldname))
+    print(fieldname)

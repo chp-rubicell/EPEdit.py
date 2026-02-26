@@ -2,22 +2,25 @@
 
 import utils
 
-# utils.test_trim('  sadf   \n\n')
+# utils.test_trim("  sadf   \n\n")
 
-# print(utils.test_to_uppercase(' kl ASDdsdf sldkf!@   '))
-# print(utils.test_to_titlecase(' kl ASDdsdf sldkf!@   '))
+# print(utils.test_to_uppercase(" kl ASDdsdf sldkf!@   "))
+# print(utils.test_to_titlecase(" kl ASDdsdf sldkf!@   "))
 
-# print(utils.test_find_char('ASDFssdfs', 'D'))
+# print(utils.test_find_char("ASDFssdfs", "D"))
 
-# print(utils.test_find_char_pos('SADFsdfsdf', 'D'))
+# print(utils.test_find_char_pos("SADFsdfsdf", "D"))
 
-# print(utils.test_fieldname_to_key('  U-Value '))
+# print(utils.test_fieldname_to_key("  U-Value "))
 
-# utils.test_extract_tag(r'\memo Determines which Heat Balance Algorithm will be used ie.', 'memo')
+# utils.test_extract_tag(r"\memo Determines which Heat Balance Algorithm will be used ie.", "memo")
+
+utils.test_match_extensible_name("Field 1")
+utils.test_match_extensible_name("Vertex 1 X-coordinate")
 
 import idd
 
-test_class_str = r'''HeatBalanceAlgorithm,
+test_class_str = r"""HeatBalanceAlgorithm,
        \memo Determines which Heat Balance Algorithm will be used ie.
        \memo CTF (Conduction Transfer Functions),
        \memo EMPD (Effective Moisture Penetration Depth with Conduction Transfer Functions).
@@ -45,9 +48,9 @@ test_class_str = r'''HeatBalanceAlgorithm,
   N3 ; \field Maximum Surface Convection Heat Transfer Coefficient Value
        \units W/m2-K
        \default 1000
-       \minimum 1.0'''
+       \minimum 1.0"""
 
-test_class_str_ext = r'''Schedule:Day:Interval,
+test_class_str_ext = r"""Schedule:Day:Interval,
        \extensible:2 - repeat last two fields, remembering to remove ; from "inner" fields.
        \memo A Schedule:Day:Interval contains a full day of values with specified end times for each value
        \memo Currently, is set up to allow for 10 minute intervals for an entire day.
@@ -75,7 +78,7 @@ test_class_str_ext = r'''Schedule:Day:Interval,
  N1  , \field Value Until Time 1
  A5  ; \field Time 2
        \note "until" includes the time entered.
-       \units hh:mm'''
+       \units hh:mm"""
 
 # idd.test_match_fields(test_class_str)
 

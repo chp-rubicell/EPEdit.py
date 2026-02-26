@@ -41,7 +41,7 @@ cdef struct FieldProps:
     cbool default_is_num # flag to distinguish string vs number types in default
 
 cdef struct ExtensibleProps:
-    int startidx # start index of the extensible fields
+    int start_idx # start index of the extensible fields
     int size # size of the extensible fields
     vector[string] key_regexp # RegExp pattern for extensible field search
     vector[pair[string, string]] fieldnames # prefix, suffix -> (prefix)(n)(suffix)
@@ -49,7 +49,7 @@ cdef struct ExtensibleProps:
 cdef struct ClassProps:
     cbool success
     string classname
-    int last_default_fieldidx
+    int last_default_field_idx
     cbool has_extensible
     ExtensibleProps extensible
 
@@ -141,10 +141,12 @@ def test_match_fields(str s):
         print("-----------")
         print(field.decode("utf-8"))
 
-cdef ClassProps parse_idd_class_string(string class_string):
+cdef ClassProps parse_idd_class_string(string class_string, cbool verbose = False):
     """
     Parse a class idd string and creates a ClassProps object.
     """
+
+    cdef size_t sep_pos # for tracking position of separators (,/;)
 
     #? Parse class_string into header_string and field_strings
     cdef HeaderFieldMatchResult match_result = match_fields(class_string)
@@ -152,20 +154,21 @@ cdef ClassProps parse_idd_class_string(string class_string):
     #? ClassProps result
     cdef ClassProps classProps
     classProps.success = True
-    classProps.last_default_fieldidx = -2 # -2 indicates undefined/none, -1 indicates present but no fields yet
+    classProps.last_default_field_idx = -2 # -2 indicates undefined/none, -1 indicates present but no fields yet
     classProps.has_extensible = False
 
     #? Extract class name
-    cdef size_t comma_pos = match_result.header_string.find(b",")
-    if comma_pos != npos:
-        classProps.classname = utils.trim(match_result.header_string.substr(0, comma_pos))
+    sep_pos = match_result.header_string.find(b",")
+    if sep_pos != npos:
+        classProps.classname = utils.trim(match_result.header_string.substr(0, sep_pos))
     else:
-        classProps.success = False
+        if verbose:
+            print(
         classProps.classname = utils.trim(match_result.header_string) # fallback
 
     #? Check for \default in header
     if match_result.header_string.find(b"\\default ") != npos:
-        classProps.last_default_fieldidx = -1
+        classProps.last_default_field_idx = -1
 
     #? Check for \extensible:<number>
     cdef string ext_tag = b"\\extensible:"
@@ -174,7 +177,7 @@ cdef ClassProps parse_idd_class_string(string class_string):
     cdef size_t num_end
     if ext_pos != npos:
         classProps.has_extensible = True
-        classProps.extensible.startidx = -1 # update during the field parsing
+        classProps.extensible.start_idx = -1 # update during the field parsing
         # Parse the number
         num_start = ext_pos + ext_tag.length()
         num_end = num_start
@@ -187,6 +190,31 @@ cdef ClassProps parse_idd_class_string(string class_string):
 
     #? Parse fields
     cdef cmap[string, FieldProps] fields_map
+    cdef string field_string
+    cdef string fieldname
+    cdef string fieldkey
+
+    cdef size_t field_idx
+    for field_idx in range(match_result.field_strings.size()):
+        if classProps.has_extensible \
+                and classProps.extensible.start_idx >= 0 \
+                and field_idx >= classProps.extensible.start_idx + classProps.extensible.size:
+            # if has extensibles, and all first extensible fields are processed
+            break
+
+        field_string = match_result.field_strings[i]
+
+        #? Parse field info from field_string
+        fieldname = utils.extract_tag(field_string, b"\\field ")
+        if fieldname.empty():
+            # fallback to using field code (e.g., N1)
+            sep_pos = field_string.find_first_of(b",;")
+            if sep_pos != npos:
+                fieldname = trim(field_string.substr(0, sep_pos))
+            else:
+                fieldname = to_string(field_idx)
+            if verbose:
+                print(f"> No fieldName match for '{classProps.classname.decode('utf-8')}' - {field_idx}. Using {fieldname.decode('utf-8')}")
 
     return classProps
 
