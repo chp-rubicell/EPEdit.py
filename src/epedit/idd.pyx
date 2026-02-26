@@ -47,8 +47,8 @@ cdef struct ExtensibleProps:
     vector[pair[string, string]] fieldnames # prefix, suffix -> (prefix)(n)(suffix)
 
 cdef struct ClassProps:
-    cbool success
-    string classname
+    string name
+    cmap[string, FieldProps] fields
     int last_default_field_idx
     cbool has_extensible
     ExtensibleProps extensible
@@ -153,18 +153,17 @@ cdef ClassProps parse_idd_class_string(string class_string, cbool verbose = Fals
 
     #? ClassProps result
     cdef ClassProps classProps
-    classProps.success = True
     classProps.last_default_field_idx = -2 # -2 indicates undefined/none, -1 indicates present but no fields yet
     classProps.has_extensible = False
 
     #? Extract class name
     sep_pos = match_result.header_string.find(b",")
     if sep_pos != npos:
-        classProps.classname = utils.trim(match_result.header_string.substr(0, sep_pos))
+        classProps.name = utils.trim(match_result.header_string.substr(0, sep_pos))
     else:
         if verbose:
             print(
-        classProps.classname = utils.trim(match_result.header_string) # fallback
+        classProps.name = utils.trim(match_result.header_string) # fallback
 
     #? Check for \default in header
     if match_result.header_string.find(b"\\default ") != npos:
@@ -214,7 +213,7 @@ cdef ClassProps parse_idd_class_string(string class_string, cbool verbose = Fals
             else:
                 fieldname = to_string(field_idx)
             if verbose:
-                print(f"> No fieldName match for '{classProps.classname.decode('utf-8')}' - {field_idx}. Using {fieldname.decode('utf-8')}")
+                print(f"> No fieldName match for '{classProps.name.decode('utf-8')}' - {field_idx}. Using {fieldname.decode('utf-8')}")
 
     return classProps
 
@@ -223,6 +222,6 @@ def test_parse_idd_class_string(str s):
     print("-----------")
     print(classProps.success)
     print("-----------")
-    print(classProps.classname.decode("utf-8"))
+    print(classProps.name.decode("utf-8"))
     print("-----------")
     print(classProps.extensible.size)
