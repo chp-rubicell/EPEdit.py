@@ -15,17 +15,17 @@ cimport cython
 
 #+ —— C++ External Definitions ——————
 
-cdef extern from '<algorithm>' namespace 'std':
+cdef extern from "<algorithm>" namespace "std":
     void replace(string.iterator, string.iterator, char, char)
     string.iterator find(string.iterator, string.iterator, char)
 
-cdef extern from '<cctype>' namespace 'std':
+cdef extern from "<cctype>" namespace "std":
     int isspace(int)
     int isdigit(int)
     int toupper(int)
     int tolower(int)
 
-cdef extern from '<string>' namespace 'std':
+cdef extern from "<string>" namespace "std":
     string to_string(int)
     string to_string(double)
 
@@ -54,7 +54,7 @@ cdef struct ClassProps:
     ExtensibleProps extensible
 
 #+ —— RegExp Pattern ——————
-r'''
+r"""
 #linebreak#
 /(?:\r\n|\r|\n)/
 
@@ -74,7 +74,7 @@ Version,
 /[^\s,]+,#linebreak#(?: *\\.*#linebreak#)+(?: *[^\s,]+ *[,;](?: *\\.*#linebreak#)+)+/g
  ^head                                ^fields
 /[^\s,]+,(?:\r\n|\r|\n)(?: *\\.*(?:\r\n|\r|\n))+(?: *[^\s,]+ *[,;](?: *\\.*(?:\r\n|\r|\n))+)+/g
-'''
+"""
 
 #+ —— Parse ——————
 
@@ -114,8 +114,8 @@ cdef HeaderFieldMatchResult match_fields(string class_string):
             if search_pos >= length: break
 
             # Check if this line is a comment/metadata
-            if class_string[search_pos] == b'\\' or class_string[search_pos] == b'!':
-                search_pos = class_string.find(b'\n', search_pos)
+            if class_string[search_pos] == b"\\" or class_string[search_pos] == b"!":
+                search_pos = class_string.find(b"\n", search_pos)
                 if search_pos == npos: break
                 search_pos += 1
             else:
@@ -134,12 +134,12 @@ cdef HeaderFieldMatchResult match_fields(string class_string):
     return result
 
 def test_match_fields(str s):
-    cdef HeaderFieldMatchResult result = match_fields(s.encode('utf-8'))
-    print('-----------')
-    print(result.header_string.decode('utf-8'))
+    cdef HeaderFieldMatchResult result = match_fields(s.encode("utf-8"))
+    print("-----------")
+    print(result.header_string.decode("utf-8"))
     for field in result.field_strings:
-        print('-----------')
-        print(field.decode('utf-8'))
+        print("-----------")
+        print(field.decode("utf-8"))
 
 cdef ClassProps parse_idd_class_string(string class_string):
     """
@@ -156,7 +156,7 @@ cdef ClassProps parse_idd_class_string(string class_string):
     classProps.has_extensible = False
 
     #? Extract class name
-    cdef size_t comma_pos = match_result.header_string.find(b',')
+    cdef size_t comma_pos = match_result.header_string.find(b",")
     if comma_pos != npos:
         classProps.classname = utils.trim(match_result.header_string.substr(0, comma_pos))
     else:
@@ -164,11 +164,11 @@ cdef ClassProps parse_idd_class_string(string class_string):
         classProps.classname = utils.trim(match_result.header_string) # fallback
 
     #? Check for \default in header
-    if match_result.header_string.find(b'\\default ') != npos:
+    if match_result.header_string.find(b"\\default ") != npos:
         classProps.last_default_fieldidx = -1
 
     #? Check for \extensible:<number>
-    cdef string ext_tag = b'\\extensible:'
+    cdef string ext_tag = b"\\extensible:"
     cdef size_t ext_pos = match_result.header_string.find(ext_tag)
     cdef size_t num_start
     cdef size_t num_end
@@ -191,10 +191,10 @@ cdef ClassProps parse_idd_class_string(string class_string):
     return classProps
 
 def test_parse_idd_class_string(str s):
-    cdef ClassProps classProps = parse_idd_class_string(s.encode('utf-8'))
-    print('-----------')
+    cdef ClassProps classProps = parse_idd_class_string(s.encode("utf-8"))
+    print("-----------")
     print(classProps.success)
-    print('-----------')
-    print(classProps.classname.decode('utf-8'))
-    print('-----------')
+    print("-----------")
+    print(classProps.classname.decode("utf-8"))
+    print("-----------")
     print(classProps.extensible.size)

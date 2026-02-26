@@ -13,7 +13,7 @@ import utils
 
 # print(utils.test_fieldname_to_key('  U-Value '))
 
-utils.test_extract_tag(r'\memo Determines which Heat Balance Algorithm will be used ie.', 'memo')
+# utils.test_extract_tag(r'\memo Determines which Heat Balance Algorithm will be used ie.', 'memo')
 
 import idd
 

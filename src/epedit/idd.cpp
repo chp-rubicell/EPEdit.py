@@ -3172,8 +3172,8 @@ static struct __pyx_t_3idd_HeaderFieldMatchResult __pyx_f_3idd_match_fields(std:
       /* "idd.pyx":117
  * 
  *             # Check if this line is a comment/metadata
- *             if class_string[search_pos] == b'\\' or class_string[search_pos] == b'!':             # <<<<<<<<<<<<<<
- *                 search_pos = class_string.find(b'\n', search_pos)
+ *             if class_string[search_pos] == b"\\" or class_string[search_pos] == b"!":             # <<<<<<<<<<<<<<
+ *                 search_pos = class_string.find(b"\n", search_pos)
  *                 if search_pos == npos: break
 */
       __pyx_t_2 = ((__pyx_v_class_string[__pyx_v_search_pos]) == '\\');
@@ -3189,16 +3189,16 @@ static struct __pyx_t_3idd_HeaderFieldMatchResult __pyx_f_3idd_match_fields(std:
 
         /* "idd.pyx":118
  *             # Check if this line is a comment/metadata
- *             if class_string[search_pos] == b'\\' or class_string[search_pos] == b'!':
- *                 search_pos = class_string.find(b'\n', search_pos)             # <<<<<<<<<<<<<<
+ *             if class_string[search_pos] == b"\\" or class_string[search_pos] == b"!":
+ *                 search_pos = class_string.find(b"\n", search_pos)             # <<<<<<<<<<<<<<
  *                 if search_pos == npos: break
  *                 search_pos += 1
 */
         __pyx_v_search_pos = __pyx_v_class_string.find(__pyx_k__2, __pyx_v_search_pos);
 
         /* "idd.pyx":119
- *             if class_string[search_pos] == b'\\' or class_string[search_pos] == b'!':
- *                 search_pos = class_string.find(b'\n', search_pos)
+ *             if class_string[search_pos] == b"\\" or class_string[search_pos] == b"!":
+ *                 search_pos = class_string.find(b"\n", search_pos)
  *                 if search_pos == npos: break             # <<<<<<<<<<<<<<
  *                 search_pos += 1
  *             else:
@@ -3209,7 +3209,7 @@ static struct __pyx_t_3idd_HeaderFieldMatchResult __pyx_f_3idd_match_fields(std:
         }
 
         /* "idd.pyx":120
- *                 search_pos = class_string.find(b'\n', search_pos)
+ *                 search_pos = class_string.find(b"\n", search_pos)
  *                 if search_pos == npos: break
  *                 search_pos += 1             # <<<<<<<<<<<<<<
  *             else:
@@ -3220,8 +3220,8 @@ static struct __pyx_t_3idd_HeaderFieldMatchResult __pyx_f_3idd_match_fields(std:
         /* "idd.pyx":117
  * 
  *             # Check if this line is a comment/metadata
- *             if class_string[search_pos] == b'\\' or class_string[search_pos] == b'!':             # <<<<<<<<<<<<<<
- *                 search_pos = class_string.find(b'\n', search_pos)
+ *             if class_string[search_pos] == b"\\" or class_string[search_pos] == b"!":             # <<<<<<<<<<<<<<
+ *                 search_pos = class_string.find(b"\n", search_pos)
  *                 if search_pos == npos: break
 */
         goto __pyx_L14;
@@ -3358,8 +3358,8 @@ static struct __pyx_t_3idd_HeaderFieldMatchResult __pyx_f_3idd_match_fields(std:
  *     return result
  * 
  * def test_match_fields(str s):             # <<<<<<<<<<<<<<
- *     cdef HeaderFieldMatchResult result = match_fields(s.encode('utf-8'))
- *     print('-----------')
+ *     cdef HeaderFieldMatchResult result = match_fields(s.encode("utf-8"))
+ *     print("-----------")
 */
 
 /* Python wrapper */
@@ -3477,9 +3477,9 @@ static PyObject *__pyx_pf_3idd_test_match_fields(CYTHON_UNUSED PyObject *__pyx_s
   /* "idd.pyx":137
  * 
  * def test_match_fields(str s):
- *     cdef HeaderFieldMatchResult result = match_fields(s.encode('utf-8'))             # <<<<<<<<<<<<<<
- *     print('-----------')
- *     print(result.header_string.decode('utf-8'))
+ *     cdef HeaderFieldMatchResult result = match_fields(s.encode("utf-8"))             # <<<<<<<<<<<<<<
+ *     print("-----------")
+ *     print(result.header_string.decode("utf-8"))
 */
   if (unlikely(__pyx_v_s == Py_None)) {
     PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%.30s'", "encode");
@@ -3494,9 +3494,9 @@ static PyObject *__pyx_pf_3idd_test_match_fields(CYTHON_UNUSED PyObject *__pyx_s
 
   /* "idd.pyx":138
  * def test_match_fields(str s):
- *     cdef HeaderFieldMatchResult result = match_fields(s.encode('utf-8'))
- *     print('-----------')             # <<<<<<<<<<<<<<
- *     print(result.header_string.decode('utf-8'))
+ *     cdef HeaderFieldMatchResult result = match_fields(s.encode("utf-8"))
+ *     print("-----------")             # <<<<<<<<<<<<<<
+ *     print(result.header_string.decode("utf-8"))
  *     for field in result.field_strings:
 */
   __pyx_t_4 = NULL;
@@ -3511,11 +3511,11 @@ static PyObject *__pyx_pf_3idd_test_match_fields(CYTHON_UNUSED PyObject *__pyx_s
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "idd.pyx":139
- *     cdef HeaderFieldMatchResult result = match_fields(s.encode('utf-8'))
- *     print('-----------')
- *     print(result.header_string.decode('utf-8'))             # <<<<<<<<<<<<<<
+ *     cdef HeaderFieldMatchResult result = match_fields(s.encode("utf-8"))
+ *     print("-----------")
+ *     print(result.header_string.decode("utf-8"))             # <<<<<<<<<<<<<<
  *     for field in result.field_strings:
- *         print('-----------')
+ *         print("-----------")
 */
   __pyx_t_4 = NULL;
   __pyx_t_6 = __Pyx_decode_cpp_string(__pyx_v_result.header_string, 0, PY_SSIZE_T_MAX, NULL, NULL, PyUnicode_DecodeUTF8); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 139, __pyx_L1_error)
@@ -3532,11 +3532,11 @@ static PyObject *__pyx_pf_3idd_test_match_fields(CYTHON_UNUSED PyObject *__pyx_s
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "idd.pyx":140
- *     print('-----------')
- *     print(result.header_string.decode('utf-8'))
+ *     print("-----------")
+ *     print(result.header_string.decode("utf-8"))
  *     for field in result.field_strings:             # <<<<<<<<<<<<<<
- *         print('-----------')
- *         print(field.decode('utf-8'))
+ *         print("-----------")
+ *         print(field.decode("utf-8"))
 */
   __pyx_t_7 = __pyx_v_result.field_strings.begin();
   for (; __pyx_t_7 != __pyx_v_result.field_strings.end(); ++__pyx_t_7) {
@@ -3544,10 +3544,10 @@ static PyObject *__pyx_pf_3idd_test_match_fields(CYTHON_UNUSED PyObject *__pyx_s
     __pyx_v_field = __PYX_STD_MOVE_IF_SUPPORTED(__pyx_t_2);
 
     /* "idd.pyx":141
- *     print(result.header_string.decode('utf-8'))
+ *     print(result.header_string.decode("utf-8"))
  *     for field in result.field_strings:
- *         print('-----------')             # <<<<<<<<<<<<<<
- *         print(field.decode('utf-8'))
+ *         print("-----------")             # <<<<<<<<<<<<<<
+ *         print(field.decode("utf-8"))
  * 
 */
     __pyx_t_6 = NULL;
@@ -3563,8 +3563,8 @@ static PyObject *__pyx_pf_3idd_test_match_fields(CYTHON_UNUSED PyObject *__pyx_s
 
     /* "idd.pyx":142
  *     for field in result.field_strings:
- *         print('-----------')
- *         print(field.decode('utf-8'))             # <<<<<<<<<<<<<<
+ *         print("-----------")
+ *         print(field.decode("utf-8"))             # <<<<<<<<<<<<<<
  * 
  * cdef ClassProps parse_idd_class_string(string class_string):
 */
@@ -3583,11 +3583,11 @@ static PyObject *__pyx_pf_3idd_test_match_fields(CYTHON_UNUSED PyObject *__pyx_s
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
     /* "idd.pyx":140
- *     print('-----------')
- *     print(result.header_string.decode('utf-8'))
+ *     print("-----------")
+ *     print(result.header_string.decode("utf-8"))
  *     for field in result.field_strings:             # <<<<<<<<<<<<<<
- *         print('-----------')
- *         print(field.decode('utf-8'))
+ *         print("-----------")
+ *         print(field.decode("utf-8"))
 */
   }
 
@@ -3595,8 +3595,8 @@ static PyObject *__pyx_pf_3idd_test_match_fields(CYTHON_UNUSED PyObject *__pyx_s
  *     return result
  * 
  * def test_match_fields(str s):             # <<<<<<<<<<<<<<
- *     cdef HeaderFieldMatchResult result = match_fields(s.encode('utf-8'))
- *     print('-----------')
+ *     cdef HeaderFieldMatchResult result = match_fields(s.encode("utf-8"))
+ *     print("-----------")
 */
 
   /* function exit code */
@@ -3615,7 +3615,7 @@ static PyObject *__pyx_pf_3idd_test_match_fields(CYTHON_UNUSED PyObject *__pyx_s
 }
 
 /* "idd.pyx":144
- *         print(field.decode('utf-8'))
+ *         print(field.decode("utf-8"))
  * 
  * cdef ClassProps parse_idd_class_string(string class_string):             # <<<<<<<<<<<<<<
  *     """
@@ -3680,7 +3680,7 @@ static struct __pyx_t_3idd_ClassProps __pyx_f_3idd_parse_idd_class_string(std::s
   /* "idd.pyx":159
  * 
  *     #? Extract class name
- *     cdef size_t comma_pos = match_result.header_string.find(b',')             # <<<<<<<<<<<<<<
+ *     cdef size_t comma_pos = match_result.header_string.find(b",")             # <<<<<<<<<<<<<<
  *     if comma_pos != npos:
  *         classProps.classname = utils.trim(match_result.header_string.substr(0, comma_pos))
 */
@@ -3688,7 +3688,7 @@ static struct __pyx_t_3idd_ClassProps __pyx_f_3idd_parse_idd_class_string(std::s
 
   /* "idd.pyx":160
  *     #? Extract class name
- *     cdef size_t comma_pos = match_result.header_string.find(b',')
+ *     cdef size_t comma_pos = match_result.header_string.find(b",")
  *     if comma_pos != npos:             # <<<<<<<<<<<<<<
  *         classProps.classname = utils.trim(match_result.header_string.substr(0, comma_pos))
  *     else:
@@ -3697,7 +3697,7 @@ static struct __pyx_t_3idd_ClassProps __pyx_f_3idd_parse_idd_class_string(std::s
   if (__pyx_t_2) {
 
     /* "idd.pyx":161
- *     cdef size_t comma_pos = match_result.header_string.find(b',')
+ *     cdef size_t comma_pos = match_result.header_string.find(b",")
  *     if comma_pos != npos:
  *         classProps.classname = utils.trim(match_result.header_string.substr(0, comma_pos))             # <<<<<<<<<<<<<<
  *     else:
@@ -3714,7 +3714,7 @@ static struct __pyx_t_3idd_ClassProps __pyx_f_3idd_parse_idd_class_string(std::s
 
     /* "idd.pyx":160
  *     #? Extract class name
- *     cdef size_t comma_pos = match_result.header_string.find(b',')
+ *     cdef size_t comma_pos = match_result.header_string.find(b",")
  *     if comma_pos != npos:             # <<<<<<<<<<<<<<
  *         classProps.classname = utils.trim(match_result.header_string.substr(0, comma_pos))
  *     else:
@@ -3747,7 +3747,7 @@ static struct __pyx_t_3idd_ClassProps __pyx_f_3idd_parse_idd_class_string(std::s
   /* "idd.pyx":167
  * 
  *     #? Check for \default in header
- *     if match_result.header_string.find(b'\\default ') != npos:             # <<<<<<<<<<<<<<
+ *     if match_result.header_string.find(b"\\default ") != npos:             # <<<<<<<<<<<<<<
  *         classProps.last_default_fieldidx = -1
  * 
 */
@@ -3756,7 +3756,7 @@ static struct __pyx_t_3idd_ClassProps __pyx_f_3idd_parse_idd_class_string(std::s
 
     /* "idd.pyx":168
  *     #? Check for \default in header
- *     if match_result.header_string.find(b'\\default ') != npos:
+ *     if match_result.header_string.find(b"\\default ") != npos:
  *         classProps.last_default_fieldidx = -1             # <<<<<<<<<<<<<<
  * 
  *     #? Check for \extensible:<number>
@@ -3766,7 +3766,7 @@ static struct __pyx_t_3idd_ClassProps __pyx_f_3idd_parse_idd_class_string(std::s
     /* "idd.pyx":167
  * 
  *     #? Check for \default in header
- *     if match_result.header_string.find(b'\\default ') != npos:             # <<<<<<<<<<<<<<
+ *     if match_result.header_string.find(b"\\default ") != npos:             # <<<<<<<<<<<<<<
  *         classProps.last_default_fieldidx = -1
  * 
 */
@@ -3775,7 +3775,7 @@ static struct __pyx_t_3idd_ClassProps __pyx_f_3idd_parse_idd_class_string(std::s
   /* "idd.pyx":171
  * 
  *     #? Check for \extensible:<number>
- *     cdef string ext_tag = b'\\extensible:'             # <<<<<<<<<<<<<<
+ *     cdef string ext_tag = b"\\extensible:"             # <<<<<<<<<<<<<<
  *     cdef size_t ext_pos = match_result.header_string.find(ext_tag)
  *     cdef size_t num_start
 */
@@ -3784,7 +3784,7 @@ static struct __pyx_t_3idd_ClassProps __pyx_f_3idd_parse_idd_class_string(std::s
 
   /* "idd.pyx":172
  *     #? Check for \extensible:<number>
- *     cdef string ext_tag = b'\\extensible:'
+ *     cdef string ext_tag = b"\\extensible:"
  *     cdef size_t ext_pos = match_result.header_string.find(ext_tag)             # <<<<<<<<<<<<<<
  *     cdef size_t num_start
  *     cdef size_t num_end
@@ -3933,7 +3933,7 @@ static struct __pyx_t_3idd_ClassProps __pyx_f_3idd_parse_idd_class_string(std::s
   goto __pyx_L0;
 
   /* "idd.pyx":144
- *         print(field.decode('utf-8'))
+ *         print(field.decode("utf-8"))
  * 
  * cdef ClassProps parse_idd_class_string(string class_string):             # <<<<<<<<<<<<<<
  *     """
@@ -3952,8 +3952,8 @@ static struct __pyx_t_3idd_ClassProps __pyx_f_3idd_parse_idd_class_string(std::s
  *     return classProps
  * 
  * def test_parse_idd_class_string(str s):             # <<<<<<<<<<<<<<
- *     cdef ClassProps classProps = parse_idd_class_string(s.encode('utf-8'))
- *     print('-----------')
+ *     cdef ClassProps classProps = parse_idd_class_string(s.encode("utf-8"))
+ *     print("-----------")
 */
 
 /* Python wrapper */
@@ -4069,8 +4069,8 @@ static PyObject *__pyx_pf_3idd_2test_parse_idd_class_string(CYTHON_UNUSED PyObje
   /* "idd.pyx":194
  * 
  * def test_parse_idd_class_string(str s):
- *     cdef ClassProps classProps = parse_idd_class_string(s.encode('utf-8'))             # <<<<<<<<<<<<<<
- *     print('-----------')
+ *     cdef ClassProps classProps = parse_idd_class_string(s.encode("utf-8"))             # <<<<<<<<<<<<<<
+ *     print("-----------")
  *     print(classProps.success)
 */
   if (unlikely(__pyx_v_s == Py_None)) {
@@ -4086,10 +4086,10 @@ static PyObject *__pyx_pf_3idd_2test_parse_idd_class_string(CYTHON_UNUSED PyObje
 
   /* "idd.pyx":195
  * def test_parse_idd_class_string(str s):
- *     cdef ClassProps classProps = parse_idd_class_string(s.encode('utf-8'))
- *     print('-----------')             # <<<<<<<<<<<<<<
+ *     cdef ClassProps classProps = parse_idd_class_string(s.encode("utf-8"))
+ *     print("-----------")             # <<<<<<<<<<<<<<
  *     print(classProps.success)
- *     print('-----------')
+ *     print("-----------")
 */
   __pyx_t_4 = NULL;
   __pyx_t_5 = 1;
@@ -4103,11 +4103,11 @@ static PyObject *__pyx_pf_3idd_2test_parse_idd_class_string(CYTHON_UNUSED PyObje
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "idd.pyx":196
- *     cdef ClassProps classProps = parse_idd_class_string(s.encode('utf-8'))
- *     print('-----------')
+ *     cdef ClassProps classProps = parse_idd_class_string(s.encode("utf-8"))
+ *     print("-----------")
  *     print(classProps.success)             # <<<<<<<<<<<<<<
- *     print('-----------')
- *     print(classProps.classname.decode('utf-8'))
+ *     print("-----------")
+ *     print(classProps.classname.decode("utf-8"))
 */
   __pyx_t_4 = NULL;
   __pyx_t_6 = __Pyx_PyBool_FromLong(__pyx_v_classProps.success); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 196, __pyx_L1_error)
@@ -4124,11 +4124,11 @@ static PyObject *__pyx_pf_3idd_2test_parse_idd_class_string(CYTHON_UNUSED PyObje
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "idd.pyx":197
- *     print('-----------')
+ *     print("-----------")
  *     print(classProps.success)
- *     print('-----------')             # <<<<<<<<<<<<<<
- *     print(classProps.classname.decode('utf-8'))
- *     print('-----------')
+ *     print("-----------")             # <<<<<<<<<<<<<<
+ *     print(classProps.classname.decode("utf-8"))
+ *     print("-----------")
 */
   __pyx_t_6 = NULL;
   __pyx_t_5 = 1;
@@ -4143,9 +4143,9 @@ static PyObject *__pyx_pf_3idd_2test_parse_idd_class_string(CYTHON_UNUSED PyObje
 
   /* "idd.pyx":198
  *     print(classProps.success)
- *     print('-----------')
- *     print(classProps.classname.decode('utf-8'))             # <<<<<<<<<<<<<<
- *     print('-----------')
+ *     print("-----------")
+ *     print(classProps.classname.decode("utf-8"))             # <<<<<<<<<<<<<<
+ *     print("-----------")
  *     print(classProps.extensible.size)
 */
   __pyx_t_6 = NULL;
@@ -4163,9 +4163,9 @@ static PyObject *__pyx_pf_3idd_2test_parse_idd_class_string(CYTHON_UNUSED PyObje
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "idd.pyx":199
- *     print('-----------')
- *     print(classProps.classname.decode('utf-8'))
- *     print('-----------')             # <<<<<<<<<<<<<<
+ *     print("-----------")
+ *     print(classProps.classname.decode("utf-8"))
+ *     print("-----------")             # <<<<<<<<<<<<<<
  *     print(classProps.extensible.size)
 */
   __pyx_t_4 = NULL;
@@ -4180,8 +4180,8 @@ static PyObject *__pyx_pf_3idd_2test_parse_idd_class_string(CYTHON_UNUSED PyObje
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "idd.pyx":200
- *     print(classProps.classname.decode('utf-8'))
- *     print('-----------')
+ *     print(classProps.classname.decode("utf-8"))
+ *     print("-----------")
  *     print(classProps.extensible.size)             # <<<<<<<<<<<<<<
 */
   __pyx_t_4 = NULL;
@@ -4202,8 +4202,8 @@ static PyObject *__pyx_pf_3idd_2test_parse_idd_class_string(CYTHON_UNUSED PyObje
  *     return classProps
  * 
  * def test_parse_idd_class_string(str s):             # <<<<<<<<<<<<<<
- *     cdef ClassProps classProps = parse_idd_class_string(s.encode('utf-8'))
- *     print('-----------')
+ *     cdef ClassProps classProps = parse_idd_class_string(s.encode("utf-8"))
+ *     print("-----------")
 */
 
   /* function exit code */
@@ -4601,8 +4601,8 @@ __Pyx_RefNannySetupContext("PyInit_idd", 0);
  *     return result
  * 
  * def test_match_fields(str s):             # <<<<<<<<<<<<<<
- *     cdef HeaderFieldMatchResult result = match_fields(s.encode('utf-8'))
- *     print('-----------')
+ *     cdef HeaderFieldMatchResult result = match_fields(s.encode("utf-8"))
+ *     print("-----------")
 */
   __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_3idd_1test_match_fields, 0, __pyx_mstate_global->__pyx_n_u_test_match_fields, NULL, __pyx_mstate_global->__pyx_n_u_idd, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[0])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 136, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
@@ -4616,8 +4616,8 @@ __Pyx_RefNannySetupContext("PyInit_idd", 0);
  *     return classProps
  * 
  * def test_parse_idd_class_string(str s):             # <<<<<<<<<<<<<<
- *     cdef ClassProps classProps = parse_idd_class_string(s.encode('utf-8'))
- *     print('-----------')
+ *     cdef ClassProps classProps = parse_idd_class_string(s.encode("utf-8"))
+ *     print("-----------")
 */
   __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_3idd_3test_parse_idd_class_string, 0, __pyx_mstate_global->__pyx_n_u_test_parse_idd_class_string, NULL, __pyx_mstate_global->__pyx_n_u_idd, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[1])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 193, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
