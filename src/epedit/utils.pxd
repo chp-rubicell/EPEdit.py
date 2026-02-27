@@ -3,6 +3,7 @@ from libcpp cimport bool as cbool
 
 cdef string trim(const string& s)
 cdef string to_uppercase(const string& s)
+cdef string to_lowercase(const string& s)
 cdef string to_titlecase(const string& s)
 cdef cbool find_char(const string& s, char c)
 cdef size_t find_char_pos(const string& s, char c)

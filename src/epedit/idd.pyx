@@ -37,20 +37,18 @@ cdef struct EPField:
     string type
     string units
     cbool has_default
-    string default_val_str
-    double default_val_num # used for int or float
-    cbool default_is_num # flag to distinguish string vs number types in default
+    string default
 
 cdef struct EPExtensible:
     int start_idx # start index of the extensible fields
     int size # size of the extensible fields
-    vector[string] key_regexp # RegExp pattern for extensible field search
+    # vector[string] key_regexp # RegExp pattern for extensible field search
     vector[pair[string, string]] fieldnames # prefix, suffix -> (prefix)(n)(suffix)
 
 cdef struct EPClass:
     string name
     cmap[string, EPField] fields
-    int last_default_field_idx
+    int last_default_field_idx # -2 indicates undefined/none, -1 indicates present but no fields yet
     cbool has_extensible
     EPExtensible extensible
 
@@ -228,7 +226,7 @@ cdef EPClass parse_idd_class_string(string class_string, cbool verbose = False):
 
     #? EPClass result
     cdef EPClass epclass
-    epclass.last_default_field_idx = -2 # -2 indicates undefined/none, -1 indicates present but no fields yet
+    epclass.last_default_field_idx = -2
     epclass.has_extensible = False
 
     #? Extract class name
@@ -269,6 +267,9 @@ cdef EPClass parse_idd_class_string(string class_string, cbool verbose = False):
     cdef string fieldname
     cdef string fieldkey
     cdef string fieldtype_raw # fieldtype in original IDD term
+    cdef string field_default_raw
+
+    cdef ExtensibleNameMatchResult extensible_result
 
     cdef size_t field_idx
     for field_idx in range(match_result.field_strings.size()):
@@ -305,9 +306,44 @@ cdef EPClass parse_idd_class_string(string class_string, cbool verbose = False):
         if fieldtype_raw == b"integer":
             current_field.type = b"int"
         elif fieldtype_raw == b"real":
-            current_field.tpe == b"float"
+            current_field.type == b"float"
         else:
-            current_field.tpe == b"string" # default
+            current_field.type == b"string" # default
+
+        #? field units
+        current_field.units = extract_tag(field_string, b"\\units ")
+
+        #? default value
+        field_default_raw = extract_tag(field_string, b"\\default ")
+        if not field_default_raw.empty():
+            epclass.last_default_field_idx = field_idx
+            current_field.has_default = True
+            if utils.to_lowercase(field_default_raw) == b"autosize" \
+                    or utils.to_lowercase(field_default_raw) == b"autocalculate":
+                field_default_raw = utils.to_titlecase(field_default_raw)
+            current_field.default = field_default_raw
+        else:
+            current_field.has_default = False
+
+        #? extensible
+        if epclass.has_extensible:
+            # start of extensible
+            if field_string.find(b"\\begin-extensible") != npos:
+                epclass.extensible.start_idx = field_idx
+            # if extensible field
+            if epclass.extensible.start_idx >= 0:
+                extensible_result = match_extensible_name(fieldname)
+                if not extensible_result.success:
+                    printf(
+                        "> No extensible pattern matched for %s - '%s'!",
+                        epclass.name.c_str(),
+                        fieldname.c_str()
+                    )
+
+                epclass.extensible.fieldnames.push_back(pair[string, string](extensible_result.prefix, extensible_result.suffix))
+                #TODO add key_regexp?
+
+        epclass.fields[fieldkey] = current_field
 
     return epclass
 
@@ -317,3 +353,6 @@ def test_parse_idd_class_string(str s, bool verbose = False):
     print(epclass.name.decode("utf-8"))
     print("-----------")
     print(epclass.extensible.size)
+    print("-----------")
+    for field in epclass.fields:
+        print(field.first.decode("utf-8"))

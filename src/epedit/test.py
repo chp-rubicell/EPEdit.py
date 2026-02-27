@@ -4,8 +4,8 @@ import utils
 
 # utils.test_trim("  sadf   \n\n")
 
-print(utils.test_to_uppercase(" kl ASDdsdf sldkf!@   "))
-print(utils.test_to_lowercase(" kl ASDdsdf sldkf!@   "))
+# print(utils.test_to_uppercase(" kl ASDdsdf sldkf!@   "))
+# print(utils.test_to_lowercase(" kl ASDdsdf sldkf!@   "))
 # print(utils.test_to_titlecase(" kl ASDdsdf sldkf!@   "))
 
 # print(utils.test_find_char("ASDFssdfs", "D"))
@@ -82,6 +82,209 @@ test_class_str_ext = r"""Schedule:Day:Interval,
        \note "until" includes the time entered.
        \units hh:mm"""
 
-# idd.test_match_fields(test_class_str)
+idd.test_match_fields(test_class_str)
 
-# idd.test_parse_idd_class_string(test_class_str_ext, verbose=True)
+idd.test_parse_idd_class_string(test_class_str_ext, verbose=True)
+
+idd.test_parse_idd_class_string(r"""
+BuildingSurface:Detailed,
+  \memo Allows for detailed entry of building heat transfer surfaces. Does not include subsurfaces such as windows or doors.
+  \extensible:3 -- duplicate last set of x,y,z coordinates (last 3 fields), remembering to remove ; from "inner" fields.
+  \format vertices
+  \min-fields 20
+  A1 , \field Name
+       \required-field
+       \type alpha
+       \reference SurfaceNames
+       \reference SurfAndSubSurfNames
+       \reference AllHeatTranSurfNames
+       \reference OutFaceEnvNames
+       \reference AllHeatTranAngFacNames
+       \reference RadiantSurfaceNames
+       \reference AllShadingAndHTSurfNames
+       \reference FloorSurfaceNames
+  A2 , \field Surface Type
+       \required-field
+       \type choice
+       \key Floor
+       \key Wall
+       \key Ceiling
+       \key Roof
+  A3 , \field Construction Name
+       \required-field
+       \note To be matched with a construction in this input file
+       \type object-list
+       \object-list ConstructionNames
+  A4 , \field Zone Name
+       \required-field
+       \note Zone the surface is a part of.
+       \type object-list
+       \object-list ZoneNames
+  A5 , \field Space Name
+       \note Space the surface is a part of (optional, see description of Space object for more details).
+       \type object-list
+       \object-list SpaceNames
+  A6 , \field Outside Boundary Condition
+       \required-field
+       \type choice
+       \key Adiabatic
+       \key Surface
+       \key Zone
+       \key Outdoors
+       \key Foundation
+       \key Ground
+       \key GroundFCfactorMethod
+       \key OtherSideCoefficients
+       \key OtherSideConditionsModel
+       \key GroundSlabPreprocessorAverage
+       \key GroundSlabPreprocessorCore
+       \key GroundSlabPreprocessorPerimeter
+       \key GroundBasementPreprocessorAverageWall
+       \key GroundBasementPreprocessorAverageFloor
+       \key GroundBasementPreprocessorUpperWall
+       \key GroundBasementPreprocessorLowerWall
+  A7,  \field Outside Boundary Condition Object
+       \type object-list
+       \object-list OutFaceEnvNames
+       \note Non-blank only if the field Outside Boundary Condition is Surface,
+       \note Zone, OtherSideCoefficients or OtherSideConditionsModel
+       \note If Surface, specify name of corresponding surface in adjacent zone or
+       \note specify current surface name for internal partition separating like zones
+       \note If Zone, specify the name of the corresponding zone and
+       \note the program will generate the corresponding interzone surface
+       \note If Foundation, specify the name of the corresponding Foundation object and
+       \note the program will calculate the heat transfer appropriately
+       \note If OtherSideCoefficients, specify name of SurfaceProperty:OtherSideCoefficients
+       \note If OtherSideConditionsModel, specify name of SurfaceProperty:OtherSideConditionsModel
+  A8 , \field Sun Exposure
+       \type choice
+       \key SunExposed
+       \key NoSun
+       \default SunExposed
+  A9,  \field Wind Exposure
+       \type choice
+       \key WindExposed
+       \key NoWind
+       \default WindExposed
+  N1,  \field View Factor to Ground
+       \type real
+       \note From the exterior of the surface
+       \note Unused if one uses the "reflections" options in Solar Distribution in Building input
+       \note unless a DaylightingDevice:Shelf or DaylightingDevice:Tubular object has been specified.
+       \note autocalculate will automatically calculate this value from the tilt of the surface
+       \autocalculatable
+       \minimum 0.0
+       \maximum 1.0
+       \default autocalculate
+  N2 , \field Number of Vertices
+       \note shown with 120 vertex coordinates -- extensible object
+       \note  "extensible" -- duplicate last set of x,y,z coordinates (last 3 fields),
+       \note remembering to remove ; from "inner" fields.
+       \note for clarity in any error messages, renumber the fields as well.
+       \note (and changing z terminator to a comma "," for all but last one which needs a semi-colon ";")
+       \autocalculatable
+       \minimum 3
+       \default autocalculate
+       \note vertices are given in GlobalGeometryRules coordinates -- if relative, all surface coordinates
+       \note are "relative" to the Zone Origin. If world, then building and zone origins are used
+       \note for some internal calculations, but all coordinates are given in an "absolute" system.
+  N3,  \field Vertex 1 X-coordinate
+       \begin-extensible
+       \required-field
+       \units m
+       \type real
+  N4 , \field Vertex 1 Y-coordinate
+       \required-field
+       \units m
+       \type real
+  N5 , \field Vertex 1 Z-coordinate
+       \required-field
+       \units m
+       \type real
+  N6,  \field Vertex 2 X-coordinate
+       \required-field
+       \units m
+       \type real
+  N7,  \field Vertex 2 Y-coordinate
+       \required-field
+       \units m
+       \type real
+  N8,  \field Vertex 2 Z-coordinate
+       \required-field
+       \units m
+       \type real
+  N9,  \field Vertex 3 X-coordinate
+       \required-field
+       \units m
+       \type real
+  N10, \field Vertex 3 Y-coordinate
+       \required-field
+       \units m
+       \type real
+  N11, \field Vertex 3 Z-coordinate
+       \required-field
+       \units m
+       \type real
+  N12, \field Vertex 4 X-coordinate
+       \units m
+       \type real
+  N13, \field Vertex 4 Y-coordinate
+       \type real
+       \units m
+  N14, \field Vertex 4 Z-coordinate
+       \units m
+       \type real
+  N15, \field Vertex 5 X-coordinate
+       \units m
+       \type real
+  N16, \field Vertex 5 Y-coordinate
+       \type real
+       \units m
+  N17, \field Vertex 5 Z-coordinate
+       \units m
+       \type real
+  N18, \field Vertex 6 X-coordinate
+       \units m
+       \type real
+  N19, \field Vertex 6 Y-coordinate
+       \type real
+       \units m
+  N20, \field Vertex 6 Z-coordinate
+       \units m
+       \type real
+  N21, \field Vertex 7 X-coordinate
+       \units m
+       \type real
+  N22, \field Vertex 7 Y-coordinate
+       \type real
+       \units m
+  N23, \field Vertex 7 Z-coordinate
+       \units m
+       \type real
+  N24, \field Vertex 8 X-coordinate
+       \units m
+       \type real
+  N25, \field Vertex 8 Y-coordinate
+       \type real
+       \units m
+  N26, \field Vertex 8 Z-coordinate
+       \units m
+       \type real
+  N27, \field Vertex 9 X-coordinate
+       \units m
+       \type real
+  N28, \field Vertex 9 Y-coordinate
+       \type real
+       \units m
+  N29, \field Vertex 9 Z-coordinate
+       \units m
+       \type real
+  N30, \field Vertex 10 X-coordinate
+       \units m
+       \type real
+  N31, \field Vertex 10 Y-coordinate
+       \type real
+       \units m
+  N32; \field Vertex 10 Z-coordinate
+       \units m
+       \type real""", verbose=True)
