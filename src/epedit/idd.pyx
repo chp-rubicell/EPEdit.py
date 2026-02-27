@@ -237,7 +237,7 @@ cdef EPClass parse_idd_class_string(string class_string, cbool verbose = False):
         epclass.name = utils.trim(match_result.header_string.substr(0, sep_pos))
     else:
         if verbose:
-            printf("")
+            printf("> Cannot find name of class -\n%s", match_result.header_string.c_str())
         epclass.name = utils.trim(match_result.header_string) # fallback
 
     #? Check for \default in header
@@ -263,10 +263,12 @@ cdef EPClass parse_idd_class_string(string class_string, cbool verbose = False):
             epclass.extensible.size = 0
 
     #? Parse fields
-    cdef cmap[string, EPField] fields_map
+    cdef EPField current_field
+
     cdef string field_string
     cdef string fieldname
     cdef string fieldkey
+    cdef string fieldtype_raw # fieldtype in original IDD term
 
     cdef size_t field_idx
     for field_idx in range(match_result.field_strings.size()):
@@ -278,7 +280,7 @@ cdef EPClass parse_idd_class_string(string class_string, cbool verbose = False):
 
         field_string = match_result.field_strings[field_idx]
 
-        #? Parse field info from field_string
+        #? field name
         fieldname = extract_tag(field_string, b"\\field ")
         if fieldname.empty():
             # fallback to using field code (e.g., N1)
@@ -294,13 +296,23 @@ cdef EPClass parse_idd_class_string(string class_string, cbool verbose = False):
                     field_idx,
                     fieldname.c_str()
                 )
+        fieldkey = utils.fieldname_to_key(fieldname)
+
+        current_field.name = fieldname
+
+        #? field type
+        fieldtype_raw = utils.to_lowercase(extract_tag(field_string, b"\\units "))
+        if fieldtype_raw == b"integer":
+            current_field.type = b"int"
+        elif fieldtype_raw == b"real":
+            current_field.tpe == b"float"
+        else:
+            current_field.tpe == b"string" # default
 
     return epclass
 
-def test_parse_idd_class_string(str s):
-    cdef EPClass epclass = parse_idd_class_string(s.encode("utf-8"))
-    print("-----------")
-    print(epclass.success)
+def test_parse_idd_class_string(str s, bool verbose = False):
+    cdef EPClass epclass = parse_idd_class_string(s.encode("utf-8"), verbose)
     print("-----------")
     print(epclass.name.decode("utf-8"))
     print("-----------")

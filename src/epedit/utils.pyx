@@ -1,6 +1,7 @@
 # distutils: language = c++
 # distutils: extra_compile_args = -std=c++11
 
+# from libc.ctype cimport toupper, tolower, isspace, isdigit
 from libcpp.string cimport string, npos
 from libcpp.pair cimport pair
 from libcpp cimport bool as cbool
@@ -28,12 +29,19 @@ cdef string to_uppercase(const string& s):
     """Convert string to uppercase."""
     cdef string result = s
     cdef size_t i
-    cdef char c
 
     for i in range(result.size()):
-        c = result[i]
-        if c >= b"a" and c <= b"z":
-            result[i] = c - 32
+        result[i] = toupper(result[i])
+
+    return result
+
+cdef string to_lowercase(const string& s):
+    """Convert string to lowercase."""
+    cdef string result = s
+    cdef size_t i
+
+    for i in range(result.size()):
+        result[i] = tolower(result[i])
 
     return result
 
@@ -104,10 +112,13 @@ def test_trim(str s):
     print(c_s.decode("utf-8"))
 
 def test_to_uppercase(str s):
-    return to_uppercase(s.encode("utf-8")).decode("utf-8")
+    print(to_uppercase(s.encode("utf-8")).decode("utf-8"))
+
+def test_to_lowercase(str s):
+    print(to_lowercase(s.encode("utf-8")).decode("utf-8"))
 
 def test_to_titlecase(str s):
-    return to_titlecase(s.encode("utf-8")).decode("utf-8")
+    print(to_titlecase(s.encode("utf-8")).decode("utf-8"))
 
 def test_find_char(str s, str c):
     if not c: return False

@@ -4,7 +4,8 @@ import utils
 
 # utils.test_trim("  sadf   \n\n")
 
-# print(utils.test_to_uppercase(" kl ASDdsdf sldkf!@   "))
+print(utils.test_to_uppercase(" kl ASDdsdf sldkf!@   "))
+print(utils.test_to_lowercase(" kl ASDdsdf sldkf!@   "))
 # print(utils.test_to_titlecase(" kl ASDdsdf sldkf!@   "))
 
 # print(utils.test_find_char("ASDFssdfs", "D"))
@@ -15,11 +16,11 @@ import utils
 
 import idd
 
-idd.test_extract_tag(r"\memo Determines which Heat Balance Algorithm will be used ie.", "memo")
+# idd.test_extract_tag(r"\memo Determines which Heat Balance Algorithm will be used ie.", "memo")
 
-idd.test_match_extensible_name("Field 1")
-idd.test_match_extensible_name("Vertex 1 X-coordinate")
-idd.test_match_extensible_name("Vertex  X-coordinate")
+# idd.test_match_extensible_name("Field 1")
+# idd.test_match_extensible_name("Vertex 1 X-coordinate")
+# idd.test_match_extensible_name("Vertex  X-coordinate")
 
 test_class_str = r"""HeatBalanceAlgorithm,
        \memo Determines which Heat Balance Algorithm will be used ie.
@@ -83,4 +84,4 @@ test_class_str_ext = r"""Schedule:Day:Interval,
 
 # idd.test_match_fields(test_class_str)
 
-# idd.test_parse_idd_class_string(test_class_str_ext)
+# idd.test_parse_idd_class_string(test_class_str_ext, verbose=True)
