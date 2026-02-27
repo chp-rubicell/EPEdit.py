@@ -176,31 +176,32 @@ cdef ExtensibleNameMatchResult match_extensible_name(string& fieldname):
     'Vertex 1 X-coordinate' -> 'Vertex ' + n + ' X-coordinate'
     """
     cdef ExtensibleNameMatchResult result
-    result.success = False
     cdef string number = b""
 
-    cdef size_t pos = 0
     cdef size_t length = fieldname.length()
+    cdef size_t pos = 0
 
     # prefix
     while pos < length and not isdigit(fieldname[pos]):
-        result.prefix.push_back(fieldname[pos])
         pos += 1
+    if pos > 0:
+        result.prefix = fieldname.substr(0, pos)
 
     # number
-    while pos < length and isdigit(fieldname[pos]):
-        number.push_back(fieldname[pos])
-        pos += 1
+    if pos == length:
+        # hit the end, no number found
+        result.success = False
+        result.prefix += <char*>b" "
+        return result # suffix is already empty (default value)
 
     # suffix
-    if pos < length:
-        result.suffix = fieldname.substr(pos, length - pos)
+    while pos < length and not isdigit(fieldname[pos]):
+        pos += 1
 
-    if number.empty():
-        result.prefix = fieldname + string(b" ")
-        result.suffix = b""
-    else:
-        result.success = True
+    result.success = True
+
+    if pos < length:
+        result.suffix = fieldname.substr(pos)
 
     return result
 
@@ -213,7 +214,6 @@ def test_match_extensible_name(str s):
     print(fieldname.decode("utf-8"))
 
 #+ —— Parsing class info ——————
-
 
 cdef ClassProps parse_idd_class_string(string class_string, cbool verbose = False):
     """
