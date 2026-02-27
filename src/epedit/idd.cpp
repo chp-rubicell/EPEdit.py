@@ -1170,6 +1170,7 @@ static int __Pyx_init_co_variables(void) {
     
 #include <map>
 #include <stdlib.h>
+#include <stdio.h>
 #include <algorithm>
 #include <cctype>
 #ifdef _OPENMP
@@ -1566,21 +1567,21 @@ static const char* const __pyx_f[] = {
 /* #### Code section: type_declarations ### */
 
 /*--- Type declarations ---*/
-struct __pyx_t_3idd_FieldProps;
-struct __pyx_t_3idd_ExtensibleProps;
-struct __pyx_t_3idd_ClassProps;
+struct __pyx_t_3idd_EPField;
+struct __pyx_t_3idd_EPExtensible;
+struct __pyx_t_3idd_EPClass;
 struct __pyx_t_3idd_MatchFieldsResult;
 struct __pyx_t_3idd_ExtensibleNameMatchResult;
 struct __pyx_opt_args_3idd_parse_idd_class_string;
 
-/* "idd.pyx":34
+/* "idd.pyx":35
  * #+  Data Structures
  * 
- * cdef struct FieldProps:             # <<<<<<<<<<<<<<
+ * cdef struct EPField:             # <<<<<<<<<<<<<<
  *     string name
  *     string type
 */
-struct __pyx_t_3idd_FieldProps {
+struct __pyx_t_3idd_EPField {
   std::string name;
   std::string type;
   std::string units;
@@ -1590,36 +1591,36 @@ struct __pyx_t_3idd_FieldProps {
   bool default_is_num;
 };
 
-/* "idd.pyx":43
+/* "idd.pyx":44
  *     cbool default_is_num # flag to distinguish string vs number types in default
  * 
- * cdef struct ExtensibleProps:             # <<<<<<<<<<<<<<
+ * cdef struct EPExtensible:             # <<<<<<<<<<<<<<
  *     int start_idx # start index of the extensible fields
  *     int size # size of the extensible fields
 */
-struct __pyx_t_3idd_ExtensibleProps {
+struct __pyx_t_3idd_EPExtensible {
   int start_idx;
   int size;
   std::vector<std::string>  key_regexp;
   std::vector<std::pair<std::string,std::string> >  fieldnames;
 };
 
-/* "idd.pyx":49
+/* "idd.pyx":50
  *     vector[pair[string, string]] fieldnames # prefix, suffix -> (prefix)(n)(suffix)
  * 
- * cdef struct ClassProps:             # <<<<<<<<<<<<<<
+ * cdef struct EPClass:             # <<<<<<<<<<<<<<
  *     string name
- *     cmap[string, FieldProps] fields
+ *     cmap[string, EPField] fields
 */
-struct __pyx_t_3idd_ClassProps {
+struct __pyx_t_3idd_EPClass {
   std::string name;
-  std::map<std::string,struct __pyx_t_3idd_FieldProps>  fields;
+  std::map<std::string,struct __pyx_t_3idd_EPField>  fields;
   int last_default_field_idx;
   bool has_extensible;
-  struct __pyx_t_3idd_ExtensibleProps extensible;
+  struct __pyx_t_3idd_EPExtensible extensible;
 };
 
-/* "idd.pyx":81
+/* "idd.pyx":82
  * #+  Helper functions
  * 
  * cdef struct MatchFieldsResult:             # <<<<<<<<<<<<<<
@@ -1631,7 +1632,7 @@ struct __pyx_t_3idd_MatchFieldsResult {
   std::vector<std::string>  field_strings;
 };
 
-/* "idd.pyx":168
+/* "idd.pyx":169
  *     print(c_block.decode("utf-8"))
  * 
  * cdef struct ExtensibleNameMatchResult:             # <<<<<<<<<<<<<<
@@ -1644,12 +1645,12 @@ struct __pyx_t_3idd_ExtensibleNameMatchResult {
   bool success;
 };
 
-/* "idd.pyx":218
+/* "idd.pyx":219
  * #+  Parsing class info
  * 
- * cdef ClassProps parse_idd_class_string(string class_string, cbool verbose = False):             # <<<<<<<<<<<<<<
+ * cdef EPClass parse_idd_class_string(string class_string, cbool verbose = False):             # <<<<<<<<<<<<<<
  *     """
- *     Parse a class idd string and creates a ClassProps object.
+ *     Parse a class idd string and creates a EPClass object.
 */
 struct __pyx_opt_args_3idd_parse_idd_class_string {
   int __pyx_n;
@@ -2043,35 +2044,6 @@ static CYTHON_INLINE PyObject* __Pyx_decode_cpp_string(
 static PyObject *__Pyx_PyObject_FastCallMethod(PyObject *name, PyObject *const *args, size_t nargsf);
 #endif
 
-/* BuildPyUnicode.proto (used by COrdinalToPyUnicode) */
-static PyObject* __Pyx_PyUnicode_BuildFromAscii(Py_ssize_t ulength, const char* chars, int clength,
-                                                int prepend_sign, char padding_char);
-
-/* COrdinalToPyUnicode.proto (used by CIntToPyUnicode) */
-static CYTHON_INLINE int __Pyx_CheckUnicodeValue(int value);
-static CYTHON_INLINE PyObject* __Pyx_PyUnicode_FromOrdinal_Padded(int value, Py_ssize_t width, char padding_char);
-
-/* GCCDiagnostics.proto (used by CIntToPyUnicode) */
-#if !defined(__INTEL_COMPILER) && defined(__GNUC__) && (__GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 6))
-#define __Pyx_HAS_GCC_DIAGNOSTIC
-#endif
-
-/* IncludeStdlibH.proto (used by CIntToPyUnicode) */
-#include <stdlib.h>
-
-/* CIntToPyUnicode.proto */
-#define __Pyx_PyUnicode_From_size_t(value, width, padding_char, format_char) (\
-    ((format_char) == ('c')) ?\
-        __Pyx_uchar___Pyx_PyUnicode_From_size_t(value, width, padding_char) :\
-        __Pyx____Pyx_PyUnicode_From_size_t(value, width, padding_char, format_char)\
-    )
-static CYTHON_INLINE PyObject* __Pyx_uchar___Pyx_PyUnicode_From_size_t(size_t value, Py_ssize_t width, char padding_char);
-static CYTHON_INLINE PyObject* __Pyx____Pyx_PyUnicode_From_size_t(size_t value, Py_ssize_t width, char padding_char, char format_char);
-
-/* JoinPyUnicode.export */
-static PyObject* __Pyx_PyUnicode_Join(PyObject** values, Py_ssize_t value_count, Py_ssize_t result_ulength,
-                                      Py_UCS4 max_char);
-
 /* FunctionImport.proto */
 static int __Pyx_ImportFunction_3_2_4(PyObject *module, const char *funcname, void (**f)(void), const char *sig);
 
@@ -2279,6 +2251,11 @@ static void __pyx_insert_code_object(int code_line, __Pyx_CachedCodeObjectType* 
 static void __Pyx_AddTraceback(const char *funcname, int c_line,
                                int py_line, const char *filename);
 
+/* GCCDiagnostics.proto */
+#if !defined(__INTEL_COMPILER) && defined(__GNUC__) && (__GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 6))
+#define __Pyx_HAS_GCC_DIAGNOSTIC
+#endif
+
 /* CppExceptionConversion.proto */
 #ifndef __Pyx_CppExn2PyErr
 #include <new>
@@ -2321,12 +2298,12 @@ static void __Pyx_CppExn2PyErr() {
 }
 #endif
 
-struct __pyx_t_3idd_FieldProps;
-static PyObject* __pyx_convert__to_py_struct____pyx_t_3idd_FieldProps(struct __pyx_t_3idd_FieldProps s);
-struct __pyx_t_3idd_ExtensibleProps;
-static PyObject* __pyx_convert__to_py_struct____pyx_t_3idd_ExtensibleProps(struct __pyx_t_3idd_ExtensibleProps s);
-struct __pyx_t_3idd_ClassProps;
-static PyObject* __pyx_convert__to_py_struct____pyx_t_3idd_ClassProps(struct __pyx_t_3idd_ClassProps s);
+struct __pyx_t_3idd_EPField;
+static PyObject* __pyx_convert__to_py_struct____pyx_t_3idd_EPField(struct __pyx_t_3idd_EPField s);
+struct __pyx_t_3idd_EPExtensible;
+static PyObject* __pyx_convert__to_py_struct____pyx_t_3idd_EPExtensible(struct __pyx_t_3idd_EPExtensible s);
+struct __pyx_t_3idd_EPClass;
+static PyObject* __pyx_convert__to_py_struct____pyx_t_3idd_EPClass(struct __pyx_t_3idd_EPClass s);
 /* PyObjectVectorCallKwBuilder.proto (used by CIntToPy) */
 CYTHON_UNUSED static int __Pyx_VectorcallBuilder_AddArg_Check(PyObject *key, PyObject *value, PyObject *builder, PyObject **args, int n);
 #if CYTHON_VECTORCALL
@@ -2485,19 +2462,21 @@ static std::string (*__pyx_f_5utils_trim)(std::string const &); /*proto*/
 
 /* Module declarations from "libc.stdlib" */
 
+/* Module declarations from "libc.stdio" */
+
 /* Module declarations from "cython" */
 
 /* Module declarations from "idd" */
 static struct __pyx_t_3idd_MatchFieldsResult __pyx_f_3idd_match_fields(std::string); /*proto*/
 static std::string __pyx_f_3idd_extract_tag(std::string &, std::string); /*proto*/
 static struct __pyx_t_3idd_ExtensibleNameMatchResult __pyx_f_3idd_match_extensible_name(std::string &); /*proto*/
-static struct __pyx_t_3idd_ClassProps __pyx_f_3idd_parse_idd_class_string(std::string, struct __pyx_opt_args_3idd_parse_idd_class_string *__pyx_optional_args); /*proto*/
+static struct __pyx_t_3idd_EPClass __pyx_f_3idd_parse_idd_class_string(std::string, struct __pyx_opt_args_3idd_parse_idd_class_string *__pyx_optional_args); /*proto*/
 static std::string __pyx_convert_string_from_py_6libcpp_6string_std__in_string(PyObject *); /*proto*/
 static CYTHON_INLINE PyObject *__pyx_convert_PyObject_string_to_py_6libcpp_6string_std__in_string(std::string const &); /*proto*/
 static CYTHON_INLINE PyObject *__pyx_convert_PyUnicode_string_to_py_6libcpp_6string_std__in_string(std::string const &); /*proto*/
 static CYTHON_INLINE PyObject *__pyx_convert_PyBytes_string_to_py_6libcpp_6string_std__in_string(std::string const &); /*proto*/
 static CYTHON_INLINE PyObject *__pyx_convert_PyByteArray_string_to_py_6libcpp_6string_std__in_string(std::string const &); /*proto*/
-static PyObject *__pyx_convert_map_to_py_std_3a__3a_string____struct____pyx_t_3idd_FieldProps(std::map<std::string,struct __pyx_t_3idd_FieldProps>  const &); /*proto*/
+static PyObject *__pyx_convert_map_to_py_std_3a__3a_string____struct____pyx_t_3idd_EPField(std::map<std::string,struct __pyx_t_3idd_EPField>  const &); /*proto*/
 static PyObject *__pyx_convert_vector_to_py_std_3a__3a_string(std::vector<std::string>  const &); /*proto*/
 static PyObject *__pyx_convert_pair_to_py_std_3a__3a_string____std_3a__3a_string(std::pair<std::string,std::string>  const &); /*proto*/
 static PyObject *__pyx_convert_vector_to_py_std_3a__3a_pair_3c_std_3a__3a_string_2c_std_3a__3a_string_3e___(std::vector<std::pair<std::string,std::string> >  const &); /*proto*/
@@ -2513,8 +2492,10 @@ static PyObject *__pyx_builtin_print;
 /* #### Code section: string_decls ### */
 static const char __pyx_k_[] = ",;";
 static const char __pyx_k__2[] = "\n";
+static const char __pyx_k__4[] = "";
 static const char __pyx_k__5[] = ",";
 static const char __pyx_k_default[] = "\\default ";
+static const char __pyx_k_No_fieldName_match_for_s_zu_Usi[] = "> No fieldName match for '%s' - %zu. Using '%s' instead.";
 /* #### Code section: decls ### */
 static PyObject *__pyx_pf_3idd_test_match_fields(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_s); /* proto */
 static PyObject *__pyx_pf_3idd_2test_extract_tag(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_block, PyObject *__pyx_v_tag); /* proto */
@@ -2544,7 +2525,7 @@ typedef struct {
   __Pyx_CachedCFunction __pyx_umethod_PyDict_Type_pop;
   __Pyx_CachedCFunction __pyx_umethod_PyDict_Type_values;
   PyObject *__pyx_codeobj_tab[4];
-  PyObject *__pyx_string_tab[64];
+  PyObject *__pyx_string_tab[60];
 /* #### Code section: module_state_contents ### */
 /* CommonTypesMetaclass.module_state_decls */
 PyTypeObject *__pyx_CommonTypesMetaclassType;
@@ -2585,70 +2566,66 @@ static __pyx_mstatetype __pyx_mstate_global_static =
 static __pyx_mstatetype * const __pyx_mstate_global = &__pyx_mstate_global_static;
 #endif
 /* #### Code section: constant_name_defines ### */
-#define __pyx_kp_u_No_fieldName_match_for __pyx_string_tab[0]
-#define __pyx_kp_u_No_fieldName_match_for_classPro __pyx_string_tab[1]
-#define __pyx_kp_u_Note_that_Cython_is_deliberately __pyx_string_tab[2]
-#define __pyx_kp_u_Using __pyx_string_tab[3]
-#define __pyx_kp_u__3 __pyx_string_tab[4]
-#define __pyx_kp_u__6 __pyx_string_tab[5]
-#define __pyx_kp_u__7 __pyx_string_tab[6]
-#define __pyx_kp_u_add_note __pyx_string_tab[7]
-#define __pyx_kp_u_idd_pyx __pyx_string_tab[8]
-#define __pyx_kp_u_utf_8 __pyx_string_tab[9]
-#define __pyx_n_u_Pyx_PyDict_NextRef __pyx_string_tab[10]
-#define __pyx_n_u_asyncio_coroutines __pyx_string_tab[11]
-#define __pyx_n_u_block __pyx_string_tab[12]
-#define __pyx_n_u_c_block __pyx_string_tab[13]
-#define __pyx_n_u_classProps __pyx_string_tab[14]
-#define __pyx_n_u_cline_in_traceback __pyx_string_tab[15]
-#define __pyx_n_u_decode __pyx_string_tab[16]
-#define __pyx_n_u_default_is_num __pyx_string_tab[17]
-#define __pyx_n_u_default_val_num __pyx_string_tab[18]
-#define __pyx_n_u_default_val_str __pyx_string_tab[19]
-#define __pyx_n_u_extensible_2 __pyx_string_tab[20]
-#define __pyx_n_u_field_2 __pyx_string_tab[21]
-#define __pyx_n_u_fieldname __pyx_string_tab[22]
-#define __pyx_n_u_fieldnames __pyx_string_tab[23]
-#define __pyx_n_u_fields __pyx_string_tab[24]
-#define __pyx_n_u_func __pyx_string_tab[25]
-#define __pyx_n_u_has_default __pyx_string_tab[26]
-#define __pyx_n_u_has_extensible __pyx_string_tab[27]
-#define __pyx_n_u_idd __pyx_string_tab[28]
-#define __pyx_n_u_is_coroutine __pyx_string_tab[29]
-#define __pyx_n_u_items __pyx_string_tab[30]
-#define __pyx_n_u_key_regexp __pyx_string_tab[31]
-#define __pyx_n_u_last_default_field_idx __pyx_string_tab[32]
-#define __pyx_n_u_main __pyx_string_tab[33]
-#define __pyx_n_u_module __pyx_string_tab[34]
-#define __pyx_n_u_name __pyx_string_tab[35]
-#define __pyx_n_u_name_2 __pyx_string_tab[36]
-#define __pyx_n_u_pop __pyx_string_tab[37]
-#define __pyx_n_u_print __pyx_string_tab[38]
-#define __pyx_n_u_qualname __pyx_string_tab[39]
-#define __pyx_n_u_result __pyx_string_tab[40]
-#define __pyx_n_u_s __pyx_string_tab[41]
-#define __pyx_n_u_set_name __pyx_string_tab[42]
-#define __pyx_n_u_setdefault __pyx_string_tab[43]
-#define __pyx_n_u_size __pyx_string_tab[44]
-#define __pyx_n_u_start_idx __pyx_string_tab[45]
-#define __pyx_n_u_success __pyx_string_tab[46]
-#define __pyx_n_u_tag __pyx_string_tab[47]
-#define __pyx_n_u_test __pyx_string_tab[48]
-#define __pyx_n_u_test_extract_tag __pyx_string_tab[49]
-#define __pyx_n_u_test_match_extensible_name __pyx_string_tab[50]
-#define __pyx_n_u_test_match_fields __pyx_string_tab[51]
-#define __pyx_n_u_test_parse_idd_class_string __pyx_string_tab[52]
-#define __pyx_n_u_type __pyx_string_tab[53]
-#define __pyx_n_u_units __pyx_string_tab[54]
-#define __pyx_n_u_values __pyx_string_tab[55]
-#define __pyx_kp_b__4 __pyx_string_tab[56]
-#define __pyx_kp_b_extensible __pyx_string_tab[57]
-#define __pyx_kp_b_field __pyx_string_tab[58]
-#define __pyx_kp_b_iso88591_7q_A_E_Kq __pyx_string_tab[59]
-#define __pyx_kp_b_iso88591_L_gQa_q_Qa_Qe7_1 __pyx_string_tab[60]
-#define __pyx_kp_b_iso88591_QgQa_A_waq_waq_7_1 __pyx_string_tab[61]
-#define __pyx_kp_b_iso88591_waq_Qis_7_1 __pyx_string_tab[62]
-#define __pyx_kp_b_std_string_std_string_const_trim __pyx_string_tab[63]
+#define __pyx_kp_u_Note_that_Cython_is_deliberately __pyx_string_tab[0]
+#define __pyx_kp_u__3 __pyx_string_tab[1]
+#define __pyx_kp_u__6 __pyx_string_tab[2]
+#define __pyx_kp_u_add_note __pyx_string_tab[3]
+#define __pyx_kp_u_idd_pyx __pyx_string_tab[4]
+#define __pyx_kp_u_utf_8 __pyx_string_tab[5]
+#define __pyx_n_u_Pyx_PyDict_NextRef __pyx_string_tab[6]
+#define __pyx_n_u_asyncio_coroutines __pyx_string_tab[7]
+#define __pyx_n_u_block __pyx_string_tab[8]
+#define __pyx_n_u_c_block __pyx_string_tab[9]
+#define __pyx_n_u_cline_in_traceback __pyx_string_tab[10]
+#define __pyx_n_u_decode __pyx_string_tab[11]
+#define __pyx_n_u_default_is_num __pyx_string_tab[12]
+#define __pyx_n_u_default_val_num __pyx_string_tab[13]
+#define __pyx_n_u_default_val_str __pyx_string_tab[14]
+#define __pyx_n_u_epclass __pyx_string_tab[15]
+#define __pyx_n_u_extensible_2 __pyx_string_tab[16]
+#define __pyx_n_u_field_2 __pyx_string_tab[17]
+#define __pyx_n_u_fieldname __pyx_string_tab[18]
+#define __pyx_n_u_fieldnames __pyx_string_tab[19]
+#define __pyx_n_u_fields __pyx_string_tab[20]
+#define __pyx_n_u_func __pyx_string_tab[21]
+#define __pyx_n_u_has_default __pyx_string_tab[22]
+#define __pyx_n_u_has_extensible __pyx_string_tab[23]
+#define __pyx_n_u_idd __pyx_string_tab[24]
+#define __pyx_n_u_is_coroutine __pyx_string_tab[25]
+#define __pyx_n_u_items __pyx_string_tab[26]
+#define __pyx_n_u_key_regexp __pyx_string_tab[27]
+#define __pyx_n_u_last_default_field_idx __pyx_string_tab[28]
+#define __pyx_n_u_main __pyx_string_tab[29]
+#define __pyx_n_u_module __pyx_string_tab[30]
+#define __pyx_n_u_name __pyx_string_tab[31]
+#define __pyx_n_u_name_2 __pyx_string_tab[32]
+#define __pyx_n_u_pop __pyx_string_tab[33]
+#define __pyx_n_u_print __pyx_string_tab[34]
+#define __pyx_n_u_qualname __pyx_string_tab[35]
+#define __pyx_n_u_result __pyx_string_tab[36]
+#define __pyx_n_u_s __pyx_string_tab[37]
+#define __pyx_n_u_set_name __pyx_string_tab[38]
+#define __pyx_n_u_setdefault __pyx_string_tab[39]
+#define __pyx_n_u_size __pyx_string_tab[40]
+#define __pyx_n_u_start_idx __pyx_string_tab[41]
+#define __pyx_n_u_success __pyx_string_tab[42]
+#define __pyx_n_u_tag __pyx_string_tab[43]
+#define __pyx_n_u_test __pyx_string_tab[44]
+#define __pyx_n_u_test_extract_tag __pyx_string_tab[45]
+#define __pyx_n_u_test_match_extensible_name __pyx_string_tab[46]
+#define __pyx_n_u_test_match_fields __pyx_string_tab[47]
+#define __pyx_n_u_test_parse_idd_class_string __pyx_string_tab[48]
+#define __pyx_n_u_type __pyx_string_tab[49]
+#define __pyx_n_u_units __pyx_string_tab[50]
+#define __pyx_n_u_values __pyx_string_tab[51]
+#define __pyx_kp_b__4 __pyx_string_tab[52]
+#define __pyx_kp_b_extensible __pyx_string_tab[53]
+#define __pyx_kp_b_field __pyx_string_tab[54]
+#define __pyx_kp_b_iso88591_1_7_1_gQa_A __pyx_string_tab[55]
+#define __pyx_kp_b_iso88591_L_gQa_q_Qa_Qe7_1 __pyx_string_tab[56]
+#define __pyx_kp_b_iso88591_QgQa_A_waq_waq_7_1 __pyx_string_tab[57]
+#define __pyx_kp_b_iso88591_waq_Qis_7_1 __pyx_string_tab[58]
+#define __pyx_kp_b_std_string_std_string_const_trim __pyx_string_tab[59]
 /* #### Code section: module_state_clear ### */
 #if CYTHON_USE_MODULE_STATE
 static CYTHON_SMALL_CODE int __pyx_m_clear(PyObject *m) {
@@ -2664,7 +2641,7 @@ static CYTHON_SMALL_CODE int __pyx_m_clear(PyObject *m) {
   __Pyx_State_RemoveModule(NULL);
   #endif
   for (int i=0; i<4; ++i) { Py_CLEAR(clear_module_state->__pyx_codeobj_tab[i]); }
-  for (int i=0; i<64; ++i) { Py_CLEAR(clear_module_state->__pyx_string_tab[i]); }
+  for (int i=0; i<60; ++i) { Py_CLEAR(clear_module_state->__pyx_string_tab[i]); }
 /* #### Code section: module_state_clear_contents ### */
 /* CommonTypesMetaclass.module_state_clear */
 Py_CLEAR(clear_module_state->__pyx_CommonTypesMetaclassType);
@@ -2688,7 +2665,7 @@ static CYTHON_SMALL_CODE int __pyx_m_traverse(PyObject *m, visitproc visit, void
   __Pyx_VISIT_CONST(traverse_module_state->__pyx_empty_bytes);
   __Pyx_VISIT_CONST(traverse_module_state->__pyx_empty_unicode);
   for (int i=0; i<4; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_codeobj_tab[i]); }
-  for (int i=0; i<64; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_string_tab[i]); }
+  for (int i=0; i<60; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_string_tab[i]); }
 /* #### Code section: module_state_traverse_contents ### */
 /* CommonTypesMetaclass.module_state_traverse */
 Py_VISIT(traverse_module_state->__pyx_CommonTypesMetaclassType);
@@ -3086,15 +3063,15 @@ static CYTHON_INLINE PyObject *__pyx_convert_PyByteArray_string_to_py_6libcpp_6s
 /* "map.to_py":245
  *         const_iterator end()
  * 
- * @cname("__pyx_convert_map_to_py_std_3a__3a_string____struct____pyx_t_3idd_FieldProps")             # <<<<<<<<<<<<<<
- * cdef object __pyx_convert_map_to_py_std_3a__3a_string____struct____pyx_t_3idd_FieldProps(const map[X,Y]& s):
+ * @cname("__pyx_convert_map_to_py_std_3a__3a_string____struct____pyx_t_3idd_EPField")             # <<<<<<<<<<<<<<
+ * cdef object __pyx_convert_map_to_py_std_3a__3a_string____struct____pyx_t_3idd_EPField(const map[X,Y]& s):
  *     o = {}
 */
 
-static PyObject *__pyx_convert_map_to_py_std_3a__3a_string____struct____pyx_t_3idd_FieldProps(std::map<std::string,struct __pyx_t_3idd_FieldProps>  const &__pyx_v_s) {
+static PyObject *__pyx_convert_map_to_py_std_3a__3a_string____struct____pyx_t_3idd_EPField(std::map<std::string,struct __pyx_t_3idd_EPField>  const &__pyx_v_s) {
   PyObject *__pyx_v_o = NULL;
-  std::map<std::string,struct __pyx_t_3idd_FieldProps> ::value_type const *__pyx_v_key_value;
-  std::map<std::string,struct __pyx_t_3idd_FieldProps> ::const_iterator __pyx_v_iter;
+  std::map<std::string,struct __pyx_t_3idd_EPField> ::value_type const *__pyx_v_key_value;
+  std::map<std::string,struct __pyx_t_3idd_EPField> ::const_iterator __pyx_v_iter;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -3103,11 +3080,11 @@ static PyObject *__pyx_convert_map_to_py_std_3a__3a_string____struct____pyx_t_3i
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
-  __Pyx_RefNannySetupContext("__pyx_convert_map_to_py_std_3a__3a_string____struct____pyx_t_3idd_FieldProps", 0);
+  __Pyx_RefNannySetupContext("__pyx_convert_map_to_py_std_3a__3a_string____struct____pyx_t_3idd_EPField", 0);
 
   /* "map.to_py":247
- * @cname("__pyx_convert_map_to_py_std_3a__3a_string____struct____pyx_t_3idd_FieldProps")
- * cdef object __pyx_convert_map_to_py_std_3a__3a_string____struct____pyx_t_3idd_FieldProps(const map[X,Y]& s):
+ * @cname("__pyx_convert_map_to_py_std_3a__3a_string____struct____pyx_t_3idd_EPField")
+ * cdef object __pyx_convert_map_to_py_std_3a__3a_string____struct____pyx_t_3idd_EPField(const map[X,Y]& s):
  *     o = {}             # <<<<<<<<<<<<<<
  *     cdef const map[X,Y].value_type *key_value
  *     cdef map[X,Y].const_iterator iter = s.begin()
@@ -3153,7 +3130,7 @@ static PyObject *__pyx_convert_map_to_py_std_3a__3a_string____struct____pyx_t_3i
  *         cython.operator.preincrement(iter)
  *     return o
 */
-    __pyx_t_1 = __pyx_convert__to_py_struct____pyx_t_3idd_FieldProps(__pyx_v_key_value->second); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 252, __pyx_L1_error)
+    __pyx_t_1 = __pyx_convert__to_py_struct____pyx_t_3idd_EPField(__pyx_v_key_value->second); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 252, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_t_3 = __pyx_convert_PyBytes_string_to_py_6libcpp_6string_std__in_string(__pyx_v_key_value->first); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 252, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
@@ -3185,8 +3162,8 @@ static PyObject *__pyx_convert_map_to_py_std_3a__3a_string____struct____pyx_t_3i
   /* "map.to_py":245
  *         const_iterator end()
  * 
- * @cname("__pyx_convert_map_to_py_std_3a__3a_string____struct____pyx_t_3idd_FieldProps")             # <<<<<<<<<<<<<<
- * cdef object __pyx_convert_map_to_py_std_3a__3a_string____struct____pyx_t_3idd_FieldProps(const map[X,Y]& s):
+ * @cname("__pyx_convert_map_to_py_std_3a__3a_string____struct____pyx_t_3idd_EPField")             # <<<<<<<<<<<<<<
+ * cdef object __pyx_convert_map_to_py_std_3a__3a_string____struct____pyx_t_3idd_EPField(const map[X,Y]& s):
  *     o = {}
 */
 
@@ -3194,7 +3171,7 @@ static PyObject *__pyx_convert_map_to_py_std_3a__3a_string____struct____pyx_t_3i
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_3);
-  __Pyx_AddTraceback("map.to_py.__pyx_convert_map_to_py_std_3a__3a_string____struct____pyx_t_3idd_FieldProps", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("map.to_py.__pyx_convert_map_to_py_std_3a__3a_string____struct____pyx_t_3idd_EPField", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = 0;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_o);
@@ -3564,7 +3541,7 @@ static PyObject *__pyx_convert_vector_to_py_std_3a__3a_pair_3c_std_3a__3a_string
   return __pyx_r;
 }
 
-/* "idd.pyx":85
+/* "idd.pyx":86
  *     vector[string] field_strings
  * 
  * cdef MatchFieldsResult match_fields(string class_string):             # <<<<<<<<<<<<<<
@@ -3588,7 +3565,7 @@ static struct __pyx_t_3idd_MatchFieldsResult __pyx_f_3idd_match_fields(std::stri
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
 
-  /* "idd.pyx":90
+  /* "idd.pyx":91
  * 
  *     cdef MatchFieldsResult result
  *     cdef size_t cursor = 0 # beginning of the "unprocessed" text             # <<<<<<<<<<<<<<
@@ -3597,7 +3574,7 @@ static struct __pyx_t_3idd_MatchFieldsResult __pyx_f_3idd_match_fields(std::stri
 */
   __pyx_v_cursor = 0;
 
-  /* "idd.pyx":91
+  /* "idd.pyx":92
  *     cdef MatchFieldsResult result
  *     cdef size_t cursor = 0 # beginning of the "unprocessed" text
  *     cdef size_t length = class_string.length()             # <<<<<<<<<<<<<<
@@ -3606,7 +3583,7 @@ static struct __pyx_t_3idd_MatchFieldsResult __pyx_f_3idd_match_fields(std::stri
 */
   __pyx_v_length = __pyx_v_class_string.length();
 
-  /* "idd.pyx":92
+  /* "idd.pyx":93
  *     cdef size_t cursor = 0 # beginning of the "unprocessed" text
  *     cdef size_t length = class_string.length()
  *     cdef size_t sep_pos = 0 # separator (,/;) positions             # <<<<<<<<<<<<<<
@@ -3615,7 +3592,7 @@ static struct __pyx_t_3idd_MatchFieldsResult __pyx_f_3idd_match_fields(std::stri
 */
   __pyx_v_sep_pos = 0;
 
-  /* "idd.pyx":93
+  /* "idd.pyx":94
  *     cdef size_t length = class_string.length()
  *     cdef size_t sep_pos = 0 # separator (,/;) positions
  *     cdef size_t search_pos = 0 # search beyond the separator for metadata/comments             # <<<<<<<<<<<<<<
@@ -3624,7 +3601,7 @@ static struct __pyx_t_3idd_MatchFieldsResult __pyx_f_3idd_match_fields(std::stri
 */
   __pyx_v_search_pos = 0;
 
-  /* "idd.pyx":94
+  /* "idd.pyx":95
  *     cdef size_t sep_pos = 0 # separator (,/;) positions
  *     cdef size_t search_pos = 0 # search beyond the separator for metadata/comments
  *     cdef cbool parsing_header = True             # <<<<<<<<<<<<<<
@@ -3633,7 +3610,7 @@ static struct __pyx_t_3idd_MatchFieldsResult __pyx_f_3idd_match_fields(std::stri
 */
   __pyx_v_parsing_header = 1;
 
-  /* "idd.pyx":95
+  /* "idd.pyx":96
  *     cdef size_t search_pos = 0 # search beyond the separator for metadata/comments
  *     cdef cbool parsing_header = True
  *     cdef size_t last_chunk_end = 0 # index of the end of last chunk + 1 (= start of current chunk)             # <<<<<<<<<<<<<<
@@ -3642,7 +3619,7 @@ static struct __pyx_t_3idd_MatchFieldsResult __pyx_f_3idd_match_fields(std::stri
 */
   __pyx_v_last_chunk_end = 0;
 
-  /* "idd.pyx":98
+  /* "idd.pyx":99
  * 
  *     # Find first comma or newline to identify class name line
  *     sep_pos = class_string.find_first_of(b",;")             # <<<<<<<<<<<<<<
@@ -3651,7 +3628,7 @@ static struct __pyx_t_3idd_MatchFieldsResult __pyx_f_3idd_match_fields(std::stri
 */
   __pyx_v_sep_pos = __pyx_v_class_string.find_first_of(__pyx_k_);
 
-  /* "idd.pyx":99
+  /* "idd.pyx":100
  *     # Find first comma or newline to identify class name line
  *     sep_pos = class_string.find_first_of(b",;")
  *     if sep_pos == npos: return result             # <<<<<<<<<<<<<<
@@ -3664,7 +3641,7 @@ static struct __pyx_t_3idd_MatchFieldsResult __pyx_f_3idd_match_fields(std::stri
     goto __pyx_L0;
   }
 
-  /* "idd.pyx":101
+  /* "idd.pyx":102
  *     if sep_pos == npos: return result
  * 
  *     while cursor < length:             # <<<<<<<<<<<<<<
@@ -3675,7 +3652,7 @@ static struct __pyx_t_3idd_MatchFieldsResult __pyx_f_3idd_match_fields(std::stri
     __pyx_t_1 = (__pyx_v_cursor < __pyx_v_length);
     if (!__pyx_t_1) break;
 
-    /* "idd.pyx":103
+    /* "idd.pyx":104
  *     while cursor < length:
  *         # Find next separator
  *         sep_pos = class_string.find_first_of(b",;", cursor)             # <<<<<<<<<<<<<<
@@ -3684,7 +3661,7 @@ static struct __pyx_t_3idd_MatchFieldsResult __pyx_f_3idd_match_fields(std::stri
 */
     __pyx_v_sep_pos = __pyx_v_class_string.find_first_of(__pyx_k_, __pyx_v_cursor);
 
-    /* "idd.pyx":104
+    /* "idd.pyx":105
  *         # Find next separator
  *         sep_pos = class_string.find_first_of(b",;", cursor)
  *         if sep_pos == npos: break             # <<<<<<<<<<<<<<
@@ -3696,7 +3673,7 @@ static struct __pyx_t_3idd_MatchFieldsResult __pyx_f_3idd_match_fields(std::stri
       goto __pyx_L5_break;
     }
 
-    /* "idd.pyx":107
+    /* "idd.pyx":108
  * 
  *         # Scan forward to find start of NEXT value (skipping comments/whitespace)
  *         search_pos = sep_pos + 1             # <<<<<<<<<<<<<<
@@ -3705,7 +3682,7 @@ static struct __pyx_t_3idd_MatchFieldsResult __pyx_f_3idd_match_fields(std::stri
 */
     __pyx_v_search_pos = (__pyx_v_sep_pos + 1);
 
-    /* "idd.pyx":109
+    /* "idd.pyx":110
  *         search_pos = sep_pos + 1
  * 
  *         while search_pos < length:             # <<<<<<<<<<<<<<
@@ -3716,7 +3693,7 @@ static struct __pyx_t_3idd_MatchFieldsResult __pyx_f_3idd_match_fields(std::stri
       __pyx_t_1 = (__pyx_v_search_pos < __pyx_v_length);
       if (!__pyx_t_1) break;
 
-      /* "idd.pyx":111
+      /* "idd.pyx":112
  *         while search_pos < length:
  *             # Skip whitespace
  *             while search_pos < length and isspace(class_string[search_pos]):             # <<<<<<<<<<<<<<
@@ -3735,7 +3712,7 @@ static struct __pyx_t_3idd_MatchFieldsResult __pyx_f_3idd_match_fields(std::stri
         __pyx_L11_bool_binop_done:;
         if (!__pyx_t_1) break;
 
-        /* "idd.pyx":112
+        /* "idd.pyx":113
  *             # Skip whitespace
  *             while search_pos < length and isspace(class_string[search_pos]):
  *                 search_pos += 1             # <<<<<<<<<<<<<<
@@ -3745,7 +3722,7 @@ static struct __pyx_t_3idd_MatchFieldsResult __pyx_f_3idd_match_fields(std::stri
         __pyx_v_search_pos = (__pyx_v_search_pos + 1);
       }
 
-      /* "idd.pyx":114
+      /* "idd.pyx":115
  *                 search_pos += 1
  * 
  *             if search_pos >= length: break             # <<<<<<<<<<<<<<
@@ -3757,7 +3734,7 @@ static struct __pyx_t_3idd_MatchFieldsResult __pyx_f_3idd_match_fields(std::stri
         goto __pyx_L8_break;
       }
 
-      /* "idd.pyx":117
+      /* "idd.pyx":118
  * 
  *             # Check if this line is a comment/metadata
  *             if class_string[search_pos] == b"\\" or class_string[search_pos] == b"!":             # <<<<<<<<<<<<<<
@@ -3775,7 +3752,7 @@ static struct __pyx_t_3idd_MatchFieldsResult __pyx_f_3idd_match_fields(std::stri
       __pyx_L15_bool_binop_done:;
       if (__pyx_t_1) {
 
-        /* "idd.pyx":118
+        /* "idd.pyx":119
  *             # Check if this line is a comment/metadata
  *             if class_string[search_pos] == b"\\" or class_string[search_pos] == b"!":
  *                 search_pos = class_string.find(b"\n", search_pos)             # <<<<<<<<<<<<<<
@@ -3784,7 +3761,7 @@ static struct __pyx_t_3idd_MatchFieldsResult __pyx_f_3idd_match_fields(std::stri
 */
         __pyx_v_search_pos = __pyx_v_class_string.find(__pyx_k__2, __pyx_v_search_pos);
 
-        /* "idd.pyx":119
+        /* "idd.pyx":120
  *             if class_string[search_pos] == b"\\" or class_string[search_pos] == b"!":
  *                 search_pos = class_string.find(b"\n", search_pos)
  *                 if search_pos == npos: break             # <<<<<<<<<<<<<<
@@ -3796,7 +3773,7 @@ static struct __pyx_t_3idd_MatchFieldsResult __pyx_f_3idd_match_fields(std::stri
           goto __pyx_L8_break;
         }
 
-        /* "idd.pyx":120
+        /* "idd.pyx":121
  *                 search_pos = class_string.find(b"\n", search_pos)
  *                 if search_pos == npos: break
  *                 search_pos += 1             # <<<<<<<<<<<<<<
@@ -3805,7 +3782,7 @@ static struct __pyx_t_3idd_MatchFieldsResult __pyx_f_3idd_match_fields(std::stri
 */
         __pyx_v_search_pos = (__pyx_v_search_pos + 1);
 
-        /* "idd.pyx":117
+        /* "idd.pyx":118
  * 
  *             # Check if this line is a comment/metadata
  *             if class_string[search_pos] == b"\\" or class_string[search_pos] == b"!":             # <<<<<<<<<<<<<<
@@ -3815,7 +3792,7 @@ static struct __pyx_t_3idd_MatchFieldsResult __pyx_f_3idd_match_fields(std::stri
         goto __pyx_L14;
       }
 
-      /* "idd.pyx":122
+      /* "idd.pyx":123
  *                 search_pos += 1
  *             else:
  *                 break             # <<<<<<<<<<<<<<
@@ -3829,7 +3806,7 @@ static struct __pyx_t_3idd_MatchFieldsResult __pyx_f_3idd_match_fields(std::stri
     }
     __pyx_L8_break:;
 
-    /* "idd.pyx":125
+    /* "idd.pyx":126
  * 
  *         # Extract the chunk
  *         if parsing_header:             # <<<<<<<<<<<<<<
@@ -3839,7 +3816,7 @@ static struct __pyx_t_3idd_MatchFieldsResult __pyx_f_3idd_match_fields(std::stri
     __pyx_t_1 = (__pyx_v_parsing_header != 0);
     if (__pyx_t_1) {
 
-      /* "idd.pyx":126
+      /* "idd.pyx":127
  *         # Extract the chunk
  *         if parsing_header:
  *             result.header_string = class_string.substr(last_chunk_end, search_pos - last_chunk_end)             # <<<<<<<<<<<<<<
@@ -3850,11 +3827,11 @@ static struct __pyx_t_3idd_MatchFieldsResult __pyx_f_3idd_match_fields(std::stri
         __pyx_t_3 = __pyx_v_class_string.substr(__pyx_v_last_chunk_end, (__pyx_v_search_pos - __pyx_v_last_chunk_end));
       } catch(...) {
         __Pyx_CppExn2PyErr();
-        __PYX_ERR(0, 126, __pyx_L1_error)
+        __PYX_ERR(0, 127, __pyx_L1_error)
       }
       __pyx_v_result.header_string = __PYX_STD_MOVE_IF_SUPPORTED(__pyx_t_3);
 
-      /* "idd.pyx":127
+      /* "idd.pyx":128
  *         if parsing_header:
  *             result.header_string = class_string.substr(last_chunk_end, search_pos - last_chunk_end)
  *             parsing_header = False             # <<<<<<<<<<<<<<
@@ -3863,7 +3840,7 @@ static struct __pyx_t_3idd_MatchFieldsResult __pyx_f_3idd_match_fields(std::stri
 */
       __pyx_v_parsing_header = 0;
 
-      /* "idd.pyx":125
+      /* "idd.pyx":126
  * 
  *         # Extract the chunk
  *         if parsing_header:             # <<<<<<<<<<<<<<
@@ -3873,7 +3850,7 @@ static struct __pyx_t_3idd_MatchFieldsResult __pyx_f_3idd_match_fields(std::stri
       goto __pyx_L18;
     }
 
-    /* "idd.pyx":129
+    /* "idd.pyx":130
  *             parsing_header = False
  *         else:
  *             result.field_strings.push_back(class_string.substr(last_chunk_end, search_pos - last_chunk_end))             # <<<<<<<<<<<<<<
@@ -3885,18 +3862,18 @@ static struct __pyx_t_3idd_MatchFieldsResult __pyx_f_3idd_match_fields(std::stri
         __pyx_t_3 = __pyx_v_class_string.substr(__pyx_v_last_chunk_end, (__pyx_v_search_pos - __pyx_v_last_chunk_end));
       } catch(...) {
         __Pyx_CppExn2PyErr();
-        __PYX_ERR(0, 129, __pyx_L1_error)
+        __PYX_ERR(0, 130, __pyx_L1_error)
       }
       try {
         __pyx_v_result.field_strings.push_back(__pyx_t_3);
       } catch(...) {
         __Pyx_CppExn2PyErr();
-        __PYX_ERR(0, 129, __pyx_L1_error)
+        __PYX_ERR(0, 130, __pyx_L1_error)
       }
     }
     __pyx_L18:;
 
-    /* "idd.pyx":131
+    /* "idd.pyx":132
  *             result.field_strings.push_back(class_string.substr(last_chunk_end, search_pos - last_chunk_end))
  * 
  *         last_chunk_end = search_pos             # <<<<<<<<<<<<<<
@@ -3905,7 +3882,7 @@ static struct __pyx_t_3idd_MatchFieldsResult __pyx_f_3idd_match_fields(std::stri
 */
     __pyx_v_last_chunk_end = __pyx_v_search_pos;
 
-    /* "idd.pyx":132
+    /* "idd.pyx":133
  * 
  *         last_chunk_end = search_pos
  *         cursor = search_pos             # <<<<<<<<<<<<<<
@@ -3916,7 +3893,7 @@ static struct __pyx_t_3idd_MatchFieldsResult __pyx_f_3idd_match_fields(std::stri
   }
   __pyx_L5_break:;
 
-  /* "idd.pyx":134
+  /* "idd.pyx":135
  *         cursor = search_pos
  * 
  *     return result             # <<<<<<<<<<<<<<
@@ -3926,7 +3903,7 @@ static struct __pyx_t_3idd_MatchFieldsResult __pyx_f_3idd_match_fields(std::stri
   __pyx_r = __pyx_v_result;
   goto __pyx_L0;
 
-  /* "idd.pyx":85
+  /* "idd.pyx":86
  *     vector[string] field_strings
  * 
  * cdef MatchFieldsResult match_fields(string class_string):             # <<<<<<<<<<<<<<
@@ -3942,7 +3919,7 @@ static struct __pyx_t_3idd_MatchFieldsResult __pyx_f_3idd_match_fields(std::stri
   return __pyx_r;
 }
 
-/* "idd.pyx":136
+/* "idd.pyx":137
  *     return result
  * 
  * def test_match_fields(str s):             # <<<<<<<<<<<<<<
@@ -3989,32 +3966,32 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_s,0};
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
-    if (unlikely(__pyx_kwds_len) < 0) __PYX_ERR(0, 136, __pyx_L3_error)
+    if (unlikely(__pyx_kwds_len) < 0) __PYX_ERR(0, 137, __pyx_L3_error)
     if (__pyx_kwds_len > 0) {
       switch (__pyx_nargs) {
         case  1:
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 136, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 137, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  0: break;
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "test_match_fields", 0) < (0)) __PYX_ERR(0, 136, __pyx_L3_error)
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "test_match_fields", 0) < (0)) __PYX_ERR(0, 137, __pyx_L3_error)
       for (Py_ssize_t i = __pyx_nargs; i < 1; i++) {
-        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("test_match_fields", 1, 1, 1, i); __PYX_ERR(0, 136, __pyx_L3_error) }
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("test_match_fields", 1, 1, 1, i); __PYX_ERR(0, 137, __pyx_L3_error) }
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 136, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 137, __pyx_L3_error)
     }
     __pyx_v_s = ((PyObject*)values[0]);
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("test_match_fields", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 136, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("test_match_fields", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 137, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -4025,7 +4002,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_s), (&PyUnicode_Type), 1, "s", 1))) __PYX_ERR(0, 136, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_s), (&PyUnicode_Type), 1, "s", 1))) __PYX_ERR(0, 137, __pyx_L1_error)
   __pyx_r = __pyx_pf_3idd_test_match_fields(__pyx_self, __pyx_v_s);
 
   /* function exit code */
@@ -4062,7 +4039,7 @@ static PyObject *__pyx_pf_3idd_test_match_fields(CYTHON_UNUSED PyObject *__pyx_s
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("test_match_fields", 0);
 
-  /* "idd.pyx":137
+  /* "idd.pyx":138
  * 
  * def test_match_fields(str s):
  *     cdef MatchFieldsResult result = match_fields(s.encode("utf-8"))             # <<<<<<<<<<<<<<
@@ -4071,16 +4048,16 @@ static PyObject *__pyx_pf_3idd_test_match_fields(CYTHON_UNUSED PyObject *__pyx_s
 */
   if (unlikely(__pyx_v_s == Py_None)) {
     PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%.30s'", "encode");
-    __PYX_ERR(0, 137, __pyx_L1_error)
+    __PYX_ERR(0, 138, __pyx_L1_error)
   }
-  __pyx_t_1 = PyUnicode_AsUTF8String(__pyx_v_s); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 137, __pyx_L1_error)
+  __pyx_t_1 = PyUnicode_AsUTF8String(__pyx_v_s); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 138, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __pyx_convert_string_from_py_6libcpp_6string_std__in_string(__pyx_t_1); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 137, __pyx_L1_error)
+  __pyx_t_2 = __pyx_convert_string_from_py_6libcpp_6string_std__in_string(__pyx_t_1); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 138, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_3 = __pyx_f_3idd_match_fields(__PYX_STD_MOVE_IF_SUPPORTED(__pyx_t_2)); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 137, __pyx_L1_error)
+  __pyx_t_3 = __pyx_f_3idd_match_fields(__PYX_STD_MOVE_IF_SUPPORTED(__pyx_t_2)); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 138, __pyx_L1_error)
   __pyx_v_result = __pyx_t_3;
 
-  /* "idd.pyx":138
+  /* "idd.pyx":139
  * def test_match_fields(str s):
  *     cdef MatchFieldsResult result = match_fields(s.encode("utf-8"))
  *     print("-----------")             # <<<<<<<<<<<<<<
@@ -4093,12 +4070,12 @@ static PyObject *__pyx_pf_3idd_test_match_fields(CYTHON_UNUSED PyObject *__pyx_s
     PyObject *__pyx_callargs[2] = {__pyx_t_4, __pyx_mstate_global->__pyx_kp_u__3};
     __pyx_t_1 = __Pyx_PyObject_FastCall((PyObject*)__pyx_builtin_print, __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 138, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 139, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "idd.pyx":139
+  /* "idd.pyx":140
  *     cdef MatchFieldsResult result = match_fields(s.encode("utf-8"))
  *     print("-----------")
  *     print(result.header_string.decode("utf-8"))             # <<<<<<<<<<<<<<
@@ -4106,7 +4083,7 @@ static PyObject *__pyx_pf_3idd_test_match_fields(CYTHON_UNUSED PyObject *__pyx_s
  *         print("-----------")
 */
   __pyx_t_4 = NULL;
-  __pyx_t_6 = __Pyx_decode_cpp_string(__pyx_v_result.header_string, 0, PY_SSIZE_T_MAX, NULL, NULL, PyUnicode_DecodeUTF8); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 139, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_decode_cpp_string(__pyx_v_result.header_string, 0, PY_SSIZE_T_MAX, NULL, NULL, PyUnicode_DecodeUTF8); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 140, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __pyx_t_5 = 1;
   {
@@ -4114,12 +4091,12 @@ static PyObject *__pyx_pf_3idd_test_match_fields(CYTHON_UNUSED PyObject *__pyx_s
     __pyx_t_1 = __Pyx_PyObject_FastCall((PyObject*)__pyx_builtin_print, __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 139, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 140, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "idd.pyx":140
+  /* "idd.pyx":141
  *     print("-----------")
  *     print(result.header_string.decode("utf-8"))
  *     for field in result.field_strings:             # <<<<<<<<<<<<<<
@@ -4131,7 +4108,7 @@ static PyObject *__pyx_pf_3idd_test_match_fields(CYTHON_UNUSED PyObject *__pyx_s
     __pyx_t_2 = *__pyx_t_7;
     __pyx_v_field = __PYX_STD_MOVE_IF_SUPPORTED(__pyx_t_2);
 
-    /* "idd.pyx":141
+    /* "idd.pyx":142
  *     print(result.header_string.decode("utf-8"))
  *     for field in result.field_strings:
  *         print("-----------")             # <<<<<<<<<<<<<<
@@ -4144,12 +4121,12 @@ static PyObject *__pyx_pf_3idd_test_match_fields(CYTHON_UNUSED PyObject *__pyx_s
       PyObject *__pyx_callargs[2] = {__pyx_t_6, __pyx_mstate_global->__pyx_kp_u__3};
       __pyx_t_1 = __Pyx_PyObject_FastCall((PyObject*)__pyx_builtin_print, __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
       __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 141, __pyx_L1_error)
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 142, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
     }
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "idd.pyx":142
+    /* "idd.pyx":143
  *     for field in result.field_strings:
  *         print("-----------")
  *         print(field.decode("utf-8"))             # <<<<<<<<<<<<<<
@@ -4157,7 +4134,7 @@ static PyObject *__pyx_pf_3idd_test_match_fields(CYTHON_UNUSED PyObject *__pyx_s
  * cdef string extract_tag(string& block, string tag):
 */
     __pyx_t_6 = NULL;
-    __pyx_t_4 = __Pyx_decode_cpp_string(__pyx_v_field, 0, PY_SSIZE_T_MAX, NULL, NULL, PyUnicode_DecodeUTF8); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 142, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_decode_cpp_string(__pyx_v_field, 0, PY_SSIZE_T_MAX, NULL, NULL, PyUnicode_DecodeUTF8); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 143, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __pyx_t_5 = 1;
     {
@@ -4165,12 +4142,12 @@ static PyObject *__pyx_pf_3idd_test_match_fields(CYTHON_UNUSED PyObject *__pyx_s
       __pyx_t_1 = __Pyx_PyObject_FastCall((PyObject*)__pyx_builtin_print, __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
       __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 142, __pyx_L1_error)
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 143, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
     }
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "idd.pyx":140
+    /* "idd.pyx":141
  *     print("-----------")
  *     print(result.header_string.decode("utf-8"))
  *     for field in result.field_strings:             # <<<<<<<<<<<<<<
@@ -4179,7 +4156,7 @@ static PyObject *__pyx_pf_3idd_test_match_fields(CYTHON_UNUSED PyObject *__pyx_s
 */
   }
 
-  /* "idd.pyx":136
+  /* "idd.pyx":137
  *     return result
  * 
  * def test_match_fields(str s):             # <<<<<<<<<<<<<<
@@ -4202,7 +4179,7 @@ static PyObject *__pyx_pf_3idd_test_match_fields(CYTHON_UNUSED PyObject *__pyx_s
   return __pyx_r;
 }
 
-/* "idd.pyx":144
+/* "idd.pyx":145
  *         print(field.decode("utf-8"))
  * 
  * cdef string extract_tag(string& block, string tag):             # <<<<<<<<<<<<<<
@@ -4222,7 +4199,7 @@ static std::string __pyx_f_3idd_extract_tag(std::string &__pyx_v_block, std::str
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
 
-  /* "idd.pyx":148
+  /* "idd.pyx":149
  *     # Tag should include the backslash, e.g., "\\field "
  * 
  *     cdef size_t start_pos = block.find(tag)             # <<<<<<<<<<<<<<
@@ -4231,7 +4208,7 @@ static std::string __pyx_f_3idd_extract_tag(std::string &__pyx_v_block, std::str
 */
   __pyx_v_start_pos = __pyx_v_block.find(__pyx_v_tag);
 
-  /* "idd.pyx":149
+  /* "idd.pyx":150
  * 
  *     cdef size_t start_pos = block.find(tag)
  *     if start_pos == npos:             # <<<<<<<<<<<<<<
@@ -4241,7 +4218,7 @@ static std::string __pyx_f_3idd_extract_tag(std::string &__pyx_v_block, std::str
   __pyx_t_1 = (__pyx_v_start_pos == std::string::npos);
   if (__pyx_t_1) {
 
-    /* "idd.pyx":150
+    /* "idd.pyx":151
  *     cdef size_t start_pos = block.find(tag)
  *     if start_pos == npos:
  *         return string()             # <<<<<<<<<<<<<<
@@ -4252,12 +4229,12 @@ static std::string __pyx_f_3idd_extract_tag(std::string &__pyx_v_block, std::str
       __pyx_t_2 = std::string();
     } catch(...) {
       __Pyx_CppExn2PyErr();
-      __PYX_ERR(0, 150, __pyx_L1_error)
+      __PYX_ERR(0, 151, __pyx_L1_error)
     }
     __pyx_r = __pyx_t_2;
     goto __pyx_L0;
 
-    /* "idd.pyx":149
+    /* "idd.pyx":150
  * 
  *     cdef size_t start_pos = block.find(tag)
  *     if start_pos == npos:             # <<<<<<<<<<<<<<
@@ -4266,7 +4243,7 @@ static std::string __pyx_f_3idd_extract_tag(std::string &__pyx_v_block, std::str
 */
   }
 
-  /* "idd.pyx":152
+  /* "idd.pyx":153
  *         return string()
  * 
  *     start_pos += tag.length()             # <<<<<<<<<<<<<<
@@ -4275,7 +4252,7 @@ static std::string __pyx_f_3idd_extract_tag(std::string &__pyx_v_block, std::str
 */
   __pyx_v_start_pos = (__pyx_v_start_pos + __pyx_v_tag.length());
 
-  /* "idd.pyx":153
+  /* "idd.pyx":154
  * 
  *     start_pos += tag.length()
  *     cdef size_t end_pos = block.find(b"\n", start_pos)             # <<<<<<<<<<<<<<
@@ -4284,7 +4261,7 @@ static std::string __pyx_f_3idd_extract_tag(std::string &__pyx_v_block, std::str
 */
   __pyx_v_end_pos = __pyx_v_block.find(__pyx_k__2, __pyx_v_start_pos);
 
-  /* "idd.pyx":154
+  /* "idd.pyx":155
  *     start_pos += tag.length()
  *     cdef size_t end_pos = block.find(b"\n", start_pos)
  *     if end_pos == npos:             # <<<<<<<<<<<<<<
@@ -4294,7 +4271,7 @@ static std::string __pyx_f_3idd_extract_tag(std::string &__pyx_v_block, std::str
   __pyx_t_1 = (__pyx_v_end_pos == std::string::npos);
   if (__pyx_t_1) {
 
-    /* "idd.pyx":155
+    /* "idd.pyx":156
  *     cdef size_t end_pos = block.find(b"\n", start_pos)
  *     if end_pos == npos:
  *         end_pos = block.length()             # <<<<<<<<<<<<<<
@@ -4303,7 +4280,7 @@ static std::string __pyx_f_3idd_extract_tag(std::string &__pyx_v_block, std::str
 */
     __pyx_v_end_pos = __pyx_v_block.length();
 
-    /* "idd.pyx":154
+    /* "idd.pyx":155
  *     start_pos += tag.length()
  *     cdef size_t end_pos = block.find(b"\n", start_pos)
  *     if end_pos == npos:             # <<<<<<<<<<<<<<
@@ -4312,7 +4289,7 @@ static std::string __pyx_f_3idd_extract_tag(std::string &__pyx_v_block, std::str
 */
   }
 
-  /* "idd.pyx":158
+  /* "idd.pyx":159
  * 
  *     # Handle \r if present
  *     if end_pos > start_pos and block[end_pos - 1] == b"\r":             # <<<<<<<<<<<<<<
@@ -4330,7 +4307,7 @@ static std::string __pyx_f_3idd_extract_tag(std::string &__pyx_v_block, std::str
   __pyx_L6_bool_binop_done:;
   if (__pyx_t_1) {
 
-    /* "idd.pyx":159
+    /* "idd.pyx":160
  *     # Handle \r if present
  *     if end_pos > start_pos and block[end_pos - 1] == b"\r":
  *         return utils.trim(block.substr(start_pos, end_pos - start_pos - 1))             # <<<<<<<<<<<<<<
@@ -4341,13 +4318,13 @@ static std::string __pyx_f_3idd_extract_tag(std::string &__pyx_v_block, std::str
       __pyx_t_2 = __pyx_v_block.substr(__pyx_v_start_pos, ((__pyx_v_end_pos - __pyx_v_start_pos) - 1));
     } catch(...) {
       __Pyx_CppExn2PyErr();
-      __PYX_ERR(0, 159, __pyx_L1_error)
+      __PYX_ERR(0, 160, __pyx_L1_error)
     }
-    __pyx_t_4 = __pyx_f_5utils_trim(__pyx_t_2); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 159, __pyx_L1_error)
+    __pyx_t_4 = __pyx_f_5utils_trim(__pyx_t_2); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 160, __pyx_L1_error)
     __pyx_r = __pyx_t_4;
     goto __pyx_L0;
 
-    /* "idd.pyx":158
+    /* "idd.pyx":159
  * 
  *     # Handle \r if present
  *     if end_pos > start_pos and block[end_pos - 1] == b"\r":             # <<<<<<<<<<<<<<
@@ -4356,7 +4333,7 @@ static std::string __pyx_f_3idd_extract_tag(std::string &__pyx_v_block, std::str
 */
   }
 
-  /* "idd.pyx":161
+  /* "idd.pyx":162
  *         return utils.trim(block.substr(start_pos, end_pos - start_pos - 1))
  * 
  *     return utils.trim(block.substr(start_pos, end_pos - start_pos))             # <<<<<<<<<<<<<<
@@ -4367,13 +4344,13 @@ static std::string __pyx_f_3idd_extract_tag(std::string &__pyx_v_block, std::str
     __pyx_t_4 = __pyx_v_block.substr(__pyx_v_start_pos, (__pyx_v_end_pos - __pyx_v_start_pos));
   } catch(...) {
     __Pyx_CppExn2PyErr();
-    __PYX_ERR(0, 161, __pyx_L1_error)
+    __PYX_ERR(0, 162, __pyx_L1_error)
   }
-  __pyx_t_2 = __pyx_f_5utils_trim(__pyx_t_4); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 161, __pyx_L1_error)
+  __pyx_t_2 = __pyx_f_5utils_trim(__pyx_t_4); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 162, __pyx_L1_error)
   __pyx_r = __pyx_t_2;
   goto __pyx_L0;
 
-  /* "idd.pyx":144
+  /* "idd.pyx":145
  *         print(field.decode("utf-8"))
  * 
  * cdef string extract_tag(string& block, string tag):             # <<<<<<<<<<<<<<
@@ -4389,7 +4366,7 @@ static std::string __pyx_f_3idd_extract_tag(std::string &__pyx_v_block, std::str
   return __pyx_r;
 }
 
-/* "idd.pyx":163
+/* "idd.pyx":164
  *     return utils.trim(block.substr(start_pos, end_pos - start_pos))
  * 
  * def test_extract_tag(str block, str tag):             # <<<<<<<<<<<<<<
@@ -4437,39 +4414,39 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_block,&__pyx_mstate_global->__pyx_n_u_tag,0};
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
-    if (unlikely(__pyx_kwds_len) < 0) __PYX_ERR(0, 163, __pyx_L3_error)
+    if (unlikely(__pyx_kwds_len) < 0) __PYX_ERR(0, 164, __pyx_L3_error)
     if (__pyx_kwds_len > 0) {
       switch (__pyx_nargs) {
         case  2:
         values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 163, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 164, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  1:
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 163, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 164, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  0: break;
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "test_extract_tag", 0) < (0)) __PYX_ERR(0, 163, __pyx_L3_error)
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "test_extract_tag", 0) < (0)) __PYX_ERR(0, 164, __pyx_L3_error)
       for (Py_ssize_t i = __pyx_nargs; i < 2; i++) {
-        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("test_extract_tag", 1, 2, 2, i); __PYX_ERR(0, 163, __pyx_L3_error) }
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("test_extract_tag", 1, 2, 2, i); __PYX_ERR(0, 164, __pyx_L3_error) }
       }
     } else if (unlikely(__pyx_nargs != 2)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 163, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 164, __pyx_L3_error)
       values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 163, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 164, __pyx_L3_error)
     }
     __pyx_v_block = ((PyObject*)values[0]);
     __pyx_v_tag = ((PyObject*)values[1]);
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("test_extract_tag", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 163, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("test_extract_tag", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 164, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -4480,8 +4457,8 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_block), (&PyUnicode_Type), 1, "block", 1))) __PYX_ERR(0, 163, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_tag), (&PyUnicode_Type), 1, "tag", 1))) __PYX_ERR(0, 163, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_block), (&PyUnicode_Type), 1, "block", 1))) __PYX_ERR(0, 164, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_tag), (&PyUnicode_Type), 1, "tag", 1))) __PYX_ERR(0, 164, __pyx_L1_error)
   __pyx_r = __pyx_pf_3idd_2test_extract_tag(__pyx_self, __pyx_v_block, __pyx_v_tag);
 
   /* function exit code */
@@ -4516,7 +4493,7 @@ static PyObject *__pyx_pf_3idd_2test_extract_tag(CYTHON_UNUSED PyObject *__pyx_s
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("test_extract_tag", 0);
 
-  /* "idd.pyx":164
+  /* "idd.pyx":165
  * 
  * def test_extract_tag(str block, str tag):
  *     cdef string c_block = block.encode("utf-8")             # <<<<<<<<<<<<<<
@@ -4525,15 +4502,15 @@ static PyObject *__pyx_pf_3idd_2test_extract_tag(CYTHON_UNUSED PyObject *__pyx_s
 */
   if (unlikely(__pyx_v_block == Py_None)) {
     PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%.30s'", "encode");
-    __PYX_ERR(0, 164, __pyx_L1_error)
+    __PYX_ERR(0, 165, __pyx_L1_error)
   }
-  __pyx_t_1 = PyUnicode_AsUTF8String(__pyx_v_block); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 164, __pyx_L1_error)
+  __pyx_t_1 = PyUnicode_AsUTF8String(__pyx_v_block); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 165, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __pyx_convert_string_from_py_6libcpp_6string_std__in_string(__pyx_t_1); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 164, __pyx_L1_error)
+  __pyx_t_2 = __pyx_convert_string_from_py_6libcpp_6string_std__in_string(__pyx_t_1); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 165, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_c_block = __PYX_STD_MOVE_IF_SUPPORTED(__pyx_t_2);
 
-  /* "idd.pyx":165
+  /* "idd.pyx":166
  * def test_extract_tag(str block, str tag):
  *     cdef string c_block = block.encode("utf-8")
  *     print(extract_tag(c_block, tag.encode("utf-8")).decode("utf-8"))             # <<<<<<<<<<<<<<
@@ -4543,14 +4520,14 @@ static PyObject *__pyx_pf_3idd_2test_extract_tag(CYTHON_UNUSED PyObject *__pyx_s
   __pyx_t_3 = NULL;
   if (unlikely(__pyx_v_tag == Py_None)) {
     PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%.30s'", "encode");
-    __PYX_ERR(0, 165, __pyx_L1_error)
+    __PYX_ERR(0, 166, __pyx_L1_error)
   }
-  __pyx_t_4 = PyUnicode_AsUTF8String(__pyx_v_tag); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 165, __pyx_L1_error)
+  __pyx_t_4 = PyUnicode_AsUTF8String(__pyx_v_tag); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 166, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_2 = __pyx_convert_string_from_py_6libcpp_6string_std__in_string(__pyx_t_4); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 165, __pyx_L1_error)
+  __pyx_t_2 = __pyx_convert_string_from_py_6libcpp_6string_std__in_string(__pyx_t_4); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 166, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_5 = __pyx_f_3idd_extract_tag(__pyx_v_c_block, __PYX_STD_MOVE_IF_SUPPORTED(__pyx_t_2)); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 165, __pyx_L1_error)
-  __pyx_t_4 = __Pyx_decode_cpp_string(__PYX_STD_MOVE_IF_SUPPORTED(__pyx_t_5), 0, PY_SSIZE_T_MAX, NULL, NULL, PyUnicode_DecodeUTF8); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 165, __pyx_L1_error)
+  __pyx_t_5 = __pyx_f_3idd_extract_tag(__pyx_v_c_block, __PYX_STD_MOVE_IF_SUPPORTED(__pyx_t_2)); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 166, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_decode_cpp_string(__PYX_STD_MOVE_IF_SUPPORTED(__pyx_t_5), 0, PY_SSIZE_T_MAX, NULL, NULL, PyUnicode_DecodeUTF8); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 166, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_t_6 = 1;
   {
@@ -4558,12 +4535,12 @@ static PyObject *__pyx_pf_3idd_2test_extract_tag(CYTHON_UNUSED PyObject *__pyx_s
     __pyx_t_1 = __Pyx_PyObject_FastCall((PyObject*)__pyx_builtin_print, __pyx_callargs+__pyx_t_6, (2-__pyx_t_6) | (__pyx_t_6*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 165, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 166, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "idd.pyx":166
+  /* "idd.pyx":167
  *     cdef string c_block = block.encode("utf-8")
  *     print(extract_tag(c_block, tag.encode("utf-8")).decode("utf-8"))
  *     print(c_block.decode("utf-8"))             # <<<<<<<<<<<<<<
@@ -4571,7 +4548,7 @@ static PyObject *__pyx_pf_3idd_2test_extract_tag(CYTHON_UNUSED PyObject *__pyx_s
  * cdef struct ExtensibleNameMatchResult:
 */
   __pyx_t_4 = NULL;
-  __pyx_t_3 = __Pyx_decode_cpp_string(__pyx_v_c_block, 0, PY_SSIZE_T_MAX, NULL, NULL, PyUnicode_DecodeUTF8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 166, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_decode_cpp_string(__pyx_v_c_block, 0, PY_SSIZE_T_MAX, NULL, NULL, PyUnicode_DecodeUTF8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 167, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_6 = 1;
   {
@@ -4579,12 +4556,12 @@ static PyObject *__pyx_pf_3idd_2test_extract_tag(CYTHON_UNUSED PyObject *__pyx_s
     __pyx_t_1 = __Pyx_PyObject_FastCall((PyObject*)__pyx_builtin_print, __pyx_callargs+__pyx_t_6, (2-__pyx_t_6) | (__pyx_t_6*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 166, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 167, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "idd.pyx":163
+  /* "idd.pyx":164
  *     return utils.trim(block.substr(start_pos, end_pos - start_pos))
  * 
  * def test_extract_tag(str block, str tag):             # <<<<<<<<<<<<<<
@@ -4607,7 +4584,7 @@ static PyObject *__pyx_pf_3idd_2test_extract_tag(CYTHON_UNUSED PyObject *__pyx_s
   return __pyx_r;
 }
 
-/* "idd.pyx":173
+/* "idd.pyx":174
  *     cbool success
  * 
  * cdef ExtensibleNameMatchResult match_extensible_name(string& fieldname):             # <<<<<<<<<<<<<<
@@ -4628,17 +4605,17 @@ static struct __pyx_t_3idd_ExtensibleNameMatchResult __pyx_f_3idd_match_extensib
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
 
-  /* "idd.pyx":179
+  /* "idd.pyx":180
  *     """
  *     cdef ExtensibleNameMatchResult result
  *     cdef string number = b""             # <<<<<<<<<<<<<<
  * 
  *     cdef size_t length = fieldname.length()
 */
-  __pyx_t_1 = __pyx_convert_string_from_py_6libcpp_6string_std__in_string(__pyx_mstate_global->__pyx_kp_b__4); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 179, __pyx_L1_error)
+  __pyx_t_1 = __pyx_convert_string_from_py_6libcpp_6string_std__in_string(__pyx_mstate_global->__pyx_kp_b__4); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 180, __pyx_L1_error)
   __pyx_v_number = __PYX_STD_MOVE_IF_SUPPORTED(__pyx_t_1);
 
-  /* "idd.pyx":181
+  /* "idd.pyx":182
  *     cdef string number = b""
  * 
  *     cdef size_t length = fieldname.length()             # <<<<<<<<<<<<<<
@@ -4647,7 +4624,7 @@ static struct __pyx_t_3idd_ExtensibleNameMatchResult __pyx_f_3idd_match_extensib
 */
   __pyx_v_length = __pyx_v_fieldname.length();
 
-  /* "idd.pyx":182
+  /* "idd.pyx":183
  * 
  *     cdef size_t length = fieldname.length()
  *     cdef size_t pos = 0             # <<<<<<<<<<<<<<
@@ -4656,7 +4633,7 @@ static struct __pyx_t_3idd_ExtensibleNameMatchResult __pyx_f_3idd_match_extensib
 */
   __pyx_v_pos = 0;
 
-  /* "idd.pyx":185
+  /* "idd.pyx":186
  * 
  *     # prefix
  *     while pos < length and not isdigit(fieldname[pos]):             # <<<<<<<<<<<<<<
@@ -4675,7 +4652,7 @@ static struct __pyx_t_3idd_ExtensibleNameMatchResult __pyx_f_3idd_match_extensib
     __pyx_L5_bool_binop_done:;
     if (!__pyx_t_2) break;
 
-    /* "idd.pyx":186
+    /* "idd.pyx":187
  *     # prefix
  *     while pos < length and not isdigit(fieldname[pos]):
  *         pos += 1             # <<<<<<<<<<<<<<
@@ -4685,7 +4662,7 @@ static struct __pyx_t_3idd_ExtensibleNameMatchResult __pyx_f_3idd_match_extensib
     __pyx_v_pos = (__pyx_v_pos + 1);
   }
 
-  /* "idd.pyx":187
+  /* "idd.pyx":188
  *     while pos < length and not isdigit(fieldname[pos]):
  *         pos += 1
  *     if pos > 0:             # <<<<<<<<<<<<<<
@@ -4695,7 +4672,7 @@ static struct __pyx_t_3idd_ExtensibleNameMatchResult __pyx_f_3idd_match_extensib
   __pyx_t_2 = (__pyx_v_pos > 0);
   if (__pyx_t_2) {
 
-    /* "idd.pyx":188
+    /* "idd.pyx":189
  *         pos += 1
  *     if pos > 0:
  *         result.prefix = fieldname.substr(0, pos)             # <<<<<<<<<<<<<<
@@ -4706,11 +4683,11 @@ static struct __pyx_t_3idd_ExtensibleNameMatchResult __pyx_f_3idd_match_extensib
       __pyx_t_1 = __pyx_v_fieldname.substr(0, __pyx_v_pos);
     } catch(...) {
       __Pyx_CppExn2PyErr();
-      __PYX_ERR(0, 188, __pyx_L1_error)
+      __PYX_ERR(0, 189, __pyx_L1_error)
     }
     __pyx_v_result.prefix = __PYX_STD_MOVE_IF_SUPPORTED(__pyx_t_1);
 
-    /* "idd.pyx":187
+    /* "idd.pyx":188
  *     while pos < length and not isdigit(fieldname[pos]):
  *         pos += 1
  *     if pos > 0:             # <<<<<<<<<<<<<<
@@ -4719,7 +4696,7 @@ static struct __pyx_t_3idd_ExtensibleNameMatchResult __pyx_f_3idd_match_extensib
 */
   }
 
-  /* "idd.pyx":191
+  /* "idd.pyx":192
  * 
  *     # number
  *     if pos == length:             # <<<<<<<<<<<<<<
@@ -4729,7 +4706,7 @@ static struct __pyx_t_3idd_ExtensibleNameMatchResult __pyx_f_3idd_match_extensib
   __pyx_t_2 = (__pyx_v_pos == __pyx_v_length);
   if (__pyx_t_2) {
 
-    /* "idd.pyx":193
+    /* "idd.pyx":194
  *     if pos == length:
  *         # hit the end, no number found
  *         result.success = False             # <<<<<<<<<<<<<<
@@ -4738,7 +4715,7 @@ static struct __pyx_t_3idd_ExtensibleNameMatchResult __pyx_f_3idd_match_extensib
 */
     __pyx_v_result.success = 0;
 
-    /* "idd.pyx":194
+    /* "idd.pyx":195
  *         # hit the end, no number found
  *         result.success = False
  *         result.prefix += <char*>b" "             # <<<<<<<<<<<<<<
@@ -4747,7 +4724,7 @@ static struct __pyx_t_3idd_ExtensibleNameMatchResult __pyx_f_3idd_match_extensib
 */
     __pyx_v_result.prefix += ((char *)((char *)" "));
 
-    /* "idd.pyx":195
+    /* "idd.pyx":196
  *         result.success = False
  *         result.prefix += <char*>b" "
  *         return result # suffix is already empty (default value)             # <<<<<<<<<<<<<<
@@ -4757,7 +4734,7 @@ static struct __pyx_t_3idd_ExtensibleNameMatchResult __pyx_f_3idd_match_extensib
     __pyx_r = __pyx_v_result;
     goto __pyx_L0;
 
-    /* "idd.pyx":191
+    /* "idd.pyx":192
  * 
  *     # number
  *     if pos == length:             # <<<<<<<<<<<<<<
@@ -4766,7 +4743,7 @@ static struct __pyx_t_3idd_ExtensibleNameMatchResult __pyx_f_3idd_match_extensib
 */
   }
 
-  /* "idd.pyx":198
+  /* "idd.pyx":199
  * 
  *     # suffix
  *     while pos < length and not isdigit(fieldname[pos]):             # <<<<<<<<<<<<<<
@@ -4785,7 +4762,7 @@ static struct __pyx_t_3idd_ExtensibleNameMatchResult __pyx_f_3idd_match_extensib
     __pyx_L11_bool_binop_done:;
     if (!__pyx_t_2) break;
 
-    /* "idd.pyx":199
+    /* "idd.pyx":200
  *     # suffix
  *     while pos < length and not isdigit(fieldname[pos]):
  *         pos += 1             # <<<<<<<<<<<<<<
@@ -4795,7 +4772,7 @@ static struct __pyx_t_3idd_ExtensibleNameMatchResult __pyx_f_3idd_match_extensib
     __pyx_v_pos = (__pyx_v_pos + 1);
   }
 
-  /* "idd.pyx":201
+  /* "idd.pyx":202
  *         pos += 1
  * 
  *     result.success = True             # <<<<<<<<<<<<<<
@@ -4804,7 +4781,7 @@ static struct __pyx_t_3idd_ExtensibleNameMatchResult __pyx_f_3idd_match_extensib
 */
   __pyx_v_result.success = 1;
 
-  /* "idd.pyx":203
+  /* "idd.pyx":204
  *     result.success = True
  * 
  *     if pos < length:             # <<<<<<<<<<<<<<
@@ -4814,7 +4791,7 @@ static struct __pyx_t_3idd_ExtensibleNameMatchResult __pyx_f_3idd_match_extensib
   __pyx_t_2 = (__pyx_v_pos < __pyx_v_length);
   if (__pyx_t_2) {
 
-    /* "idd.pyx":204
+    /* "idd.pyx":205
  * 
  *     if pos < length:
  *         result.suffix = fieldname.substr(pos)             # <<<<<<<<<<<<<<
@@ -4825,11 +4802,11 @@ static struct __pyx_t_3idd_ExtensibleNameMatchResult __pyx_f_3idd_match_extensib
       __pyx_t_1 = __pyx_v_fieldname.substr(__pyx_v_pos);
     } catch(...) {
       __Pyx_CppExn2PyErr();
-      __PYX_ERR(0, 204, __pyx_L1_error)
+      __PYX_ERR(0, 205, __pyx_L1_error)
     }
     __pyx_v_result.suffix = __PYX_STD_MOVE_IF_SUPPORTED(__pyx_t_1);
 
-    /* "idd.pyx":203
+    /* "idd.pyx":204
  *     result.success = True
  * 
  *     if pos < length:             # <<<<<<<<<<<<<<
@@ -4838,7 +4815,7 @@ static struct __pyx_t_3idd_ExtensibleNameMatchResult __pyx_f_3idd_match_extensib
 */
   }
 
-  /* "idd.pyx":206
+  /* "idd.pyx":207
  *         result.suffix = fieldname.substr(pos)
  * 
  *     return result             # <<<<<<<<<<<<<<
@@ -4848,7 +4825,7 @@ static struct __pyx_t_3idd_ExtensibleNameMatchResult __pyx_f_3idd_match_extensib
   __pyx_r = __pyx_v_result;
   goto __pyx_L0;
 
-  /* "idd.pyx":173
+  /* "idd.pyx":174
  *     cbool success
  * 
  * cdef ExtensibleNameMatchResult match_extensible_name(string& fieldname):             # <<<<<<<<<<<<<<
@@ -4864,7 +4841,7 @@ static struct __pyx_t_3idd_ExtensibleNameMatchResult __pyx_f_3idd_match_extensib
   return __pyx_r;
 }
 
-/* "idd.pyx":208
+/* "idd.pyx":209
  *     return result
  * 
  * def test_match_extensible_name(str s):             # <<<<<<<<<<<<<<
@@ -4911,32 +4888,32 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_s,0};
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
-    if (unlikely(__pyx_kwds_len) < 0) __PYX_ERR(0, 208, __pyx_L3_error)
+    if (unlikely(__pyx_kwds_len) < 0) __PYX_ERR(0, 209, __pyx_L3_error)
     if (__pyx_kwds_len > 0) {
       switch (__pyx_nargs) {
         case  1:
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 208, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 209, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  0: break;
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "test_match_extensible_name", 0) < (0)) __PYX_ERR(0, 208, __pyx_L3_error)
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "test_match_extensible_name", 0) < (0)) __PYX_ERR(0, 209, __pyx_L3_error)
       for (Py_ssize_t i = __pyx_nargs; i < 1; i++) {
-        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("test_match_extensible_name", 1, 1, 1, i); __PYX_ERR(0, 208, __pyx_L3_error) }
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("test_match_extensible_name", 1, 1, 1, i); __PYX_ERR(0, 209, __pyx_L3_error) }
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 208, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 209, __pyx_L3_error)
     }
     __pyx_v_s = ((PyObject*)values[0]);
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("test_match_extensible_name", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 208, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("test_match_extensible_name", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 209, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -4947,7 +4924,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_s), (&PyUnicode_Type), 1, "s", 1))) __PYX_ERR(0, 208, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_s), (&PyUnicode_Type), 1, "s", 1))) __PYX_ERR(0, 209, __pyx_L1_error)
   __pyx_r = __pyx_pf_3idd_4test_match_extensible_name(__pyx_self, __pyx_v_s);
 
   /* function exit code */
@@ -4984,7 +4961,7 @@ static PyObject *__pyx_pf_3idd_4test_match_extensible_name(CYTHON_UNUSED PyObjec
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("test_match_extensible_name", 0);
 
-  /* "idd.pyx":209
+  /* "idd.pyx":210
  * 
  * def test_match_extensible_name(str s):
  *     cdef fieldname = s.encode("utf-8")             # <<<<<<<<<<<<<<
@@ -4993,25 +4970,25 @@ static PyObject *__pyx_pf_3idd_4test_match_extensible_name(CYTHON_UNUSED PyObjec
 */
   if (unlikely(__pyx_v_s == Py_None)) {
     PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%.30s'", "encode");
-    __PYX_ERR(0, 209, __pyx_L1_error)
+    __PYX_ERR(0, 210, __pyx_L1_error)
   }
-  __pyx_t_1 = PyUnicode_AsUTF8String(__pyx_v_s); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 209, __pyx_L1_error)
+  __pyx_t_1 = PyUnicode_AsUTF8String(__pyx_v_s); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 210, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_fieldname = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "idd.pyx":210
+  /* "idd.pyx":211
  * def test_match_extensible_name(str s):
  *     cdef fieldname = s.encode("utf-8")
  *     cdef ExtensibleNameMatchResult result = match_extensible_name(fieldname)             # <<<<<<<<<<<<<<
  *     print(result.prefix.decode("utf-8"))
  *     print(result.suffix.decode("utf-8"))
 */
-  __pyx_t_2 = __pyx_convert_string_from_py_6libcpp_6string_std__in_string(__pyx_v_fieldname); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 210, __pyx_L1_error)
-  __pyx_t_3 = __pyx_f_3idd_match_extensible_name(__pyx_t_2); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 210, __pyx_L1_error)
+  __pyx_t_2 = __pyx_convert_string_from_py_6libcpp_6string_std__in_string(__pyx_v_fieldname); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 211, __pyx_L1_error)
+  __pyx_t_3 = __pyx_f_3idd_match_extensible_name(__pyx_t_2); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 211, __pyx_L1_error)
   __pyx_v_result = __pyx_t_3;
 
-  /* "idd.pyx":211
+  /* "idd.pyx":212
  *     cdef fieldname = s.encode("utf-8")
  *     cdef ExtensibleNameMatchResult result = match_extensible_name(fieldname)
  *     print(result.prefix.decode("utf-8"))             # <<<<<<<<<<<<<<
@@ -5019,7 +4996,7 @@ static PyObject *__pyx_pf_3idd_4test_match_extensible_name(CYTHON_UNUSED PyObjec
  *     print(result.success)
 */
   __pyx_t_4 = NULL;
-  __pyx_t_5 = __Pyx_decode_cpp_string(__pyx_v_result.prefix, 0, PY_SSIZE_T_MAX, NULL, NULL, PyUnicode_DecodeUTF8); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 211, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_decode_cpp_string(__pyx_v_result.prefix, 0, PY_SSIZE_T_MAX, NULL, NULL, PyUnicode_DecodeUTF8); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 212, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_t_6 = 1;
   {
@@ -5027,12 +5004,12 @@ static PyObject *__pyx_pf_3idd_4test_match_extensible_name(CYTHON_UNUSED PyObjec
     __pyx_t_1 = __Pyx_PyObject_FastCall((PyObject*)__pyx_builtin_print, __pyx_callargs+__pyx_t_6, (2-__pyx_t_6) | (__pyx_t_6*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 211, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 212, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "idd.pyx":212
+  /* "idd.pyx":213
  *     cdef ExtensibleNameMatchResult result = match_extensible_name(fieldname)
  *     print(result.prefix.decode("utf-8"))
  *     print(result.suffix.decode("utf-8"))             # <<<<<<<<<<<<<<
@@ -5040,7 +5017,7 @@ static PyObject *__pyx_pf_3idd_4test_match_extensible_name(CYTHON_UNUSED PyObjec
  *     print(fieldname.decode("utf-8"))
 */
   __pyx_t_5 = NULL;
-  __pyx_t_4 = __Pyx_decode_cpp_string(__pyx_v_result.suffix, 0, PY_SSIZE_T_MAX, NULL, NULL, PyUnicode_DecodeUTF8); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 212, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_decode_cpp_string(__pyx_v_result.suffix, 0, PY_SSIZE_T_MAX, NULL, NULL, PyUnicode_DecodeUTF8); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 213, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_t_6 = 1;
   {
@@ -5048,12 +5025,12 @@ static PyObject *__pyx_pf_3idd_4test_match_extensible_name(CYTHON_UNUSED PyObjec
     __pyx_t_1 = __Pyx_PyObject_FastCall((PyObject*)__pyx_builtin_print, __pyx_callargs+__pyx_t_6, (2-__pyx_t_6) | (__pyx_t_6*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 212, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 213, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "idd.pyx":213
+  /* "idd.pyx":214
  *     print(result.prefix.decode("utf-8"))
  *     print(result.suffix.decode("utf-8"))
  *     print(result.success)             # <<<<<<<<<<<<<<
@@ -5061,7 +5038,7 @@ static PyObject *__pyx_pf_3idd_4test_match_extensible_name(CYTHON_UNUSED PyObjec
  * 
 */
   __pyx_t_4 = NULL;
-  __pyx_t_5 = __Pyx_PyBool_FromLong(__pyx_v_result.success); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 213, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyBool_FromLong(__pyx_v_result.success); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 214, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_t_6 = 1;
   {
@@ -5069,12 +5046,12 @@ static PyObject *__pyx_pf_3idd_4test_match_extensible_name(CYTHON_UNUSED PyObjec
     __pyx_t_1 = __Pyx_PyObject_FastCall((PyObject*)__pyx_builtin_print, __pyx_callargs+__pyx_t_6, (2-__pyx_t_6) | (__pyx_t_6*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 213, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 214, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "idd.pyx":214
+  /* "idd.pyx":215
  *     print(result.suffix.decode("utf-8"))
  *     print(result.success)
  *     print(fieldname.decode("utf-8"))             # <<<<<<<<<<<<<<
@@ -5089,7 +5066,7 @@ static PyObject *__pyx_pf_3idd_4test_match_extensible_name(CYTHON_UNUSED PyObjec
     PyObject *__pyx_callargs[2] = {__pyx_t_7, __pyx_mstate_global->__pyx_kp_u_utf_8};
     __pyx_t_4 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_decode, __pyx_callargs+__pyx_t_6, (2-__pyx_t_6) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
     __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
-    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 214, __pyx_L1_error)
+    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 215, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
   }
   __pyx_t_6 = 1;
@@ -5098,12 +5075,12 @@ static PyObject *__pyx_pf_3idd_4test_match_extensible_name(CYTHON_UNUSED PyObjec
     __pyx_t_1 = __Pyx_PyObject_FastCall((PyObject*)__pyx_builtin_print, __pyx_callargs+__pyx_t_6, (2-__pyx_t_6) | (__pyx_t_6*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 214, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 215, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "idd.pyx":208
+  /* "idd.pyx":209
  *     return result
  * 
  * def test_match_extensible_name(str s):             # <<<<<<<<<<<<<<
@@ -5128,19 +5105,19 @@ static PyObject *__pyx_pf_3idd_4test_match_extensible_name(CYTHON_UNUSED PyObjec
   return __pyx_r;
 }
 
-/* "idd.pyx":218
+/* "idd.pyx":219
  * #+  Parsing class info
  * 
- * cdef ClassProps parse_idd_class_string(string class_string, cbool verbose = False):             # <<<<<<<<<<<<<<
+ * cdef EPClass parse_idd_class_string(string class_string, cbool verbose = False):             # <<<<<<<<<<<<<<
  *     """
- *     Parse a class idd string and creates a ClassProps object.
+ *     Parse a class idd string and creates a EPClass object.
 */
 
-static struct __pyx_t_3idd_ClassProps __pyx_f_3idd_parse_idd_class_string(std::string __pyx_v_class_string, struct __pyx_opt_args_3idd_parse_idd_class_string *__pyx_optional_args) {
+static struct __pyx_t_3idd_EPClass __pyx_f_3idd_parse_idd_class_string(std::string __pyx_v_class_string, struct __pyx_opt_args_3idd_parse_idd_class_string *__pyx_optional_args) {
   bool __pyx_v_verbose = ((bool)0);
   size_t __pyx_v_sep_pos;
   struct __pyx_t_3idd_MatchFieldsResult __pyx_v_match_result;
-  struct __pyx_t_3idd_ClassProps __pyx_v_classProps;
+  struct __pyx_t_3idd_EPClass __pyx_v_epclass;
   std::string __pyx_v_ext_tag;
   size_t __pyx_v_ext_pos;
   size_t __pyx_v_num_start;
@@ -5148,85 +5125,75 @@ static struct __pyx_t_3idd_ClassProps __pyx_f_3idd_parse_idd_class_string(std::s
   std::string __pyx_v_field_string;
   std::string __pyx_v_fieldname;
   size_t __pyx_v_field_idx;
-  struct __pyx_t_3idd_ClassProps __pyx_r;
-  __Pyx_RefNannyDeclarations
+  struct __pyx_t_3idd_EPClass __pyx_r;
   struct __pyx_t_3idd_MatchFieldsResult __pyx_t_1;
   int __pyx_t_2;
   std::string __pyx_t_3;
   std::string __pyx_t_4;
-  PyObject *__pyx_t_5 = NULL;
-  PyObject *__pyx_t_6 = NULL;
-  size_t __pyx_t_7;
-  int __pyx_t_8;
-  std::vector<std::string> ::size_type __pyx_t_9;
-  std::vector<std::string> ::size_type __pyx_t_10;
-  PyObject *__pyx_t_11 = NULL;
-  PyObject *__pyx_t_12 = NULL;
-  PyObject *__pyx_t_13 = NULL;
-  PyObject *__pyx_t_14[6];
-  PyObject *__pyx_t_15 = NULL;
-  size_t __pyx_t_16;
+  int __pyx_t_5;
+  std::vector<std::string> ::size_type __pyx_t_6;
+  std::vector<std::string> ::size_type __pyx_t_7;
+  size_t __pyx_t_8;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
-  __Pyx_RefNannySetupContext("parse_idd_class_string", 0);
   if (__pyx_optional_args) {
     if (__pyx_optional_args->__pyx_n > 0) {
       __pyx_v_verbose = __pyx_optional_args->verbose;
     }
   }
 
-  /* "idd.pyx":226
+  /* "idd.pyx":227
  * 
  *     #? Parse class_string into header_string and field_strings
  *     cdef MatchFieldsResult match_result = match_fields(class_string)             # <<<<<<<<<<<<<<
  * 
- *     #? ClassProps result
+ *     #? EPClass result
 */
-  __pyx_t_1 = __pyx_f_3idd_match_fields(__pyx_v_class_string); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 226, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_3idd_match_fields(__pyx_v_class_string); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 227, __pyx_L1_error)
   __pyx_v_match_result = __pyx_t_1;
 
-  /* "idd.pyx":230
- *     #? ClassProps result
- *     cdef ClassProps classProps
- *     classProps.last_default_field_idx = -2 # -2 indicates undefined/none, -1 indicates present but no fields yet             # <<<<<<<<<<<<<<
- *     classProps.has_extensible = False
+  /* "idd.pyx":231
+ *     #? EPClass result
+ *     cdef EPClass epclass
+ *     epclass.last_default_field_idx = -2 # -2 indicates undefined/none, -1 indicates present but no fields yet             # <<<<<<<<<<<<<<
+ *     epclass.has_extensible = False
  * 
 */
-  __pyx_v_classProps.last_default_field_idx = -2;
+  __pyx_v_epclass.last_default_field_idx = -2;
 
-  /* "idd.pyx":231
- *     cdef ClassProps classProps
- *     classProps.last_default_field_idx = -2 # -2 indicates undefined/none, -1 indicates present but no fields yet
- *     classProps.has_extensible = False             # <<<<<<<<<<<<<<
+  /* "idd.pyx":232
+ *     cdef EPClass epclass
+ *     epclass.last_default_field_idx = -2 # -2 indicates undefined/none, -1 indicates present but no fields yet
+ *     epclass.has_extensible = False             # <<<<<<<<<<<<<<
  * 
  *     #? Extract class name
 */
-  __pyx_v_classProps.has_extensible = 0;
+  __pyx_v_epclass.has_extensible = 0;
 
-  /* "idd.pyx":234
+  /* "idd.pyx":235
  * 
  *     #? Extract class name
  *     sep_pos = match_result.header_string.find(b",")             # <<<<<<<<<<<<<<
  *     if sep_pos != npos:
- *         classProps.name = utils.trim(match_result.header_string.substr(0, sep_pos))
+ *         epclass.name = utils.trim(match_result.header_string.substr(0, sep_pos))
 */
   __pyx_v_sep_pos = __pyx_v_match_result.header_string.find(__pyx_k__5);
 
-  /* "idd.pyx":235
+  /* "idd.pyx":236
  *     #? Extract class name
  *     sep_pos = match_result.header_string.find(b",")
  *     if sep_pos != npos:             # <<<<<<<<<<<<<<
- *         classProps.name = utils.trim(match_result.header_string.substr(0, sep_pos))
+ *         epclass.name = utils.trim(match_result.header_string.substr(0, sep_pos))
  *     else:
 */
   __pyx_t_2 = (__pyx_v_sep_pos != std::string::npos);
   if (__pyx_t_2) {
 
-    /* "idd.pyx":236
+    /* "idd.pyx":237
  *     sep_pos = match_result.header_string.find(b",")
  *     if sep_pos != npos:
- *         classProps.name = utils.trim(match_result.header_string.substr(0, sep_pos))             # <<<<<<<<<<<<<<
+ *         epclass.name = utils.trim(match_result.header_string.substr(0, sep_pos))             # <<<<<<<<<<<<<<
  *     else:
  *         if verbose:
 */
@@ -5234,110 +5201,101 @@ static struct __pyx_t_3idd_ClassProps __pyx_f_3idd_parse_idd_class_string(std::s
       __pyx_t_3 = __pyx_v_match_result.header_string.substr(0, __pyx_v_sep_pos);
     } catch(...) {
       __Pyx_CppExn2PyErr();
-      __PYX_ERR(0, 236, __pyx_L1_error)
+      __PYX_ERR(0, 237, __pyx_L1_error)
     }
-    __pyx_t_4 = __pyx_f_5utils_trim(__pyx_t_3); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 236, __pyx_L1_error)
-    __pyx_v_classProps.name = __PYX_STD_MOVE_IF_SUPPORTED(__pyx_t_4);
+    __pyx_t_4 = __pyx_f_5utils_trim(__pyx_t_3); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 237, __pyx_L1_error)
+    __pyx_v_epclass.name = __PYX_STD_MOVE_IF_SUPPORTED(__pyx_t_4);
 
-    /* "idd.pyx":235
+    /* "idd.pyx":236
  *     #? Extract class name
  *     sep_pos = match_result.header_string.find(b",")
  *     if sep_pos != npos:             # <<<<<<<<<<<<<<
- *         classProps.name = utils.trim(match_result.header_string.substr(0, sep_pos))
+ *         epclass.name = utils.trim(match_result.header_string.substr(0, sep_pos))
  *     else:
 */
     goto __pyx_L3;
   }
 
-  /* "idd.pyx":238
- *         classProps.name = utils.trim(match_result.header_string.substr(0, sep_pos))
+  /* "idd.pyx":239
+ *         epclass.name = utils.trim(match_result.header_string.substr(0, sep_pos))
  *     else:
  *         if verbose:             # <<<<<<<<<<<<<<
- *             print("> No fieldName match for '{classProps.name.decode('utf-8')}' - {field_idx}. Using {fieldname.decode('utf-8')}")
- *         classProps.name = utils.trim(match_result.header_string) # fallback
+ *             printf("")
+ *         epclass.name = utils.trim(match_result.header_string) # fallback
 */
   /*else*/ {
     __pyx_t_2 = (__pyx_v_verbose != 0);
     if (__pyx_t_2) {
 
-      /* "idd.pyx":239
+      /* "idd.pyx":240
  *     else:
  *         if verbose:
- *             print("> No fieldName match for '{classProps.name.decode('utf-8')}' - {field_idx}. Using {fieldname.decode('utf-8')}")             # <<<<<<<<<<<<<<
- *         classProps.name = utils.trim(match_result.header_string) # fallback
+ *             printf("")             # <<<<<<<<<<<<<<
+ *         epclass.name = utils.trim(match_result.header_string) # fallback
  * 
 */
-      __pyx_t_6 = NULL;
-      __pyx_t_7 = 1;
-      {
-        PyObject *__pyx_callargs[2] = {__pyx_t_6, __pyx_mstate_global->__pyx_kp_u_No_fieldName_match_for_classPro};
-        __pyx_t_5 = __Pyx_PyObject_FastCall((PyObject*)__pyx_builtin_print, __pyx_callargs+__pyx_t_7, (2-__pyx_t_7) | (__pyx_t_7*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
-        __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-        if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 239, __pyx_L1_error)
-        __Pyx_GOTREF(__pyx_t_5);
-      }
-      __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+      (void)(printf(__pyx_k__4));
 
-      /* "idd.pyx":238
- *         classProps.name = utils.trim(match_result.header_string.substr(0, sep_pos))
+      /* "idd.pyx":239
+ *         epclass.name = utils.trim(match_result.header_string.substr(0, sep_pos))
  *     else:
  *         if verbose:             # <<<<<<<<<<<<<<
- *             print("> No fieldName match for '{classProps.name.decode('utf-8')}' - {field_idx}. Using {fieldname.decode('utf-8')}")
- *         classProps.name = utils.trim(match_result.header_string) # fallback
+ *             printf("")
+ *         epclass.name = utils.trim(match_result.header_string) # fallback
 */
     }
 
-    /* "idd.pyx":240
+    /* "idd.pyx":241
  *         if verbose:
- *             print("> No fieldName match for '{classProps.name.decode('utf-8')}' - {field_idx}. Using {fieldname.decode('utf-8')}")
- *         classProps.name = utils.trim(match_result.header_string) # fallback             # <<<<<<<<<<<<<<
+ *             printf("")
+ *         epclass.name = utils.trim(match_result.header_string) # fallback             # <<<<<<<<<<<<<<
  * 
  *     #? Check for \default in header
 */
-    __pyx_t_4 = __pyx_f_5utils_trim(__pyx_v_match_result.header_string); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 240, __pyx_L1_error)
-    __pyx_v_classProps.name = __PYX_STD_MOVE_IF_SUPPORTED(__pyx_t_4);
+    __pyx_t_4 = __pyx_f_5utils_trim(__pyx_v_match_result.header_string); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 241, __pyx_L1_error)
+    __pyx_v_epclass.name = __PYX_STD_MOVE_IF_SUPPORTED(__pyx_t_4);
   }
   __pyx_L3:;
 
-  /* "idd.pyx":243
+  /* "idd.pyx":244
  * 
  *     #? Check for \default in header
  *     if match_result.header_string.find(b"\\default ") != npos:             # <<<<<<<<<<<<<<
- *         classProps.last_default_field_idx = -1
+ *         epclass.last_default_field_idx = -1
  * 
 */
   __pyx_t_2 = (__pyx_v_match_result.header_string.find(__pyx_k_default) != std::string::npos);
   if (__pyx_t_2) {
 
-    /* "idd.pyx":244
+    /* "idd.pyx":245
  *     #? Check for \default in header
  *     if match_result.header_string.find(b"\\default ") != npos:
- *         classProps.last_default_field_idx = -1             # <<<<<<<<<<<<<<
+ *         epclass.last_default_field_idx = -1             # <<<<<<<<<<<<<<
  * 
  *     #? Check for \extensible:<number>
 */
-    __pyx_v_classProps.last_default_field_idx = -1;
+    __pyx_v_epclass.last_default_field_idx = -1;
 
-    /* "idd.pyx":243
+    /* "idd.pyx":244
  * 
  *     #? Check for \default in header
  *     if match_result.header_string.find(b"\\default ") != npos:             # <<<<<<<<<<<<<<
- *         classProps.last_default_field_idx = -1
+ *         epclass.last_default_field_idx = -1
  * 
 */
   }
 
-  /* "idd.pyx":247
+  /* "idd.pyx":248
  * 
  *     #? Check for \extensible:<number>
  *     cdef string ext_tag = b"\\extensible:"             # <<<<<<<<<<<<<<
  *     cdef size_t ext_pos = match_result.header_string.find(ext_tag)
  *     cdef size_t num_start
 */
-  __pyx_t_4 = __pyx_convert_string_from_py_6libcpp_6string_std__in_string(__pyx_mstate_global->__pyx_kp_b_extensible); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 247, __pyx_L1_error)
+  __pyx_t_4 = __pyx_convert_string_from_py_6libcpp_6string_std__in_string(__pyx_mstate_global->__pyx_kp_b_extensible); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 248, __pyx_L1_error)
   __pyx_v_ext_tag = __PYX_STD_MOVE_IF_SUPPORTED(__pyx_t_4);
 
-  /* "idd.pyx":248
+  /* "idd.pyx":249
  *     #? Check for \extensible:<number>
  *     cdef string ext_tag = b"\\extensible:"
  *     cdef size_t ext_pos = match_result.header_string.find(ext_tag)             # <<<<<<<<<<<<<<
@@ -5346,36 +5304,36 @@ static struct __pyx_t_3idd_ClassProps __pyx_f_3idd_parse_idd_class_string(std::s
 */
   __pyx_v_ext_pos = __pyx_v_match_result.header_string.find(__pyx_v_ext_tag);
 
-  /* "idd.pyx":251
+  /* "idd.pyx":252
  *     cdef size_t num_start
  *     cdef size_t num_end
  *     if ext_pos != npos:             # <<<<<<<<<<<<<<
- *         classProps.has_extensible = True
- *         classProps.extensible.start_idx = -1 # update during the field parsing
+ *         epclass.has_extensible = True
+ *         epclass.extensible.start_idx = -1 # update during the field parsing
 */
   __pyx_t_2 = (__pyx_v_ext_pos != std::string::npos);
   if (__pyx_t_2) {
 
-    /* "idd.pyx":252
+    /* "idd.pyx":253
  *     cdef size_t num_end
  *     if ext_pos != npos:
- *         classProps.has_extensible = True             # <<<<<<<<<<<<<<
- *         classProps.extensible.start_idx = -1 # update during the field parsing
+ *         epclass.has_extensible = True             # <<<<<<<<<<<<<<
+ *         epclass.extensible.start_idx = -1 # update during the field parsing
  *         # Parse the number
 */
-    __pyx_v_classProps.has_extensible = 1;
+    __pyx_v_epclass.has_extensible = 1;
 
-    /* "idd.pyx":253
+    /* "idd.pyx":254
  *     if ext_pos != npos:
- *         classProps.has_extensible = True
- *         classProps.extensible.start_idx = -1 # update during the field parsing             # <<<<<<<<<<<<<<
+ *         epclass.has_extensible = True
+ *         epclass.extensible.start_idx = -1 # update during the field parsing             # <<<<<<<<<<<<<<
  *         # Parse the number
  *         num_start = ext_pos + ext_tag.length()
 */
-    __pyx_v_classProps.extensible.start_idx = -1;
+    __pyx_v_epclass.extensible.start_idx = -1;
 
-    /* "idd.pyx":255
- *         classProps.extensible.start_idx = -1 # update during the field parsing
+    /* "idd.pyx":256
+ *         epclass.extensible.start_idx = -1 # update during the field parsing
  *         # Parse the number
  *         num_start = ext_pos + ext_tag.length()             # <<<<<<<<<<<<<<
  *         num_end = num_start
@@ -5383,7 +5341,7 @@ static struct __pyx_t_3idd_ClassProps __pyx_f_3idd_parse_idd_class_string(std::s
 */
     __pyx_v_num_start = (__pyx_v_ext_pos + __pyx_v_ext_tag.length());
 
-    /* "idd.pyx":256
+    /* "idd.pyx":257
  *         # Parse the number
  *         num_start = ext_pos + ext_tag.length()
  *         num_end = num_start             # <<<<<<<<<<<<<<
@@ -5392,7 +5350,7 @@ static struct __pyx_t_3idd_ClassProps __pyx_f_3idd_parse_idd_class_string(std::s
 */
     __pyx_v_num_end = __pyx_v_num_start;
 
-    /* "idd.pyx":257
+    /* "idd.pyx":258
  *         num_start = ext_pos + ext_tag.length()
  *         num_end = num_start
  *         while num_end < match_result.header_string.length() and isdigit(match_result.header_string[num_end]):             # <<<<<<<<<<<<<<
@@ -5400,145 +5358,145 @@ static struct __pyx_t_3idd_ClassProps __pyx_f_3idd_parse_idd_class_string(std::s
  *         if num_end > num_start:
 */
     while (1) {
-      __pyx_t_8 = (__pyx_v_num_end < __pyx_v_match_result.header_string.length());
-      if (__pyx_t_8) {
+      __pyx_t_5 = (__pyx_v_num_end < __pyx_v_match_result.header_string.length());
+      if (__pyx_t_5) {
       } else {
-        __pyx_t_2 = __pyx_t_8;
+        __pyx_t_2 = __pyx_t_5;
         goto __pyx_L9_bool_binop_done;
       }
-      __pyx_t_8 = (std::isdigit((__pyx_v_match_result.header_string[__pyx_v_num_end])) != 0);
-      __pyx_t_2 = __pyx_t_8;
+      __pyx_t_5 = (std::isdigit((__pyx_v_match_result.header_string[__pyx_v_num_end])) != 0);
+      __pyx_t_2 = __pyx_t_5;
       __pyx_L9_bool_binop_done:;
       if (!__pyx_t_2) break;
 
-      /* "idd.pyx":258
+      /* "idd.pyx":259
  *         num_end = num_start
  *         while num_end < match_result.header_string.length() and isdigit(match_result.header_string[num_end]):
  *             num_end += 1             # <<<<<<<<<<<<<<
  *         if num_end > num_start:
- *             classProps.extensible.size = atoi(match_result.header_string.substr(num_start, num_end - num_start).c_str()) # use atoi (ASCII to Integer) (need to convert string to C-string buffer first)
+ *             epclass.extensible.size = atoi(match_result.header_string.substr(num_start, num_end - num_start).c_str()) # use atoi (ASCII to Integer) (need to convert string to C-string buffer first)
 */
       __pyx_v_num_end = (__pyx_v_num_end + 1);
     }
 
-    /* "idd.pyx":259
+    /* "idd.pyx":260
  *         while num_end < match_result.header_string.length() and isdigit(match_result.header_string[num_end]):
  *             num_end += 1
  *         if num_end > num_start:             # <<<<<<<<<<<<<<
- *             classProps.extensible.size = atoi(match_result.header_string.substr(num_start, num_end - num_start).c_str()) # use atoi (ASCII to Integer) (need to convert string to C-string buffer first)
+ *             epclass.extensible.size = atoi(match_result.header_string.substr(num_start, num_end - num_start).c_str()) # use atoi (ASCII to Integer) (need to convert string to C-string buffer first)
  *         else:
 */
     __pyx_t_2 = (__pyx_v_num_end > __pyx_v_num_start);
     if (__pyx_t_2) {
 
-      /* "idd.pyx":260
+      /* "idd.pyx":261
  *             num_end += 1
  *         if num_end > num_start:
- *             classProps.extensible.size = atoi(match_result.header_string.substr(num_start, num_end - num_start).c_str()) # use atoi (ASCII to Integer) (need to convert string to C-string buffer first)             # <<<<<<<<<<<<<<
+ *             epclass.extensible.size = atoi(match_result.header_string.substr(num_start, num_end - num_start).c_str()) # use atoi (ASCII to Integer) (need to convert string to C-string buffer first)             # <<<<<<<<<<<<<<
  *         else:
- *             classProps.extensible.size = 0
+ *             epclass.extensible.size = 0
 */
       try {
         __pyx_t_4 = __pyx_v_match_result.header_string.substr(__pyx_v_num_start, (__pyx_v_num_end - __pyx_v_num_start));
       } catch(...) {
         __Pyx_CppExn2PyErr();
-        __PYX_ERR(0, 260, __pyx_L1_error)
+        __PYX_ERR(0, 261, __pyx_L1_error)
       }
-      __pyx_v_classProps.extensible.size = atoi(__pyx_t_4.c_str());
+      __pyx_v_epclass.extensible.size = atoi(__pyx_t_4.c_str());
 
-      /* "idd.pyx":259
+      /* "idd.pyx":260
  *         while num_end < match_result.header_string.length() and isdigit(match_result.header_string[num_end]):
  *             num_end += 1
  *         if num_end > num_start:             # <<<<<<<<<<<<<<
- *             classProps.extensible.size = atoi(match_result.header_string.substr(num_start, num_end - num_start).c_str()) # use atoi (ASCII to Integer) (need to convert string to C-string buffer first)
+ *             epclass.extensible.size = atoi(match_result.header_string.substr(num_start, num_end - num_start).c_str()) # use atoi (ASCII to Integer) (need to convert string to C-string buffer first)
  *         else:
 */
       goto __pyx_L11;
     }
 
-    /* "idd.pyx":262
- *             classProps.extensible.size = atoi(match_result.header_string.substr(num_start, num_end - num_start).c_str()) # use atoi (ASCII to Integer) (need to convert string to C-string buffer first)
+    /* "idd.pyx":263
+ *             epclass.extensible.size = atoi(match_result.header_string.substr(num_start, num_end - num_start).c_str()) # use atoi (ASCII to Integer) (need to convert string to C-string buffer first)
  *         else:
- *             classProps.extensible.size = 0             # <<<<<<<<<<<<<<
+ *             epclass.extensible.size = 0             # <<<<<<<<<<<<<<
  * 
  *     #? Parse fields
 */
     /*else*/ {
-      __pyx_v_classProps.extensible.size = 0;
+      __pyx_v_epclass.extensible.size = 0;
     }
     __pyx_L11:;
 
-    /* "idd.pyx":251
+    /* "idd.pyx":252
  *     cdef size_t num_start
  *     cdef size_t num_end
  *     if ext_pos != npos:             # <<<<<<<<<<<<<<
- *         classProps.has_extensible = True
- *         classProps.extensible.start_idx = -1 # update during the field parsing
+ *         epclass.has_extensible = True
+ *         epclass.extensible.start_idx = -1 # update during the field parsing
 */
   }
 
-  /* "idd.pyx":271
+  /* "idd.pyx":272
  * 
  *     cdef size_t field_idx
  *     for field_idx in range(match_result.field_strings.size()):             # <<<<<<<<<<<<<<
- *         if classProps.has_extensible \
- *                 and classProps.extensible.start_idx >= 0 \
+ *         if epclass.has_extensible \
+ *                 and epclass.extensible.start_idx >= 0 \
 */
-  __pyx_t_9 = __pyx_v_match_result.field_strings.size();
-  __pyx_t_10 = __pyx_t_9;
-  for (__pyx_t_7 = 0; __pyx_t_7 < __pyx_t_10; __pyx_t_7+=1) {
-    __pyx_v_field_idx = __pyx_t_7;
-
-    /* "idd.pyx":272
- *     cdef size_t field_idx
- *     for field_idx in range(match_result.field_strings.size()):
- *         if classProps.has_extensible \             # <<<<<<<<<<<<<<
- *                 and classProps.extensible.start_idx >= 0 \
- *                 and field_idx >= classProps.extensible.start_idx + classProps.extensible.size:
-*/
-    __pyx_t_8 = (__pyx_v_classProps.has_extensible != 0);
-    if (__pyx_t_8) {
-    } else {
-      __pyx_t_2 = __pyx_t_8;
-      goto __pyx_L15_bool_binop_done;
-    }
+  __pyx_t_6 = __pyx_v_match_result.field_strings.size();
+  __pyx_t_7 = __pyx_t_6;
+  for (__pyx_t_8 = 0; __pyx_t_8 < __pyx_t_7; __pyx_t_8+=1) {
+    __pyx_v_field_idx = __pyx_t_8;
 
     /* "idd.pyx":273
+ *     cdef size_t field_idx
  *     for field_idx in range(match_result.field_strings.size()):
- *         if classProps.has_extensible \
- *                 and classProps.extensible.start_idx >= 0 \             # <<<<<<<<<<<<<<
- *                 and field_idx >= classProps.extensible.start_idx + classProps.extensible.size:
- *             # if has extensibles, and all first extensible fields are processed
+ *         if epclass.has_extensible \             # <<<<<<<<<<<<<<
+ *                 and epclass.extensible.start_idx >= 0 \
+ *                 and field_idx >= epclass.extensible.start_idx + epclass.extensible.size:
 */
-    __pyx_t_8 = (__pyx_v_classProps.extensible.start_idx >= 0);
-    if (__pyx_t_8) {
+    __pyx_t_5 = (__pyx_v_epclass.has_extensible != 0);
+    if (__pyx_t_5) {
     } else {
-      __pyx_t_2 = __pyx_t_8;
+      __pyx_t_2 = __pyx_t_5;
       goto __pyx_L15_bool_binop_done;
     }
 
     /* "idd.pyx":274
- *         if classProps.has_extensible \
- *                 and classProps.extensible.start_idx >= 0 \
- *                 and field_idx >= classProps.extensible.start_idx + classProps.extensible.size:             # <<<<<<<<<<<<<<
+ *     for field_idx in range(match_result.field_strings.size()):
+ *         if epclass.has_extensible \
+ *                 and epclass.extensible.start_idx >= 0 \             # <<<<<<<<<<<<<<
+ *                 and field_idx >= epclass.extensible.start_idx + epclass.extensible.size:
+ *             # if has extensibles, and all first extensible fields are processed
+*/
+    __pyx_t_5 = (__pyx_v_epclass.extensible.start_idx >= 0);
+    if (__pyx_t_5) {
+    } else {
+      __pyx_t_2 = __pyx_t_5;
+      goto __pyx_L15_bool_binop_done;
+    }
+
+    /* "idd.pyx":275
+ *         if epclass.has_extensible \
+ *                 and epclass.extensible.start_idx >= 0 \
+ *                 and field_idx >= epclass.extensible.start_idx + epclass.extensible.size:             # <<<<<<<<<<<<<<
  *             # if has extensibles, and all first extensible fields are processed
  *             break
 */
-    __pyx_t_8 = (__pyx_v_field_idx >= (__pyx_v_classProps.extensible.start_idx + __pyx_v_classProps.extensible.size));
-    __pyx_t_2 = __pyx_t_8;
+    __pyx_t_5 = (__pyx_v_field_idx >= (__pyx_v_epclass.extensible.start_idx + __pyx_v_epclass.extensible.size));
+    __pyx_t_2 = __pyx_t_5;
     __pyx_L15_bool_binop_done:;
 
-    /* "idd.pyx":272
+    /* "idd.pyx":273
  *     cdef size_t field_idx
  *     for field_idx in range(match_result.field_strings.size()):
- *         if classProps.has_extensible \             # <<<<<<<<<<<<<<
- *                 and classProps.extensible.start_idx >= 0 \
- *                 and field_idx >= classProps.extensible.start_idx + classProps.extensible.size:
+ *         if epclass.has_extensible \             # <<<<<<<<<<<<<<
+ *                 and epclass.extensible.start_idx >= 0 \
+ *                 and field_idx >= epclass.extensible.start_idx + epclass.extensible.size:
 */
     if (__pyx_t_2) {
 
-      /* "idd.pyx":276
- *                 and field_idx >= classProps.extensible.start_idx + classProps.extensible.size:
+      /* "idd.pyx":277
+ *                 and field_idx >= epclass.extensible.start_idx + epclass.extensible.size:
  *             # if has extensibles, and all first extensible fields are processed
  *             break             # <<<<<<<<<<<<<<
  * 
@@ -5546,16 +5504,16 @@ static struct __pyx_t_3idd_ClassProps __pyx_f_3idd_parse_idd_class_string(std::s
 */
       goto __pyx_L13_break;
 
-      /* "idd.pyx":272
+      /* "idd.pyx":273
  *     cdef size_t field_idx
  *     for field_idx in range(match_result.field_strings.size()):
- *         if classProps.has_extensible \             # <<<<<<<<<<<<<<
- *                 and classProps.extensible.start_idx >= 0 \
- *                 and field_idx >= classProps.extensible.start_idx + classProps.extensible.size:
+ *         if epclass.has_extensible \             # <<<<<<<<<<<<<<
+ *                 and epclass.extensible.start_idx >= 0 \
+ *                 and field_idx >= epclass.extensible.start_idx + epclass.extensible.size:
 */
     }
 
-    /* "idd.pyx":278
+    /* "idd.pyx":279
  *             break
  * 
  *         field_string = match_result.field_strings[field_idx]             # <<<<<<<<<<<<<<
@@ -5564,18 +5522,18 @@ static struct __pyx_t_3idd_ClassProps __pyx_f_3idd_parse_idd_class_string(std::s
 */
     __pyx_v_field_string = (__pyx_v_match_result.field_strings[__pyx_v_field_idx]);
 
-    /* "idd.pyx":281
+    /* "idd.pyx":282
  * 
  *         #? Parse field info from field_string
  *         fieldname = extract_tag(field_string, b"\\field ")             # <<<<<<<<<<<<<<
  *         if fieldname.empty():
  *             # fallback to using field code (e.g., N1)
 */
-    __pyx_t_4 = __pyx_convert_string_from_py_6libcpp_6string_std__in_string(__pyx_mstate_global->__pyx_kp_b_field); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 281, __pyx_L1_error)
-    __pyx_t_3 = __pyx_f_3idd_extract_tag(__pyx_v_field_string, __PYX_STD_MOVE_IF_SUPPORTED(__pyx_t_4)); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 281, __pyx_L1_error)
+    __pyx_t_4 = __pyx_convert_string_from_py_6libcpp_6string_std__in_string(__pyx_mstate_global->__pyx_kp_b_field); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 282, __pyx_L1_error)
+    __pyx_t_3 = __pyx_f_3idd_extract_tag(__pyx_v_field_string, __PYX_STD_MOVE_IF_SUPPORTED(__pyx_t_4)); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 282, __pyx_L1_error)
     __pyx_v_fieldname = __PYX_STD_MOVE_IF_SUPPORTED(__pyx_t_3);
 
-    /* "idd.pyx":282
+    /* "idd.pyx":283
  *         #? Parse field info from field_string
  *         fieldname = extract_tag(field_string, b"\\field ")
  *         if fieldname.empty():             # <<<<<<<<<<<<<<
@@ -5585,7 +5543,7 @@ static struct __pyx_t_3idd_ClassProps __pyx_f_3idd_parse_idd_class_string(std::s
     __pyx_t_2 = __pyx_v_fieldname.empty();
     if (__pyx_t_2) {
 
-      /* "idd.pyx":284
+      /* "idd.pyx":285
  *         if fieldname.empty():
  *             # fallback to using field code (e.g., N1)
  *             sep_pos = field_string.find_first_of(b",;")             # <<<<<<<<<<<<<<
@@ -5594,7 +5552,7 @@ static struct __pyx_t_3idd_ClassProps __pyx_f_3idd_parse_idd_class_string(std::s
 */
       __pyx_v_sep_pos = __pyx_v_field_string.find_first_of(__pyx_k_);
 
-      /* "idd.pyx":285
+      /* "idd.pyx":286
  *             # fallback to using field code (e.g., N1)
  *             sep_pos = field_string.find_first_of(b",;")
  *             if sep_pos != npos:             # <<<<<<<<<<<<<<
@@ -5604,7 +5562,7 @@ static struct __pyx_t_3idd_ClassProps __pyx_f_3idd_parse_idd_class_string(std::s
       __pyx_t_2 = (__pyx_v_sep_pos != std::string::npos);
       if (__pyx_t_2) {
 
-        /* "idd.pyx":286
+        /* "idd.pyx":287
  *             sep_pos = field_string.find_first_of(b",;")
  *             if sep_pos != npos:
  *                 fieldname = utils.trim(field_string.substr(0, sep_pos))             # <<<<<<<<<<<<<<
@@ -5615,12 +5573,12 @@ static struct __pyx_t_3idd_ClassProps __pyx_f_3idd_parse_idd_class_string(std::s
           __pyx_t_3 = __pyx_v_field_string.substr(0, __pyx_v_sep_pos);
         } catch(...) {
           __Pyx_CppExn2PyErr();
-          __PYX_ERR(0, 286, __pyx_L1_error)
+          __PYX_ERR(0, 287, __pyx_L1_error)
         }
-        __pyx_t_4 = __pyx_f_5utils_trim(__pyx_t_3); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 286, __pyx_L1_error)
+        __pyx_t_4 = __pyx_f_5utils_trim(__pyx_t_3); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 287, __pyx_L1_error)
         __pyx_v_fieldname = __PYX_STD_MOVE_IF_SUPPORTED(__pyx_t_4);
 
-        /* "idd.pyx":285
+        /* "idd.pyx":286
  *             # fallback to using field code (e.g., N1)
  *             sep_pos = field_string.find_first_of(b",;")
  *             if sep_pos != npos:             # <<<<<<<<<<<<<<
@@ -5630,75 +5588,47 @@ static struct __pyx_t_3idd_ClassProps __pyx_f_3idd_parse_idd_class_string(std::s
         goto __pyx_L19;
       }
 
-      /* "idd.pyx":288
+      /* "idd.pyx":289
  *                 fieldname = utils.trim(field_string.substr(0, sep_pos))
  *             else:
  *                 fieldname = to_string(field_idx)             # <<<<<<<<<<<<<<
  *             if verbose:
- *                 print(f"> No fieldName match for '{classProps.name.decode('utf-8')}' - {field_idx}. Using {fieldname.decode('utf-8')}")
+ *                 printf(
 */
       /*else*/ {
         __pyx_v_fieldname = std::to_string(__pyx_v_field_idx);
       }
       __pyx_L19:;
 
-      /* "idd.pyx":289
+      /* "idd.pyx":290
  *             else:
  *                 fieldname = to_string(field_idx)
  *             if verbose:             # <<<<<<<<<<<<<<
- *                 print(f"> No fieldName match for '{classProps.name.decode('utf-8')}' - {field_idx}. Using {fieldname.decode('utf-8')}")
- * 
+ *                 printf(
+ *                     "> No fieldName match for '%s' - %zu. Using '%s' instead.",
 */
       __pyx_t_2 = (__pyx_v_verbose != 0);
       if (__pyx_t_2) {
 
-        /* "idd.pyx":290
+        /* "idd.pyx":291
  *                 fieldname = to_string(field_idx)
  *             if verbose:
- *                 print(f"> No fieldName match for '{classProps.name.decode('utf-8')}' - {field_idx}. Using {fieldname.decode('utf-8')}")             # <<<<<<<<<<<<<<
- * 
- *     return classProps
+ *                 printf(             # <<<<<<<<<<<<<<
+ *                     "> No fieldName match for '%s' - %zu. Using '%s' instead.",
+ *                     epclass.name.c_str(),
 */
-        __pyx_t_6 = NULL;
-        __pyx_t_11 = __Pyx_decode_cpp_string(__pyx_v_classProps.name, 0, PY_SSIZE_T_MAX, NULL, NULL, PyUnicode_DecodeUTF8); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 290, __pyx_L1_error)
-        __Pyx_GOTREF(__pyx_t_11);
-        __pyx_t_12 = __Pyx_PyUnicode_From_size_t(__pyx_v_field_idx, 0, ' ', 'd'); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 290, __pyx_L1_error)
-        __Pyx_GOTREF(__pyx_t_12);
-        __pyx_t_13 = __Pyx_decode_cpp_string(__pyx_v_fieldname, 0, PY_SSIZE_T_MAX, NULL, NULL, PyUnicode_DecodeUTF8); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 290, __pyx_L1_error)
-        __Pyx_GOTREF(__pyx_t_13);
-        __pyx_t_14[0] = __pyx_mstate_global->__pyx_kp_u_No_fieldName_match_for;
-        __pyx_t_14[1] = __pyx_t_11;
-        __pyx_t_14[2] = __pyx_mstate_global->__pyx_kp_u__6;
-        __pyx_t_14[3] = __pyx_t_12;
-        __pyx_t_14[4] = __pyx_mstate_global->__pyx_kp_u_Using;
-        __pyx_t_14[5] = __pyx_t_13;
-        __pyx_t_15 = __Pyx_PyUnicode_Join(__pyx_t_14, 6, 26 + __Pyx_PyUnicode_GET_LENGTH(__pyx_t_11) + 4 + __Pyx_PyUnicode_GET_LENGTH(__pyx_t_12) + 8 + __Pyx_PyUnicode_GET_LENGTH(__pyx_t_13), 127 | __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_11) | __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_13));
-        if (unlikely(!__pyx_t_15)) __PYX_ERR(0, 290, __pyx_L1_error)
-        __Pyx_GOTREF(__pyx_t_15);
-        __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-        __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-        __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
-        __pyx_t_16 = 1;
-        {
-          PyObject *__pyx_callargs[2] = {__pyx_t_6, __pyx_t_15};
-          __pyx_t_5 = __Pyx_PyObject_FastCall((PyObject*)__pyx_builtin_print, __pyx_callargs+__pyx_t_16, (2-__pyx_t_16) | (__pyx_t_16*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
-          __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-          __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
-          if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 290, __pyx_L1_error)
-          __Pyx_GOTREF(__pyx_t_5);
-        }
-        __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+        (void)(printf(__pyx_k_No_fieldName_match_for_s_zu_Usi, __pyx_v_epclass.name.c_str(), __pyx_v_field_idx, __pyx_v_fieldname.c_str()));
 
-        /* "idd.pyx":289
+        /* "idd.pyx":290
  *             else:
  *                 fieldname = to_string(field_idx)
  *             if verbose:             # <<<<<<<<<<<<<<
- *                 print(f"> No fieldName match for '{classProps.name.decode('utf-8')}' - {field_idx}. Using {fieldname.decode('utf-8')}")
- * 
+ *                 printf(
+ *                     "> No fieldName match for '%s' - %zu. Using '%s' instead.",
 */
       }
 
-      /* "idd.pyx":282
+      /* "idd.pyx":283
  *         #? Parse field info from field_string
  *         fieldname = extract_tag(field_string, b"\\field ")
  *         if fieldname.empty():             # <<<<<<<<<<<<<<
@@ -5709,44 +5639,37 @@ static struct __pyx_t_3idd_ClassProps __pyx_f_3idd_parse_idd_class_string(std::s
   }
   __pyx_L13_break:;
 
-  /* "idd.pyx":292
- *                 print(f"> No fieldName match for '{classProps.name.decode('utf-8')}' - {field_idx}. Using {fieldname.decode('utf-8')}")
+  /* "idd.pyx":298
+ *                 )
  * 
- *     return classProps             # <<<<<<<<<<<<<<
+ *     return epclass             # <<<<<<<<<<<<<<
  * 
  * def test_parse_idd_class_string(str s):
 */
-  __pyx_r = __pyx_v_classProps;
+  __pyx_r = __pyx_v_epclass;
   goto __pyx_L0;
 
-  /* "idd.pyx":218
+  /* "idd.pyx":219
  * #+  Parsing class info
  * 
- * cdef ClassProps parse_idd_class_string(string class_string, cbool verbose = False):             # <<<<<<<<<<<<<<
+ * cdef EPClass parse_idd_class_string(string class_string, cbool verbose = False):             # <<<<<<<<<<<<<<
  *     """
- *     Parse a class idd string and creates a ClassProps object.
+ *     Parse a class idd string and creates a EPClass object.
 */
 
   /* function exit code */
   __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_5);
-  __Pyx_XDECREF(__pyx_t_6);
-  __Pyx_XDECREF(__pyx_t_11);
-  __Pyx_XDECREF(__pyx_t_12);
-  __Pyx_XDECREF(__pyx_t_13);
-  __Pyx_XDECREF(__pyx_t_15);
   __Pyx_AddTraceback("idd.parse_idd_class_string", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_pretend_to_initialize(&__pyx_r);
   __pyx_L0:;
-  __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-/* "idd.pyx":294
- *     return classProps
+/* "idd.pyx":300
+ *     return epclass
  * 
  * def test_parse_idd_class_string(str s):             # <<<<<<<<<<<<<<
- *     cdef ClassProps classProps = parse_idd_class_string(s.encode("utf-8"))
+ *     cdef EPClass epclass = parse_idd_class_string(s.encode("utf-8"))
  *     print("-----------")
 */
 
@@ -5789,32 +5712,32 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_s,0};
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
-    if (unlikely(__pyx_kwds_len) < 0) __PYX_ERR(0, 294, __pyx_L3_error)
+    if (unlikely(__pyx_kwds_len) < 0) __PYX_ERR(0, 300, __pyx_L3_error)
     if (__pyx_kwds_len > 0) {
       switch (__pyx_nargs) {
         case  1:
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 294, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 300, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  0: break;
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "test_parse_idd_class_string", 0) < (0)) __PYX_ERR(0, 294, __pyx_L3_error)
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "test_parse_idd_class_string", 0) < (0)) __PYX_ERR(0, 300, __pyx_L3_error)
       for (Py_ssize_t i = __pyx_nargs; i < 1; i++) {
-        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("test_parse_idd_class_string", 1, 1, 1, i); __PYX_ERR(0, 294, __pyx_L3_error) }
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("test_parse_idd_class_string", 1, 1, 1, i); __PYX_ERR(0, 300, __pyx_L3_error) }
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 294, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 300, __pyx_L3_error)
     }
     __pyx_v_s = ((PyObject*)values[0]);
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("test_parse_idd_class_string", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 294, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("test_parse_idd_class_string", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 300, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -5825,7 +5748,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_s), (&PyUnicode_Type), 1, "s", 1))) __PYX_ERR(0, 294, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_s), (&PyUnicode_Type), 1, "s", 1))) __PYX_ERR(0, 300, __pyx_L1_error)
   __pyx_r = __pyx_pf_3idd_6test_parse_idd_class_string(__pyx_self, __pyx_v_s);
 
   /* function exit code */
@@ -5846,12 +5769,12 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
 }
 
 static PyObject *__pyx_pf_3idd_6test_parse_idd_class_string(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_s) {
-  struct __pyx_t_3idd_ClassProps __pyx_v_classProps;
+  struct __pyx_t_3idd_EPClass __pyx_v_epclass;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
   std::string __pyx_t_2;
-  struct __pyx_t_3idd_ClassProps __pyx_t_3;
+  struct __pyx_t_3idd_EPClass __pyx_t_3;
   PyObject *__pyx_t_4 = NULL;
   size_t __pyx_t_5;
   PyObject *__pyx_t_6 = NULL;
@@ -5861,29 +5784,29 @@ static PyObject *__pyx_pf_3idd_6test_parse_idd_class_string(CYTHON_UNUSED PyObje
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("test_parse_idd_class_string", 0);
 
-  /* "idd.pyx":295
+  /* "idd.pyx":301
  * 
  * def test_parse_idd_class_string(str s):
- *     cdef ClassProps classProps = parse_idd_class_string(s.encode("utf-8"))             # <<<<<<<<<<<<<<
+ *     cdef EPClass epclass = parse_idd_class_string(s.encode("utf-8"))             # <<<<<<<<<<<<<<
  *     print("-----------")
- *     print(classProps.success)
+ *     print(epclass.success)
 */
   if (unlikely(__pyx_v_s == Py_None)) {
     PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%.30s'", "encode");
-    __PYX_ERR(0, 295, __pyx_L1_error)
+    __PYX_ERR(0, 301, __pyx_L1_error)
   }
-  __pyx_t_1 = PyUnicode_AsUTF8String(__pyx_v_s); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 295, __pyx_L1_error)
+  __pyx_t_1 = PyUnicode_AsUTF8String(__pyx_v_s); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 301, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __pyx_convert_string_from_py_6libcpp_6string_std__in_string(__pyx_t_1); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 295, __pyx_L1_error)
+  __pyx_t_2 = __pyx_convert_string_from_py_6libcpp_6string_std__in_string(__pyx_t_1); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 301, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_3 = __pyx_f_3idd_parse_idd_class_string(__PYX_STD_MOVE_IF_SUPPORTED(__pyx_t_2), NULL); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 295, __pyx_L1_error)
-  __pyx_v_classProps = __pyx_t_3;
+  __pyx_t_3 = __pyx_f_3idd_parse_idd_class_string(__PYX_STD_MOVE_IF_SUPPORTED(__pyx_t_2), NULL); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 301, __pyx_L1_error)
+  __pyx_v_epclass = __pyx_t_3;
 
-  /* "idd.pyx":296
+  /* "idd.pyx":302
  * def test_parse_idd_class_string(str s):
- *     cdef ClassProps classProps = parse_idd_class_string(s.encode("utf-8"))
+ *     cdef EPClass epclass = parse_idd_class_string(s.encode("utf-8"))
  *     print("-----------")             # <<<<<<<<<<<<<<
- *     print(classProps.success)
+ *     print(epclass.success)
  *     print("-----------")
 */
   __pyx_t_4 = NULL;
@@ -5892,22 +5815,22 @@ static PyObject *__pyx_pf_3idd_6test_parse_idd_class_string(CYTHON_UNUSED PyObje
     PyObject *__pyx_callargs[2] = {__pyx_t_4, __pyx_mstate_global->__pyx_kp_u__3};
     __pyx_t_1 = __Pyx_PyObject_FastCall((PyObject*)__pyx_builtin_print, __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 296, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 302, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "idd.pyx":297
- *     cdef ClassProps classProps = parse_idd_class_string(s.encode("utf-8"))
+  /* "idd.pyx":303
+ *     cdef EPClass epclass = parse_idd_class_string(s.encode("utf-8"))
  *     print("-----------")
- *     print(classProps.success)             # <<<<<<<<<<<<<<
+ *     print(epclass.success)             # <<<<<<<<<<<<<<
  *     print("-----------")
- *     print(classProps.name.decode("utf-8"))
+ *     print(epclass.name.decode("utf-8"))
 */
   __pyx_t_4 = NULL;
-  __pyx_t_6 = __pyx_convert__to_py_struct____pyx_t_3idd_ClassProps(__pyx_v_classProps); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 297, __pyx_L1_error)
+  __pyx_t_6 = __pyx_convert__to_py_struct____pyx_t_3idd_EPClass(__pyx_v_epclass); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 303, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_success); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 297, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_mstate_global->__pyx_n_u_success); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 303, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __pyx_t_5 = 1;
@@ -5916,16 +5839,16 @@ static PyObject *__pyx_pf_3idd_6test_parse_idd_class_string(CYTHON_UNUSED PyObje
     __pyx_t_1 = __Pyx_PyObject_FastCall((PyObject*)__pyx_builtin_print, __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 297, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 303, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "idd.pyx":298
+  /* "idd.pyx":304
  *     print("-----------")
- *     print(classProps.success)
+ *     print(epclass.success)
  *     print("-----------")             # <<<<<<<<<<<<<<
- *     print(classProps.name.decode("utf-8"))
+ *     print(epclass.name.decode("utf-8"))
  *     print("-----------")
 */
   __pyx_t_7 = NULL;
@@ -5934,20 +5857,20 @@ static PyObject *__pyx_pf_3idd_6test_parse_idd_class_string(CYTHON_UNUSED PyObje
     PyObject *__pyx_callargs[2] = {__pyx_t_7, __pyx_mstate_global->__pyx_kp_u__3};
     __pyx_t_1 = __Pyx_PyObject_FastCall((PyObject*)__pyx_builtin_print, __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
     __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 298, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 304, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "idd.pyx":299
- *     print(classProps.success)
+  /* "idd.pyx":305
+ *     print(epclass.success)
  *     print("-----------")
- *     print(classProps.name.decode("utf-8"))             # <<<<<<<<<<<<<<
+ *     print(epclass.name.decode("utf-8"))             # <<<<<<<<<<<<<<
  *     print("-----------")
- *     print(classProps.extensible.size)
+ *     print(epclass.extensible.size)
 */
   __pyx_t_7 = NULL;
-  __pyx_t_4 = __Pyx_decode_cpp_string(__pyx_v_classProps.name, 0, PY_SSIZE_T_MAX, NULL, NULL, PyUnicode_DecodeUTF8); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 299, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_decode_cpp_string(__pyx_v_epclass.name, 0, PY_SSIZE_T_MAX, NULL, NULL, PyUnicode_DecodeUTF8); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 305, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __pyx_t_5 = 1;
   {
@@ -5955,16 +5878,16 @@ static PyObject *__pyx_pf_3idd_6test_parse_idd_class_string(CYTHON_UNUSED PyObje
     __pyx_t_1 = __Pyx_PyObject_FastCall((PyObject*)__pyx_builtin_print, __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
     __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 299, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 305, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "idd.pyx":300
+  /* "idd.pyx":306
  *     print("-----------")
- *     print(classProps.name.decode("utf-8"))
+ *     print(epclass.name.decode("utf-8"))
  *     print("-----------")             # <<<<<<<<<<<<<<
- *     print(classProps.extensible.size)
+ *     print(epclass.extensible.size)
 */
   __pyx_t_4 = NULL;
   __pyx_t_5 = 1;
@@ -5972,18 +5895,18 @@ static PyObject *__pyx_pf_3idd_6test_parse_idd_class_string(CYTHON_UNUSED PyObje
     PyObject *__pyx_callargs[2] = {__pyx_t_4, __pyx_mstate_global->__pyx_kp_u__3};
     __pyx_t_1 = __Pyx_PyObject_FastCall((PyObject*)__pyx_builtin_print, __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 300, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 306, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "idd.pyx":301
- *     print(classProps.name.decode("utf-8"))
+  /* "idd.pyx":307
+ *     print(epclass.name.decode("utf-8"))
  *     print("-----------")
- *     print(classProps.extensible.size)             # <<<<<<<<<<<<<<
+ *     print(epclass.extensible.size)             # <<<<<<<<<<<<<<
 */
   __pyx_t_4 = NULL;
-  __pyx_t_7 = __Pyx_PyLong_From_int(__pyx_v_classProps.extensible.size); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 301, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyLong_From_int(__pyx_v_epclass.extensible.size); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 307, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __pyx_t_5 = 1;
   {
@@ -5991,16 +5914,16 @@ static PyObject *__pyx_pf_3idd_6test_parse_idd_class_string(CYTHON_UNUSED PyObje
     __pyx_t_1 = __Pyx_PyObject_FastCall((PyObject*)__pyx_builtin_print, __pyx_callargs+__pyx_t_5, (2-__pyx_t_5) | (__pyx_t_5*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 301, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 307, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "idd.pyx":294
- *     return classProps
+  /* "idd.pyx":300
+ *     return epclass
  * 
  * def test_parse_idd_class_string(str s):             # <<<<<<<<<<<<<<
- *     cdef ClassProps classProps = parse_idd_class_string(s.encode("utf-8"))
+ *     cdef EPClass epclass = parse_idd_class_string(s.encode("utf-8"))
  *     print("-----------")
 */
 
@@ -6396,64 +6319,64 @@ __Pyx_RefNannySetupContext("PyInit_idd", 0);
   if (unlikely((__Pyx_modinit_function_import_code(__pyx_mstate) < 0))) __PYX_ERR(0, 1, __pyx_L1_error)
   /*--- Execution code ---*/
 
-  /* "idd.pyx":136
+  /* "idd.pyx":137
  *     return result
  * 
  * def test_match_fields(str s):             # <<<<<<<<<<<<<<
  *     cdef MatchFieldsResult result = match_fields(s.encode("utf-8"))
  *     print("-----------")
 */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_3idd_1test_match_fields, 0, __pyx_mstate_global->__pyx_n_u_test_match_fields, NULL, __pyx_mstate_global->__pyx_n_u_idd, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[0])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 136, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_3idd_1test_match_fields, 0, __pyx_mstate_global->__pyx_n_u_test_match_fields, NULL, __pyx_mstate_global->__pyx_n_u_idd, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[0])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 137, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_2);
   #endif
-  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_test_match_fields, __pyx_t_2) < (0)) __PYX_ERR(0, 136, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_test_match_fields, __pyx_t_2) < (0)) __PYX_ERR(0, 137, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "idd.pyx":163
+  /* "idd.pyx":164
  *     return utils.trim(block.substr(start_pos, end_pos - start_pos))
  * 
  * def test_extract_tag(str block, str tag):             # <<<<<<<<<<<<<<
  *     cdef string c_block = block.encode("utf-8")
  *     print(extract_tag(c_block, tag.encode("utf-8")).decode("utf-8"))
 */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_3idd_3test_extract_tag, 0, __pyx_mstate_global->__pyx_n_u_test_extract_tag, NULL, __pyx_mstate_global->__pyx_n_u_idd, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[1])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 163, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_3idd_3test_extract_tag, 0, __pyx_mstate_global->__pyx_n_u_test_extract_tag, NULL, __pyx_mstate_global->__pyx_n_u_idd, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[1])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 164, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_2);
   #endif
-  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_test_extract_tag, __pyx_t_2) < (0)) __PYX_ERR(0, 163, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_test_extract_tag, __pyx_t_2) < (0)) __PYX_ERR(0, 164, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "idd.pyx":208
+  /* "idd.pyx":209
  *     return result
  * 
  * def test_match_extensible_name(str s):             # <<<<<<<<<<<<<<
  *     cdef fieldname = s.encode("utf-8")
  *     cdef ExtensibleNameMatchResult result = match_extensible_name(fieldname)
 */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_3idd_5test_match_extensible_name, 0, __pyx_mstate_global->__pyx_n_u_test_match_extensible_name, NULL, __pyx_mstate_global->__pyx_n_u_idd, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[2])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 208, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_3idd_5test_match_extensible_name, 0, __pyx_mstate_global->__pyx_n_u_test_match_extensible_name, NULL, __pyx_mstate_global->__pyx_n_u_idd, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[2])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 209, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_2);
   #endif
-  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_test_match_extensible_name, __pyx_t_2) < (0)) __PYX_ERR(0, 208, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_test_match_extensible_name, __pyx_t_2) < (0)) __PYX_ERR(0, 209, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "idd.pyx":294
- *     return classProps
+  /* "idd.pyx":300
+ *     return epclass
  * 
  * def test_parse_idd_class_string(str s):             # <<<<<<<<<<<<<<
- *     cdef ClassProps classProps = parse_idd_class_string(s.encode("utf-8"))
+ *     cdef EPClass epclass = parse_idd_class_string(s.encode("utf-8"))
  *     print("-----------")
 */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_3idd_7test_parse_idd_class_string, 0, __pyx_mstate_global->__pyx_n_u_test_parse_idd_class_string, NULL, __pyx_mstate_global->__pyx_n_u_idd, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[3])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 294, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_3idd_7test_parse_idd_class_string, 0, __pyx_mstate_global->__pyx_n_u_test_parse_idd_class_string, NULL, __pyx_mstate_global->__pyx_n_u_idd, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[3])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 300, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_2);
   #endif
-  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_test_parse_idd_class_string, __pyx_t_2) < (0)) __PYX_ERR(0, 294, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_test_parse_idd_class_string, __pyx_t_2) < (0)) __PYX_ERR(0, 300, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "idd.pyx":1
@@ -6502,7 +6425,7 @@ __Pyx_RefNannySetupContext("PyInit_idd", 0);
 
 static int __Pyx_InitCachedBuiltins(__pyx_mstatetype *__pyx_mstate) {
   CYTHON_UNUSED_VAR(__pyx_mstate);
-  __pyx_builtin_print = __Pyx_GetBuiltinName(__pyx_mstate->__pyx_n_u_print); if (!__pyx_builtin_print) __PYX_ERR(0, 138, __pyx_L1_error)
+  __pyx_builtin_print = __Pyx_GetBuiltinName(__pyx_mstate->__pyx_n_u_print); if (!__pyx_builtin_print) __PYX_ERR(0, 139, __pyx_L1_error)
 
   /* Cached unbound methods */
   __pyx_mstate->__pyx_umethod_PyDict_Type_items.type = (PyObject*)&PyDict_Type;
@@ -6529,34 +6452,34 @@ static int __Pyx_InitCachedConstants(__pyx_mstatetype *__pyx_mstate) {
 static int __Pyx_InitConstants(__pyx_mstatetype *__pyx_mstate) {
   CYTHON_UNUSED_VAR(__pyx_mstate);
   {
-    const struct { const unsigned int length: 8; } index[] = {{26},{109},{179},{8},{11},{4},{1},{8},{7},{5},{20},{18},{5},{7},{10},{18},{6},{14},{15},{15},{10},{5},{9},{10},{6},{8},{11},{14},{3},{13},{5},{10},{22},{8},{10},{8},{4},{3},{5},{12},{6},{1},{12},{10},{4},{9},{7},{3},{8},{16},{26},{17},{27},{4},{5},{6},{0},{12},{7},{74},{68},{75},{51},{38}};
-    #if (CYTHON_COMPRESS_STRINGS) == 2 /* compression: bz2 (758 bytes) */
-const char* const cstring = "BZh91AY&SY\327\307TR\000\000k\177\376d\343#\220g\377$\321\257-r\004\277\377\377\372@@@@@@@@@\000@@@\002\235\034\271Z)\260\324\324\302h\t\246\214)\275M\023\020a\001\240\000\000\321\243&&\236\240\224@&\024\311\244\302\236I\352b\000\000\0004\032\000\007\2504\r\004\3215=PyG\251\351\017SM\031\006\200\000\000\000\006\200\000\322\243\324\321\243\322\000\032\r\000\0004h\000\320\000\000b\n\210\276\275\260\313L\260\007\340\010O0n\036\221\023P\003\203\230\021}9\316\022v\210E\003x\357\254\274\357\002\2119pp\214\255\r\377U\346uc\334.\001\235I\310\235H\0217P\355)O\305\002)\256+\327)\254\000tb8\027\251w\240$c\004\252-F\021\215\201[$\005Z\225\233\004\013\322CMn8,\220D\362\211\344~\340\343\220\342\341,;\324?&\255\322\363Wd9\3011\321\205\002O\006\244\010\014\023\n\243v\002\023\314\035\370\205d\306u0\276\365\201\270\356\253P\312w\215\002DA\234hh\246F\252\337\014\330\306J\347(\220A{\324\372TW\3665{\223\310D\200\236\253\177V\034\022pW\316\370\020\251\000\314\014\005D\325F\203\te\212\256\245id '\010E-\270\300\364\006}\033\320\270\257(\2726\344\0301E\036\220\310H\263'v\201\223\255\025P\204\323LHl\261{\211\n\214\275\270\2755\177/l?L\0227F\215\203l\210A\345\224\"\273\3266i\234/\212\024\276\263%wm\353\231\262\023\331\237D\006\230\306]\200\272\020R\265\022\022\n\261\205\t&\257\333\224\007\333T6L7f\244\025S\211\020\326\351Y\3674u\312\272\230Q\330a\"\270>\354\035$mD!'\021\n\360\214\221\314\240\334B\321\204e\226\0000\301\210\207C\322\312@\222\344\357\304\271\252\253wNwQ@sq\205B\260i\216\370\255\251\202m\257\003\335\233A\244i\222\213\225\345\246\324\352a\205\024\317\035}\325:[ K8\270\312\312\341)\332\"i#(o\260\213\006ks\340+\337\016fg\025\251\r\340\376\224\327Q\036\365b\204\227\337\346\276t\355\214a\2525\235RG5x,TPh\036l\241$t\304\004\017P\264\330\002h\r\030Ml\260\344e\224\215)s\313\247#\201Q\362+\032\312\334\262H\361g\262\016\\N\034{&Z\025%~\323F{MTF2\375\256\226mI\373\177:\270@\366\345]\303t\362|\004N\021\023\342r\234\200\352cM\311\365\245c6A\2377\216\241\243 \301HwO\366!F\270 \275\255\347\236r""fR\343S\307iI:c\206\224\241\327\344\212\307\020\242\344\020\225\000z\037\370\273\222)\302\204\206\276:\242\220";
-    PyObject *data = __Pyx_DecompressString(cstring, 758, 2);
+    const struct { const unsigned int length: 8; } index[] = {{179},{11},{1},{8},{7},{5},{20},{18},{5},{7},{18},{6},{14},{15},{15},{7},{10},{5},{9},{10},{6},{8},{11},{14},{3},{13},{5},{10},{22},{8},{10},{8},{4},{3},{5},{12},{6},{1},{12},{10},{4},{9},{7},{3},{8},{16},{26},{17},{27},{4},{5},{6},{0},{12},{7},{74},{68},{75},{51},{38}};
+    #if (CYTHON_COMPRESS_STRINGS) == 2 /* compression: bz2 (676 bytes) */
+const char* const cstring = "BZh91AY&SY\257\256)\200\000\000\\\177\376d\343#\230g\357$\320\257%p\004\277\377\377\360@@@@@@@@@\000@@@\002Cs\242\016p\225\002'\251\224\321\230\246OH\311\240\017Q\240\000\036\211\241\246M\246\232e\006\204\000\200@&M\006\200\000\000\000\000\r\001\024\361MO\325\006\20044\003@\000\000\000\000\000\001\2424M'\252~\204\215\350M\020\000h\000\000\000\000\332!\204\2676\2553\005@\202\372\305\017!\010\236\300\306\254B(\256k\245\326\245\t\251J\232\\j\315\317\233\247#\263H\346\225\267\355\232\330Ob\302\324\353\257\252\331\024H\212\330B\344\213\010\024\240\251\253\353di\216\276\362#\371\263\0147!\264a\210\362~\361\tym\036\3639_\361\271~\005\021\362i\225\213.\226\207`\223\243>@?\244\263\"\r\302N\216\r\005ql\324\312\214z\211\001:\004R\344Db\260\232\331\215\214\211\222\321\026\036\0245\376\217\275b\254\243\027\242\234E=\375\314\222\240T\3446\026\361\006\240+\005\200\306\032h\030\310F4]\310\333l\2303\020G_\021\226\017f\334\3166\013\207N\030\003C\014&\306x\276\350HM\0230\033\001y\230-4@\222\205YM\374\264\251\277h\t\320t\224\325\300\211\254\0200\022EF\0024\334l\362\020\376\225\304\307i[\226\246\230\257\005v\302\242'H\253\307*\305\322\300\206\255\221\241x\\\220\310_\224\013b\366\231\2152*\321\320d\253\010)0\365\317\243 }\014\232\204q/0(\007\241\025\223\031)\030\260hC\t\2051o$\010E\330\304\272\215$]n\250\314\337\251\007\326`\226\252\333 $\325\n\302HQ\212X\330\272\314K\021\323pM\n\026Z\251Lr;0i`u\240u6e\241\220\204E\260\3273\002\025\345-\200\330\313\265\250JA\031`\020\273\022\013Y\241\200\303\356\366\236\021\331\010\202\343\246\215\271\"\331~v\025U\032\006\233\024\022Gd\002\006\250*\310\200\367\014\216~\032de\201\024%\006\010E\343\021\223\036&t\317\237\365\344\354w' \263\260gYTD\203\250\302.[\232\006`\222\215\305>\313\305\225\231\273\023\216\321\217\360B0\010FR\223 w\216$\263\227=\t\254h\224\233F\262}Fi\n\207\212$.\323\202\226\265\265\266\343\252\375\245\233W\035\200c\013\312\203;\356<\342\373\006\003\022\372\322\014R\177\213\271\"\234(HW\327\024\300\000";
+    PyObject *data = __Pyx_DecompressString(cstring, 676, 2);
     if (unlikely(!data)) __PYX_ERR(0, 1, __pyx_L1_error)
     const char* const bytes = __Pyx_PyBytes_AsString(data);
     #if !CYTHON_ASSUME_SAFE_MACROS
     if (likely(bytes)); else { Py_DECREF(data); __PYX_ERR(0, 1, __pyx_L1_error) }
     #endif
-    #elif (CYTHON_COMPRESS_STRINGS) != 0 /* compression: zlib (661 bytes) */
-const char* const cstring = "x\332uR\277k\333@\024\256!\320dh\301C\033\350\364\014m\024\267\261!\020H\310\220\022\332\024J\213\211\013\335\002\307\371\356\331\276F\276\223u\247\304j\010t\364\250Q\243\306\214\036=\372O\310\350?\247O\222c\273\2419\220\356\375\374\336\367\336\273\023h\031\350*\364e\213\017\020\006\334\211>tM\010\336\311\223\236\033\341sk\317C\023\330\246&_S\2420\022w\275\310u\033G^\375\326\203\006\334\024\251L\311\321m\023~Z\245{\013\323\1773Z\306!\270>w\360)v}\243AY\220\350\253\016\206\334\241\037\203u\241\022\016\303<H\303\371\331y\343\340\350\000\270\226\020\342/\024\316\202\215:\005/\264`\272\320\211\224\357\224\006\027\007h\233\360\265\013\261\211@#Jp\006\002\212[Op}\324`\321\345\002x\\k\343\270SF3J'\346\036H\025R\021u\205y\366\027\356[l>t\325X\235\274\357\217\\JF\371\250\244l\006\361\250\350\220\261\363xD\337g\352\201\265p\344~`\227\333X\013e\232\302\204&\"\252h;\276\021\227\202\225\327r\304\302'\037S\304%\344\002;\\\\\226\303\223\004\021\371\216)\313t4x\320\256\270\377X\245\321QE\324Vu|,V\260\334\303R\260\205d\031\353FZ0\326\347\226- rq\225NM\345\005\227\234\225\303\201\275\304\230\205\330\303Q@\244\335C\"[>\000\306\006\234\370\323\031\030\031\371\230Ky\321\362\037\230 \010\225v\214\r#\356\227\366\020-!\020\035\332\311\"\224\244\005\260U\277\321:\036\272\034\333FB\240%\265\307\230#\363\342O\214iZ\216\221\275\320\213\327\273\326G\001\272\346)\333/\014\001\017-\315\233\032-v\220\217\217\326\234\277\243H+gi\242\021\332\213\025\324\361E\221\014\177*\363\215\332}\355p2\234V\246\333\263\312\254:\337\330\032W\307\265\362z\237\234>\322\317\322\355\254\222=\216\372\226\016s\244\267\331\367IeR\235x\323\352\264\366O\310N\3622\355e\355\214\31776\307[\311\353d8\337|1n\217yyar\230\326\322\375\034\343U\322Nzi;\245\310\275\373\275\323Yu\266\204x\236\\\247<\035>\241VJ\241\276\202z\223\276K\2573\236-B>\020\262Jm\346\335U\357\352\223\303im\272_:\274d;\255\244U\353\344\361q98\330]W\204\321\326\301N\375\031\251\203\277?\345\262/";
-    PyObject *data = __Pyx_DecompressString(cstring, 661, 1);
+    #elif (CYTHON_COMPRESS_STRINGS) != 0 /* compression: zlib (590 bytes) */
+const char* const cstring = "x\332uR=k\033A\020\215\300\020\273H\340\n'\0207+H\254\230\330\002\203\301\306\2151\371\200@0Vj\303\262\332\035I\033\337\355\236ofm]\252\224*\257\274R\245K\225*\375\023\\\372\347d\356N\266\024C\026nw\336\334\2747\037\273g\236@\320H\221\370\234\323\310;aQ\030\210m\0372E\020\347\002)\263\232 \253\202\2348\377z\276wpt \2243\"\203_\240\t\005\206\276\216\025\"\240\360\003\321\0176&\353\004\345)`W|\037\210\334\007\341\000\214 /R\216[%\320\010\234@\240\312\020\035\345\234'E\326;\311t\353\206\035al\306I\3545T\354o*F\350\356-\327\2112F2\007\2541\3354\037\007\032\354\035Iy\236\217\371\373\302u\3133\030\323O\030(\314\235\266\276\253}\346\003\227\007\330\217\275\276\324\2629b\366H\313Y3\245\241\257\364\245\001\355\r\030&\206\230\244E\351B\362\210\256U\374\034\362\220 mz\032\0238\264\375\030\006\026bSoN%\360d`m\241\224\203\340\264\224#\205r\241T\231K:wT\345}*\330\022$x\t\271\314`\010\343\224s\321#Q\326\222\322\232\261\224\211\3426x%\336\204\030*\253J\332\354\251O\323\314:\222\362*\250\270\361g\200\254\300\345\360%,B\331Z\010\243\375\rH*\243J\033\203\326\200\014\207R\022\273\027;W\314C#\311\376\032'\212\364h\245\217Zt\345O\323~\355HU\206<vn\264\036]5E\276\363\352\341\004g\ty\260\001\360b)u|Q\223\305\237\326\303\332\326\375\326\376,\232\265g\207\363\366|\377amc\022M\332\315\321)\242gx\263\030\226\275R=\363n\225\247\225\322\373\351\217Y\213\245:\363h\336\376'd\273x]\016\247\275)\023\327'\033\305\233\342\352a\375\325\2447Q\315\001\305a\331.\367+\215\315\242\367\230b\367~\367\364.\272{\222xY\334\224\252\274\372\017l5\306\316R\352]\371\241\274\231\252\351\"\344\023+\333\022\247\235\333\350vg\265\331N\361\266l\225\021\2229>n\006'>\256\002\355\035\222\330\336y\3010\371\013\177^\177\257";
+    PyObject *data = __Pyx_DecompressString(cstring, 590, 1);
     if (unlikely(!data)) __PYX_ERR(0, 1, __pyx_L1_error)
     const char* const bytes = __Pyx_PyBytes_AsString(data);
     #if !CYTHON_ASSUME_SAFE_MACROS
     if (likely(bytes)); else { Py_DECREF(data); __PYX_ERR(0, 1, __pyx_L1_error) }
     #endif
-    #else /* compression: none (1148 bytes) */
-const char* const bytes = "> No fieldName match for '> No fieldName match for '{classProps.name.decode('utf-8')}' - {field_idx}. Using {fieldname.decode('utf-8')}Note that Cython is deliberately stricter than PEP-484 and rejects subclasses of builtin types. If you need to pass subclasses then set the 'annotation_typing' directive to False.. Using -----------' - ?add_noteidd.pyxutf-8__Pyx_PyDict_NextRefasyncio.coroutinesblockc_blockclassPropscline_in_tracebackdecodedefault_is_numdefault_val_numdefault_val_strextensiblefieldfieldnamefieldnamesfields__func__has_defaulthas_extensibleidd_is_coroutineitemskey_regexplast_default_field_idx__main____module____name__namepopprint__qualname__results__set_name__setdefaultsizestart_idxsuccesstag__test__test_extract_tagtest_match_extensible_nametest_match_fieldstest_parse_idd_class_stringtypeunitsvalues\\extensible:\\field \200\001\330\004!\320!7\260q\270\001\270\027\300\001\300\021\330\004\t\210\021\210!\330\004\t\210\021\210*\220A\330\004\t\210\021\210!\330\004\t\210\021\210*\220E\230\027\240\001\240\021\330\004\t\210\021\210!\330\004\t\210\021\210*\220K\230q\200\001\330\004$\240L\260\001\260\021\260'\270\021\270!\330\004\t\210\021\210!\330\004\t\210\021\210&\220\016\230g\240Q\240a\330\004\010\210\t\220\026\220q\330\010\r\210Q\210a\330\010\r\210Q\210e\2207\230!\2301\200\001\330\004\025\220Q\220g\230Q\230a\330\004,\320,A\300\021\300!\330\004\t\210\021\210&\220\007\220w\230a\230q\330\004\t\210\021\210&\220\007\220w\230a\230q\330\004\t\210\021\210&\220\001\330\004\t\210\021\210)\2207\230!\2301\200\001\330\004\032\230%\230w\240a\240q\330\004\t\210\021\210+\220Q\220i\230s\240'\250\021\250)\2607\270!\2701\330\004\t\210\021\210'\220\027\230\001\230\021std::string (std::string const &)\000trim";
+    #else /* compression: none (998 bytes) */
+const char* const bytes = "Note that Cython is deliberately stricter than PEP-484 and rejects subclasses of builtin types. If you need to pass subclasses then set the 'annotation_typing' directive to False.-----------?add_noteidd.pyxutf-8__Pyx_PyDict_NextRefasyncio.coroutinesblockc_blockcline_in_tracebackdecodedefault_is_numdefault_val_numdefault_val_strepclassextensiblefieldfieldnamefieldnamesfields__func__has_defaulthas_extensibleidd_is_coroutineitemskey_regexplast_default_field_idx__main____module____name__namepopprint__qualname__results__set_name__setdefaultsizestart_idxsuccesstag__test__test_extract_tagtest_match_extensible_nametest_match_fieldstest_parse_idd_class_stringtypeunitsvalues\\extensible:\\field \200\001\330\004\033\320\0331\260\021\260!\2607\270!\2701\330\004\t\210\021\210!\330\004\t\210\021\210'\220\021\330\004\t\210\021\210!\330\004\t\210\021\210'\220\025\220g\230Q\230a\330\004\t\210\021\210!\330\004\t\210\021\210'\220\033\230A\200\001\330\004$\240L\260\001\260\021\260'\270\021\270!\330\004\t\210\021\210!\330\004\t\210\021\210&\220\016\230g\240Q\240a\330\004\010\210\t\220\026\220q\330\010\r\210Q\210a\330\010\r\210Q\210e\2207\230!\2301\200\001\330\004\025\220Q\220g\230Q\230a\330\004,\320,A\300\021\300!\330\004\t\210\021\210&\220\007\220w\230a\230q\330\004\t\210\021\210&\220\007\220w\230a\230q\330\004\t\210\021\210&\220\001\330\004\t\210\021\210)\2207\230!\2301\200\001\330\004\032\230%\230w\240a\240q\330\004\t\210\021\210+\220Q\220i\230s\240'\250\021\250)\2607\270!\2701\330\004\t\210\021\210'\220\027\230\001\230\021std::string (std::string const &)\000trim";
     PyObject *data = NULL;
     CYTHON_UNUSED_VAR(__Pyx_DecompressString);
     #endif
     PyObject **stringtab = __pyx_mstate->__pyx_string_tab;
     Py_ssize_t pos = 0;
-    for (int i = 0; i < 56; i++) {
+    for (int i = 0; i < 52; i++) {
       Py_ssize_t bytes_length = index[i].length;
       PyObject *string = PyUnicode_DecodeUTF8(bytes + pos, bytes_length, NULL);
-      if (likely(string) && i >= 10) PyUnicode_InternInPlace(&string);
+      if (likely(string) && i >= 6) PyUnicode_InternInPlace(&string);
       if (unlikely(!string)) {
         Py_XDECREF(data);
         __PYX_ERR(0, 1, __pyx_L1_error)
@@ -6564,7 +6487,7 @@ const char* const bytes = "> No fieldName match for '> No fieldName match for '{
       stringtab[i] = string;
       pos += bytes_length;
     }
-    for (int i = 56; i < 64; i++) {
+    for (int i = 52; i < 60; i++) {
       Py_ssize_t bytes_length = index[i].length;
       PyObject *string = PyBytes_FromStringAndSize(bytes + pos, bytes_length);
       stringtab[i] = string;
@@ -6575,14 +6498,14 @@ const char* const bytes = "> No fieldName match for '> No fieldName match for '{
       }
     }
     Py_XDECREF(data);
-    for (Py_ssize_t i = 0; i < 64; i++) {
+    for (Py_ssize_t i = 0; i < 60; i++) {
       if (unlikely(PyObject_Hash(stringtab[i]) == -1)) {
         __PYX_ERR(0, 1, __pyx_L1_error)
       }
     }
     #if CYTHON_IMMORTAL_CONSTANTS
     {
-      PyObject **table = stringtab + 56;
+      PyObject **table = stringtab + 52;
       for (Py_ssize_t i=0; i<8; ++i) {
         #if CYTHON_COMPILING_IN_CPYTHON_FREETHREADING
         #if PY_VERSION_HEX < 0x030E0000
@@ -6628,24 +6551,24 @@ static int __Pyx_CreateCodeObjects(__pyx_mstatetype *__pyx_mstate) {
   PyObject* tuple_dedup_map = PyDict_New();
   if (unlikely(!tuple_dedup_map)) return -1;
   {
-    const __Pyx_PyCode_New_function_description descr = {1, 0, 0, 3, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 136};
+    const __Pyx_PyCode_New_function_description descr = {1, 0, 0, 3, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 137};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_s, __pyx_mstate->__pyx_n_u_result, __pyx_mstate->__pyx_n_u_field_2};
     __pyx_mstate_global->__pyx_codeobj_tab[0] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_idd_pyx, __pyx_mstate->__pyx_n_u_test_match_fields, __pyx_mstate->__pyx_kp_b_iso88591_L_gQa_q_Qa_Qe7_1, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[0])) goto bad;
   }
   {
-    const __Pyx_PyCode_New_function_description descr = {2, 0, 0, 3, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 163};
+    const __Pyx_PyCode_New_function_description descr = {2, 0, 0, 3, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 164};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_block, __pyx_mstate->__pyx_n_u_tag, __pyx_mstate->__pyx_n_u_c_block};
     __pyx_mstate_global->__pyx_codeobj_tab[1] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_idd_pyx, __pyx_mstate->__pyx_n_u_test_extract_tag, __pyx_mstate->__pyx_kp_b_iso88591_waq_Qis_7_1, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[1])) goto bad;
   }
   {
-    const __Pyx_PyCode_New_function_description descr = {1, 0, 0, 3, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 208};
+    const __Pyx_PyCode_New_function_description descr = {1, 0, 0, 3, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 209};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_s, __pyx_mstate->__pyx_n_u_fieldname, __pyx_mstate->__pyx_n_u_result};
     __pyx_mstate_global->__pyx_codeobj_tab[2] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_idd_pyx, __pyx_mstate->__pyx_n_u_test_match_extensible_name, __pyx_mstate->__pyx_kp_b_iso88591_QgQa_A_waq_waq_7_1, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[2])) goto bad;
   }
   {
-    const __Pyx_PyCode_New_function_description descr = {1, 0, 0, 2, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 294};
-    PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_s, __pyx_mstate->__pyx_n_u_classProps};
-    __pyx_mstate_global->__pyx_codeobj_tab[3] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_idd_pyx, __pyx_mstate->__pyx_n_u_test_parse_idd_class_string, __pyx_mstate->__pyx_kp_b_iso88591_7q_A_E_Kq, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[3])) goto bad;
+    const __Pyx_PyCode_New_function_description descr = {1, 0, 0, 2, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 300};
+    PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_s, __pyx_mstate->__pyx_n_u_epclass};
+    __pyx_mstate_global->__pyx_codeobj_tab[3] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_idd_pyx, __pyx_mstate->__pyx_n_u_test_parse_idd_class_string, __pyx_mstate->__pyx_kp_b_iso88591_1_7_1_gQa_A, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[3])) goto bad;
   }
   Py_DECREF(tuple_dedup_map);
   return 0;
@@ -7989,328 +7912,6 @@ static PyObject *__Pyx_PyObject_FastCallMethod(PyObject *name, PyObject *const *
     return result;
 }
 #endif
-
-/* CIntToDigits (used by CIntToPyUnicode) */
-static const char DIGIT_PAIRS_10[2*10*10+1] = {
-    "00010203040506070809"
-    "10111213141516171819"
-    "20212223242526272829"
-    "30313233343536373839"
-    "40414243444546474849"
-    "50515253545556575859"
-    "60616263646566676869"
-    "70717273747576777879"
-    "80818283848586878889"
-    "90919293949596979899"
-};
-static const char DIGIT_PAIRS_8[2*8*8+1] = {
-    "0001020304050607"
-    "1011121314151617"
-    "2021222324252627"
-    "3031323334353637"
-    "4041424344454647"
-    "5051525354555657"
-    "6061626364656667"
-    "7071727374757677"
-};
-static const char DIGITS_HEX[2*16+1] = {
-    "0123456789abcdef"
-    "0123456789ABCDEF"
-};
-
-/* BuildPyUnicode (used by COrdinalToPyUnicode) */
-static PyObject* __Pyx_PyUnicode_BuildFromAscii(Py_ssize_t ulength, const char* chars, int clength,
-                                                int prepend_sign, char padding_char) {
-    PyObject *uval;
-    Py_ssize_t uoffset = ulength - clength;
-#if CYTHON_USE_UNICODE_INTERNALS
-    Py_ssize_t i;
-    void *udata;
-    uval = PyUnicode_New(ulength, 127);
-    if (unlikely(!uval)) return NULL;
-    udata = PyUnicode_DATA(uval);
-    if (uoffset > 0) {
-        i = 0;
-        if (prepend_sign) {
-            __Pyx_PyUnicode_WRITE(PyUnicode_1BYTE_KIND, udata, 0, '-');
-            i++;
-        }
-        for (; i < uoffset; i++) {
-            __Pyx_PyUnicode_WRITE(PyUnicode_1BYTE_KIND, udata, i, padding_char);
-        }
-    }
-    for (i=0; i < clength; i++) {
-        __Pyx_PyUnicode_WRITE(PyUnicode_1BYTE_KIND, udata, uoffset+i, chars[i]);
-    }
-#else
-    {
-        PyObject *sign = NULL, *padding = NULL;
-        uval = NULL;
-        if (uoffset > 0) {
-            prepend_sign = !!prepend_sign;
-            if (uoffset > prepend_sign) {
-                padding = PyUnicode_FromOrdinal(padding_char);
-                if (likely(padding) && uoffset > prepend_sign + 1) {
-                    PyObject *tmp = PySequence_Repeat(padding, uoffset - prepend_sign);
-                    Py_DECREF(padding);
-                    padding = tmp;
-                }
-                if (unlikely(!padding)) goto done_or_error;
-            }
-            if (prepend_sign) {
-                sign = PyUnicode_FromOrdinal('-');
-                if (unlikely(!sign)) goto done_or_error;
-            }
-        }
-        uval = PyUnicode_DecodeASCII(chars, clength, NULL);
-        if (likely(uval) && padding) {
-            PyObject *tmp = PyUnicode_Concat(padding, uval);
-            Py_DECREF(uval);
-            uval = tmp;
-        }
-        if (likely(uval) && sign) {
-            PyObject *tmp = PyUnicode_Concat(sign, uval);
-            Py_DECREF(uval);
-            uval = tmp;
-        }
-done_or_error:
-        Py_XDECREF(padding);
-        Py_XDECREF(sign);
-    }
-#endif
-    return uval;
-}
-
-/* COrdinalToPyUnicode (used by CIntToPyUnicode) */
-static CYTHON_INLINE int __Pyx_CheckUnicodeValue(int value) {
-    return value <= 1114111;
-}
-static PyObject* __Pyx_PyUnicode_FromOrdinal_Padded(int value, Py_ssize_t ulength, char padding_char) {
-    Py_ssize_t padding_length = ulength - 1;
-    if (likely((padding_length <= 250) && (value < 0xD800 || value > 0xDFFF))) {
-        char chars[256];
-        if (value <= 255) {
-            memset(chars, padding_char, (size_t) padding_length);
-            chars[ulength-1] = (char) value;
-            return PyUnicode_DecodeLatin1(chars, ulength, NULL);
-        }
-        char *cpos = chars + sizeof(chars);
-        if (value < 0x800) {
-            *--cpos = (char) (0x80 | (value & 0x3f));
-            value >>= 6;
-            *--cpos = (char) (0xc0 | (value & 0x1f));
-        } else if (value < 0x10000) {
-            *--cpos = (char) (0x80 | (value & 0x3f));
-            value >>= 6;
-            *--cpos = (char) (0x80 | (value & 0x3f));
-            value >>= 6;
-            *--cpos = (char) (0xe0 | (value & 0x0f));
-        } else {
-            *--cpos = (char) (0x80 | (value & 0x3f));
-            value >>= 6;
-            *--cpos = (char) (0x80 | (value & 0x3f));
-            value >>= 6;
-            *--cpos = (char) (0x80 | (value & 0x3f));
-            value >>= 6;
-            *--cpos = (char) (0xf0 | (value & 0x07));
-        }
-        cpos -= padding_length;
-        memset(cpos, padding_char, (size_t) padding_length);
-        return PyUnicode_DecodeUTF8(cpos, chars + sizeof(chars) - cpos, NULL);
-    }
-    if (value <= 127 && CYTHON_USE_UNICODE_INTERNALS) {
-        const char chars[1] = {(char) value};
-        return __Pyx_PyUnicode_BuildFromAscii(ulength, chars, 1, 0, padding_char);
-    }
-    {
-        PyObject *uchar, *padding_uchar, *padding, *result;
-        padding_uchar = PyUnicode_FromOrdinal(padding_char);
-        if (unlikely(!padding_uchar)) return NULL;
-        padding = PySequence_Repeat(padding_uchar, padding_length);
-        Py_DECREF(padding_uchar);
-        if (unlikely(!padding)) return NULL;
-        uchar = PyUnicode_FromOrdinal(value);
-        if (unlikely(!uchar)) {
-            Py_DECREF(padding);
-            return NULL;
-        }
-        result = PyUnicode_Concat(padding, uchar);
-        Py_DECREF(padding);
-        Py_DECREF(uchar);
-        return result;
-    }
-}
-
-/* CIntToPyUnicode */
-static CYTHON_INLINE PyObject* __Pyx_uchar___Pyx_PyUnicode_From_size_t(size_t value, Py_ssize_t width, char padding_char) {
-#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wconversion"
-#endif
-    const size_t neg_one = (size_t) -1, const_zero = (size_t) 0;
-#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
-#pragma GCC diagnostic pop
-#endif
-    const int is_unsigned = neg_one > const_zero;
-    if (unlikely(!(is_unsigned || value == 0 || value > 0) ||
-                    !(sizeof(value) <= 2 || value & ~ (size_t) 0x01fffff || __Pyx_CheckUnicodeValue((int) value)))) {
-        PyErr_SetString(PyExc_OverflowError, "%c arg not in range(0x110000)");
-        return NULL;
-    }
-    if (width <= 1) {
-        return PyUnicode_FromOrdinal((int) value);
-    }
-    return __Pyx_PyUnicode_FromOrdinal_Padded((int) value, width, padding_char);
-}
-static CYTHON_INLINE PyObject* __Pyx____Pyx_PyUnicode_From_size_t(size_t value, Py_ssize_t width, char padding_char, char format_char) {
-    char digits[sizeof(size_t)*3+2];
-    char *dpos, *end = digits + sizeof(size_t)*3+2;
-    const char *hex_digits = DIGITS_HEX;
-    Py_ssize_t length, ulength;
-    int prepend_sign, last_one_off;
-    size_t remaining;
-#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wconversion"
-#endif
-    const size_t neg_one = (size_t) -1, const_zero = (size_t) 0;
-#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
-#pragma GCC diagnostic pop
-#endif
-    const int is_unsigned = neg_one > const_zero;
-    if (format_char == 'X') {
-        hex_digits += 16;
-        format_char = 'x';
-    }
-    remaining = value;
-    last_one_off = 0;
-    dpos = end;
-    do {
-        int digit_pos;
-        switch (format_char) {
-        case 'o':
-            digit_pos = abs((int)(remaining % (8*8)));
-            remaining = (size_t) (remaining / (8*8));
-            dpos -= 2;
-            memcpy(dpos, DIGIT_PAIRS_8 + digit_pos * 2, 2);
-            last_one_off = (digit_pos < 8);
-            break;
-        case 'd':
-            digit_pos = abs((int)(remaining % (10*10)));
-            remaining = (size_t) (remaining / (10*10));
-            dpos -= 2;
-            memcpy(dpos, DIGIT_PAIRS_10 + digit_pos * 2, 2);
-            last_one_off = (digit_pos < 10);
-            break;
-        case 'x':
-            *(--dpos) = hex_digits[abs((int)(remaining % 16))];
-            remaining = (size_t) (remaining / 16);
-            break;
-        default:
-            assert(0);
-            break;
-        }
-    } while (unlikely(remaining != 0));
-    assert(!last_one_off || *dpos == '0');
-    dpos += last_one_off;
-    length = end - dpos;
-    ulength = length;
-    prepend_sign = 0;
-    if (!is_unsigned && value <= neg_one) {
-        if (padding_char == ' ' || width <= length + 1) {
-            *(--dpos) = '-';
-            ++length;
-        } else {
-            prepend_sign = 1;
-        }
-        ++ulength;
-    }
-    if (width > ulength) {
-        ulength = width;
-    }
-    if (ulength == 1) {
-        return PyUnicode_FromOrdinal(*dpos);
-    }
-    return __Pyx_PyUnicode_BuildFromAscii(ulength, dpos, (int) length, prepend_sign, padding_char);
-}
-
-/* JoinPyUnicode */
-static PyObject* __Pyx_PyUnicode_Join(PyObject** values, Py_ssize_t value_count, Py_ssize_t result_ulength,
-                                      Py_UCS4 max_char) {
-#if CYTHON_USE_UNICODE_INTERNALS && CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-    PyObject *result_uval;
-    int result_ukind, kind_shift;
-    Py_ssize_t i, char_pos;
-    void *result_udata;
-    if (max_char > 1114111) max_char = 1114111;
-    result_uval = PyUnicode_New(result_ulength, max_char);
-    if (unlikely(!result_uval)) return NULL;
-    result_ukind = (max_char <= 255) ? PyUnicode_1BYTE_KIND : (max_char <= 65535) ? PyUnicode_2BYTE_KIND : PyUnicode_4BYTE_KIND;
-    kind_shift = (result_ukind == PyUnicode_4BYTE_KIND) ? 2 : result_ukind - 1;
-    result_udata = PyUnicode_DATA(result_uval);
-    assert(kind_shift == 2 || kind_shift == 1 || kind_shift == 0);
-    if (unlikely((PY_SSIZE_T_MAX >> kind_shift) - result_ulength < 0))
-        goto overflow;
-    char_pos = 0;
-    for (i=0; i < value_count; i++) {
-        int ukind;
-        Py_ssize_t ulength;
-        void *udata;
-        PyObject *uval = values[i];
-        #if !CYTHON_COMPILING_IN_LIMITED_API
-        if (__Pyx_PyUnicode_READY(uval) == (-1))
-            goto bad;
-        #endif
-        ulength = __Pyx_PyUnicode_GET_LENGTH(uval);
-        #if !CYTHON_ASSUME_SAFE_SIZE
-        if (unlikely(ulength < 0)) goto bad;
-        #endif
-        if (unlikely(!ulength))
-            continue;
-        if (unlikely((PY_SSIZE_T_MAX >> kind_shift) - ulength < char_pos))
-            goto overflow;
-        ukind = __Pyx_PyUnicode_KIND(uval);
-        udata = __Pyx_PyUnicode_DATA(uval);
-        if (ukind == result_ukind) {
-            memcpy((char *)result_udata + (char_pos << kind_shift), udata, (size_t) (ulength << kind_shift));
-        } else {
-            #if PY_VERSION_HEX >= 0x030d0000
-            if (unlikely(PyUnicode_CopyCharacters(result_uval, char_pos, uval, 0, ulength) < 0)) goto bad;
-            #elif CYTHON_COMPILING_IN_CPYTHON || defined(_PyUnicode_FastCopyCharacters)
-            _PyUnicode_FastCopyCharacters(result_uval, char_pos, uval, 0, ulength);
-            #else
-            Py_ssize_t j;
-            for (j=0; j < ulength; j++) {
-                Py_UCS4 uchar = __Pyx_PyUnicode_READ(ukind, udata, j);
-                __Pyx_PyUnicode_WRITE(result_ukind, result_udata, char_pos+j, uchar);
-            }
-            #endif
-        }
-        char_pos += ulength;
-    }
-    return result_uval;
-overflow:
-    PyErr_SetString(PyExc_OverflowError, "join() result is too long for a Python string");
-bad:
-    Py_DECREF(result_uval);
-    return NULL;
-#else
-    Py_ssize_t i;
-    PyObject *result = NULL;
-    PyObject *value_tuple = PyTuple_New(value_count);
-    if (unlikely(!value_tuple)) return NULL;
-    CYTHON_UNUSED_VAR(max_char);
-    CYTHON_UNUSED_VAR(result_ulength);
-    for (i=0; i<value_count; i++) {
-        if (__Pyx_PyTuple_SET_ITEM(value_tuple, i, values[i]) != (0)) goto bad;
-        Py_INCREF(values[i]);
-    }
-    result = PyUnicode_Join(__pyx_mstate_global->__pyx_empty_unicode, value_tuple);
-bad:
-    Py_DECREF(value_tuple);
-    return result;
-#endif
-}
 
 /* PxdImportShared (used by FunctionImport) */
 #ifndef __PYX_HAVE_RT_ImportFromPxd_3_2_4
@@ -10249,7 +9850,7 @@ bad:
         return (target_type) value;\
     }
 
-static PyObject* __pyx_convert__to_py_struct____pyx_t_3idd_FieldProps(struct __pyx_t_3idd_FieldProps s) {
+static PyObject* __pyx_convert__to_py_struct____pyx_t_3idd_EPField(struct __pyx_t_3idd_EPField s) {
   PyObject* res;
   PyObject* member;
   res = __Pyx_PyDict_NewPresized(7); if (unlikely(!res)) return NULL;
@@ -10280,7 +9881,7 @@ static PyObject* __pyx_convert__to_py_struct____pyx_t_3idd_FieldProps(struct __p
   Py_DECREF(res);
   return NULL;
 }
-static PyObject* __pyx_convert__to_py_struct____pyx_t_3idd_ExtensibleProps(struct __pyx_t_3idd_ExtensibleProps s) {
+static PyObject* __pyx_convert__to_py_struct____pyx_t_3idd_EPExtensible(struct __pyx_t_3idd_EPExtensible s) {
   PyObject* res;
   PyObject* member;
   res = __Pyx_PyDict_NewPresized(4); if (unlikely(!res)) return NULL;
@@ -10302,14 +9903,14 @@ static PyObject* __pyx_convert__to_py_struct____pyx_t_3idd_ExtensibleProps(struc
   Py_DECREF(res);
   return NULL;
 }
-static PyObject* __pyx_convert__to_py_struct____pyx_t_3idd_ClassProps(struct __pyx_t_3idd_ClassProps s) {
+static PyObject* __pyx_convert__to_py_struct____pyx_t_3idd_EPClass(struct __pyx_t_3idd_EPClass s) {
   PyObject* res;
   PyObject* member;
   res = __Pyx_PyDict_NewPresized(5); if (unlikely(!res)) return NULL;
   member = __pyx_convert_PyObject_string_to_py_6libcpp_6string_std__in_string(s.name); if (unlikely(!member)) goto bad;
   if (unlikely(PyDict_SetItem(res, __pyx_mstate_global->__pyx_n_u_name_2, member) < 0)) goto bad;
   Py_DECREF(member);
-  member = __pyx_convert_map_to_py_std_3a__3a_string____struct____pyx_t_3idd_FieldProps(s.fields); if (unlikely(!member)) goto bad;
+  member = __pyx_convert_map_to_py_std_3a__3a_string____struct____pyx_t_3idd_EPField(s.fields); if (unlikely(!member)) goto bad;
   if (unlikely(PyDict_SetItem(res, __pyx_mstate_global->__pyx_n_u_fields, member) < 0)) goto bad;
   Py_DECREF(member);
   member = __Pyx_PyLong_From_int(s.last_default_field_idx); if (unlikely(!member)) goto bad;
@@ -10318,7 +9919,7 @@ static PyObject* __pyx_convert__to_py_struct____pyx_t_3idd_ClassProps(struct __p
   member = __Pyx_PyBool_FromLong(s.has_extensible); if (unlikely(!member)) goto bad;
   if (unlikely(PyDict_SetItem(res, __pyx_mstate_global->__pyx_n_u_has_extensible, member) < 0)) goto bad;
   Py_DECREF(member);
-  member = __pyx_convert__to_py_struct____pyx_t_3idd_ExtensibleProps(s.extensible); if (unlikely(!member)) goto bad;
+  member = __pyx_convert__to_py_struct____pyx_t_3idd_EPExtensible(s.extensible); if (unlikely(!member)) goto bad;
   if (unlikely(PyDict_SetItem(res, __pyx_mstate_global->__pyx_n_u_extensible_2, member) < 0)) goto bad;
   Py_DECREF(member);
   return res;
@@ -10711,7 +10312,7 @@ __Pyx_PyType_GetFullyQualifiedName(PyTypeObject* tp)
         result = name;
         name = NULL;
     } else {
-        result = __Pyx_NewRef(__pyx_mstate_global->__pyx_kp_u__7);
+        result = __Pyx_NewRef(__pyx_mstate_global->__pyx_kp_u__6);
     }
     goto done;
 }

@@ -9,6 +9,7 @@ from libcpp.map cimport map as cmap
 from libcpp.pair cimport pair
 from libcpp cimport bool as cbool
 from libc.stdlib cimport atoi, atof
+from libc.stdio cimport printf
 from cython.operator cimport dereference as deref, preincrement as inc
 
 cimport cython
@@ -31,7 +32,7 @@ cdef extern from "<string>" namespace "std":
 
 #+ —— Data Structures ——————
 
-cdef struct FieldProps:
+cdef struct EPField:
     string name
     string type
     string units
@@ -40,18 +41,18 @@ cdef struct FieldProps:
     double default_val_num # used for int or float
     cbool default_is_num # flag to distinguish string vs number types in default
 
-cdef struct ExtensibleProps:
+cdef struct EPExtensible:
     int start_idx # start index of the extensible fields
     int size # size of the extensible fields
     vector[string] key_regexp # RegExp pattern for extensible field search
     vector[pair[string, string]] fieldnames # prefix, suffix -> (prefix)(n)(suffix)
 
-cdef struct ClassProps:
+cdef struct EPClass:
     string name
-    cmap[string, FieldProps] fields
+    cmap[string, EPField] fields
     int last_default_field_idx
     cbool has_extensible
-    ExtensibleProps extensible
+    EPExtensible extensible
 
 #+ —— RegExp Pattern ——————
 r"""
@@ -215,9 +216,9 @@ def test_match_extensible_name(str s):
 
 #+ —— Parsing class info ——————
 
-cdef ClassProps parse_idd_class_string(string class_string, cbool verbose = False):
+cdef EPClass parse_idd_class_string(string class_string, cbool verbose = False):
     """
-    Parse a class idd string and creates a ClassProps object.
+    Parse a class idd string and creates a EPClass object.
     """
 
     cdef size_t sep_pos # for tracking position of separators (,/;)
@@ -225,23 +226,23 @@ cdef ClassProps parse_idd_class_string(string class_string, cbool verbose = Fals
     #? Parse class_string into header_string and field_strings
     cdef MatchFieldsResult match_result = match_fields(class_string)
 
-    #? ClassProps result
-    cdef ClassProps classProps
-    classProps.last_default_field_idx = -2 # -2 indicates undefined/none, -1 indicates present but no fields yet
-    classProps.has_extensible = False
+    #? EPClass result
+    cdef EPClass epclass
+    epclass.last_default_field_idx = -2 # -2 indicates undefined/none, -1 indicates present but no fields yet
+    epclass.has_extensible = False
 
     #? Extract class name
     sep_pos = match_result.header_string.find(b",")
     if sep_pos != npos:
-        classProps.name = utils.trim(match_result.header_string.substr(0, sep_pos))
+        epclass.name = utils.trim(match_result.header_string.substr(0, sep_pos))
     else:
         if verbose:
-            print("> No fieldName match for '{classProps.name.decode('utf-8')}' - {field_idx}. Using {fieldname.decode('utf-8')}")
-        classProps.name = utils.trim(match_result.header_string) # fallback
+            printf("")
+        epclass.name = utils.trim(match_result.header_string) # fallback
 
     #? Check for \default in header
     if match_result.header_string.find(b"\\default ") != npos:
-        classProps.last_default_field_idx = -1
+        epclass.last_default_field_idx = -1
 
     #? Check for \extensible:<number>
     cdef string ext_tag = b"\\extensible:"
@@ -249,29 +250,29 @@ cdef ClassProps parse_idd_class_string(string class_string, cbool verbose = Fals
     cdef size_t num_start
     cdef size_t num_end
     if ext_pos != npos:
-        classProps.has_extensible = True
-        classProps.extensible.start_idx = -1 # update during the field parsing
+        epclass.has_extensible = True
+        epclass.extensible.start_idx = -1 # update during the field parsing
         # Parse the number
         num_start = ext_pos + ext_tag.length()
         num_end = num_start
         while num_end < match_result.header_string.length() and isdigit(match_result.header_string[num_end]):
             num_end += 1
         if num_end > num_start:
-            classProps.extensible.size = atoi(match_result.header_string.substr(num_start, num_end - num_start).c_str()) # use atoi (ASCII to Integer) (need to convert string to C-string buffer first)
+            epclass.extensible.size = atoi(match_result.header_string.substr(num_start, num_end - num_start).c_str()) # use atoi (ASCII to Integer) (need to convert string to C-string buffer first)
         else:
-            classProps.extensible.size = 0
+            epclass.extensible.size = 0
 
     #? Parse fields
-    cdef cmap[string, FieldProps] fields_map
+    cdef cmap[string, EPField] fields_map
     cdef string field_string
     cdef string fieldname
     cdef string fieldkey
 
     cdef size_t field_idx
     for field_idx in range(match_result.field_strings.size()):
-        if classProps.has_extensible \
-                and classProps.extensible.start_idx >= 0 \
-                and field_idx >= classProps.extensible.start_idx + classProps.extensible.size:
+        if epclass.has_extensible \
+                and epclass.extensible.start_idx >= 0 \
+                and field_idx >= epclass.extensible.start_idx + epclass.extensible.size:
             # if has extensibles, and all first extensible fields are processed
             break
 
@@ -287,15 +288,20 @@ cdef ClassProps parse_idd_class_string(string class_string, cbool verbose = Fals
             else:
                 fieldname = to_string(field_idx)
             if verbose:
-                print(f"> No fieldName match for '{classProps.name.decode('utf-8')}' - {field_idx}. Using {fieldname.decode('utf-8')}")
+                printf(
+                    "> No fieldName match for '%s' - %zu. Using '%s' instead.",
+                    epclass.name.c_str(),
+                    field_idx,
+                    fieldname.c_str()
+                )
 
-    return classProps
+    return epclass
 
 def test_parse_idd_class_string(str s):
-    cdef ClassProps classProps = parse_idd_class_string(s.encode("utf-8"))
+    cdef EPClass epclass = parse_idd_class_string(s.encode("utf-8"))
     print("-----------")
-    print(classProps.success)
+    print(epclass.success)
     print("-----------")
-    print(classProps.name.decode("utf-8"))
+    print(epclass.name.decode("utf-8"))
     print("-----------")
-    print(classProps.extensible.size)
+    print(epclass.extensible.size)
