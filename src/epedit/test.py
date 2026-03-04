@@ -289,8 +289,8 @@ BuildingSurface:Detailed,
        \units m
        \type real""", verbose=True)
 '''
-idd.test_match_classes(r"""
-HeatBalanceAlgorithm,
+
+test_idd_str = r"""HeatBalanceAlgorithm,
        \memo Determines which Heat Balance Algorithm will be used ie.
        \memo CTF (Conduction Transfer Functions),
        \memo EMPD (Effective Moisture Penetration Depth with Conduction Transfer Functions).
@@ -551,4 +551,9 @@ BuildingSurface:Detailed,
        \units m
   N32; \field Vertex 10 Z-coordinate
        \units m
-       \type real""")
+       \type real"""
+
+# idd.test_match_classes(test_idd_str)
+
+test_idd = idd.IDD("./test.idd")
+test_idd.test()

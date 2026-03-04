@@ -32,25 +32,7 @@ cdef extern from "<string>" namespace "std":
 
 #+ —— Data Structures ——————
 
-cdef struct EPField:
-    string name
-    string type
-    string units
-    cbool has_default
-    string default
-
-cdef struct EPExtensible:
-    int start_idx # start index of the extensible fields
-    int size # size of the extensible fields
-    # vector[string] key_regexp # RegExp pattern for extensible field search
-    vector[pair[string, string]] fieldnames # prefix, suffix -> (prefix)(n)(suffix)
-
-cdef struct EPClass:
-    string name
-    cmap[string, EPField] fields
-    int last_default_field_idx # -2 indicates undefined/none, -1 indicates present but no fields yet
-    cbool has_extensible
-    EPExtensible extensible
+# defined in idd.pxd
 
 #+ —— RegExp Pattern ——————
 r"""
@@ -490,20 +472,39 @@ cdef extern from *:
     string read_file_cpp(string filepath) nogil
 
 cdef class IDD:
-    cdef string _version
-    cdef cmap[string, EPClass] classes
+    # cdef string _version
+    # cdef cmap[string, EPClass] classes
 
     def __init__(self, str idd_path, bool verbose = False):
+        '''
         try:
             with open(idd_path, 'r', encoding='utf-8', errors='ignore') as f:
                 idd_string = f.read()
         except IOError:
             raise RuntimeError(f"Error reading the file '{idd_path}'")
+        '''
+
+        cdef string idd_string = read_file_cpp(idd_path.encode("utf-8"))
 
         cdef vector[string] classes = match_classes(idd_string)
-        parse_idd_class_string
+
+        cdef string class_string
+        cdef EPClass epclass
+        for class_string in classes:
+            epclass = parse_idd_class_string(class_string)
+            self.classes[utils.to_lowercase(epclass.name)] = epclass
 
     @property
     def version(self):
         """Get EnergyPlus version"""
-        return self._username.decode('utf-8')
+        return self._version.decode('utf-8')
+
+    def test(self):
+        for entry in self.classes:
+            name = entry.first
+            epclass = entry.second
+            print("-----------")
+            print(name.decode("utf-8"))
+            print()
+            for field in epclass.fields:
+                print(field.first.decode("utf-8"))
