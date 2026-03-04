@@ -5,7 +5,7 @@ cimport utils  # utils.pxd
 
 from libcpp.string cimport string, npos
 from libcpp.vector cimport vector
-from libcpp.map cimport map as cmap
+from libcpp.unordered_map cimport unordered_map as cmap
 from libcpp.pair cimport pair
 from libcpp cimport bool as cbool
 from libc.stdlib cimport atoi, atof
@@ -284,13 +284,13 @@ cdef EPClass parse_idd_class_string(string class_string, cbool verbose = False):
         current_field.name = fieldname
 
         #? field type
-        fieldtype_raw = utils.to_lowercase(extract_tag(field_string, b"\\units "))
+        fieldtype_raw = utils.to_lowercase(extract_tag(field_string, b"\\type "))
         if fieldtype_raw == b"integer":
             current_field.type = b"int"
         elif fieldtype_raw == b"real":
-            current_field.type == b"float"
+            current_field.type = b"float"
         else:
-            current_field.type == b"string" # default
+            current_field.type = b"string" # default
 
         #? field units
         current_field.units = extract_tag(field_string, b"\\units ")
@@ -322,10 +322,11 @@ cdef EPClass parse_idd_class_string(string class_string, cbool verbose = False):
                         fieldname.c_str()
                     )
 
-                epclass.extensible.fieldnames.push_back(pair[string, string](extensible_result.prefix, extensible_result.suffix))
+                epclass.extensible.fields.push_back(pair[string, string](extensible_result.prefix, extensible_result.suffix))
                 #TODO add key_regexp?
 
         epclass.fields[fieldkey] = current_field
+        epclass.fieldnames.push_back(fieldkey) # add fieldkey to preserve order
 
     return epclass
 
@@ -493,6 +494,7 @@ cdef class IDD:
         for class_string in classes:
             epclass = parse_idd_class_string(class_string)
             self.classes[utils.to_lowercase(epclass.name)] = epclass
+            self.classnames.push_back(epclass.name) # to preserve order
 
     @property
     def version(self):
@@ -500,11 +502,16 @@ cdef class IDD:
         return self._version.decode('utf-8')
 
     def test(self):
-        for entry in self.classes:
-            name = entry.first
-            epclass = entry.second
+        for classname in self.classnames:
+            epclass = self.classes[utils.to_lowercase(classname)]
             print("-----------")
-            print(name.decode("utf-8"))
+            print(classname.decode("utf-8"))
             print()
-            for field in epclass.fields:
-                print(field.first.decode("utf-8"))
+            #? unordered
+            # for field in epclass.fields:
+            #     print(field.first.decode("utf-8"))
+            #? ordered
+            for fieldname in epclass.fieldnames:
+                print(fieldname.decode("utf-8"))
+                print(" " + epclass.fields[fieldname].type.decode("utf-8"))
+                print(" " + epclass.fields[fieldname].units.decode("utf-8"))
