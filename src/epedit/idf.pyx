@@ -1,11 +1,24 @@
 # distutils: language = c++
+# distutils: extra_compile_args = ["-std=c++11", "-O3"]
 
-from libcpp.vector cimport vector
-from libcpp.string cimport string
 cimport utils  # utils.pxd
+from idd cimport IDD
 
+from libcpp.string cimport string, npos
+from libcpp.vector cimport vector
 
 cdef class IDFObject:
+    """
+    Represents a single IDF object (e.g., Wall, Zone).
+    """
+    cdef string classname
+
+    def __cinit__(self):
+        pass
+
+
+
+cdef class _IDFObject:
     """
     Represents a single IDF object (e.g., Wall, Zone).
     Stores data in C++ containers for performance.

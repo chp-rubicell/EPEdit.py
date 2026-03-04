@@ -196,9 +196,9 @@ def test_match_extensible_name(str s):
 
 #+ —— Parsing class info ——————
 
-cdef EPClass parse_idd_class_string(string& class_string, cbool verbose = False):
+cdef IDDClass parse_idd_class_string(string& class_string, cbool verbose = False):
     """
-    Parse a class idd string and creates a EPClass object.
+    Parse a class idd string and creates a IDDClass object.
     """
 
     cdef size_t sep_pos # for tracking position of separators (,/;)
@@ -206,23 +206,23 @@ cdef EPClass parse_idd_class_string(string& class_string, cbool verbose = False)
     #? Parse class_string into header_string and field_strings
     cdef MatchFieldsResult match_result = match_fields(class_string)
 
-    #? EPClass result
-    cdef EPClass epclass
-    epclass.last_default_field_idx = -2
-    epclass.has_extensible = False
+    #? IDDClass result
+    cdef IDDClass iddclass
+    iddclass.last_default_field_idx = -2
+    iddclass.has_extensible = False
 
     #? Extract class name
     sep_pos = match_result.header_string.find(b",")
     if sep_pos != npos:
-        epclass.name = utils.trim(match_result.header_string.substr(0, sep_pos))
+        iddclass.name = utils.trim(match_result.header_string.substr(0, sep_pos))
     else:
         if verbose:
             printf("> Cannot find name of class -\n%s", match_result.header_string.c_str())
-        epclass.name = utils.trim(match_result.header_string) # fallback
+        iddclass.name = utils.trim(match_result.header_string) # fallback
 
     #? Check for \default in header
     if match_result.header_string.find(b"\\default ") != npos:
-        epclass.last_default_field_idx = -1
+        iddclass.last_default_field_idx = -1
 
     #? Check for \extensible:<number>
     cdef string ext_tag = b"\\extensible:"
@@ -230,20 +230,20 @@ cdef EPClass parse_idd_class_string(string& class_string, cbool verbose = False)
     cdef size_t num_start
     cdef size_t num_end
     if ext_pos != npos:
-        epclass.has_extensible = True
-        epclass.extensible.start_idx = -1 # update during the field parsing
+        iddclass.has_extensible = True
+        iddclass.extensible.start_idx = -1 # update during the field parsing
         # Parse the number
         num_start = ext_pos + ext_tag.length()
         num_end = num_start
         while num_end < match_result.header_string.length() and isdigit(match_result.header_string[num_end]):
             num_end += 1
         if num_end > num_start:
-            epclass.extensible.size = atoi(match_result.header_string.substr(num_start, num_end - num_start).c_str()) # use atoi (ASCII to Integer) (need to convert string to C-string buffer first)
+            iddclass.extensible.size = atoi(match_result.header_string.substr(num_start, num_end - num_start).c_str()) # use atoi (ASCII to Integer) (need to convert string to C-string buffer first)
         else:
-            epclass.extensible.size = 0
+            iddclass.extensible.size = 0
 
     #? Parse fields
-    cdef EPField current_field
+    cdef IDDField current_field
 
     cdef string field_string
     cdef string fieldname
@@ -255,9 +255,9 @@ cdef EPClass parse_idd_class_string(string& class_string, cbool verbose = False)
 
     cdef size_t field_idx
     for field_idx in range(match_result.field_strings.size()):
-        if epclass.has_extensible \
-                and epclass.extensible.start_idx >= 0 \
-                and <int>field_idx >= (epclass.extensible.start_idx + epclass.extensible.size):
+        if iddclass.has_extensible \
+                and iddclass.extensible.start_idx >= 0 \
+                and <int>field_idx >= (iddclass.extensible.start_idx + iddclass.extensible.size):
             # if has extensibles, and all first extensible fields are processed
             break
 
@@ -275,7 +275,7 @@ cdef EPClass parse_idd_class_string(string& class_string, cbool verbose = False)
             if verbose:
                 printf(
                     "> No fieldName match for '%s' - %zu. Using '%s' instead.",
-                    epclass.name.c_str(),
+                    iddclass.name.c_str(),
                     field_idx,
                     fieldname.c_str()
                 )
@@ -298,7 +298,7 @@ cdef EPClass parse_idd_class_string(string& class_string, cbool verbose = False)
         #? default value
         field_default_raw = extract_tag(field_string, b"\\default ")
         if not field_default_raw.empty():
-            epclass.last_default_field_idx = field_idx
+            iddclass.last_default_field_idx = field_idx
             current_field.has_default = True
             if utils.to_lowercase(field_default_raw) == b"autosize" \
                     or utils.to_lowercase(field_default_raw) == b"autocalculate":
@@ -308,36 +308,36 @@ cdef EPClass parse_idd_class_string(string& class_string, cbool verbose = False)
             current_field.has_default = False
 
         #? extensible
-        if epclass.has_extensible:
+        if iddclass.has_extensible:
             # start of extensible
             if field_string.find(b"\\begin-extensible") != npos:
-                epclass.extensible.start_idx = field_idx
+                iddclass.extensible.start_idx = field_idx
             # if extensible field
-            if epclass.extensible.start_idx >= 0:
+            if iddclass.extensible.start_idx >= 0:
                 extensible_result = match_extensible_name(fieldname)
                 if not extensible_result.success:
                     printf(
                         "> No extensible pattern matched for %s - '%s'!",
-                        epclass.name.c_str(),
+                        iddclass.name.c_str(),
                         fieldname.c_str()
                     )
 
-                epclass.extensible.fields.push_back(pair[string, string](extensible_result.prefix, extensible_result.suffix))
+                iddclass.extensible.fields.push_back(pair[string, string](extensible_result.prefix, extensible_result.suffix))
                 #TODO add key_regexp?
 
-        epclass.fields[fieldkey] = current_field
-        epclass.fieldnames.push_back(fieldkey) # add fieldkey to preserve order
+        iddclass.fields[fieldkey] = current_field
+        iddclass.fieldnames.push_back(fieldkey) # add fieldkey to preserve order
 
-    return epclass
+    return iddclass
 
 def test_parse_idd_class_string(str s, bool verbose = False):
-    cdef EPClass epclass = parse_idd_class_string(s.encode("utf-8"), verbose)
+    cdef IDDClass iddclass = parse_idd_class_string(s.encode("utf-8"), verbose)
     print("-----------")
-    print(epclass.name.decode("utf-8"))
+    print(iddclass.name.decode("utf-8"))
     print("-----------")
-    print(epclass.extensible.size)
+    print(iddclass.extensible.size)
     print("-----------")
-    for field in epclass.fields:
+    for field in iddclass.fields:
         print(field.first.decode("utf-8"))
 
 #+ —— Extract class string blocks ——————
@@ -450,7 +450,7 @@ def test_match_classes(str s):
 
 cdef class IDD:
     # cdef string _version
-    # cdef cmap[string, EPClass] classes
+    # cdef cmap[string, IDDClass] classes
 
     def __init__(self, str idd_path, bool verbose = False):
 
@@ -464,11 +464,11 @@ cdef class IDD:
         cdef vector[string] classes = match_classes(idd_string)
 
         cdef string class_string
-        cdef EPClass epclass
+        cdef IDDClass iddclass
         for class_string in classes:
-            epclass = parse_idd_class_string(class_string)
-            self.classes[utils.to_lowercase(epclass.name)] = epclass
-            self.classnames.push_back(epclass.name) # to preserve order
+            iddclass = parse_idd_class_string(class_string)
+            self.classes[utils.to_lowercase(iddclass.name)] = iddclass
+            self.classnames.push_back(iddclass.name) # to preserve order
 
     @property
     def version(self):
@@ -477,15 +477,15 @@ cdef class IDD:
 
     def test(self):
         for classname in self.classnames:
-            epclass = self.classes[utils.to_lowercase(classname)]
+            iddclass = self.classes[utils.to_lowercase(classname)]
             print("-----------")
             print(classname.decode("utf-8"))
             print()
             #? unordered
-            # for field in epclass.fields:
+            # for field in iddclass.fields:
             #     print(field.first.decode("utf-8"))
             #? ordered
-            for fieldname in epclass.fieldnames:
+            for fieldname in iddclass.fieldnames:
                 print(fieldname.decode("utf-8"))
-                print(" " + epclass.fields[fieldname].type.decode("utf-8"))
-                print(" " + epclass.fields[fieldname].units.decode("utf-8"))
+                print(" " + iddclass.fields[fieldname].type.decode("utf-8"))
+                print(" " + iddclass.fields[fieldname].units.decode("utf-8"))
