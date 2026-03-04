@@ -473,6 +473,7 @@ cdef class IDD:
     @property
     def version(self):
         """Get EnergyPlus version"""
+        #TODO
         return self._version.decode('utf-8')
 
     def test(self):
