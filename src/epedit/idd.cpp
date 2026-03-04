@@ -1667,7 +1667,7 @@ struct __pyx_t_3idd_ExtensibleNameMatchResult {
 /* "idd.pyx":199
  * #+  Parsing class info
  * 
- * cdef EPClass parse_idd_class_string(string class_string, cbool verbose = False):             # <<<<<<<<<<<<<<
+ * cdef EPClass parse_idd_class_string(string& class_string, cbool verbose = False):             # <<<<<<<<<<<<<<
  *     """
  *     Parse a class idd string and creates a EPClass object.
 */
@@ -2694,8 +2694,8 @@ static std::string (*__pyx_f_5utils_fieldname_to_key)(std::string &); /*proto*/
 static struct __pyx_t_3idd_MatchFieldsResult __pyx_f_3idd_match_fields(std::string); /*proto*/
 static std::string __pyx_f_3idd_extract_tag(std::string &, std::string); /*proto*/
 static struct __pyx_t_3idd_ExtensibleNameMatchResult __pyx_f_3idd_match_extensible_name(std::string &); /*proto*/
-static struct __pyx_t_3idd_EPClass __pyx_f_3idd_parse_idd_class_string(std::string, struct __pyx_opt_args_3idd_parse_idd_class_string *__pyx_optional_args); /*proto*/
-static std::vector<std::string>  __pyx_f_3idd_match_classes(std::string); /*proto*/
+static struct __pyx_t_3idd_EPClass __pyx_f_3idd_parse_idd_class_string(std::string &, struct __pyx_opt_args_3idd_parse_idd_class_string *__pyx_optional_args); /*proto*/
+static std::vector<std::string>  __pyx_f_3idd_match_classes(std::string &); /*proto*/
 static PyObject *__pyx_f_3idd___pyx_unpickle_IDD__set_state(struct __pyx_obj_3idd_IDD *, PyObject *); /*proto*/
 static CYTHON_INLINE PyObject *__pyx_convert_PyObject_string_to_py_6libcpp_6string_std__in_string(std::string const &); /*proto*/
 static CYTHON_INLINE PyObject *__pyx_convert_PyUnicode_string_to_py_6libcpp_6string_std__in_string(std::string const &); /*proto*/
@@ -8044,12 +8044,12 @@ static PyObject *__pyx_pf_3idd_4test_match_extensible_name(CYTHON_UNUSED PyObjec
 /* "idd.pyx":199
  * #+  Parsing class info
  * 
- * cdef EPClass parse_idd_class_string(string class_string, cbool verbose = False):             # <<<<<<<<<<<<<<
+ * cdef EPClass parse_idd_class_string(string& class_string, cbool verbose = False):             # <<<<<<<<<<<<<<
  *     """
  *     Parse a class idd string and creates a EPClass object.
 */
 
-static struct __pyx_t_3idd_EPClass __pyx_f_3idd_parse_idd_class_string(std::string __pyx_v_class_string, struct __pyx_opt_args_3idd_parse_idd_class_string *__pyx_optional_args) {
+static struct __pyx_t_3idd_EPClass __pyx_f_3idd_parse_idd_class_string(std::string &__pyx_v_class_string, struct __pyx_opt_args_3idd_parse_idd_class_string *__pyx_optional_args) {
   bool __pyx_v_verbose = ((bool)0);
   size_t __pyx_v_sep_pos;
   struct __pyx_t_3idd_MatchFieldsResult __pyx_v_match_result;
@@ -8982,7 +8982,7 @@ static struct __pyx_t_3idd_EPClass __pyx_f_3idd_parse_idd_class_string(std::stri
   /* "idd.pyx":199
  * #+  Parsing class info
  * 
- * cdef EPClass parse_idd_class_string(string class_string, cbool verbose = False):             # <<<<<<<<<<<<<<
+ * cdef EPClass parse_idd_class_string(string& class_string, cbool verbose = False):             # <<<<<<<<<<<<<<
  *     """
  *     Parse a class idd string and creates a EPClass object.
 */
@@ -9152,7 +9152,7 @@ static PyObject *__pyx_pf_3idd_6test_parse_idd_class_string(CYTHON_UNUSED PyObje
   __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_v_verbose); if (unlikely((__pyx_t_3 == ((bool)-1)) && PyErr_Occurred())) __PYX_ERR(0, 334, __pyx_L1_error)
   __pyx_t_5.__pyx_n = 1;
   __pyx_t_5.verbose = __pyx_t_3;
-  __pyx_t_4 = __pyx_f_3idd_parse_idd_class_string(__PYX_STD_MOVE_IF_SUPPORTED(__pyx_t_2), &__pyx_t_5); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 334, __pyx_L1_error)
+  __pyx_t_4 = __pyx_f_3idd_parse_idd_class_string(__pyx_t_2, &__pyx_t_5); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 334, __pyx_L1_error)
   __pyx_v_epclass = __pyx_t_4;
 
   /* "idd.pyx":335
@@ -9319,12 +9319,12 @@ static PyObject *__pyx_pf_3idd_6test_parse_idd_class_string(CYTHON_UNUSED PyObje
 /* "idd.pyx":345
  * #+  Extract class string blocks
  * 
- * cdef vector[string] match_classes(string idd_string):             # <<<<<<<<<<<<<<
+ * cdef vector[string] match_classes(string& idd_string):             # <<<<<<<<<<<<<<
  *     """
  *     Extracts individual class blocks from the IDD string.
 */
 
-static std::vector<std::string>  __pyx_f_3idd_match_classes(std::string __pyx_v_idd_string) {
+static std::vector<std::string>  __pyx_f_3idd_match_classes(std::string &__pyx_v_idd_string) {
   std::vector<std::string>  __pyx_v_classes;
   size_t __pyx_v_length;
   size_t __pyx_v_cursor;
@@ -10044,7 +10044,7 @@ static std::vector<std::string>  __pyx_f_3idd_match_classes(std::string __pyx_v_
   /* "idd.pyx":345
  * #+  Extract class string blocks
  * 
- * cdef vector[string] match_classes(string idd_string):             # <<<<<<<<<<<<<<
+ * cdef vector[string] match_classes(string& idd_string):             # <<<<<<<<<<<<<<
  *     """
  *     Extracts individual class blocks from the IDD string.
 */
@@ -10193,7 +10193,7 @@ static PyObject *__pyx_pf_3idd_8test_match_classes(CYTHON_UNUSED PyObject *__pyx
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_2 = __pyx_convert_string_from_py_6libcpp_6string_std__in_string(__pyx_t_1); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 440, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_3 = __pyx_f_3idd_match_classes(__PYX_STD_MOVE_IF_SUPPORTED(__pyx_t_2)); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 440, __pyx_L1_error)
+  __pyx_t_3 = __pyx_f_3idd_match_classes(__pyx_t_2); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 440, __pyx_L1_error)
   __pyx_v_classes = __PYX_STD_MOVE_IF_SUPPORTED(__pyx_t_3);
 
   /* "idd.pyx":441

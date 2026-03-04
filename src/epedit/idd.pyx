@@ -196,7 +196,7 @@ def test_match_extensible_name(str s):
 
 #+ —— Parsing class info ——————
 
-cdef EPClass parse_idd_class_string(string class_string, cbool verbose = False):
+cdef EPClass parse_idd_class_string(string& class_string, cbool verbose = False):
     """
     Parse a class idd string and creates a EPClass object.
     """
@@ -342,7 +342,7 @@ def test_parse_idd_class_string(str s, bool verbose = False):
 
 #+ —— Extract class string blocks ——————
 
-cdef vector[string] match_classes(string idd_string):
+cdef vector[string] match_classes(string& idd_string):
     """
     Extracts individual class blocks from the IDD string.
     A class block starts with a Name and ends with the first ';'
