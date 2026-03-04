@@ -448,44 +448,18 @@ def test_match_classes(str s):
 
 #+ —— Open and parse IDD file ——————
 
-cdef extern from *:
-    """
-    #include <fstream>
-    #include <sstream>
-    #include <string>
-
-    // Standard C++ idiom for reading an entire file into a string quickly
-    static std::string read_file_cpp(const std::string& filepath) {
-        std::ifstream file_stream(filepath);
-
-        // Return empty string if file doesn't exist or is locked
-        if (!file_stream.is_open()) {
-            return "";
-        }
-
-        // Dump the file buffer into a string stream, then output it
-        std::ostringstream ss;
-        ss << file_stream.rdbuf();
-        return ss.str();
-    }
-    """
-    # 2. Declare the function signature so Cython knows it exists
-    string read_file_cpp(string filepath) nogil
-
 cdef class IDD:
     # cdef string _version
     # cdef cmap[string, EPClass] classes
 
     def __init__(self, str idd_path, bool verbose = False):
-        '''
+
+        cdef string idd_string
         try:
             with open(idd_path, 'r', encoding='utf-8', errors='ignore') as f:
-                idd_string = f.read()
+                idd_string = f.read().encode("utf-8")
         except IOError:
             raise RuntimeError(f"Error reading the file '{idd_path}'")
-        '''
-
-        cdef string idd_string = read_file_cpp(idd_path.encode("utf-8"))
 
         cdef vector[string] classes = match_classes(idd_string)
 
