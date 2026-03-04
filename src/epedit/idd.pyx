@@ -275,7 +275,7 @@ cdef EPClass parse_idd_class_string(string class_string, cbool verbose = False):
     for field_idx in range(match_result.field_strings.size()):
         if epclass.has_extensible \
                 and epclass.extensible.start_idx >= 0 \
-                and field_idx >= epclass.extensible.start_idx + epclass.extensible.size:
+                and <int>field_idx >= (epclass.extensible.start_idx + epclass.extensible.size):
             # if has extensibles, and all first extensible fields are processed
             break
 
@@ -356,3 +356,154 @@ def test_parse_idd_class_string(str s, bool verbose = False):
     print("-----------")
     for field in epclass.fields:
         print(field.first.decode("utf-8"))
+
+#+ —— Extract class string blocks ——————
+
+cdef vector[string] match_classes(string idd_string):
+    """
+    Extracts individual class blocks from the IDD string.
+    A class block starts with a Name and ends with the first ';'
+    (including any trailing '\\' comment lines immediately following the ';').
+    """
+    cdef vector[string] classes
+
+    cdef size_t length = idd_string.length()
+    cdef size_t cursor = 0
+    cdef size_t temp_cursor = 0
+
+    cdef size_t start_pos = 0
+    cdef cbool in_class = False
+    cdef cbool found_semicolon = False
+
+    while cursor < length:
+        if not in_class:
+            #? Searching for the start of a new class
+
+            # skip whitespaces
+            while cursor < length and isspace(idd_string[cursor]):
+                cursor += 1
+            if cursor >= length:
+                break
+
+            # Skip standalone metadata lines (e.g., \group)
+            if idd_string[cursor] == b"\\":
+                cursor = idd_string.find(b"\n", cursor)
+                if cursor == npos:
+                    break
+                cursor += 1
+                continue
+
+            # Start of a new class
+            start_pos = cursor
+            in_class = True
+            found_semicolon = False
+
+        else:
+            #? Inside a class
+
+            if not found_semicolon:
+                # Scan forward until the terminating semicolon (skip semicolon inside comment blocks)
+
+                while cursor < length:
+                    # When hitting metadata comment, skip to the end of the line
+                    if idd_string[cursor] == b"\\":
+                        cursor = idd_string.find(b"\n", cursor)
+                        if cursor == npos:
+                            cursor = length
+                            break
+                        cursor += 1 # Move past the newline
+                        continue
+
+                    # Actual structural semicolon
+                    if idd_string[cursor] == b";":
+                        break
+
+                    cursor += 1
+
+                if cursor < length and idd_string[cursor] == b";":
+                    found_semicolon = True
+                    cursor += 1 # Step past the semicolon
+
+            else:
+                # Semicolon found, capture trailing "\" metadata lines
+                temp_cursor = cursor
+
+                # Skip spaces/newlines to see what comes next
+                while temp_cursor < length and isspace(idd_string[temp_cursor]):
+                    temp_cursor += 1
+                if temp_cursor >= length:
+                    classes.push_back(utils.trim(idd_string.substr(start_pos)))
+                    break
+
+                if idd_string[temp_cursor] == b"\\":
+                    temp_cursor = idd_string.find(b"\n", temp_cursor)
+                    if temp_cursor == npos:
+                        cursor = length # move cursor to the end of the idd_string
+                    else:
+                        cursor = temp_cursor + 1
+                else:
+                    # Next class is starting
+                    classes.push_back(utils.trim(idd_string.substr(start_pos, temp_cursor - start_pos)))
+                    cursor = temp_cursor
+                    in_class = False
+
+    # Catch the last block if the file ended while still processing it
+    if in_class:
+        classes.push_back(utils.trim(idd_string.substr(start_pos)))
+
+    return classes
+
+def test_match_classes(str s):
+    cdef vector[string] classes = match_classes(s.encode("utf-8"))
+    print("-----------")
+    print(classes.size())
+    for c in classes:
+        print("-----------")
+        print(c.decode("utf-8")[:200])
+        print("...")
+        print(c.decode("utf-8")[-200:])
+
+#+ —— Open and parse IDD file ——————
+
+cdef extern from *:
+    """
+    #include <fstream>
+    #include <sstream>
+    #include <string>
+
+    // Standard C++ idiom for reading an entire file into a string quickly
+    static std::string read_file_cpp(const std::string& filepath) {
+        std::ifstream file_stream(filepath);
+
+        // Return empty string if file doesn't exist or is locked
+        if (!file_stream.is_open()) {
+            return "";
+        }
+
+        // Dump the file buffer into a string stream, then output it
+        std::ostringstream ss;
+        ss << file_stream.rdbuf();
+        return ss.str();
+    }
+    """
+    # 2. Declare the function signature so Cython knows it exists
+    string read_file_cpp(string filepath) nogil
+
+cdef class IDD:
+    cdef string _version
+    cdef cmap[string, EPClass] classes
+
+    def __init__(self, str idd_path, bool verbose = False):
+        try:
+            with open(idd_path, 'r', encoding='utf-8', errors='ignore') as f:
+                idd_string = f.read()
+        except IOError:
+            raise RuntimeError(f"Error reading the file '{idd_path}'")
+
+        cdef vector[string] classes = match_classes(idd_string)
+        parse_idd_class_string
+
+    @property
+    def version(self):
+        """Get EnergyPlus version"""
+        return self._username.decode('utf-8')
