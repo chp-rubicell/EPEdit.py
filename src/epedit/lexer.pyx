@@ -41,7 +41,7 @@ cdef class Lexer:
         self.buffer.clear()
         self.buffer_idx = 0
 
-    cdef cbool scan_next_line(self, string& line) nogil:
+    cdef cbool scan_next_line(self, string& line) noexcept nogil:
         """
         Extracts next line from content and stores it in the provided `line` reference.
         Advances `pos` past the next `\n` character.
@@ -66,7 +66,7 @@ cdef class Lexer:
         self.line_num += 1
         return True
 
-    cdef Token next_token(self) nogil:
+    cdef Token next_token(self) noexcept nogil:
         """
         Return next token when parser requests.
         """
@@ -101,10 +101,10 @@ cdef class Lexer:
 
         # Return EOF if no more content
         tok.type = TOKEN_EOF
-        tok.value = b""
+        tok.value.clear()  # instead of tok.value = b""
         return tok
 
-    cdef void tokenize_line(self, const string& line) nogil:
+    cdef void tokenize_line(self, const string& line) noexcept nogil:
         # Find position of comment
         cdef size_t limit = line.find(b'!')
 
@@ -112,7 +112,7 @@ cdef class Lexer:
         if limit == npos:
             limit = line.size()
 
-        cdef string text_builder = b""
+        cdef string text_builder  # empty string
         cdef size_t byte_idx = 0
         cdef char c
 
@@ -132,10 +132,10 @@ cdef class Lexer:
 
             if c == b',':
                 self.push_text_token(text_builder)
-                self.buffer.push_back(Token(TOKEN_COMMA, b","))
+                self.buffer.push_back(Token(TOKEN_COMMA, <const char*>b","))
             elif c == b';':
                 self.push_text_token(text_builder)
-                self.buffer.push_back(Token(TOKEN_SEMICOLON, b";"))
+                self.buffer.push_back(Token(TOKEN_SEMICOLON, <const char*>b";"))
             else:
                 text_builder.push_back(c)
 
@@ -144,7 +144,7 @@ cdef class Lexer:
         # Final flush
         self.push_text_token(text_builder)
 
-    cdef void push_text_token(self, string& builder) nogil:
+    cdef void push_text_token(self, string& builder) noexcept nogil:
         """
         Trims and pushes to buffer using reference.
         """

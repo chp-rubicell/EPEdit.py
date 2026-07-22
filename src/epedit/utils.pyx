@@ -7,11 +7,11 @@ cdef extern from "<string>" namespace "std":
     string to_string(long long val)
     string to_string(double val)
 
-cdef string trim_string(const string& s) nogil:
+cdef string trim_string(const string& s) noexcept nogil:
     """Remove leading and trailing whitespace from a C++ string."""
     cdef size_t first = s.find_first_not_of(b" \t\r\n")
     if first == npos:
-        return b""
+        return <const char*>b""
     cdef size_t last = s.find_last_not_of(b" \t\r\n")
     return s.substr(first, (last - first + 1))
 
@@ -20,10 +20,10 @@ cdef string any_to_string(object value) except *:
     Get Python object and convert it to C++ std::string.
     """
     if value is None:
-        return b""
+        return <const char*>b""
     elif isinstance(value, bool):
         # EnergyPlus Yes/No convention
-        return b"Yes" if value else b"No"
+        return <const char*>b"Yes" if value else <const char*>b"No"
     elif isinstance(value, int):
         return to_string(<long long>value)
     elif isinstance(value, float):
@@ -38,7 +38,7 @@ cdef string any_to_string(object value) except *:
         # Uses Python's built-in str() function, then encodes it.
         return str(value).encode('utf-8')
 
-cdef (int, int) get_continuous_digits_indices(const string& name) nogil:
+cdef (int, int) get_continuous_digits_indices(const string& name) noexcept nogil:
     """
     Get start and end indices of continous digits (first appearance)
     """
