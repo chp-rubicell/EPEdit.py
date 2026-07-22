@@ -15,6 +15,15 @@ cdef string trim_string(const string& s) noexcept nogil:
     cdef size_t last = s.find_last_not_of(b" \t\r\n")
     return s.substr(first, (last - first + 1))
 
+# Similar to Go's CutPrefix()
+cdef (string, cbool) cut_prefix(const string& s, const string& prefix) noexcept nogil:
+    cdef size_t p_len = prefix.length()
+
+    if s.length() >= p_len and s.compare(0, p_len, prefix) == 0:
+        return (s.substr(p_len), True)
+
+    return (s, False)
+
 cdef string any_to_string(object value) except *:
     """
     Get Python object and convert it to C++ std::string.
