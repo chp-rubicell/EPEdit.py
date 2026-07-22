@@ -1572,8 +1572,8 @@ struct __pyx_ctuple_int__and_int {
 };
 struct __pyx_t_5lexer_Token;
 
-/* "lexer.pyx":9
- * from utils cimport trim_string
+/* "lexer.pxd":5
+ * from libcpp cimport bool as cbool
  * 
  * cdef enum TokenType:             # <<<<<<<<<<<<<<
  *     TOKEN_TEXT      = 0
@@ -1587,7 +1587,7 @@ enum __pyx_t_5lexer_TokenType {
   __pyx_e_5lexer_TOKEN_ERROR = 4
 };
 
-/* "lexer.pyx":16
+/* "lexer.pxd":12
  *     TOKEN_ERROR     = 4
  * 
  * cdef struct Token:             # <<<<<<<<<<<<<<
@@ -1599,7 +1599,7 @@ struct __pyx_t_5lexer_Token {
   std::string value;
 };
 
-/* "lexer.pyx":20
+/* "lexer.pxd":16
  *     string value
  * 
  * cdef class Lexer:             # <<<<<<<<<<<<<<
@@ -1618,6 +1618,14 @@ struct __pyx_obj_5lexer_Lexer {
 };
 
 
+
+/* "lexer.pyx":9
+ * from utils cimport trim_string
+ * 
+ * cdef class Lexer:             # <<<<<<<<<<<<<<
+ * 
+ *     def __init__(self, bytes file_content, bint is_idd):
+*/
 
 struct __pyx_vtabstruct_5lexer_Lexer {
   bool (*scan_next_line)(struct __pyx_obj_5lexer_Lexer *, std::string &);
@@ -3856,8 +3864,8 @@ static std::vector<struct __pyx_t_5lexer_Token>  __pyx_convert_vector_from_py_st
   return __pyx_r;
 }
 
-/* "lexer.pyx":30
- *     cdef size_t pos  # current position in content
+/* "lexer.pyx":11
+ * cdef class Lexer:
  * 
  *     def __init__(self, bytes file_content, bint is_idd):             # <<<<<<<<<<<<<<
  *         """
@@ -3891,39 +3899,39 @@ static int __pyx_pw_5lexer_5Lexer_1__init__(PyObject *__pyx_v_self, PyObject *__
   {
     PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_file_content,&__pyx_mstate_global->__pyx_n_u_is_idd,0};
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_VARARGS(__pyx_kwds) : 0;
-    if (unlikely(__pyx_kwds_len) < 0) __PYX_ERR(0, 30, __pyx_L3_error)
+    if (unlikely(__pyx_kwds_len) < 0) __PYX_ERR(0, 11, __pyx_L3_error)
     if (__pyx_kwds_len > 0) {
       switch (__pyx_nargs) {
         case  2:
         values[1] = __Pyx_ArgRef_VARARGS(__pyx_args, 1);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 30, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 11, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  1:
         values[0] = __Pyx_ArgRef_VARARGS(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 30, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 11, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  0: break;
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "__init__", 0) < (0)) __PYX_ERR(0, 30, __pyx_L3_error)
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "__init__", 0) < (0)) __PYX_ERR(0, 11, __pyx_L3_error)
       for (Py_ssize_t i = __pyx_nargs; i < 2; i++) {
-        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("__init__", 1, 2, 2, i); __PYX_ERR(0, 30, __pyx_L3_error) }
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("__init__", 1, 2, 2, i); __PYX_ERR(0, 11, __pyx_L3_error) }
       }
     } else if (unlikely(__pyx_nargs != 2)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_ArgRef_VARARGS(__pyx_args, 0);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 30, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 11, __pyx_L3_error)
       values[1] = __Pyx_ArgRef_VARARGS(__pyx_args, 1);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 30, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 11, __pyx_L3_error)
     }
     __pyx_v_file_content = ((PyObject*)values[0]);
-    __pyx_v_is_idd = __Pyx_PyObject_IsTrue(values[1]); if (unlikely((__pyx_v_is_idd == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 30, __pyx_L3_error)
+    __pyx_v_is_idd = __Pyx_PyObject_IsTrue(values[1]); if (unlikely((__pyx_v_is_idd == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 11, __pyx_L3_error)
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 30, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 11, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -3934,7 +3942,7 @@ static int __pyx_pw_5lexer_5Lexer_1__init__(PyObject *__pyx_v_self, PyObject *__
   __Pyx_RefNannyFinishContext();
   return -1;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_file_content), (&PyBytes_Type), 1, "file_content", 1))) __PYX_ERR(0, 30, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_file_content), (&PyBytes_Type), 1, "file_content", 1))) __PYX_ERR(0, 11, __pyx_L1_error)
   __pyx_r = __pyx_pf_5lexer_5Lexer___init__(((struct __pyx_obj_5lexer_Lexer *)__pyx_v_self), __pyx_v_file_content, __pyx_v_is_idd);
 
   /* function exit code */
@@ -3961,17 +3969,17 @@ static int __pyx_pf_5lexer_5Lexer___init__(struct __pyx_obj_5lexer_Lexer *__pyx_
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
 
-  /* "lexer.pyx":35
+  /* "lexer.pyx":16
  *         """
  *         # Python 'bytes' is automatically converted to C++ std::string
  *         self.content = file_content             # <<<<<<<<<<<<<<
  *         self.pos = 0
  *         self.line_num = 0
 */
-  __pyx_t_1 = __pyx_convert_string_from_py_6libcpp_6string_std__in_string(__pyx_v_file_content); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 35, __pyx_L1_error)
+  __pyx_t_1 = __pyx_convert_string_from_py_6libcpp_6string_std__in_string(__pyx_v_file_content); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 16, __pyx_L1_error)
   __pyx_v_self->content = __PYX_STD_MOVE_IF_SUPPORTED(__pyx_t_1);
 
-  /* "lexer.pyx":36
+  /* "lexer.pyx":17
  *         # Python 'bytes' is automatically converted to C++ std::string
  *         self.content = file_content
  *         self.pos = 0             # <<<<<<<<<<<<<<
@@ -3980,7 +3988,7 @@ static int __pyx_pf_5lexer_5Lexer___init__(struct __pyx_obj_5lexer_Lexer *__pyx_
 */
   __pyx_v_self->pos = 0;
 
-  /* "lexer.pyx":37
+  /* "lexer.pyx":18
  *         self.content = file_content
  *         self.pos = 0
  *         self.line_num = 0             # <<<<<<<<<<<<<<
@@ -3989,7 +3997,7 @@ static int __pyx_pf_5lexer_5Lexer___init__(struct __pyx_obj_5lexer_Lexer *__pyx_
 */
   __pyx_v_self->line_num = 0;
 
-  /* "lexer.pyx":38
+  /* "lexer.pyx":19
  *         self.pos = 0
  *         self.line_num = 0
  *         self.is_idd = is_idd             # <<<<<<<<<<<<<<
@@ -3998,7 +4006,7 @@ static int __pyx_pf_5lexer_5Lexer___init__(struct __pyx_obj_5lexer_Lexer *__pyx_
 */
   __pyx_v_self->is_idd = __pyx_v_is_idd;
 
-  /* "lexer.pyx":41
+  /* "lexer.pyx":22
  * 
  *         # Initialize buffer and index pointer
  *         self.buffer.clear()             # <<<<<<<<<<<<<<
@@ -4007,7 +4015,7 @@ static int __pyx_pf_5lexer_5Lexer___init__(struct __pyx_obj_5lexer_Lexer *__pyx_
 */
   __pyx_v_self->buffer.clear();
 
-  /* "lexer.pyx":42
+  /* "lexer.pyx":23
  *         # Initialize buffer and index pointer
  *         self.buffer.clear()
  *         self.buffer_idx = 0             # <<<<<<<<<<<<<<
@@ -4016,8 +4024,8 @@ static int __pyx_pf_5lexer_5Lexer___init__(struct __pyx_obj_5lexer_Lexer *__pyx_
 */
   __pyx_v_self->buffer_idx = 0;
 
-  /* "lexer.pyx":30
- *     cdef size_t pos  # current position in content
+  /* "lexer.pyx":11
+ * cdef class Lexer:
  * 
  *     def __init__(self, bytes file_content, bint is_idd):             # <<<<<<<<<<<<<<
  *         """
@@ -4034,7 +4042,7 @@ static int __pyx_pf_5lexer_5Lexer___init__(struct __pyx_obj_5lexer_Lexer *__pyx_
   return __pyx_r;
 }
 
-/* "lexer.pyx":44
+/* "lexer.pyx":25
  *         self.buffer_idx = 0
  * 
  *     cdef cbool scan_next_line(self, string& line) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -4053,7 +4061,7 @@ static bool __pyx_f_5lexer_5Lexer_scan_next_line(struct __pyx_obj_5lexer_Lexer *
   int __pyx_clineno = 0;
   PyGILState_STATE __pyx_gilstate_save;
 
-  /* "lexer.pyx":50
+  /* "lexer.pyx":31
  *         Returns True if a line was successfully read, or False if EOF is reached.
  *         """
  *         if self.pos >= self.content.size():             # <<<<<<<<<<<<<<
@@ -4063,7 +4071,7 @@ static bool __pyx_f_5lexer_5Lexer_scan_next_line(struct __pyx_obj_5lexer_Lexer *
   __pyx_t_1 = (__pyx_v_self->pos >= __pyx_v_self->content.size());
   if (__pyx_t_1) {
 
-    /* "lexer.pyx":51
+    /* "lexer.pyx":32
  *         """
  *         if self.pos >= self.content.size():
  *             return False             # <<<<<<<<<<<<<<
@@ -4073,7 +4081,7 @@ static bool __pyx_f_5lexer_5Lexer_scan_next_line(struct __pyx_obj_5lexer_Lexer *
     __pyx_r = 0;
     goto __pyx_L0;
 
-    /* "lexer.pyx":50
+    /* "lexer.pyx":31
  *         Returns True if a line was successfully read, or False if EOF is reached.
  *         """
  *         if self.pos >= self.content.size():             # <<<<<<<<<<<<<<
@@ -4082,7 +4090,7 @@ static bool __pyx_f_5lexer_5Lexer_scan_next_line(struct __pyx_obj_5lexer_Lexer *
 */
   }
 
-  /* "lexer.pyx":53
+  /* "lexer.pyx":34
  *             return False
  * 
  *         cdef size_t next_newline = self.content.find(b'\n', self.pos)             # <<<<<<<<<<<<<<
@@ -4091,7 +4099,7 @@ static bool __pyx_f_5lexer_5Lexer_scan_next_line(struct __pyx_obj_5lexer_Lexer *
 */
   __pyx_v_next_newline = __pyx_v_self->content.find(__pyx_k_, __pyx_v_self->pos);
 
-  /* "lexer.pyx":55
+  /* "lexer.pyx":36
  *         cdef size_t next_newline = self.content.find(b'\n', self.pos)
  * 
  *         if next_newline == npos:             # <<<<<<<<<<<<<<
@@ -4101,7 +4109,7 @@ static bool __pyx_f_5lexer_5Lexer_scan_next_line(struct __pyx_obj_5lexer_Lexer *
   __pyx_t_1 = (__pyx_v_next_newline == std::string::npos);
   if (__pyx_t_1) {
 
-    /* "lexer.pyx":56
+    /* "lexer.pyx":37
  * 
  *         if next_newline == npos:
  *             line = self.content.substr(self.pos)             # <<<<<<<<<<<<<<
@@ -4114,11 +4122,11 @@ static bool __pyx_f_5lexer_5Lexer_scan_next_line(struct __pyx_obj_5lexer_Lexer *
       PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
       __Pyx_CppExn2PyErr();
       __Pyx_PyGILState_Release(__pyx_gilstate_save);
-      __PYX_ERR(0, 56, __pyx_L1_error)
+      __PYX_ERR(0, 37, __pyx_L1_error)
     }
     __pyx_v_line = __pyx_t_2;
 
-    /* "lexer.pyx":57
+    /* "lexer.pyx":38
  *         if next_newline == npos:
  *             line = self.content.substr(self.pos)
  *             self.pos = self.content.size()             # <<<<<<<<<<<<<<
@@ -4127,7 +4135,7 @@ static bool __pyx_f_5lexer_5Lexer_scan_next_line(struct __pyx_obj_5lexer_Lexer *
 */
     __pyx_v_self->pos = __pyx_v_self->content.size();
 
-    /* "lexer.pyx":55
+    /* "lexer.pyx":36
  *         cdef size_t next_newline = self.content.find(b'\n', self.pos)
  * 
  *         if next_newline == npos:             # <<<<<<<<<<<<<<
@@ -4137,7 +4145,7 @@ static bool __pyx_f_5lexer_5Lexer_scan_next_line(struct __pyx_obj_5lexer_Lexer *
     goto __pyx_L4;
   }
 
-  /* "lexer.pyx":59
+  /* "lexer.pyx":40
  *             self.pos = self.content.size()
  *         else:
  *             line = self.content.substr(self.pos, next_newline - self.pos)             # <<<<<<<<<<<<<<
@@ -4151,11 +4159,11 @@ static bool __pyx_f_5lexer_5Lexer_scan_next_line(struct __pyx_obj_5lexer_Lexer *
       PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
       __Pyx_CppExn2PyErr();
       __Pyx_PyGILState_Release(__pyx_gilstate_save);
-      __PYX_ERR(0, 59, __pyx_L1_error)
+      __PYX_ERR(0, 40, __pyx_L1_error)
     }
     __pyx_v_line = __pyx_t_2;
 
-    /* "lexer.pyx":60
+    /* "lexer.pyx":41
  *         else:
  *             line = self.content.substr(self.pos, next_newline - self.pos)
  *             self.pos = next_newline + 1             # <<<<<<<<<<<<<<
@@ -4166,7 +4174,7 @@ static bool __pyx_f_5lexer_5Lexer_scan_next_line(struct __pyx_obj_5lexer_Lexer *
   }
   __pyx_L4:;
 
-  /* "lexer.pyx":63
+  /* "lexer.pyx":44
  * 
  *         # Handle CRLF (\r\n)
  *         if not line.empty() and line.back() == b'\r':             # <<<<<<<<<<<<<<
@@ -4184,7 +4192,7 @@ static bool __pyx_f_5lexer_5Lexer_scan_next_line(struct __pyx_obj_5lexer_Lexer *
   __pyx_L6_bool_binop_done:;
   if (__pyx_t_1) {
 
-    /* "lexer.pyx":64
+    /* "lexer.pyx":45
  *         # Handle CRLF (\r\n)
  *         if not line.empty() and line.back() == b'\r':
  *             line.pop_back()             # <<<<<<<<<<<<<<
@@ -4193,7 +4201,7 @@ static bool __pyx_f_5lexer_5Lexer_scan_next_line(struct __pyx_obj_5lexer_Lexer *
 */
     __pyx_v_line.pop_back();
 
-    /* "lexer.pyx":63
+    /* "lexer.pyx":44
  * 
  *         # Handle CRLF (\r\n)
  *         if not line.empty() and line.back() == b'\r':             # <<<<<<<<<<<<<<
@@ -4202,7 +4210,7 @@ static bool __pyx_f_5lexer_5Lexer_scan_next_line(struct __pyx_obj_5lexer_Lexer *
 */
   }
 
-  /* "lexer.pyx":66
+  /* "lexer.pyx":47
  *             line.pop_back()
  * 
  *         self.line_num += 1             # <<<<<<<<<<<<<<
@@ -4211,7 +4219,7 @@ static bool __pyx_f_5lexer_5Lexer_scan_next_line(struct __pyx_obj_5lexer_Lexer *
 */
   __pyx_v_self->line_num = (__pyx_v_self->line_num + 1);
 
-  /* "lexer.pyx":67
+  /* "lexer.pyx":48
  * 
  *         self.line_num += 1
  *         return True             # <<<<<<<<<<<<<<
@@ -4221,7 +4229,7 @@ static bool __pyx_f_5lexer_5Lexer_scan_next_line(struct __pyx_obj_5lexer_Lexer *
   __pyx_r = 1;
   goto __pyx_L0;
 
-  /* "lexer.pyx":44
+  /* "lexer.pyx":25
  *         self.buffer_idx = 0
  * 
  *     cdef cbool scan_next_line(self, string& line) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -4239,7 +4247,7 @@ static bool __pyx_f_5lexer_5Lexer_scan_next_line(struct __pyx_obj_5lexer_Lexer *
   return __pyx_r;
 }
 
-/* "lexer.pyx":69
+/* "lexer.pyx":50
  *         return True
  * 
  *     cdef Token next_token(self) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -4254,7 +4262,7 @@ static struct __pyx_t_5lexer_Token __pyx_f_5lexer_5Lexer_next_token(struct __pyx
   struct __pyx_t_5lexer_Token __pyx_r;
   int __pyx_t_1;
 
-  /* "lexer.pyx":78
+  /* "lexer.pyx":59
  * 
  *         # If there is a remaining token in the buffer
  *         if self.buffer_idx < self.buffer.size():             # <<<<<<<<<<<<<<
@@ -4264,7 +4272,7 @@ static struct __pyx_t_5lexer_Token __pyx_f_5lexer_5Lexer_next_token(struct __pyx
   __pyx_t_1 = (__pyx_v_self->buffer_idx < __pyx_v_self->buffer.size());
   if (__pyx_t_1) {
 
-    /* "lexer.pyx":79
+    /* "lexer.pyx":60
  *         # If there is a remaining token in the buffer
  *         if self.buffer_idx < self.buffer.size():
  *             tok = self.buffer[self.buffer_idx]             # <<<<<<<<<<<<<<
@@ -4273,7 +4281,7 @@ static struct __pyx_t_5lexer_Token __pyx_f_5lexer_5Lexer_next_token(struct __pyx
 */
     __pyx_v_tok = (__pyx_v_self->buffer[__pyx_v_self->buffer_idx]);
 
-    /* "lexer.pyx":80
+    /* "lexer.pyx":61
  *         if self.buffer_idx < self.buffer.size():
  *             tok = self.buffer[self.buffer_idx]
  *             self.buffer_idx += 1             # <<<<<<<<<<<<<<
@@ -4282,7 +4290,7 @@ static struct __pyx_t_5lexer_Token __pyx_f_5lexer_5Lexer_next_token(struct __pyx
 */
     __pyx_v_self->buffer_idx = (__pyx_v_self->buffer_idx + 1);
 
-    /* "lexer.pyx":81
+    /* "lexer.pyx":62
  *             tok = self.buffer[self.buffer_idx]
  *             self.buffer_idx += 1
  *             return tok             # <<<<<<<<<<<<<<
@@ -4292,7 +4300,7 @@ static struct __pyx_t_5lexer_Token __pyx_f_5lexer_5Lexer_next_token(struct __pyx
     __pyx_r = __pyx_v_tok;
     goto __pyx_L0;
 
-    /* "lexer.pyx":78
+    /* "lexer.pyx":59
  * 
  *         # If there is a remaining token in the buffer
  *         if self.buffer_idx < self.buffer.size():             # <<<<<<<<<<<<<<
@@ -4301,7 +4309,7 @@ static struct __pyx_t_5lexer_Token __pyx_f_5lexer_5Lexer_next_token(struct __pyx
 */
   }
 
-  /* "lexer.pyx":84
+  /* "lexer.pyx":65
  * 
  *         # Clear buffer
  *         self.buffer.clear()             # <<<<<<<<<<<<<<
@@ -4310,7 +4318,7 @@ static struct __pyx_t_5lexer_Token __pyx_f_5lexer_5Lexer_next_token(struct __pyx
 */
   __pyx_v_self->buffer.clear();
 
-  /* "lexer.pyx":85
+  /* "lexer.pyx":66
  *         # Clear buffer
  *         self.buffer.clear()
  *         self.buffer_idx = 0             # <<<<<<<<<<<<<<
@@ -4319,7 +4327,7 @@ static struct __pyx_t_5lexer_Token __pyx_f_5lexer_5Lexer_next_token(struct __pyx
 */
   __pyx_v_self->buffer_idx = 0;
 
-  /* "lexer.pyx":88
+  /* "lexer.pyx":69
  * 
  *         # Read next line
  *         while True:             # <<<<<<<<<<<<<<
@@ -4328,7 +4336,7 @@ static struct __pyx_t_5lexer_Token __pyx_f_5lexer_5Lexer_next_token(struct __pyx
 */
   while (1) {
 
-    /* "lexer.pyx":89
+    /* "lexer.pyx":70
  *         # Read next line
  *         while True:
  *             has_more_lines = self.scan_next_line(line)             # <<<<<<<<<<<<<<
@@ -4337,7 +4345,7 @@ static struct __pyx_t_5lexer_Token __pyx_f_5lexer_5Lexer_next_token(struct __pyx
 */
     __pyx_v_has_more_lines = ((struct __pyx_vtabstruct_5lexer_Lexer *)__pyx_v_self->__pyx_vtab)->scan_next_line(__pyx_v_self, __pyx_v_line);
 
-    /* "lexer.pyx":91
+    /* "lexer.pyx":72
  *             has_more_lines = self.scan_next_line(line)
  * 
  *             if not has_more_lines:             # <<<<<<<<<<<<<<
@@ -4347,7 +4355,7 @@ static struct __pyx_t_5lexer_Token __pyx_f_5lexer_5Lexer_next_token(struct __pyx
     __pyx_t_1 = (!(__pyx_v_has_more_lines != 0));
     if (__pyx_t_1) {
 
-      /* "lexer.pyx":92
+      /* "lexer.pyx":73
  * 
  *             if not has_more_lines:
  *                 break             # <<<<<<<<<<<<<<
@@ -4356,7 +4364,7 @@ static struct __pyx_t_5lexer_Token __pyx_f_5lexer_5Lexer_next_token(struct __pyx
 */
       goto __pyx_L5_break;
 
-      /* "lexer.pyx":91
+      /* "lexer.pyx":72
  *             has_more_lines = self.scan_next_line(line)
  * 
  *             if not has_more_lines:             # <<<<<<<<<<<<<<
@@ -4365,7 +4373,7 @@ static struct __pyx_t_5lexer_Token __pyx_f_5lexer_5Lexer_next_token(struct __pyx
 */
     }
 
-    /* "lexer.pyx":94
+    /* "lexer.pyx":75
  *                 break
  * 
  *             self.tokenize_line(line)             # <<<<<<<<<<<<<<
@@ -4374,7 +4382,7 @@ static struct __pyx_t_5lexer_Token __pyx_f_5lexer_5Lexer_next_token(struct __pyx
 */
     ((struct __pyx_vtabstruct_5lexer_Lexer *)__pyx_v_self->__pyx_vtab)->tokenize_line(__pyx_v_self, __pyx_v_line);
 
-    /* "lexer.pyx":97
+    /* "lexer.pyx":78
  * 
  *             # If tokens were generated, return first one and move pointer
  *             if self.buffer.size() > 0:             # <<<<<<<<<<<<<<
@@ -4384,7 +4392,7 @@ static struct __pyx_t_5lexer_Token __pyx_f_5lexer_5Lexer_next_token(struct __pyx
     __pyx_t_1 = (__pyx_v_self->buffer.size() > 0);
     if (__pyx_t_1) {
 
-      /* "lexer.pyx":98
+      /* "lexer.pyx":79
  *             # If tokens were generated, return first one and move pointer
  *             if self.buffer.size() > 0:
  *                 tok = self.buffer[0]             # <<<<<<<<<<<<<<
@@ -4393,7 +4401,7 @@ static struct __pyx_t_5lexer_Token __pyx_f_5lexer_5Lexer_next_token(struct __pyx
 */
       __pyx_v_tok = (__pyx_v_self->buffer[0]);
 
-      /* "lexer.pyx":99
+      /* "lexer.pyx":80
  *             if self.buffer.size() > 0:
  *                 tok = self.buffer[0]
  *                 self.buffer_idx = 1             # <<<<<<<<<<<<<<
@@ -4402,7 +4410,7 @@ static struct __pyx_t_5lexer_Token __pyx_f_5lexer_5Lexer_next_token(struct __pyx
 */
       __pyx_v_self->buffer_idx = 1;
 
-      /* "lexer.pyx":100
+      /* "lexer.pyx":81
  *                 tok = self.buffer[0]
  *                 self.buffer_idx = 1
  *                 return tok             # <<<<<<<<<<<<<<
@@ -4412,7 +4420,7 @@ static struct __pyx_t_5lexer_Token __pyx_f_5lexer_5Lexer_next_token(struct __pyx
       __pyx_r = __pyx_v_tok;
       goto __pyx_L0;
 
-      /* "lexer.pyx":97
+      /* "lexer.pyx":78
  * 
  *             # If tokens were generated, return first one and move pointer
  *             if self.buffer.size() > 0:             # <<<<<<<<<<<<<<
@@ -4423,7 +4431,7 @@ static struct __pyx_t_5lexer_Token __pyx_f_5lexer_5Lexer_next_token(struct __pyx
   }
   __pyx_L5_break:;
 
-  /* "lexer.pyx":103
+  /* "lexer.pyx":84
  * 
  *         # Return EOF if no more content
  *         tok.type = TOKEN_EOF             # <<<<<<<<<<<<<<
@@ -4432,7 +4440,7 @@ static struct __pyx_t_5lexer_Token __pyx_f_5lexer_5Lexer_next_token(struct __pyx
 */
   __pyx_v_tok.type = __pyx_e_5lexer_TOKEN_EOF;
 
-  /* "lexer.pyx":104
+  /* "lexer.pyx":85
  *         # Return EOF if no more content
  *         tok.type = TOKEN_EOF
  *         tok.value.clear()  # instead of tok.value = b""             # <<<<<<<<<<<<<<
@@ -4441,7 +4449,7 @@ static struct __pyx_t_5lexer_Token __pyx_f_5lexer_5Lexer_next_token(struct __pyx
 */
   __pyx_v_tok.value.clear();
 
-  /* "lexer.pyx":105
+  /* "lexer.pyx":86
  *         tok.type = TOKEN_EOF
  *         tok.value.clear()  # instead of tok.value = b""
  *         return tok             # <<<<<<<<<<<<<<
@@ -4451,7 +4459,7 @@ static struct __pyx_t_5lexer_Token __pyx_f_5lexer_5Lexer_next_token(struct __pyx
   __pyx_r = __pyx_v_tok;
   goto __pyx_L0;
 
-  /* "lexer.pyx":69
+  /* "lexer.pyx":50
  *         return True
  * 
  *     cdef Token next_token(self) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -4464,7 +4472,7 @@ static struct __pyx_t_5lexer_Token __pyx_f_5lexer_5Lexer_next_token(struct __pyx
   return __pyx_r;
 }
 
-/* "lexer.pyx":107
+/* "lexer.pyx":88
  *         return tok
  * 
  *     cdef void tokenize_line(self, const string& line) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -4487,7 +4495,7 @@ static void __pyx_f_5lexer_5Lexer_tokenize_line(struct __pyx_obj_5lexer_Lexer *_
   int __pyx_clineno = 0;
   PyGILState_STATE __pyx_gilstate_save;
 
-  /* "lexer.pyx":109
+  /* "lexer.pyx":90
  *     cdef void tokenize_line(self, const string& line) noexcept nogil:
  *         # Find position of comment
  *         cdef size_t limit = line.find(b'!')             # <<<<<<<<<<<<<<
@@ -4496,7 +4504,7 @@ static void __pyx_f_5lexer_5Lexer_tokenize_line(struct __pyx_obj_5lexer_Lexer *_
 */
   __pyx_v_limit = __pyx_v_line.find(__pyx_k__2);
 
-  /* "lexer.pyx":112
+  /* "lexer.pyx":93
  * 
  *         # If no comment is found, set limit to end of string
  *         if limit == npos:             # <<<<<<<<<<<<<<
@@ -4506,7 +4514,7 @@ static void __pyx_f_5lexer_5Lexer_tokenize_line(struct __pyx_obj_5lexer_Lexer *_
   __pyx_t_1 = (__pyx_v_limit == std::string::npos);
   if (__pyx_t_1) {
 
-    /* "lexer.pyx":113
+    /* "lexer.pyx":94
  *         # If no comment is found, set limit to end of string
  *         if limit == npos:
  *             limit = line.size()             # <<<<<<<<<<<<<<
@@ -4515,7 +4523,7 @@ static void __pyx_f_5lexer_5Lexer_tokenize_line(struct __pyx_obj_5lexer_Lexer *_
 */
     __pyx_v_limit = __pyx_v_line.size();
 
-    /* "lexer.pyx":112
+    /* "lexer.pyx":93
  * 
  *         # If no comment is found, set limit to end of string
  *         if limit == npos:             # <<<<<<<<<<<<<<
@@ -4524,7 +4532,7 @@ static void __pyx_f_5lexer_5Lexer_tokenize_line(struct __pyx_obj_5lexer_Lexer *_
 */
   }
 
-  /* "lexer.pyx":116
+  /* "lexer.pyx":97
  * 
  *         cdef string text_builder  # empty string
  *         cdef size_t byte_idx = 0             # <<<<<<<<<<<<<<
@@ -4533,7 +4541,7 @@ static void __pyx_f_5lexer_5Lexer_tokenize_line(struct __pyx_obj_5lexer_Lexer *_
 */
   __pyx_v_byte_idx = 0;
 
-  /* "lexer.pyx":122
+  /* "lexer.pyx":103
  * 
  *         # Iterate up to the `limit`
  *         while byte_idx < limit:             # <<<<<<<<<<<<<<
@@ -4544,7 +4552,7 @@ static void __pyx_f_5lexer_5Lexer_tokenize_line(struct __pyx_obj_5lexer_Lexer *_
     __pyx_t_1 = (__pyx_v_byte_idx < __pyx_v_limit);
     if (!__pyx_t_1) break;
 
-    /* "lexer.pyx":123
+    /* "lexer.pyx":104
  *         # Iterate up to the `limit`
  *         while byte_idx < limit:
  *             c = line[byte_idx]             # <<<<<<<<<<<<<<
@@ -4553,7 +4561,7 @@ static void __pyx_f_5lexer_5Lexer_tokenize_line(struct __pyx_obj_5lexer_Lexer *_
 */
     __pyx_v_c = (__pyx_v_line[__pyx_v_byte_idx]);
 
-    /* "lexer.pyx":125
+    /* "lexer.pyx":106
  *             c = line[byte_idx]
  * 
  *             if self.is_idd and c == b'\\':             # <<<<<<<<<<<<<<
@@ -4571,7 +4579,7 @@ static void __pyx_f_5lexer_5Lexer_tokenize_line(struct __pyx_obj_5lexer_Lexer *_
     __pyx_L7_bool_binop_done:;
     if (__pyx_t_1) {
 
-      /* "lexer.pyx":126
+      /* "lexer.pyx":107
  * 
  *             if self.is_idd and c == b'\\':
  *                 self.push_text_token(text_builder)             # <<<<<<<<<<<<<<
@@ -4580,7 +4588,7 @@ static void __pyx_f_5lexer_5Lexer_tokenize_line(struct __pyx_obj_5lexer_Lexer *_
 */
       ((struct __pyx_vtabstruct_5lexer_Lexer *)__pyx_v_self->__pyx_vtab)->push_text_token(__pyx_v_self, __pyx_v_text_builder);
 
-      /* "lexer.pyx":127
+      /* "lexer.pyx":108
  *             if self.is_idd and c == b'\\':
  *                 self.push_text_token(text_builder)
  *                 remainder = line.substr(byte_idx, limit - byte_idx)             # <<<<<<<<<<<<<<
@@ -4593,11 +4601,11 @@ static void __pyx_f_5lexer_5Lexer_tokenize_line(struct __pyx_obj_5lexer_Lexer *_
         PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
         __Pyx_CppExn2PyErr();
         __Pyx_PyGILState_Release(__pyx_gilstate_save);
-        __PYX_ERR(0, 127, __pyx_L1_error)
+        __PYX_ERR(0, 108, __pyx_L1_error)
       }
       __pyx_v_remainder = __PYX_STD_MOVE_IF_SUPPORTED(__pyx_t_3);
 
-      /* "lexer.pyx":128
+      /* "lexer.pyx":109
  *                 self.push_text_token(text_builder)
  *                 remainder = line.substr(byte_idx, limit - byte_idx)
  *                 remainder = trim_string(remainder)             # <<<<<<<<<<<<<<
@@ -4606,7 +4614,7 @@ static void __pyx_f_5lexer_5Lexer_tokenize_line(struct __pyx_obj_5lexer_Lexer *_
 */
       __pyx_v_remainder = __pyx_f_5utils_trim_string(__pyx_v_remainder);
 
-      /* "lexer.pyx":129
+      /* "lexer.pyx":110
  *                 remainder = line.substr(byte_idx, limit - byte_idx)
  *                 remainder = trim_string(remainder)
  *                 if not remainder.empty():             # <<<<<<<<<<<<<<
@@ -4616,7 +4624,7 @@ static void __pyx_f_5lexer_5Lexer_tokenize_line(struct __pyx_obj_5lexer_Lexer *_
       __pyx_t_1 = (!__pyx_v_remainder.empty());
       if (__pyx_t_1) {
 
-        /* "lexer.pyx":130
+        /* "lexer.pyx":111
  *                 remainder = trim_string(remainder)
  *                 if not remainder.empty():
  *                     self.buffer.push_back(Token(TOKEN_TEXT, remainder))             # <<<<<<<<<<<<<<
@@ -4631,10 +4639,10 @@ static void __pyx_f_5lexer_5Lexer_tokenize_line(struct __pyx_obj_5lexer_Lexer *_
           PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
           __Pyx_CppExn2PyErr();
           __Pyx_PyGILState_Release(__pyx_gilstate_save);
-          __PYX_ERR(0, 130, __pyx_L1_error)
+          __PYX_ERR(0, 111, __pyx_L1_error)
         }
 
-        /* "lexer.pyx":129
+        /* "lexer.pyx":110
  *                 remainder = line.substr(byte_idx, limit - byte_idx)
  *                 remainder = trim_string(remainder)
  *                 if not remainder.empty():             # <<<<<<<<<<<<<<
@@ -4643,7 +4651,7 @@ static void __pyx_f_5lexer_5Lexer_tokenize_line(struct __pyx_obj_5lexer_Lexer *_
 */
       }
 
-      /* "lexer.pyx":131
+      /* "lexer.pyx":112
  *                 if not remainder.empty():
  *                     self.buffer.push_back(Token(TOKEN_TEXT, remainder))
  *                 break             # <<<<<<<<<<<<<<
@@ -4652,7 +4660,7 @@ static void __pyx_f_5lexer_5Lexer_tokenize_line(struct __pyx_obj_5lexer_Lexer *_
 */
       goto __pyx_L5_break;
 
-      /* "lexer.pyx":125
+      /* "lexer.pyx":106
  *             c = line[byte_idx]
  * 
  *             if self.is_idd and c == b'\\':             # <<<<<<<<<<<<<<
@@ -4661,7 +4669,7 @@ static void __pyx_f_5lexer_5Lexer_tokenize_line(struct __pyx_obj_5lexer_Lexer *_
 */
     }
 
-    /* "lexer.pyx":133
+    /* "lexer.pyx":114
  *                 break
  * 
  *             if c == b',':             # <<<<<<<<<<<<<<
@@ -4671,7 +4679,7 @@ static void __pyx_f_5lexer_5Lexer_tokenize_line(struct __pyx_obj_5lexer_Lexer *_
     switch (__pyx_v_c) {
       case ',':
 
-      /* "lexer.pyx":134
+      /* "lexer.pyx":115
  * 
  *             if c == b',':
  *                 self.push_text_token(text_builder)             # <<<<<<<<<<<<<<
@@ -4680,7 +4688,7 @@ static void __pyx_f_5lexer_5Lexer_tokenize_line(struct __pyx_obj_5lexer_Lexer *_
 */
       ((struct __pyx_vtabstruct_5lexer_Lexer *)__pyx_v_self->__pyx_vtab)->push_text_token(__pyx_v_self, __pyx_v_text_builder);
 
-      /* "lexer.pyx":135
+      /* "lexer.pyx":116
  *             if c == b',':
  *                 self.push_text_token(text_builder)
  *                 self.buffer.push_back(Token(TOKEN_COMMA, <const char*>b","))             # <<<<<<<<<<<<<<
@@ -4695,10 +4703,10 @@ static void __pyx_f_5lexer_5Lexer_tokenize_line(struct __pyx_obj_5lexer_Lexer *_
         PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
         __Pyx_CppExn2PyErr();
         __Pyx_PyGILState_Release(__pyx_gilstate_save);
-        __PYX_ERR(0, 135, __pyx_L1_error)
+        __PYX_ERR(0, 116, __pyx_L1_error)
       }
 
-      /* "lexer.pyx":133
+      /* "lexer.pyx":114
  *                 break
  * 
  *             if c == b',':             # <<<<<<<<<<<<<<
@@ -4708,7 +4716,7 @@ static void __pyx_f_5lexer_5Lexer_tokenize_line(struct __pyx_obj_5lexer_Lexer *_
       break;
       case ';':
 
-      /* "lexer.pyx":137
+      /* "lexer.pyx":118
  *                 self.buffer.push_back(Token(TOKEN_COMMA, <const char*>b","))
  *             elif c == b';':
  *                 self.push_text_token(text_builder)             # <<<<<<<<<<<<<<
@@ -4717,7 +4725,7 @@ static void __pyx_f_5lexer_5Lexer_tokenize_line(struct __pyx_obj_5lexer_Lexer *_
 */
       ((struct __pyx_vtabstruct_5lexer_Lexer *)__pyx_v_self->__pyx_vtab)->push_text_token(__pyx_v_self, __pyx_v_text_builder);
 
-      /* "lexer.pyx":138
+      /* "lexer.pyx":119
  *             elif c == b';':
  *                 self.push_text_token(text_builder)
  *                 self.buffer.push_back(Token(TOKEN_SEMICOLON, <const char*>b";"))             # <<<<<<<<<<<<<<
@@ -4732,10 +4740,10 @@ static void __pyx_f_5lexer_5Lexer_tokenize_line(struct __pyx_obj_5lexer_Lexer *_
         PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
         __Pyx_CppExn2PyErr();
         __Pyx_PyGILState_Release(__pyx_gilstate_save);
-        __PYX_ERR(0, 138, __pyx_L1_error)
+        __PYX_ERR(0, 119, __pyx_L1_error)
       }
 
-      /* "lexer.pyx":136
+      /* "lexer.pyx":117
  *                 self.push_text_token(text_builder)
  *                 self.buffer.push_back(Token(TOKEN_COMMA, <const char*>b","))
  *             elif c == b';':             # <<<<<<<<<<<<<<
@@ -4745,7 +4753,7 @@ static void __pyx_f_5lexer_5Lexer_tokenize_line(struct __pyx_obj_5lexer_Lexer *_
       break;
       default:
 
-      /* "lexer.pyx":140
+      /* "lexer.pyx":121
  *                 self.buffer.push_back(Token(TOKEN_SEMICOLON, <const char*>b";"))
  *             else:
  *                 text_builder.push_back(c)             # <<<<<<<<<<<<<<
@@ -4758,12 +4766,12 @@ static void __pyx_f_5lexer_5Lexer_tokenize_line(struct __pyx_obj_5lexer_Lexer *_
         PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
         __Pyx_CppExn2PyErr();
         __Pyx_PyGILState_Release(__pyx_gilstate_save);
-        __PYX_ERR(0, 140, __pyx_L1_error)
+        __PYX_ERR(0, 121, __pyx_L1_error)
       }
       break;
     }
 
-    /* "lexer.pyx":142
+    /* "lexer.pyx":123
  *                 text_builder.push_back(c)
  * 
  *             byte_idx += 1             # <<<<<<<<<<<<<<
@@ -4774,7 +4782,7 @@ static void __pyx_f_5lexer_5Lexer_tokenize_line(struct __pyx_obj_5lexer_Lexer *_
   }
   __pyx_L5_break:;
 
-  /* "lexer.pyx":145
+  /* "lexer.pyx":126
  * 
  *         # Final flush
  *         self.push_text_token(text_builder)             # <<<<<<<<<<<<<<
@@ -4783,7 +4791,7 @@ static void __pyx_f_5lexer_5Lexer_tokenize_line(struct __pyx_obj_5lexer_Lexer *_
 */
   ((struct __pyx_vtabstruct_5lexer_Lexer *)__pyx_v_self->__pyx_vtab)->push_text_token(__pyx_v_self, __pyx_v_text_builder);
 
-  /* "lexer.pyx":107
+  /* "lexer.pyx":88
  *         return tok
  * 
  *     cdef void tokenize_line(self, const string& line) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -4800,7 +4808,7 @@ static void __pyx_f_5lexer_5Lexer_tokenize_line(struct __pyx_obj_5lexer_Lexer *_
   __pyx_L0:;
 }
 
-/* "lexer.pyx":147
+/* "lexer.pyx":128
  *         self.push_text_token(text_builder)
  * 
  *     cdef void push_text_token(self, string& builder) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -4817,7 +4825,7 @@ static void __pyx_f_5lexer_5Lexer_push_text_token(struct __pyx_obj_5lexer_Lexer 
   int __pyx_clineno = 0;
   PyGILState_STATE __pyx_gilstate_save;
 
-  /* "lexer.pyx":151
+  /* "lexer.pyx":132
  *         Trims and pushes to buffer using reference.
  *         """
  *         cdef string trimmed = trim_string(builder)             # <<<<<<<<<<<<<<
@@ -4826,7 +4834,7 @@ static void __pyx_f_5lexer_5Lexer_push_text_token(struct __pyx_obj_5lexer_Lexer 
 */
   __pyx_v_trimmed = __pyx_f_5utils_trim_string(__pyx_v_builder);
 
-  /* "lexer.pyx":152
+  /* "lexer.pyx":133
  *         """
  *         cdef string trimmed = trim_string(builder)
  *         if not trimmed.empty():             # <<<<<<<<<<<<<<
@@ -4836,7 +4844,7 @@ static void __pyx_f_5lexer_5Lexer_push_text_token(struct __pyx_obj_5lexer_Lexer 
   __pyx_t_1 = (!__pyx_v_trimmed.empty());
   if (__pyx_t_1) {
 
-    /* "lexer.pyx":153
+    /* "lexer.pyx":134
  *         cdef string trimmed = trim_string(builder)
  *         if not trimmed.empty():
  *             self.buffer.push_back(Token(TOKEN_TEXT, trimmed))             # <<<<<<<<<<<<<<
@@ -4851,10 +4859,10 @@ static void __pyx_f_5lexer_5Lexer_push_text_token(struct __pyx_obj_5lexer_Lexer 
       PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
       __Pyx_CppExn2PyErr();
       __Pyx_PyGILState_Release(__pyx_gilstate_save);
-      __PYX_ERR(0, 153, __pyx_L1_error)
+      __PYX_ERR(0, 134, __pyx_L1_error)
     }
 
-    /* "lexer.pyx":152
+    /* "lexer.pyx":133
  *         """
  *         cdef string trimmed = trim_string(builder)
  *         if not trimmed.empty():             # <<<<<<<<<<<<<<
@@ -4863,7 +4871,7 @@ static void __pyx_f_5lexer_5Lexer_push_text_token(struct __pyx_obj_5lexer_Lexer 
 */
   }
 
-  /* "lexer.pyx":155
+  /* "lexer.pyx":136
  *             self.buffer.push_back(Token(TOKEN_TEXT, trimmed))
  *         # Clear builder to reuse its allocated capacity
  *         builder.clear()             # <<<<<<<<<<<<<<
@@ -4872,7 +4880,7 @@ static void __pyx_f_5lexer_5Lexer_push_text_token(struct __pyx_obj_5lexer_Lexer 
 */
   __pyx_v_builder.clear();
 
-  /* "lexer.pyx":147
+  /* "lexer.pyx":128
  *         self.push_text_token(text_builder)
  * 
  *     cdef void push_text_token(self, string& builder) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -4889,7 +4897,7 @@ static void __pyx_f_5lexer_5Lexer_push_text_token(struct __pyx_obj_5lexer_Lexer 
   __pyx_L0:;
 }
 
-/* "lexer.pyx":157
+/* "lexer.pyx":138
  *         builder.clear()
  * 
  *     def test(self):             # <<<<<<<<<<<<<<
@@ -4954,19 +4962,19 @@ static PyObject *__pyx_pf_5lexer_5Lexer_2test(struct __pyx_obj_5lexer_Lexer *__p
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("test", 0);
 
-  /* "lexer.pyx":159
+  /* "lexer.pyx":140
  *     def test(self):
  *         cdef Token tok
  *         tokens = []             # <<<<<<<<<<<<<<
  * 
  *         while True:
 */
-  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 159, __pyx_L1_error)
+  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 140, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_tokens = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "lexer.pyx":161
+  /* "lexer.pyx":142
  *         tokens = []
  * 
  *         while True:             # <<<<<<<<<<<<<<
@@ -4975,7 +4983,7 @@ static PyObject *__pyx_pf_5lexer_5Lexer_2test(struct __pyx_obj_5lexer_Lexer *__p
 */
   while (1) {
 
-    /* "lexer.pyx":162
+    /* "lexer.pyx":143
  * 
  *         while True:
  *             with nogil:             # <<<<<<<<<<<<<<
@@ -4988,7 +4996,7 @@ static PyObject *__pyx_pf_5lexer_5Lexer_2test(struct __pyx_obj_5lexer_Lexer *__p
         __Pyx_FastGIL_Remember();
         /*try:*/ {
 
-          /* "lexer.pyx":163
+          /* "lexer.pyx":144
  *         while True:
  *             with nogil:
  *                 tok = self.next_token()             # <<<<<<<<<<<<<<
@@ -4998,7 +5006,7 @@ static PyObject *__pyx_pf_5lexer_5Lexer_2test(struct __pyx_obj_5lexer_Lexer *__p
           __pyx_v_tok = ((struct __pyx_vtabstruct_5lexer_Lexer *)__pyx_v_self->__pyx_vtab)->next_token(__pyx_v_self);
         }
 
-        /* "lexer.pyx":162
+        /* "lexer.pyx":143
  * 
  *         while True:
  *             with nogil:             # <<<<<<<<<<<<<<
@@ -5015,29 +5023,29 @@ static PyObject *__pyx_pf_5lexer_5Lexer_2test(struct __pyx_obj_5lexer_Lexer *__p
         }
     }
 
-    /* "lexer.pyx":166
+    /* "lexer.pyx":147
  * 
  *             # Convert C++ struct the Python Tuple
  *             tokens.append((tok.type, tok.value.decode("utf-8")))             # <<<<<<<<<<<<<<
  * 
  *             if tok.type == TOKEN_EOF:
 */
-    __pyx_t_1 = __Pyx_PyLong_From_enum____pyx_t_5lexer_TokenType(__pyx_v_tok.type); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 166, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyLong_From_enum____pyx_t_5lexer_TokenType(__pyx_v_tok.type); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 147, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = __Pyx_decode_cpp_string(__pyx_v_tok.value, 0, PY_SSIZE_T_MAX, NULL, NULL, PyUnicode_DecodeUTF8); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 166, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_decode_cpp_string(__pyx_v_tok.value, 0, PY_SSIZE_T_MAX, NULL, NULL, PyUnicode_DecodeUTF8); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 147, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 166, __pyx_L1_error)
+    __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 147, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_GIVEREF(__pyx_t_1);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_1) != (0)) __PYX_ERR(0, 166, __pyx_L1_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_1) != (0)) __PYX_ERR(0, 147, __pyx_L1_error);
     __Pyx_GIVEREF(__pyx_t_2);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_2) != (0)) __PYX_ERR(0, 166, __pyx_L1_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_2) != (0)) __PYX_ERR(0, 147, __pyx_L1_error);
     __pyx_t_1 = 0;
     __pyx_t_2 = 0;
-    __pyx_t_4 = __Pyx_PyList_Append(__pyx_v_tokens, __pyx_t_3); if (unlikely(__pyx_t_4 == ((int)-1))) __PYX_ERR(0, 166, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyList_Append(__pyx_v_tokens, __pyx_t_3); if (unlikely(__pyx_t_4 == ((int)-1))) __PYX_ERR(0, 147, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-    /* "lexer.pyx":168
+    /* "lexer.pyx":149
  *             tokens.append((tok.type, tok.value.decode("utf-8")))
  * 
  *             if tok.type == TOKEN_EOF:             # <<<<<<<<<<<<<<
@@ -5047,7 +5055,7 @@ static PyObject *__pyx_pf_5lexer_5Lexer_2test(struct __pyx_obj_5lexer_Lexer *__p
     __pyx_t_5 = (__pyx_v_tok.type == __pyx_e_5lexer_TOKEN_EOF);
     if (__pyx_t_5) {
 
-      /* "lexer.pyx":169
+      /* "lexer.pyx":150
  * 
  *             if tok.type == TOKEN_EOF:
  *                 break             # <<<<<<<<<<<<<<
@@ -5056,7 +5064,7 @@ static PyObject *__pyx_pf_5lexer_5Lexer_2test(struct __pyx_obj_5lexer_Lexer *__p
 */
       goto __pyx_L4_break;
 
-      /* "lexer.pyx":168
+      /* "lexer.pyx":149
  *             tokens.append((tok.type, tok.value.decode("utf-8")))
  * 
  *             if tok.type == TOKEN_EOF:             # <<<<<<<<<<<<<<
@@ -5067,7 +5075,7 @@ static PyObject *__pyx_pf_5lexer_5Lexer_2test(struct __pyx_obj_5lexer_Lexer *__p
   }
   __pyx_L4_break:;
 
-  /* "lexer.pyx":171
+  /* "lexer.pyx":152
  *                 break
  * 
  *         return tokens             # <<<<<<<<<<<<<<
@@ -5077,7 +5085,7 @@ static PyObject *__pyx_pf_5lexer_5Lexer_2test(struct __pyx_obj_5lexer_Lexer *__p
   __pyx_r = __pyx_v_tokens;
   goto __pyx_L0;
 
-  /* "lexer.pyx":157
+  /* "lexer.pyx":138
  *         builder.clear()
  * 
  *     def test(self):             # <<<<<<<<<<<<<<
@@ -6052,15 +6060,15 @@ static int __Pyx_modinit_type_init_code(__pyx_mstatetype *__pyx_mstate) {
   __pyx_vtable_5lexer_Lexer.tokenize_line = (void (*)(struct __pyx_obj_5lexer_Lexer *, std::string const &))__pyx_f_5lexer_5Lexer_tokenize_line;
   __pyx_vtable_5lexer_Lexer.push_text_token = (void (*)(struct __pyx_obj_5lexer_Lexer *, std::string &))__pyx_f_5lexer_5Lexer_push_text_token;
   #if CYTHON_USE_TYPE_SPECS
-  __pyx_mstate->__pyx_ptype_5lexer_Lexer = (PyTypeObject *) __Pyx_PyType_FromModuleAndSpec(__pyx_m, &__pyx_type_5lexer_Lexer_spec, NULL); if (unlikely(!__pyx_mstate->__pyx_ptype_5lexer_Lexer)) __PYX_ERR(0, 20, __pyx_L1_error)
-  if (__Pyx_fix_up_extension_type_from_spec(&__pyx_type_5lexer_Lexer_spec, __pyx_mstate->__pyx_ptype_5lexer_Lexer) < (0)) __PYX_ERR(0, 20, __pyx_L1_error)
+  __pyx_mstate->__pyx_ptype_5lexer_Lexer = (PyTypeObject *) __Pyx_PyType_FromModuleAndSpec(__pyx_m, &__pyx_type_5lexer_Lexer_spec, NULL); if (unlikely(!__pyx_mstate->__pyx_ptype_5lexer_Lexer)) __PYX_ERR(0, 9, __pyx_L1_error)
+  if (__Pyx_fix_up_extension_type_from_spec(&__pyx_type_5lexer_Lexer_spec, __pyx_mstate->__pyx_ptype_5lexer_Lexer) < (0)) __PYX_ERR(0, 9, __pyx_L1_error)
   #else
   __pyx_mstate->__pyx_ptype_5lexer_Lexer = &__pyx_type_5lexer_Lexer;
   #endif
   #if !CYTHON_COMPILING_IN_LIMITED_API
   #endif
   #if !CYTHON_USE_TYPE_SPECS
-  if (__Pyx_PyType_Ready(__pyx_mstate->__pyx_ptype_5lexer_Lexer) < (0)) __PYX_ERR(0, 20, __pyx_L1_error)
+  if (__Pyx_PyType_Ready(__pyx_mstate->__pyx_ptype_5lexer_Lexer) < (0)) __PYX_ERR(0, 9, __pyx_L1_error)
   #endif
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount((PyObject*)__pyx_mstate->__pyx_ptype_5lexer_Lexer);
@@ -6072,7 +6080,7 @@ static int __Pyx_modinit_type_init_code(__pyx_mstatetype *__pyx_mstate) {
   #endif
   #if CYTHON_UPDATE_DESCRIPTOR_DOC
   {
-    PyObject *wrapper = PyObject_GetAttrString((PyObject *)__pyx_mstate->__pyx_ptype_5lexer_Lexer, "__init__"); if (unlikely(!wrapper)) __PYX_ERR(0, 20, __pyx_L1_error)
+    PyObject *wrapper = PyObject_GetAttrString((PyObject *)__pyx_mstate->__pyx_ptype_5lexer_Lexer, "__init__"); if (unlikely(!wrapper)) __PYX_ERR(0, 9, __pyx_L1_error)
     if (__Pyx_IS_TYPE(wrapper, &PyWrapperDescr_Type)) {
       __pyx_wrapperbase_5lexer_5Lexer___init__ = *((PyWrapperDescrObject *)wrapper)->d_base;
       __pyx_wrapperbase_5lexer_5Lexer___init__.doc = __pyx_doc_5lexer_5Lexer___init__;
@@ -6080,10 +6088,10 @@ static int __Pyx_modinit_type_init_code(__pyx_mstatetype *__pyx_mstate) {
     }
   }
   #endif
-  if (__Pyx_SetVtable(__pyx_mstate->__pyx_ptype_5lexer_Lexer, __pyx_vtabptr_5lexer_Lexer) < (0)) __PYX_ERR(0, 20, __pyx_L1_error)
-  if (__Pyx_MergeVtables(__pyx_mstate->__pyx_ptype_5lexer_Lexer) < (0)) __PYX_ERR(0, 20, __pyx_L1_error)
-  if (PyObject_SetAttr(__pyx_m, __pyx_mstate_global->__pyx_n_u_Lexer, (PyObject *) __pyx_mstate->__pyx_ptype_5lexer_Lexer) < (0)) __PYX_ERR(0, 20, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject *) __pyx_mstate->__pyx_ptype_5lexer_Lexer) < (0)) __PYX_ERR(0, 20, __pyx_L1_error)
+  if (__Pyx_SetVtable(__pyx_mstate->__pyx_ptype_5lexer_Lexer, __pyx_vtabptr_5lexer_Lexer) < (0)) __PYX_ERR(0, 9, __pyx_L1_error)
+  if (__Pyx_MergeVtables(__pyx_mstate->__pyx_ptype_5lexer_Lexer) < (0)) __PYX_ERR(0, 9, __pyx_L1_error)
+  if (PyObject_SetAttr(__pyx_m, __pyx_mstate_global->__pyx_n_u_Lexer, (PyObject *) __pyx_mstate->__pyx_ptype_5lexer_Lexer) < (0)) __PYX_ERR(0, 9, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject *) __pyx_mstate->__pyx_ptype_5lexer_Lexer) < (0)) __PYX_ERR(0, 9, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -6412,19 +6420,19 @@ __Pyx_RefNannySetupContext("PyInit_lexer", 0);
   if (unlikely((__Pyx_modinit_function_import_code(__pyx_mstate) < 0))) __PYX_ERR(0, 1, __pyx_L1_error)
   /*--- Execution code ---*/
 
-  /* "lexer.pyx":157
+  /* "lexer.pyx":138
  *         builder.clear()
  * 
  *     def test(self):             # <<<<<<<<<<<<<<
  *         cdef Token tok
  *         tokens = []
 */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_5lexer_5Lexer_3test, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_Lexer_test, NULL, __pyx_mstate_global->__pyx_n_u_lexer, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[0])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 157, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_5lexer_5Lexer_3test, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_Lexer_test, NULL, __pyx_mstate_global->__pyx_n_u_lexer, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[0])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 138, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_2);
   #endif
-  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_5lexer_Lexer, __pyx_mstate_global->__pyx_n_u_test, __pyx_t_2) < (0)) __PYX_ERR(0, 157, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_5lexer_Lexer, __pyx_mstate_global->__pyx_n_u_test, __pyx_t_2) < (0)) __PYX_ERR(0, 138, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "(tree fragment)":1
@@ -6665,7 +6673,7 @@ static int __Pyx_CreateCodeObjects(__pyx_mstatetype *__pyx_mstate) {
   PyObject* tuple_dedup_map = PyDict_New();
   if (unlikely(!tuple_dedup_map)) return -1;
   {
-    const __Pyx_PyCode_New_function_description descr = {1, 0, 0, 3, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 157};
+    const __Pyx_PyCode_New_function_description descr = {1, 0, 0, 3, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 138};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_tok, __pyx_mstate->__pyx_n_u_tokens};
     __pyx_mstate_global->__pyx_codeobj_tab[0] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_lexer_pyx, __pyx_mstate->__pyx_n_u_test, __pyx_mstate->__pyx_kp_b_iso88591_A_d_Q_3gS_gQa_s_1_q, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[0])) goto bad;
   }

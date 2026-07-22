@@ -6,26 +6,7 @@ from libcpp cimport bool as cbool
 
 from utils cimport trim_string
 
-cdef enum TokenType:
-    TOKEN_TEXT      = 0
-    TOKEN_COMMA     = 1
-    TOKEN_SEMICOLON = 2
-    TOKEN_EOF       = 3
-    TOKEN_ERROR     = 4
-
-cdef struct Token:
-    TokenType type
-    string value
-
 cdef class Lexer:
-    cdef vector[Token] buffer  # temporary storage for tokens
-    cdef size_t buffer_idx  # current index within the token buffer
-
-    cdef int line_num  # current line number (for debugging)
-    cdef cbool is_idd  # for IDD parsing
-
-    cdef string content  # the entire file
-    cdef size_t pos  # current position in content
 
     def __init__(self, bytes file_content, bint is_idd):
         """

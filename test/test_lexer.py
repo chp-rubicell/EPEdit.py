@@ -90,6 +90,20 @@ Zone,
   ! Empty lines and spaces above should be ignored
 """
 
+TOKEN_TYPES = [
+    "TEXT",
+    "COMMA",
+    "SEMICOLON",
+    "EOF",
+    "ERROR",
+]
+
+def print_tokens(tokens):
+    print(f"{'TYPE':<9} | {'VALUE'}")
+    print("-" * 30)
+    for t_type, t_value in tokens:
+        print(f"{TOKEN_TYPES[t_type]:<9} | {repr(t_value)}")
+
 def run_test():
     #? Test IDD
     print("Testing IDD")
@@ -97,11 +111,7 @@ def run_test():
     lexer = Lexer(mock_idd_data, True)
     tokens = lexer.test()
 
-    # Print result
-    print(f"{'TYPE':<5} | {'VALUE'}")
-    print("-" * 30)
-    for t_type, t_value in tokens:
-        print(f"{t_type:<5} | {repr(t_value)}")
+    print_tokens(tokens)
 
     #? Test IDF
     print()
@@ -110,11 +120,7 @@ def run_test():
     lexer = Lexer(mock_idf_data, False)
     tokens = lexer.test()
 
-    # Print result
-    print(f"{'TYPE':<5} | {'VALUE'}")
-    print("-" * 30)
-    for t_type, t_value in tokens:
-        print(f"{t_type:<5} | {repr(t_value)}")
+    print_tokens(tokens)
 
 if __name__ == "__main__":
     run_test()
