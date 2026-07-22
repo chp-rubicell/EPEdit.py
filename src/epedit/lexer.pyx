@@ -1,6 +1,6 @@
 # distutils: language = c++
 
-from libcpp.string cimport string
+from libcpp.string cimport string, npos
 from libcpp.vector cimport vector
 from libcpp cimport bool as cbool
 
@@ -52,7 +52,7 @@ cdef class Lexer:
 
         cdef size_t next_newline = self.content.find(b'\n', self.pos)
 
-        if next_newline == string.npos:
+        if next_newline == npos:
             line = self.content.substr(self.pos)
             self.pos = self.content.size()
         else:
@@ -109,7 +109,7 @@ cdef class Lexer:
         cdef size_t limit = line.find(b'!')
 
         # If no comment is found, set limit to end of string
-        if limit == string.npos:
+        if limit == npos:
             limit = line.size()
 
         cdef string text_builder = b""

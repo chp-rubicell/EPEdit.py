@@ -1,6 +1,6 @@
 # distutils: language = c++
 
-from libcpp.string cimport string
+from libcpp.string cimport string, npos
 from libcpp cimport bool as cbool
 
 cdef extern from "<string>" namespace "std":
@@ -10,7 +10,7 @@ cdef extern from "<string>" namespace "std":
 cdef string trim_string(const string& s) nogil:
     """Remove leading and trailing whitespace from a C++ string."""
     cdef size_t first = s.find_first_not_of(b" \t\r\n")
-    if first == string.npos:
+    if first == npos:
         return b""
     cdef size_t last = s.find_last_not_of(b" \t\r\n")
     return s.substr(first, (last - first + 1))

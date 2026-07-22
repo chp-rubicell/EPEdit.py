@@ -3,13 +3,13 @@ from setuptools import setup, Extension
 from Cython.Build import cythonize
 
 if len(sys.argv) == 1:
-    sys.argv.extend(['build_ext', '--inplace'])
+    sys.argv.extend(["build_ext", "--inplace"])
 # python setup.py build_ext --inplace 실행하는 것과 동일
 
 # Define extensions separately to give the C++ file special instructions
 ext_modules = [
-    Extension('utils', sources=['utils.pyx'], language='c++'),
-    Extension('idd', sources=['idd.pyx'], language='c++'),
+    Extension("*", sources=["utils.pyx"], language="c++"),
+    Extension("*", sources=["lexer.pyx"], language="c++"),
 ]
 
 setup(
