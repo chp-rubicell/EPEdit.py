@@ -390,13 +390,10 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 };
 static struct __pyx_vtabstruct_5lexer_Lexer *__pyx_vtabptr_5lexer_Lexer;
 </pre><pre class="cython line score-0">&#xA0;<span class="">010</span>: </pre>
-<pre class="cython line score-38" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">011</span>:     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">bytes</span> <span class="n">file_content</span><span class="p">,</span> <span class="nb">bint</span> <span class="n">is_idd</span><span class="p">):</span></pre>
-<pre class='cython code score-38 '>/* Python wrapper */
+<pre class="cython line score-0">&#xA0;<span class="">011</span>:     <span class="c"># Accepts raw bytes of the entire file.</span></pre>
+<pre class="cython line score-37" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">012</span>:     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">bytes</span> <span class="n">file_content</span><span class="p">,</span> <span class="nb">bint</span> <span class="n">is_idd</span><span class="p">):</span></pre>
+<pre class='cython code score-37 '>/* Python wrapper */
 static int __pyx_pw_5lexer_5Lexer_1__init__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-<span class='py_macro_api'>PyDoc_STRVAR</span>(__pyx_doc_5lexer_5Lexer___init__, "\n        Accepts raw bytes of the entire file.\n        ");
-#if CYTHON_UPDATE_DESCRIPTOR_DOC
-struct wrapperbase __pyx_wrapperbase_5lexer_5Lexer___init__;
-#endif
 static int __pyx_pw_5lexer_5Lexer_1__init__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_file_content = 0;
   int __pyx_v_is_idd;
@@ -415,39 +412,39 @@ static int __pyx_pw_5lexer_5Lexer_1__init__(PyObject *__pyx_v_self, PyObject *__
     PyObject ** const __pyx_pyargnames[] = {&amp;__pyx_mstate_global-&gt;__pyx_n_u_file_content,&amp;__pyx_mstate_global-&gt;__pyx_n_u_is_idd,0};
   PyObject* values[2] = {0,0};
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? <span class='pyx_c_api'>__Pyx_NumKwargs_VARARGS</span>(__pyx_kwds) : 0;
-    if (unlikely(__pyx_kwds_len) &lt; 0) <span class='error_goto'>__PYX_ERR(0, 11, __pyx_L3_error)</span>
+    if (unlikely(__pyx_kwds_len) &lt; 0) <span class='error_goto'>__PYX_ERR(0, 12, __pyx_L3_error)</span>
     if (__pyx_kwds_len &gt; 0) {
       switch (__pyx_nargs) {
         case  2:
         values[1] = <span class='pyx_c_api'>__Pyx_ArgRef_VARARGS</span>(__pyx_args, 1);
-        if (!CYTHON_ASSUME_SAFE_MACROS &amp;&amp; unlikely(!values[1])) <span class='error_goto'>__PYX_ERR(0, 11, __pyx_L3_error)</span>
+        if (!CYTHON_ASSUME_SAFE_MACROS &amp;&amp; unlikely(!values[1])) <span class='error_goto'>__PYX_ERR(0, 12, __pyx_L3_error)</span>
         CYTHON_FALLTHROUGH;
         case  1:
         values[0] = <span class='pyx_c_api'>__Pyx_ArgRef_VARARGS</span>(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS &amp;&amp; unlikely(!values[0])) <span class='error_goto'>__PYX_ERR(0, 11, __pyx_L3_error)</span>
+        if (!CYTHON_ASSUME_SAFE_MACROS &amp;&amp; unlikely(!values[0])) <span class='error_goto'>__PYX_ERR(0, 12, __pyx_L3_error)</span>
         CYTHON_FALLTHROUGH;
         case  0: break;
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (<span class='pyx_c_api'>__Pyx_ParseKeywords</span>(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "__init__", 0) &lt; (0)) <span class='error_goto'>__PYX_ERR(0, 11, __pyx_L3_error)</span>
+      if (<span class='pyx_c_api'>__Pyx_ParseKeywords</span>(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "__init__", 0) &lt; (0)) <span class='error_goto'>__PYX_ERR(0, 12, __pyx_L3_error)</span>
       for (Py_ssize_t i = __pyx_nargs; i &lt; 2; i++) {
-        if (unlikely(!values[i])) { <span class='pyx_c_api'>__Pyx_RaiseArgtupleInvalid</span>("__init__", 1, 2, 2, i); <span class='error_goto'>__PYX_ERR(0, 11, __pyx_L3_error)</span> }
+        if (unlikely(!values[i])) { <span class='pyx_c_api'>__Pyx_RaiseArgtupleInvalid</span>("__init__", 1, 2, 2, i); <span class='error_goto'>__PYX_ERR(0, 12, __pyx_L3_error)</span> }
       }
     } else if (unlikely(__pyx_nargs != 2)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = <span class='pyx_c_api'>__Pyx_ArgRef_VARARGS</span>(__pyx_args, 0);
-      if (!CYTHON_ASSUME_SAFE_MACROS &amp;&amp; unlikely(!values[0])) <span class='error_goto'>__PYX_ERR(0, 11, __pyx_L3_error)</span>
+      if (!CYTHON_ASSUME_SAFE_MACROS &amp;&amp; unlikely(!values[0])) <span class='error_goto'>__PYX_ERR(0, 12, __pyx_L3_error)</span>
       values[1] = <span class='pyx_c_api'>__Pyx_ArgRef_VARARGS</span>(__pyx_args, 1);
-      if (!CYTHON_ASSUME_SAFE_MACROS &amp;&amp; unlikely(!values[1])) <span class='error_goto'>__PYX_ERR(0, 11, __pyx_L3_error)</span>
+      if (!CYTHON_ASSUME_SAFE_MACROS &amp;&amp; unlikely(!values[1])) <span class='error_goto'>__PYX_ERR(0, 12, __pyx_L3_error)</span>
     }
     __pyx_v_file_content = ((PyObject*)values[0]);
-    __pyx_v_is_idd = <span class='pyx_c_api'>__Pyx_PyObject_IsTrue</span>(values[1]); if (unlikely((__pyx_v_is_idd == (int)-1) &amp;&amp; <span class='py_c_api'>PyErr_Occurred</span>())) <span class='error_goto'>__PYX_ERR(0, 11, __pyx_L3_error)</span>
+    __pyx_v_is_idd = <span class='pyx_c_api'>__Pyx_PyObject_IsTrue</span>(values[1]); if (unlikely((__pyx_v_is_idd == (int)-1) &amp;&amp; <span class='py_c_api'>PyErr_Occurred</span>())) <span class='error_goto'>__PYX_ERR(0, 12, __pyx_L3_error)</span>
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  <span class='pyx_c_api'>__Pyx_RaiseArgtupleInvalid</span>("__init__", 1, 2, 2, __pyx_nargs); <span class='error_goto'>__PYX_ERR(0, 11, __pyx_L3_error)</span>
+  <span class='pyx_c_api'>__Pyx_RaiseArgtupleInvalid</span>("__init__", 1, 2, 2, __pyx_nargs); <span class='error_goto'>__PYX_ERR(0, 12, __pyx_L3_error)</span>
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -458,7 +455,7 @@ static int __pyx_pw_5lexer_5Lexer_1__init__(PyObject *__pyx_v_self, PyObject *__
   <span class='refnanny'>__Pyx_RefNannyFinishContext</span>();
   return -1;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!<span class='pyx_c_api'>__Pyx_ArgTypeTest</span>(((PyObject *)__pyx_v_file_content), (&amp;PyBytes_Type), 1, "file_content", 1))) <span class='error_goto'>__PYX_ERR(0, 11, __pyx_L1_error)</span>
+  if (unlikely(!<span class='pyx_c_api'>__Pyx_ArgTypeTest</span>(((PyObject *)__pyx_v_file_content), (&amp;PyBytes_Type), 1, "file_content", 1))) <span class='error_goto'>__PYX_ERR(0, 12, __pyx_L1_error)</span>
   __pyx_r = __pyx_pf_5lexer_5Lexer___init__(((struct __pyx_obj_5lexer_Lexer *)__pyx_v_self), __pyx_v_file_content, __pyx_v_is_idd);
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
@@ -493,27 +490,27 @@ static int __pyx_pf_5lexer_5Lexer___init__(struct __pyx_obj_5lexer_Lexer *__pyx_
   __pyx_L0:;
   return __pyx_r;
 }
-</pre><pre class="cython line score-0">&#xA0;<span class="">012</span>: <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span></pre>
-<pre class="cython line score-0">&#xA0;<span class="">013</span>: <span class="sd">        Accepts raw bytes of the entire file.</span></pre>
-<pre class="cython line score-0">&#xA0;<span class="">014</span>: <span class="sd">        &quot;&quot;&quot;</span></pre>
-<pre class="cython line score-0">&#xA0;<span class="">015</span>:         <span class="c"># Python &#39;bytes&#39; is automatically converted to C++ std::string</span></pre>
-<pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">016</span>:         <span class="bp">self</span><span class="o">.</span><span class="n">content</span> <span class="o">=</span> <span class="n">file_content</span></pre>
-<pre class='cython code score-0 '>  __pyx_t_1 = __pyx_convert_string_from_py_6libcpp_6string_std__in_string(__pyx_v_file_content);<span class='error_goto'> if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 16, __pyx_L1_error)</span>
+</pre><pre class="cython line score-0">&#xA0;<span class="">013</span>:         <span class="c"># Python &#39;bytes&#39; is automatically converted to C++ std::string</span></pre>
+<pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">014</span>:         <span class="bp">self</span><span class="o">.</span><span class="n">content</span> <span class="o">=</span> <span class="n">file_content</span></pre>
+<pre class='cython code score-0 '>  __pyx_t_1 = __pyx_convert_string_from_py_6libcpp_6string_std__in_string(__pyx_v_file_content);<span class='error_goto'> if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 14, __pyx_L1_error)</span>
   __pyx_v_self-&gt;content = __PYX_STD_MOVE_IF_SUPPORTED(__pyx_t_1);
-</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">017</span>:         <span class="bp">self</span><span class="o">.</span><span class="n">pos</span> <span class="o">=</span> <span class="mf">0</span></pre>
+</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">015</span>:         <span class="bp">self</span><span class="o">.</span><span class="n">pos</span> <span class="o">=</span> <span class="mf">0</span></pre>
 <pre class='cython code score-0 '>  __pyx_v_self-&gt;pos = 0;
-</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">018</span>:         <span class="bp">self</span><span class="o">.</span><span class="n">line_num</span> <span class="o">=</span> <span class="mf">0</span></pre>
+</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">016</span>:         <span class="bp">self</span><span class="o">.</span><span class="n">line_num</span> <span class="o">=</span> <span class="mf">0</span></pre>
 <pre class='cython code score-0 '>  __pyx_v_self-&gt;line_num = 0;
-</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">019</span>:         <span class="bp">self</span><span class="o">.</span><span class="n">is_idd</span> <span class="o">=</span> <span class="n">is_idd</span></pre>
+</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">017</span>:         <span class="bp">self</span><span class="o">.</span><span class="n">is_idd</span> <span class="o">=</span> <span class="n">is_idd</span></pre>
 <pre class='cython code score-0 '>  __pyx_v_self-&gt;is_idd = __pyx_v_is_idd;
-</pre><pre class="cython line score-0">&#xA0;<span class="">020</span>: </pre>
-<pre class="cython line score-0">&#xA0;<span class="">021</span>:         <span class="c"># Initialize buffer and index pointer</span></pre>
-<pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">022</span>:         <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span></pre>
+</pre><pre class="cython line score-0">&#xA0;<span class="">018</span>: </pre>
+<pre class="cython line score-0">&#xA0;<span class="">019</span>:         <span class="c"># Initialize buffer and index pointer</span></pre>
+<pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">020</span>:         <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span></pre>
 <pre class='cython code score-0 '>  __pyx_v_self-&gt;buffer.clear();
-</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">023</span>:         <span class="bp">self</span><span class="o">.</span><span class="n">buffer_idx</span> <span class="o">=</span> <span class="mf">0</span></pre>
+</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">021</span>:         <span class="bp">self</span><span class="o">.</span><span class="n">buffer_idx</span> <span class="o">=</span> <span class="mf">0</span></pre>
 <pre class='cython code score-0 '>  __pyx_v_self-&gt;buffer_idx = 0;
-</pre><pre class="cython line score-0">&#xA0;<span class="">024</span>: </pre>
-<pre class="cython line score-6" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">025</span>:     <span class="k">cdef</span> <span class="kt">cbool</span> <span class="nf">scan_next_line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="o">&amp;</span> <span class="n">line</span><span class="p">)</span> <span class="n">noexcept</span> <span class="k">nogil</span><span class="p">:</span></pre>
+</pre><pre class="cython line score-0">&#xA0;<span class="">022</span>: </pre>
+<pre class="cython line score-0">&#xA0;<span class="">023</span>:     <span class="c"># Extracts next line from content and stores it in the provided `line` reference.</span></pre>
+<pre class="cython line score-0">&#xA0;<span class="">024</span>:     <span class="c"># Advances `pos` past the next `\n` character.</span></pre>
+<pre class="cython line score-0">&#xA0;<span class="">025</span>:     <span class="c"># Returns True if a line was successfully read, or False if EOF is reached.</span></pre>
+<pre class="cython line score-6" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">026</span>:     <span class="k">cdef</span> <span class="kt">cbool</span> <span class="nf">scan_next_line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="o">&amp;</span> <span class="n">line</span><span class="p">)</span> <span class="n">noexcept</span> <span class="k">nogil</span><span class="p">:</span></pre>
 <pre class='cython code score-6 '>static bool __pyx_f_5lexer_5Lexer_scan_next_line(struct __pyx_obj_5lexer_Lexer *__pyx_v_self, std::string &amp;__pyx_v_line) {
   size_t __pyx_v_next_newline;
   bool __pyx_r;
@@ -527,43 +524,38 @@ static int __pyx_pf_5lexer_5Lexer___init__(struct __pyx_obj_5lexer_Lexer *__pyx_
   __pyx_L0:;
   return __pyx_r;
 }
-</pre><pre class="cython line score-0">&#xA0;<span class="">026</span>: <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span></pre>
-<pre class="cython line score-0">&#xA0;<span class="">027</span>: <span class="sd">        Extracts next line from content and stores it in the provided `line` reference.</span></pre>
-<pre class="cython line score-0">&#xA0;<span class="">028</span>: <span class="sd">        Advances `pos` past the next `\n` character.</span></pre>
-<pre class="cython line score-0">&#xA0;<span class="">029</span>: <span class="sd">        Returns True if a line was successfully read, or False if EOF is reached.</span></pre>
-<pre class="cython line score-0">&#xA0;<span class="">030</span>: <span class="sd">        &quot;&quot;&quot;</span></pre>
-<pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">031</span>:         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pos</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">size</span><span class="p">():</span></pre>
+</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">027</span>:         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pos</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">size</span><span class="p">():</span></pre>
 <pre class='cython code score-0 '>  __pyx_t_1 = (__pyx_v_self-&gt;pos &gt;= __pyx_v_self-&gt;content.size());
   if (__pyx_t_1) {
 /* … */
   }
-</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">032</span>:             <span class="k">return</span> <span class="bp">False</span></pre>
+</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">028</span>:             <span class="k">return</span> <span class="bp">False</span></pre>
 <pre class='cython code score-0 '>    __pyx_r = 0;
     goto __pyx_L0;
-</pre><pre class="cython line score-0">&#xA0;<span class="">033</span>: </pre>
-<pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">034</span>:         <span class="k">cdef</span> <span class="kt">size_t</span> <span class="nf">next_newline</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">b</span><span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pos</span><span class="p">)</span></pre>
-<pre class='cython code score-0 '>  __pyx_v_next_newline = __pyx_v_self-&gt;content.find(__pyx_k_, __pyx_v_self-&gt;pos);
-</pre><pre class="cython line score-0">&#xA0;<span class="">035</span>: </pre>
-<pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">036</span>:         <span class="k">if</span> <span class="n">next_newline</span> <span class="o">==</span> <span class="n">npos</span><span class="p">:</span></pre>
+</pre><pre class="cython line score-0">&#xA0;<span class="">029</span>: </pre>
+<pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">030</span>:         <span class="k">cdef</span> <span class="kt">size_t</span> <span class="nf">next_newline</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">b</span><span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pos</span><span class="p">)</span></pre>
+<pre class='cython code score-0 '>  __pyx_v_next_newline = __pyx_v_self-&gt;content.find(__pyx_k__3, __pyx_v_self-&gt;pos);
+</pre><pre class="cython line score-0">&#xA0;<span class="">031</span>: </pre>
+<pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">032</span>:         <span class="k">if</span> <span class="n">next_newline</span> <span class="o">==</span> <span class="n">npos</span><span class="p">:</span></pre>
 <pre class='cython code score-0 '>  __pyx_t_1 = (__pyx_v_next_newline == std::string::npos);
   if (__pyx_t_1) {
 /* … */
     goto __pyx_L4;
   }
-</pre><pre class="cython line score-4" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">037</span>:             <span class="n">line</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">substr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pos</span><span class="p">)</span></pre>
+</pre><pre class="cython line score-4" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">033</span>:             <span class="n">line</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">substr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pos</span><span class="p">)</span></pre>
 <pre class='cython code score-4 '>    try {
       __pyx_t_2 = __pyx_v_self-&gt;content.substr(__pyx_v_self-&gt;pos);
     } catch(...) {
       PyGILState_STATE __pyx_gilstate_save = <span class='pyx_c_api'>__Pyx_PyGILState_Ensure</span>();
       __Pyx_CppExn2PyErr();
       <span class='pyx_c_api'>__Pyx_PyGILState_Release</span>(__pyx_gilstate_save);
-      <span class='error_goto'>__PYX_ERR(0, 37, __pyx_L1_error)</span>
+      <span class='error_goto'>__PYX_ERR(0, 33, __pyx_L1_error)</span>
     }
     __pyx_v_line = __pyx_t_2;
-</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">038</span>:             <span class="bp">self</span><span class="o">.</span><span class="n">pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">size</span><span class="p">()</span></pre>
+</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">034</span>:             <span class="bp">self</span><span class="o">.</span><span class="n">pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">size</span><span class="p">()</span></pre>
 <pre class='cython code score-0 '>    __pyx_v_self-&gt;pos = __pyx_v_self-&gt;content.size();
-</pre><pre class="cython line score-0">&#xA0;<span class="">039</span>:         <span class="k">else</span><span class="p">:</span></pre>
-<pre class="cython line score-4" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">040</span>:             <span class="n">line</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">substr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pos</span><span class="p">,</span> <span class="n">next_newline</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">pos</span><span class="p">)</span></pre>
+</pre><pre class="cython line score-0">&#xA0;<span class="">035</span>:         <span class="k">else</span><span class="p">:</span></pre>
+<pre class="cython line score-4" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">036</span>:             <span class="n">line</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">substr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pos</span><span class="p">,</span> <span class="n">next_newline</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">pos</span><span class="p">)</span></pre>
 <pre class='cython code score-4 '>  /*else*/ {
     try {
       __pyx_t_2 = __pyx_v_self-&gt;content.substr(__pyx_v_self-&gt;pos, (__pyx_v_next_newline - __pyx_v_self-&gt;pos));
@@ -571,16 +563,16 @@ static int __pyx_pf_5lexer_5Lexer___init__(struct __pyx_obj_5lexer_Lexer *__pyx_
       PyGILState_STATE __pyx_gilstate_save = <span class='pyx_c_api'>__Pyx_PyGILState_Ensure</span>();
       __Pyx_CppExn2PyErr();
       <span class='pyx_c_api'>__Pyx_PyGILState_Release</span>(__pyx_gilstate_save);
-      <span class='error_goto'>__PYX_ERR(0, 40, __pyx_L1_error)</span>
+      <span class='error_goto'>__PYX_ERR(0, 36, __pyx_L1_error)</span>
     }
     __pyx_v_line = __pyx_t_2;
-</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">041</span>:             <span class="bp">self</span><span class="o">.</span><span class="n">pos</span> <span class="o">=</span> <span class="n">next_newline</span> <span class="o">+</span> <span class="mf">1</span></pre>
+</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">037</span>:             <span class="bp">self</span><span class="o">.</span><span class="n">pos</span> <span class="o">=</span> <span class="n">next_newline</span> <span class="o">+</span> <span class="mf">1</span></pre>
 <pre class='cython code score-0 '>    __pyx_v_self-&gt;pos = (__pyx_v_next_newline + 1);
   }
   __pyx_L4:;
-</pre><pre class="cython line score-0">&#xA0;<span class="">042</span>: </pre>
-<pre class="cython line score-0">&#xA0;<span class="">043</span>:         <span class="c"># Handle CRLF (\r\n)</span></pre>
-<pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">044</span>:         <span class="k">if</span> <span class="ow">not</span> <span class="n">line</span><span class="o">.</span><span class="n">empty</span><span class="p">()</span> <span class="ow">and</span> <span class="n">line</span><span class="o">.</span><span class="n">back</span><span class="p">()</span> <span class="o">==</span> <span class="n">b</span><span class="s">&#39;</span><span class="se">\r</span><span class="s">&#39;</span><span class="p">:</span></pre>
+</pre><pre class="cython line score-0">&#xA0;<span class="">038</span>: </pre>
+<pre class="cython line score-0">&#xA0;<span class="">039</span>:         <span class="c"># Handle CRLF (\r\n)</span></pre>
+<pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">040</span>:         <span class="k">if</span> <span class="ow">not</span> <span class="n">line</span><span class="o">.</span><span class="n">empty</span><span class="p">()</span> <span class="ow">and</span> <span class="n">line</span><span class="o">.</span><span class="n">back</span><span class="p">()</span> <span class="o">==</span> <span class="n">b</span><span class="s">&#39;</span><span class="se">\r</span><span class="s">&#39;</span><span class="p">:</span></pre>
 <pre class='cython code score-0 '>  __pyx_t_3 = (!__pyx_v_line.empty());
   if (__pyx_t_3) {
   } else {
@@ -593,16 +585,17 @@ static int __pyx_pf_5lexer_5Lexer___init__(struct __pyx_obj_5lexer_Lexer *__pyx_
   if (__pyx_t_1) {
 /* … */
   }
-</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">045</span>:             <span class="n">line</span><span class="o">.</span><span class="n">pop_back</span><span class="p">()</span></pre>
+</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">041</span>:             <span class="n">line</span><span class="o">.</span><span class="n">pop_back</span><span class="p">()</span></pre>
 <pre class='cython code score-0 '>    __pyx_v_line.pop_back();
-</pre><pre class="cython line score-0">&#xA0;<span class="">046</span>: </pre>
-<pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">047</span>:         <span class="bp">self</span><span class="o">.</span><span class="n">line_num</span> <span class="o">+=</span> <span class="mf">1</span></pre>
+</pre><pre class="cython line score-0">&#xA0;<span class="">042</span>: </pre>
+<pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">043</span>:         <span class="bp">self</span><span class="o">.</span><span class="n">line_num</span> <span class="o">+=</span> <span class="mf">1</span></pre>
 <pre class='cython code score-0 '>  __pyx_v_self-&gt;line_num = (__pyx_v_self-&gt;line_num + 1);
-</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">048</span>:         <span class="k">return</span> <span class="bp">True</span></pre>
+</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">044</span>:         <span class="k">return</span> <span class="bp">True</span></pre>
 <pre class='cython code score-0 '>  __pyx_r = 1;
   goto __pyx_L0;
-</pre><pre class="cython line score-0">&#xA0;<span class="">049</span>: </pre>
-<pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">050</span>:     <span class="k">cdef</span> <span class="kt">Token</span> <span class="nf">next_token</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="n">noexcept</span> <span class="k">nogil</span><span class="p">:</span></pre>
+</pre><pre class="cython line score-0">&#xA0;<span class="">045</span>: </pre>
+<pre class="cython line score-0">&#xA0;<span class="">046</span>:     <span class="c"># Return next token when parser requests.</span></pre>
+<pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">047</span>:     <span class="k">cdef</span> <span class="kt">Token</span> <span class="nf">next_token</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="n">noexcept</span> <span class="k">nogil</span><span class="p">:</span></pre>
 <pre class='cython code score-0 '>static struct __pyx_t_5lexer_Token __pyx_f_5lexer_5Lexer_next_token(struct __pyx_obj_5lexer_Lexer *__pyx_v_self) {
   struct __pyx_t_5lexer_Token __pyx_v_tok;
   std::string __pyx_v_line;
@@ -613,76 +606,74 @@ static int __pyx_pf_5lexer_5Lexer___init__(struct __pyx_obj_5lexer_Lexer *__pyx_
   __pyx_L0:;
   return __pyx_r;
 }
-</pre><pre class="cython line score-0">&#xA0;<span class="">051</span>: <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span></pre>
-<pre class="cython line score-0">&#xA0;<span class="">052</span>: <span class="sd">        Return next token when parser requests.</span></pre>
-<pre class="cython line score-0">&#xA0;<span class="">053</span>: <span class="sd">        &quot;&quot;&quot;</span></pre>
-<pre class="cython line score-0">&#xA0;<span class="">054</span>:         <span class="k">cdef</span> <span class="kt">Token</span> <span class="nf">tok</span></pre>
-<pre class="cython line score-0">&#xA0;<span class="">055</span>:         <span class="k">cdef</span> <span class="kt">string</span> <span class="nf">line</span></pre>
-<pre class="cython line score-0">&#xA0;<span class="">056</span>:         <span class="k">cdef</span> <span class="kt">cbool</span> <span class="nf">has_more_lines</span></pre>
-<pre class="cython line score-0">&#xA0;<span class="">057</span>: </pre>
-<pre class="cython line score-0">&#xA0;<span class="">058</span>:         <span class="c"># If there is a remaining token in the buffer</span></pre>
-<pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">059</span>:         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">buffer_idx</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="o">.</span><span class="n">size</span><span class="p">():</span></pre>
+</pre><pre class="cython line score-0">&#xA0;<span class="">048</span>:         <span class="k">cdef</span> <span class="kt">Token</span> <span class="nf">tok</span></pre>
+<pre class="cython line score-0">&#xA0;<span class="">049</span>:         <span class="k">cdef</span> <span class="kt">string</span> <span class="nf">line</span></pre>
+<pre class="cython line score-0">&#xA0;<span class="">050</span>:         <span class="k">cdef</span> <span class="kt">cbool</span> <span class="nf">has_more_lines</span></pre>
+<pre class="cython line score-0">&#xA0;<span class="">051</span>: </pre>
+<pre class="cython line score-0">&#xA0;<span class="">052</span>:         <span class="c"># If there is a remaining token in the buffer</span></pre>
+<pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">053</span>:         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">buffer_idx</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="o">.</span><span class="n">size</span><span class="p">():</span></pre>
 <pre class='cython code score-0 '>  __pyx_t_1 = (__pyx_v_self-&gt;buffer_idx &lt; __pyx_v_self-&gt;buffer.size());
   if (__pyx_t_1) {
 /* … */
   }
-</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">060</span>:             <span class="n">tok</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">buffer_idx</span><span class="p">]</span></pre>
+</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">054</span>:             <span class="n">tok</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">buffer_idx</span><span class="p">]</span></pre>
 <pre class='cython code score-0 '>    __pyx_v_tok = (__pyx_v_self-&gt;buffer[__pyx_v_self-&gt;buffer_idx]);
-</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">061</span>:             <span class="bp">self</span><span class="o">.</span><span class="n">buffer_idx</span> <span class="o">+=</span> <span class="mf">1</span></pre>
+</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">055</span>:             <span class="bp">self</span><span class="o">.</span><span class="n">buffer_idx</span> <span class="o">+=</span> <span class="mf">1</span></pre>
 <pre class='cython code score-0 '>    __pyx_v_self-&gt;buffer_idx = (__pyx_v_self-&gt;buffer_idx + 1);
-</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">062</span>:             <span class="k">return</span> <span class="n">tok</span></pre>
+</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">056</span>:             <span class="k">return</span> <span class="n">tok</span></pre>
 <pre class='cython code score-0 '>    __pyx_r = __pyx_v_tok;
     goto __pyx_L0;
-</pre><pre class="cython line score-0">&#xA0;<span class="">063</span>: </pre>
-<pre class="cython line score-0">&#xA0;<span class="">064</span>:         <span class="c"># Clear buffer</span></pre>
-<pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">065</span>:         <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span></pre>
+</pre><pre class="cython line score-0">&#xA0;<span class="">057</span>: </pre>
+<pre class="cython line score-0">&#xA0;<span class="">058</span>:         <span class="c"># Clear buffer</span></pre>
+<pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">059</span>:         <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span></pre>
 <pre class='cython code score-0 '>  __pyx_v_self-&gt;buffer.clear();
-</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">066</span>:         <span class="bp">self</span><span class="o">.</span><span class="n">buffer_idx</span> <span class="o">=</span> <span class="mf">0</span></pre>
+</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">060</span>:         <span class="bp">self</span><span class="o">.</span><span class="n">buffer_idx</span> <span class="o">=</span> <span class="mf">0</span></pre>
 <pre class='cython code score-0 '>  __pyx_v_self-&gt;buffer_idx = 0;
-</pre><pre class="cython line score-0">&#xA0;<span class="">067</span>: </pre>
-<pre class="cython line score-0">&#xA0;<span class="">068</span>:         <span class="c"># Read next line</span></pre>
-<pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">069</span>:         <span class="k">while</span> <span class="bp">True</span><span class="p">:</span></pre>
+</pre><pre class="cython line score-0">&#xA0;<span class="">061</span>: </pre>
+<pre class="cython line score-0">&#xA0;<span class="">062</span>:         <span class="c"># Read next line</span></pre>
+<pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">063</span>:         <span class="k">while</span> <span class="bp">True</span><span class="p">:</span></pre>
 <pre class='cython code score-0 '>  while (1) {
-</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">070</span>:             <span class="n">has_more_lines</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scan_next_line</span><span class="p">(</span><span class="n">line</span><span class="p">)</span></pre>
+</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">064</span>:             <span class="n">has_more_lines</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scan_next_line</span><span class="p">(</span><span class="n">line</span><span class="p">)</span></pre>
 <pre class='cython code score-0 '>    __pyx_v_has_more_lines = ((struct __pyx_vtabstruct_5lexer_Lexer *)__pyx_v_self-&gt;__pyx_vtab)-&gt;scan_next_line(__pyx_v_self, __pyx_v_line);
-</pre><pre class="cython line score-0">&#xA0;<span class="">071</span>: </pre>
-<pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">072</span>:             <span class="k">if</span> <span class="ow">not</span> <span class="n">has_more_lines</span><span class="p">:</span></pre>
+</pre><pre class="cython line score-0">&#xA0;<span class="">065</span>: </pre>
+<pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">066</span>:             <span class="k">if</span> <span class="ow">not</span> <span class="n">has_more_lines</span><span class="p">:</span></pre>
 <pre class='cython code score-0 '>    __pyx_t_1 = (!(__pyx_v_has_more_lines != 0));
     if (__pyx_t_1) {
 /* … */
     }
-</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">073</span>:                 <span class="k">break</span></pre>
+</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">067</span>:                 <span class="k">break</span></pre>
 <pre class='cython code score-0 '>      goto __pyx_L5_break;
-</pre><pre class="cython line score-0">&#xA0;<span class="">074</span>: </pre>
-<pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">075</span>:             <span class="bp">self</span><span class="o">.</span><span class="n">tokenize_line</span><span class="p">(</span><span class="n">line</span><span class="p">)</span></pre>
+</pre><pre class="cython line score-0">&#xA0;<span class="">068</span>: </pre>
+<pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">069</span>:             <span class="bp">self</span><span class="o">.</span><span class="n">tokenize_line</span><span class="p">(</span><span class="n">line</span><span class="p">)</span></pre>
 <pre class='cython code score-0 '>    ((struct __pyx_vtabstruct_5lexer_Lexer *)__pyx_v_self-&gt;__pyx_vtab)-&gt;tokenize_line(__pyx_v_self, __pyx_v_line);
-</pre><pre class="cython line score-0">&#xA0;<span class="">076</span>: </pre>
-<pre class="cython line score-0">&#xA0;<span class="">077</span>:             <span class="c"># If tokens were generated, return first one and move pointer</span></pre>
-<pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">078</span>:             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="o">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">0</span><span class="p">:</span></pre>
+</pre><pre class="cython line score-0">&#xA0;<span class="">070</span>: </pre>
+<pre class="cython line score-0">&#xA0;<span class="">071</span>:             <span class="c"># If tokens were generated, return first one and move pointer</span></pre>
+<pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">072</span>:             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="o">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">0</span><span class="p">:</span></pre>
 <pre class='cython code score-0 '>    __pyx_t_1 = (__pyx_v_self-&gt;buffer.size() &gt; 0);
     if (__pyx_t_1) {
 /* … */
     }
   }
   __pyx_L5_break:;
-</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">079</span>:                 <span class="n">tok</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span></pre>
+</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">073</span>:                 <span class="n">tok</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span></pre>
 <pre class='cython code score-0 '>      __pyx_v_tok = (__pyx_v_self-&gt;buffer[0]);
-</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">080</span>:                 <span class="bp">self</span><span class="o">.</span><span class="n">buffer_idx</span> <span class="o">=</span> <span class="mf">1</span></pre>
+</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">074</span>:                 <span class="bp">self</span><span class="o">.</span><span class="n">buffer_idx</span> <span class="o">=</span> <span class="mf">1</span></pre>
 <pre class='cython code score-0 '>      __pyx_v_self-&gt;buffer_idx = 1;
-</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">081</span>:                 <span class="k">return</span> <span class="n">tok</span></pre>
+</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">075</span>:                 <span class="k">return</span> <span class="n">tok</span></pre>
 <pre class='cython code score-0 '>      __pyx_r = __pyx_v_tok;
       goto __pyx_L0;
-</pre><pre class="cython line score-0">&#xA0;<span class="">082</span>: </pre>
-<pre class="cython line score-0">&#xA0;<span class="">083</span>:         <span class="c"># Return EOF if no more content</span></pre>
-<pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">084</span>:         <span class="n">tok</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="n">TOKEN_EOF</span></pre>
+</pre><pre class="cython line score-0">&#xA0;<span class="">076</span>: </pre>
+<pre class="cython line score-0">&#xA0;<span class="">077</span>:         <span class="c"># Return EOF if no more content</span></pre>
+<pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">078</span>:         <span class="n">tok</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="n">TOKEN_EOF</span></pre>
 <pre class='cython code score-0 '>  __pyx_v_tok.type = __pyx_e_5lexer_TOKEN_EOF;
-</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">085</span>:         <span class="n">tok</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>  <span class="c"># instead of tok.value = b&quot;&quot;</span></pre>
+</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">079</span>:         <span class="n">tok</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>  <span class="c"># instead of tok.value = b&quot;&quot;</span></pre>
 <pre class='cython code score-0 '>  __pyx_v_tok.value.clear();
-</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">086</span>:         <span class="k">return</span> <span class="n">tok</span></pre>
+</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">080</span>:         <span class="k">return</span> <span class="n">tok</span></pre>
 <pre class='cython code score-0 '>  __pyx_r = __pyx_v_tok;
   goto __pyx_L0;
-</pre><pre class="cython line score-0">&#xA0;<span class="">087</span>: </pre>
-<pre class="cython line score-6" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">088</span>:     <span class="k">cdef</span> <span class="kt">void</span> <span class="nf">tokenize_line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">const</span> <span class="n">string</span><span class="o">&amp;</span> <span class="n">line</span><span class="p">)</span> <span class="n">noexcept</span> <span class="k">nogil</span><span class="p">:</span></pre>
+</pre><pre class="cython line score-0">&#xA0;<span class="">081</span>: </pre>
+<pre class="cython line score-0">&#xA0;<span class="">082</span>:     <span class="c"># Read line and split by commas and semicolons.</span></pre>
+<pre class="cython line score-6" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">083</span>:     <span class="k">cdef</span> <span class="kt">void</span> <span class="nf">tokenize_line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">const</span> <span class="n">string</span><span class="o">&amp;</span> <span class="n">line</span><span class="p">)</span> <span class="n">noexcept</span> <span class="k">nogil</span><span class="p">:</span></pre>
 <pre class='cython code score-6 '>static void __pyx_f_5lexer_5Lexer_tokenize_line(struct __pyx_obj_5lexer_Lexer *__pyx_v_self, std::string const &amp;__pyx_v_line) {
   size_t __pyx_v_limit;
   std::string __pyx_v_text_builder;
@@ -698,35 +689,35 @@ static int __pyx_pf_5lexer_5Lexer___init__(struct __pyx_obj_5lexer_Lexer *__pyx_
   <span class='pyx_c_api'>__Pyx_PyGILState_Release</span>(__pyx_gilstate_save);
   __pyx_L0:;
 }
-</pre><pre class="cython line score-0">&#xA0;<span class="">089</span>:         <span class="c"># Find position of comment</span></pre>
-<pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">090</span>:         <span class="k">cdef</span> <span class="kt">size_t</span> <span class="nf">limit</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">b</span><span class="s">&#39;!&#39;</span><span class="p">)</span></pre>
-<pre class='cython code score-0 '>  __pyx_v_limit = __pyx_v_line.find(__pyx_k__2);
-</pre><pre class="cython line score-0">&#xA0;<span class="">091</span>: </pre>
-<pre class="cython line score-0">&#xA0;<span class="">092</span>:         <span class="c"># If no comment is found, set limit to end of string</span></pre>
-<pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">093</span>:         <span class="k">if</span> <span class="n">limit</span> <span class="o">==</span> <span class="n">npos</span><span class="p">:</span></pre>
+</pre><pre class="cython line score-0">&#xA0;<span class="">084</span>:         <span class="c"># Find position of comment</span></pre>
+<pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">085</span>:         <span class="k">cdef</span> <span class="kt">size_t</span> <span class="nf">limit</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">b</span><span class="s">&#39;!&#39;</span><span class="p">)</span></pre>
+<pre class='cython code score-0 '>  __pyx_v_limit = __pyx_v_line.find(__pyx_k__4);
+</pre><pre class="cython line score-0">&#xA0;<span class="">086</span>: </pre>
+<pre class="cython line score-0">&#xA0;<span class="">087</span>:         <span class="c"># If no comment is found, set limit to end of string</span></pre>
+<pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">088</span>:         <span class="k">if</span> <span class="n">limit</span> <span class="o">==</span> <span class="n">npos</span><span class="p">:</span></pre>
 <pre class='cython code score-0 '>  __pyx_t_1 = (__pyx_v_limit == std::string::npos);
   if (__pyx_t_1) {
 /* … */
   }
-</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">094</span>:             <span class="n">limit</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">size</span><span class="p">()</span></pre>
+</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">089</span>:             <span class="n">limit</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">size</span><span class="p">()</span></pre>
 <pre class='cython code score-0 '>    __pyx_v_limit = __pyx_v_line.size();
-</pre><pre class="cython line score-0">&#xA0;<span class="">095</span>: </pre>
-<pre class="cython line score-0">&#xA0;<span class="">096</span>:         <span class="k">cdef</span> <span class="kt">string</span> <span class="nf">text_builder</span>  <span class="c"># empty string</span></pre>
-<pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">097</span>:         <span class="k">cdef</span> <span class="kt">size_t</span> <span class="nf">byte_idx</span> <span class="o">=</span> <span class="mf">0</span></pre>
+</pre><pre class="cython line score-0">&#xA0;<span class="">090</span>: </pre>
+<pre class="cython line score-0">&#xA0;<span class="">091</span>:         <span class="k">cdef</span> <span class="kt">string</span> <span class="nf">text_builder</span>  <span class="c"># empty string</span></pre>
+<pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">092</span>:         <span class="k">cdef</span> <span class="kt">size_t</span> <span class="nf">byte_idx</span> <span class="o">=</span> <span class="mf">0</span></pre>
 <pre class='cython code score-0 '>  __pyx_v_byte_idx = 0;
-</pre><pre class="cython line score-0">&#xA0;<span class="">098</span>:         <span class="k">cdef</span> <span class="kt">char</span> <span class="nf">c</span></pre>
-<pre class="cython line score-0">&#xA0;<span class="">099</span>: </pre>
-<pre class="cython line score-0">&#xA0;<span class="">100</span>:         <span class="k">cdef</span> <span class="kt">string</span> <span class="nf">remainder</span></pre>
-<pre class="cython line score-0">&#xA0;<span class="">101</span>: </pre>
-<pre class="cython line score-0">&#xA0;<span class="">102</span>:         <span class="c"># Iterate up to the `limit`</span></pre>
-<pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">103</span>:         <span class="k">while</span> <span class="n">byte_idx</span> <span class="o">&lt;</span> <span class="n">limit</span><span class="p">:</span></pre>
+</pre><pre class="cython line score-0">&#xA0;<span class="">093</span>:         <span class="k">cdef</span> <span class="kt">char</span> <span class="nf">c</span></pre>
+<pre class="cython line score-0">&#xA0;<span class="">094</span>: </pre>
+<pre class="cython line score-0">&#xA0;<span class="">095</span>:         <span class="k">cdef</span> <span class="kt">string</span> <span class="nf">remainder</span></pre>
+<pre class="cython line score-0">&#xA0;<span class="">096</span>: </pre>
+<pre class="cython line score-0">&#xA0;<span class="">097</span>:         <span class="c"># Iterate up to the `limit`</span></pre>
+<pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">098</span>:         <span class="k">while</span> <span class="n">byte_idx</span> <span class="o">&lt;</span> <span class="n">limit</span><span class="p">:</span></pre>
 <pre class='cython code score-0 '>  while (1) {
     __pyx_t_1 = (__pyx_v_byte_idx &lt; __pyx_v_limit);
     if (!__pyx_t_1) break;
-</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">104</span>:             <span class="n">c</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="n">byte_idx</span><span class="p">]</span></pre>
+</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">099</span>:             <span class="n">c</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="n">byte_idx</span><span class="p">]</span></pre>
 <pre class='cython code score-0 '>    __pyx_v_c = (__pyx_v_line[__pyx_v_byte_idx]);
-</pre><pre class="cython line score-0">&#xA0;<span class="">105</span>: </pre>
-<pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">106</span>:             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_idd</span> <span class="ow">and</span> <span class="n">c</span> <span class="o">==</span> <span class="n">b</span><span class="s">&#39;</span><span class="se">\\</span><span class="s">&#39;</span><span class="p">:</span></pre>
+</pre><pre class="cython line score-0">&#xA0;<span class="">100</span>: </pre>
+<pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">101</span>:             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_idd</span> <span class="ow">and</span> <span class="n">c</span> <span class="o">==</span> <span class="n">b</span><span class="s">&#39;</span><span class="se">\\</span><span class="s">&#39;</span><span class="p">:</span></pre>
 <pre class='cython code score-0 '>    __pyx_t_2 = (__pyx_v_self-&gt;is_idd != 0);
     if (__pyx_t_2) {
     } else {
@@ -739,26 +730,26 @@ static int __pyx_pf_5lexer_5Lexer___init__(struct __pyx_obj_5lexer_Lexer *__pyx_
     if (__pyx_t_1) {
 /* … */
     }
-</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">107</span>:                 <span class="bp">self</span><span class="o">.</span><span class="n">push_text_token</span><span class="p">(</span><span class="n">text_builder</span><span class="p">)</span></pre>
+</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">102</span>:                 <span class="bp">self</span><span class="o">.</span><span class="n">push_text_token</span><span class="p">(</span><span class="n">text_builder</span><span class="p">)</span></pre>
 <pre class='cython code score-0 '>      ((struct __pyx_vtabstruct_5lexer_Lexer *)__pyx_v_self-&gt;__pyx_vtab)-&gt;push_text_token(__pyx_v_self, __pyx_v_text_builder);
-</pre><pre class="cython line score-4" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">108</span>:                 <span class="n">remainder</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">substr</span><span class="p">(</span><span class="n">byte_idx</span><span class="p">,</span> <span class="n">limit</span> <span class="o">-</span> <span class="n">byte_idx</span><span class="p">)</span></pre>
+</pre><pre class="cython line score-4" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">103</span>:                 <span class="n">remainder</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">substr</span><span class="p">(</span><span class="n">byte_idx</span><span class="p">,</span> <span class="n">limit</span> <span class="o">-</span> <span class="n">byte_idx</span><span class="p">)</span></pre>
 <pre class='cython code score-4 '>      try {
         __pyx_t_3 = __pyx_v_line.substr(__pyx_v_byte_idx, (__pyx_v_limit - __pyx_v_byte_idx));
       } catch(...) {
         PyGILState_STATE __pyx_gilstate_save = <span class='pyx_c_api'>__Pyx_PyGILState_Ensure</span>();
         __Pyx_CppExn2PyErr();
         <span class='pyx_c_api'>__Pyx_PyGILState_Release</span>(__pyx_gilstate_save);
-        <span class='error_goto'>__PYX_ERR(0, 108, __pyx_L1_error)</span>
+        <span class='error_goto'>__PYX_ERR(0, 103, __pyx_L1_error)</span>
       }
       __pyx_v_remainder = __PYX_STD_MOVE_IF_SUPPORTED(__pyx_t_3);
-</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">109</span>:                 <span class="n">remainder</span> <span class="o">=</span> <span class="n">trim_string</span><span class="p">(</span><span class="n">remainder</span><span class="p">)</span></pre>
+</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">104</span>:                 <span class="n">remainder</span> <span class="o">=</span> <span class="n">trim_string</span><span class="p">(</span><span class="n">remainder</span><span class="p">)</span></pre>
 <pre class='cython code score-0 '>      __pyx_v_remainder = __pyx_f_5utils_trim_string(__pyx_v_remainder);
-</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">110</span>:                 <span class="k">if</span> <span class="ow">not</span> <span class="n">remainder</span><span class="o">.</span><span class="n">empty</span><span class="p">():</span></pre>
+</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">105</span>:                 <span class="k">if</span> <span class="ow">not</span> <span class="n">remainder</span><span class="o">.</span><span class="n">empty</span><span class="p">():</span></pre>
 <pre class='cython code score-0 '>      __pyx_t_1 = (!__pyx_v_remainder.empty());
       if (__pyx_t_1) {
 /* … */
       }
-</pre><pre class="cython line score-4" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">111</span>:                     <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="o">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">Token</span><span class="p">(</span><span class="n">TOKEN_TEXT</span><span class="p">,</span> <span class="n">remainder</span><span class="p">))</span></pre>
+</pre><pre class="cython line score-4" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">106</span>:                     <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="o">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">Token</span><span class="p">(</span><span class="n">TOKEN_TEXT</span><span class="p">,</span> <span class="n">remainder</span><span class="p">))</span></pre>
 <pre class='cython code score-4 '>        __pyx_t_4.type = __pyx_e_5lexer_TOKEN_TEXT;
         __pyx_t_4.value = __pyx_v_remainder;
         try {
@@ -767,69 +758,70 @@ static int __pyx_pf_5lexer_5Lexer___init__(struct __pyx_obj_5lexer_Lexer *__pyx_
           PyGILState_STATE __pyx_gilstate_save = <span class='pyx_c_api'>__Pyx_PyGILState_Ensure</span>();
           __Pyx_CppExn2PyErr();
           <span class='pyx_c_api'>__Pyx_PyGILState_Release</span>(__pyx_gilstate_save);
-          <span class='error_goto'>__PYX_ERR(0, 111, __pyx_L1_error)</span>
+          <span class='error_goto'>__PYX_ERR(0, 106, __pyx_L1_error)</span>
         }
-</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">112</span>:                 <span class="k">break</span></pre>
+</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">107</span>:                 <span class="k">break</span></pre>
 <pre class='cython code score-0 '>      goto __pyx_L5_break;
-</pre><pre class="cython line score-0">&#xA0;<span class="">113</span>: </pre>
-<pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">114</span>:             <span class="k">if</span> <span class="n">c</span> <span class="o">==</span> <span class="n">b</span><span class="s">&#39;,&#39;</span><span class="p">:</span></pre>
+</pre><pre class="cython line score-0">&#xA0;<span class="">108</span>: </pre>
+<pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">109</span>:             <span class="k">if</span> <span class="n">c</span> <span class="o">==</span> <span class="n">b</span><span class="s">&#39;,&#39;</span><span class="p">:</span></pre>
 <pre class='cython code score-0 '>    switch (__pyx_v_c) {
       case ',':
 /* … */
       break;
       case ';':
-</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">115</span>:                 <span class="bp">self</span><span class="o">.</span><span class="n">push_text_token</span><span class="p">(</span><span class="n">text_builder</span><span class="p">)</span></pre>
+</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">110</span>:                 <span class="bp">self</span><span class="o">.</span><span class="n">push_text_token</span><span class="p">(</span><span class="n">text_builder</span><span class="p">)</span></pre>
 <pre class='cython code score-0 '>      ((struct __pyx_vtabstruct_5lexer_Lexer *)__pyx_v_self-&gt;__pyx_vtab)-&gt;push_text_token(__pyx_v_self, __pyx_v_text_builder);
-</pre><pre class="cython line score-4" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">116</span>:                 <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="o">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">Token</span><span class="p">(</span><span class="n">TOKEN_COMMA</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">const</span> <span class="n">char</span><span class="o">*&gt;</span><span class="n">b</span><span class="s">&quot;,&quot;</span><span class="p">))</span></pre>
+</pre><pre class="cython line score-4" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">111</span>:                 <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="o">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">Token</span><span class="p">(</span><span class="n">TOKEN_COMMA</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">const</span> <span class="n">char</span><span class="o">*&gt;</span><span class="n">b</span><span class="s">&quot;,&quot;</span><span class="p">))</span></pre>
 <pre class='cython code score-4 '>      __pyx_t_4.type = __pyx_e_5lexer_TOKEN_COMMA;
-      __pyx_t_4.value = ((char const *)__pyx_k__3);
+      __pyx_t_4.value = ((char const *)__pyx_k__5);
       try {
         __pyx_v_self-&gt;buffer.push_back(__pyx_t_4);
       } catch(...) {
         PyGILState_STATE __pyx_gilstate_save = <span class='pyx_c_api'>__Pyx_PyGILState_Ensure</span>();
         __Pyx_CppExn2PyErr();
         <span class='pyx_c_api'>__Pyx_PyGILState_Release</span>(__pyx_gilstate_save);
-        <span class='error_goto'>__PYX_ERR(0, 116, __pyx_L1_error)</span>
+        <span class='error_goto'>__PYX_ERR(0, 111, __pyx_L1_error)</span>
       }
-</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">117</span>:             <span class="k">elif</span> <span class="n">c</span> <span class="o">==</span> <span class="n">b</span><span class="s">&#39;;&#39;</span><span class="p">:</span></pre>
+</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">112</span>:             <span class="k">elif</span> <span class="n">c</span> <span class="o">==</span> <span class="n">b</span><span class="s">&#39;;&#39;</span><span class="p">:</span></pre>
 <pre class='cython code score-0 '>      break;
       default:
-</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">118</span>:                 <span class="bp">self</span><span class="o">.</span><span class="n">push_text_token</span><span class="p">(</span><span class="n">text_builder</span><span class="p">)</span></pre>
+</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">113</span>:                 <span class="bp">self</span><span class="o">.</span><span class="n">push_text_token</span><span class="p">(</span><span class="n">text_builder</span><span class="p">)</span></pre>
 <pre class='cython code score-0 '>      ((struct __pyx_vtabstruct_5lexer_Lexer *)__pyx_v_self-&gt;__pyx_vtab)-&gt;push_text_token(__pyx_v_self, __pyx_v_text_builder);
-</pre><pre class="cython line score-4" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">119</span>:                 <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="o">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">Token</span><span class="p">(</span><span class="n">TOKEN_SEMICOLON</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">const</span> <span class="n">char</span><span class="o">*&gt;</span><span class="n">b</span><span class="s">&quot;;&quot;</span><span class="p">))</span></pre>
+</pre><pre class="cython line score-4" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">114</span>:                 <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="o">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">Token</span><span class="p">(</span><span class="n">TOKEN_SEMICOLON</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">const</span> <span class="n">char</span><span class="o">*&gt;</span><span class="n">b</span><span class="s">&quot;;&quot;</span><span class="p">))</span></pre>
 <pre class='cython code score-4 '>      __pyx_t_4.type = __pyx_e_5lexer_TOKEN_SEMICOLON;
-      __pyx_t_4.value = ((char const *)__pyx_k__4);
+      __pyx_t_4.value = ((char const *)__pyx_k__6);
       try {
         __pyx_v_self-&gt;buffer.push_back(__pyx_t_4);
       } catch(...) {
         PyGILState_STATE __pyx_gilstate_save = <span class='pyx_c_api'>__Pyx_PyGILState_Ensure</span>();
         __Pyx_CppExn2PyErr();
         <span class='pyx_c_api'>__Pyx_PyGILState_Release</span>(__pyx_gilstate_save);
-        <span class='error_goto'>__PYX_ERR(0, 119, __pyx_L1_error)</span>
+        <span class='error_goto'>__PYX_ERR(0, 114, __pyx_L1_error)</span>
       }
-</pre><pre class="cython line score-0">&#xA0;<span class="">120</span>:             <span class="k">else</span><span class="p">:</span></pre>
-<pre class="cython line score-4" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">121</span>:                 <span class="n">text_builder</span><span class="o">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">c</span><span class="p">)</span></pre>
+</pre><pre class="cython line score-0">&#xA0;<span class="">115</span>:             <span class="k">else</span><span class="p">:</span></pre>
+<pre class="cython line score-4" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">116</span>:                 <span class="n">text_builder</span><span class="o">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">c</span><span class="p">)</span></pre>
 <pre class='cython code score-4 '>      try {
         __pyx_v_text_builder.push_back(__pyx_v_c);
       } catch(...) {
         PyGILState_STATE __pyx_gilstate_save = <span class='pyx_c_api'>__Pyx_PyGILState_Ensure</span>();
         __Pyx_CppExn2PyErr();
         <span class='pyx_c_api'>__Pyx_PyGILState_Release</span>(__pyx_gilstate_save);
-        <span class='error_goto'>__PYX_ERR(0, 121, __pyx_L1_error)</span>
+        <span class='error_goto'>__PYX_ERR(0, 116, __pyx_L1_error)</span>
       }
       break;
     }
-</pre><pre class="cython line score-0">&#xA0;<span class="">122</span>: </pre>
-<pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">123</span>:             <span class="n">byte_idx</span> <span class="o">+=</span> <span class="mf">1</span></pre>
+</pre><pre class="cython line score-0">&#xA0;<span class="">117</span>: </pre>
+<pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">118</span>:             <span class="n">byte_idx</span> <span class="o">+=</span> <span class="mf">1</span></pre>
 <pre class='cython code score-0 '>    __pyx_v_byte_idx = (__pyx_v_byte_idx + 1);
   }
   __pyx_L5_break:;
-</pre><pre class="cython line score-0">&#xA0;<span class="">124</span>: </pre>
-<pre class="cython line score-0">&#xA0;<span class="">125</span>:         <span class="c"># Final flush</span></pre>
-<pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">126</span>:         <span class="bp">self</span><span class="o">.</span><span class="n">push_text_token</span><span class="p">(</span><span class="n">text_builder</span><span class="p">)</span></pre>
+</pre><pre class="cython line score-0">&#xA0;<span class="">119</span>: </pre>
+<pre class="cython line score-0">&#xA0;<span class="">120</span>:         <span class="c"># Final flush</span></pre>
+<pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">121</span>:         <span class="bp">self</span><span class="o">.</span><span class="n">push_text_token</span><span class="p">(</span><span class="n">text_builder</span><span class="p">)</span></pre>
 <pre class='cython code score-0 '>  ((struct __pyx_vtabstruct_5lexer_Lexer *)__pyx_v_self-&gt;__pyx_vtab)-&gt;push_text_token(__pyx_v_self, __pyx_v_text_builder);
-</pre><pre class="cython line score-0">&#xA0;<span class="">127</span>: </pre>
-<pre class="cython line score-6" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">128</span>:     <span class="k">cdef</span> <span class="kt">void</span> <span class="nf">push_text_token</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="o">&amp;</span> <span class="n">builder</span><span class="p">)</span> <span class="n">noexcept</span> <span class="k">nogil</span><span class="p">:</span></pre>
+</pre><pre class="cython line score-0">&#xA0;<span class="">122</span>: </pre>
+<pre class="cython line score-0">&#xA0;<span class="">123</span>:     <span class="c"># Trims and pushes to buffer using reference.</span></pre>
+<pre class="cython line score-6" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">124</span>:     <span class="k">cdef</span> <span class="kt">void</span> <span class="nf">push_text_token</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="o">&amp;</span> <span class="n">builder</span><span class="p">)</span> <span class="n">noexcept</span> <span class="k">nogil</span><span class="p">:</span></pre>
 <pre class='cython code score-6 '>static void __pyx_f_5lexer_5Lexer_push_text_token(struct __pyx_obj_5lexer_Lexer *__pyx_v_self, std::string &amp;__pyx_v_builder) {
   std::string __pyx_v_trimmed;
 /* … */
@@ -841,17 +833,14 @@ static int __pyx_pf_5lexer_5Lexer___init__(struct __pyx_obj_5lexer_Lexer *__pyx_
   <span class='pyx_c_api'>__Pyx_PyGILState_Release</span>(__pyx_gilstate_save);
   __pyx_L0:;
 }
-</pre><pre class="cython line score-0">&#xA0;<span class="">129</span>: <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span></pre>
-<pre class="cython line score-0">&#xA0;<span class="">130</span>: <span class="sd">        Trims and pushes to buffer using reference.</span></pre>
-<pre class="cython line score-0">&#xA0;<span class="">131</span>: <span class="sd">        &quot;&quot;&quot;</span></pre>
-<pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">132</span>:         <span class="k">cdef</span> <span class="kt">string</span> <span class="nf">trimmed</span> <span class="o">=</span> <span class="n">trim_string</span><span class="p">(</span><span class="n">builder</span><span class="p">)</span></pre>
+</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">125</span>:         <span class="k">cdef</span> <span class="kt">string</span> <span class="nf">trimmed</span> <span class="o">=</span> <span class="n">trim_string</span><span class="p">(</span><span class="n">builder</span><span class="p">)</span></pre>
 <pre class='cython code score-0 '>  __pyx_v_trimmed = __pyx_f_5utils_trim_string(__pyx_v_builder);
-</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">133</span>:         <span class="k">if</span> <span class="ow">not</span> <span class="n">trimmed</span><span class="o">.</span><span class="n">empty</span><span class="p">():</span></pre>
+</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">126</span>:         <span class="k">if</span> <span class="ow">not</span> <span class="n">trimmed</span><span class="o">.</span><span class="n">empty</span><span class="p">():</span></pre>
 <pre class='cython code score-0 '>  __pyx_t_1 = (!__pyx_v_trimmed.empty());
   if (__pyx_t_1) {
 /* … */
   }
-</pre><pre class="cython line score-4" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">134</span>:             <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="o">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">Token</span><span class="p">(</span><span class="n">TOKEN_TEXT</span><span class="p">,</span> <span class="n">trimmed</span><span class="p">))</span></pre>
+</pre><pre class="cython line score-4" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">127</span>:             <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="o">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">Token</span><span class="p">(</span><span class="n">TOKEN_TEXT</span><span class="p">,</span> <span class="n">trimmed</span><span class="p">))</span></pre>
 <pre class='cython code score-4 '>    __pyx_t_2.type = __pyx_e_5lexer_TOKEN_TEXT;
     __pyx_t_2.value = __pyx_v_trimmed;
     try {
@@ -860,13 +849,13 @@ static int __pyx_pf_5lexer_5Lexer___init__(struct __pyx_obj_5lexer_Lexer *__pyx_
       PyGILState_STATE __pyx_gilstate_save = <span class='pyx_c_api'>__Pyx_PyGILState_Ensure</span>();
       __Pyx_CppExn2PyErr();
       <span class='pyx_c_api'>__Pyx_PyGILState_Release</span>(__pyx_gilstate_save);
-      <span class='error_goto'>__PYX_ERR(0, 134, __pyx_L1_error)</span>
+      <span class='error_goto'>__PYX_ERR(0, 127, __pyx_L1_error)</span>
     }
-</pre><pre class="cython line score-0">&#xA0;<span class="">135</span>:         <span class="c"># Clear builder to reuse its allocated capacity</span></pre>
-<pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">136</span>:         <span class="n">builder</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span></pre>
+</pre><pre class="cython line score-0">&#xA0;<span class="">128</span>:         <span class="c"># Clear builder to reuse its allocated capacity</span></pre>
+<pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">129</span>:         <span class="n">builder</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span></pre>
 <pre class='cython code score-0 '>  __pyx_v_builder.clear();
-</pre><pre class="cython line score-0">&#xA0;<span class="">137</span>: </pre>
-<pre class="cython line score-30" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">138</span>:     <span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></pre>
+</pre><pre class="cython line score-0">&#xA0;<span class="">130</span>: </pre>
+<pre class="cython line score-30" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">131</span>:     <span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></pre>
 <pre class='cython code score-30 '>/* Python wrapper */
 static PyObject *__pyx_pw_5lexer_5Lexer_3test(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
@@ -928,23 +917,23 @@ static PyObject *__pyx_pf_5lexer_5Lexer_2test(struct __pyx_obj_5lexer_Lexer *__p
   return __pyx_r;
 }
 /* … */
-  __pyx_t_2 = <span class='pyx_c_api'>__Pyx_CyFunction_New</span>(&amp;__pyx_mdef_5lexer_5Lexer_3test, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global-&gt;__pyx_n_u_Lexer_test, NULL, __pyx_mstate_global-&gt;__pyx_n_u_lexer, __pyx_mstate_global-&gt;__pyx_d, ((PyObject *)__pyx_mstate_global-&gt;__pyx_codeobj_tab[0]));<span class='error_goto'> if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 138, __pyx_L1_error)</span>
+  __pyx_t_2 = <span class='pyx_c_api'>__Pyx_CyFunction_New</span>(&amp;__pyx_mdef_5lexer_5Lexer_3test, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global-&gt;__pyx_n_u_Lexer_test, NULL, __pyx_mstate_global-&gt;__pyx_n_u_lexer, __pyx_mstate_global-&gt;__pyx_d, ((PyObject *)__pyx_mstate_global-&gt;__pyx_codeobj_tab[0]));<span class='error_goto'> if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 131, __pyx_L1_error)</span>
   <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON &amp;&amp; PY_VERSION_HEX &gt;= 0x030E0000
   <span class='py_c_api'>PyUnstable_Object_EnableDeferredRefcount</span>(__pyx_t_2);
   #endif
-  if (<span class='pyx_c_api'>__Pyx_SetItemOnTypeDict</span>(__pyx_mstate_global-&gt;__pyx_ptype_5lexer_Lexer, __pyx_mstate_global-&gt;__pyx_n_u_test, __pyx_t_2) &lt; (0)) <span class='error_goto'>__PYX_ERR(0, 138, __pyx_L1_error)</span>
+  if (<span class='pyx_c_api'>__Pyx_SetItemOnTypeDict</span>(__pyx_mstate_global-&gt;__pyx_ptype_5lexer_Lexer, __pyx_mstate_global-&gt;__pyx_n_u_test, __pyx_t_2) &lt; (0)) <span class='error_goto'>__PYX_ERR(0, 131, __pyx_L1_error)</span>
   <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_2); __pyx_t_2 = 0;
-</pre><pre class="cython line score-0">&#xA0;<span class="">139</span>:         <span class="k">cdef</span> <span class="kt">Token</span> <span class="nf">tok</span></pre>
-<pre class="cython line score-5" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">140</span>:         <span class="n">tokens</span> <span class="o">=</span> <span class="p">[]</span></pre>
-<pre class='cython code score-5 '>  __pyx_t_1 = <span class='py_c_api'>PyList_New</span>(0);<span class='error_goto'> if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 140, __pyx_L1_error)</span>
+</pre><pre class="cython line score-0">&#xA0;<span class="">132</span>:         <span class="k">cdef</span> <span class="kt">Token</span> <span class="nf">tok</span></pre>
+<pre class="cython line score-5" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">133</span>:         <span class="n">tokens</span> <span class="o">=</span> <span class="p">[]</span></pre>
+<pre class='cython code score-5 '>  __pyx_t_1 = <span class='py_c_api'>PyList_New</span>(0);<span class='error_goto'> if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 133, __pyx_L1_error)</span>
   <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_1);
   __pyx_v_tokens = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
-</pre><pre class="cython line score-0">&#xA0;<span class="">141</span>: </pre>
-<pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">142</span>:         <span class="k">while</span> <span class="bp">True</span><span class="p">:</span></pre>
+</pre><pre class="cython line score-0">&#xA0;<span class="">134</span>: </pre>
+<pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">135</span>:         <span class="k">while</span> <span class="bp">True</span><span class="p">:</span></pre>
 <pre class='cython code score-0 '>  while (1) {
-</pre><pre class="cython line score-14" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">143</span>:             <span class="k">with</span> <span class="k">nogil</span><span class="p">:</span></pre>
+</pre><pre class="cython line score-14" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">136</span>:             <span class="k">with</span> <span class="k">nogil</span><span class="p">:</span></pre>
 <pre class='cython code score-14 '>    {
         PyThreadState * _save;
         _save = <span class='py_c_api'>PyEval_SaveThread</span>();
@@ -960,38 +949,38 @@ static PyObject *__pyx_pf_5lexer_5Lexer_2test(struct __pyx_obj_5lexer_Lexer *__p
           __pyx_L9:;
         }
     }
-</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">144</span>:                 <span class="n">tok</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">next_token</span><span class="p">()</span></pre>
+</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">137</span>:                 <span class="n">tok</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">next_token</span><span class="p">()</span></pre>
 <pre class='cython code score-0 '>          __pyx_v_tok = ((struct __pyx_vtabstruct_5lexer_Lexer *)__pyx_v_self-&gt;__pyx_vtab)-&gt;next_token(__pyx_v_self);
         }
-</pre><pre class="cython line score-0">&#xA0;<span class="">145</span>: </pre>
-<pre class="cython line score-0">&#xA0;<span class="">146</span>:             <span class="c"># Convert C++ struct the Python Tuple</span></pre>
-<pre class="cython line score-12" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">147</span>:             <span class="n">tokens</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">tok</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="n">tok</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">&quot;utf-8&quot;</span><span class="p">)))</span></pre>
-<pre class='cython code score-12 '>    __pyx_t_1 = __Pyx_PyLong_From_enum____pyx_t_5lexer_TokenType(__pyx_v_tok.type);<span class='error_goto'> if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 147, __pyx_L1_error)</span>
+</pre><pre class="cython line score-0">&#xA0;<span class="">138</span>: </pre>
+<pre class="cython line score-0">&#xA0;<span class="">139</span>:             <span class="c"># Convert C++ struct the Python Tuple</span></pre>
+<pre class="cython line score-12" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">140</span>:             <span class="n">tokens</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">tok</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="n">tok</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">&quot;utf-8&quot;</span><span class="p">)))</span></pre>
+<pre class='cython code score-12 '>    __pyx_t_1 = __Pyx_PyLong_From_enum____pyx_t_5lexer_TokenType(__pyx_v_tok.type);<span class='error_goto'> if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 140, __pyx_L1_error)</span>
     <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_1);
-    __pyx_t_2 = __Pyx_decode_cpp_string(__pyx_v_tok.value, 0, PY_SSIZE_T_MAX, NULL, NULL, PyUnicode_DecodeUTF8);<span class='error_goto'> if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 147, __pyx_L1_error)</span>
+    __pyx_t_2 = __Pyx_decode_cpp_string(__pyx_v_tok.value, 0, PY_SSIZE_T_MAX, NULL, NULL, PyUnicode_DecodeUTF8);<span class='error_goto'> if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 140, __pyx_L1_error)</span>
     <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_2);
-    __pyx_t_3 = <span class='py_c_api'>PyTuple_New</span>(2);<span class='error_goto'> if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 147, __pyx_L1_error)</span>
+    __pyx_t_3 = <span class='py_c_api'>PyTuple_New</span>(2);<span class='error_goto'> if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 140, __pyx_L1_error)</span>
     <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_3);
     <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_t_1);
-    if (<span class='pyx_c_api'>__Pyx_PyTuple_SET_ITEM</span>(__pyx_t_3, 0, __pyx_t_1) != (0)) <span class='error_goto'>__PYX_ERR(0, 147, __pyx_L1_error)</span>;
+    if (<span class='pyx_c_api'>__Pyx_PyTuple_SET_ITEM</span>(__pyx_t_3, 0, __pyx_t_1) != (0)) <span class='error_goto'>__PYX_ERR(0, 140, __pyx_L1_error)</span>;
     <span class='refnanny'>__Pyx_GIVEREF</span>(__pyx_t_2);
-    if (<span class='pyx_c_api'>__Pyx_PyTuple_SET_ITEM</span>(__pyx_t_3, 1, __pyx_t_2) != (0)) <span class='error_goto'>__PYX_ERR(0, 147, __pyx_L1_error)</span>;
+    if (<span class='pyx_c_api'>__Pyx_PyTuple_SET_ITEM</span>(__pyx_t_3, 1, __pyx_t_2) != (0)) <span class='error_goto'>__PYX_ERR(0, 140, __pyx_L1_error)</span>;
     __pyx_t_1 = 0;
     __pyx_t_2 = 0;
-    __pyx_t_4 = <span class='pyx_c_api'>__Pyx_PyList_Append</span>(__pyx_v_tokens, __pyx_t_3);<span class='error_goto'> if (unlikely(__pyx_t_4 == ((int)-1))) __PYX_ERR(0, 147, __pyx_L1_error)</span>
+    __pyx_t_4 = <span class='pyx_c_api'>__Pyx_PyList_Append</span>(__pyx_v_tokens, __pyx_t_3);<span class='error_goto'> if (unlikely(__pyx_t_4 == ((int)-1))) __PYX_ERR(0, 140, __pyx_L1_error)</span>
     <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_3); __pyx_t_3 = 0;
-</pre><pre class="cython line score-0">&#xA0;<span class="">148</span>: </pre>
-<pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">149</span>:             <span class="k">if</span> <span class="n">tok</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">TOKEN_EOF</span><span class="p">:</span></pre>
+</pre><pre class="cython line score-0">&#xA0;<span class="">141</span>: </pre>
+<pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">142</span>:             <span class="k">if</span> <span class="n">tok</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">TOKEN_EOF</span><span class="p">:</span></pre>
 <pre class='cython code score-0 '>    __pyx_t_5 = (__pyx_v_tok.type == __pyx_e_5lexer_TOKEN_EOF);
     if (__pyx_t_5) {
 /* … */
     }
   }
   __pyx_L4_break:;
-</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">150</span>:                 <span class="k">break</span></pre>
+</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">143</span>:                 <span class="k">break</span></pre>
 <pre class='cython code score-0 '>      goto __pyx_L4_break;
-</pre><pre class="cython line score-0">&#xA0;<span class="">151</span>: </pre>
-<pre class="cython line score-2" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">152</span>:         <span class="k">return</span> <span class="n">tokens</span></pre>
+</pre><pre class="cython line score-0">&#xA0;<span class="">144</span>: </pre>
+<pre class="cython line score-2" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">145</span>:         <span class="k">return</span> <span class="n">tokens</span></pre>
 <pre class='cython code score-2 '>  <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_r);
   <span class='pyx_macro_api'>__Pyx_INCREF</span>(__pyx_v_tokens);
   __pyx_r = __pyx_v_tokens;

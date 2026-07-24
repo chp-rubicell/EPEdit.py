@@ -1369,8 +1369,21 @@ static const char *__pyx_filename;
 static const char* const __pyx_f[] = {
   "lexer.pyx",
   "<stringsource>",
+  "utils.pxd",
 };
 /* #### Code section: utility_code_proto_before_types ### */
+/* ForceInitThreads.proto */
+#ifndef __PYX_FORCE_INIT_THREADS
+  #define __PYX_FORCE_INIT_THREADS 0
+#endif
+
+/* NoFastGil.proto */
+#define __Pyx_PyGILState_Ensure PyGILState_Ensure
+#define __Pyx_PyGILState_Release PyGILState_Release
+#define __Pyx_FastGIL_Remember()
+#define __Pyx_FastGIL_Forget()
+#define __Pyx_FastGilFuncInit()
+
 /* Atomics.proto (used by UnpackUnboundCMethod) */
 #include <pythread.h>
 #ifndef CYTHON_ATOMICS
@@ -1537,18 +1550,6 @@ static const char* const __pyx_f[] = {
 #define __Pyx_END_CRITICAL_SECTION Py_END_CRITICAL_SECTION
 #endif
 
-/* ForceInitThreads.proto */
-#ifndef __PYX_FORCE_INIT_THREADS
-  #define __PYX_FORCE_INIT_THREADS 0
-#endif
-
-/* NoFastGil.proto */
-#define __Pyx_PyGILState_Ensure PyGILState_Ensure
-#define __Pyx_PyGILState_Release PyGILState_Release
-#define __Pyx_FastGIL_Remember()
-#define __Pyx_FastGIL_Forget()
-#define __Pyx_FastGilFuncInit()
-
 /* IncludeStructmemberH.proto (used by FixUpExtensionType) */
 #include <structmember.h>
 
@@ -1560,15 +1561,31 @@ static const char* const __pyx_f[] = {
 struct __pyx_obj_5lexer_Lexer;
 struct __pyx_ctuple_int__and_int;
 typedef struct __pyx_ctuple_int__and_int __pyx_ctuple_int__and_int;
+struct __pyx_ctuple_6libcpp_6string_std__in_string__and_6libcpp_bool;
+typedef struct __pyx_ctuple_6libcpp_6string_std__in_string__and_6libcpp_bool __pyx_ctuple_6libcpp_6string_std__in_string__and_6libcpp_bool;
 
-/* "utils.pxd":5
- * cdef string trim_string(const string& s) noexcept nogil
+/* "utils.pxd":8
+ * 
  * cdef string any_to_string(object value) except *
  * cdef (int, int) get_continuous_digits_indices(const string& name) noexcept nogil             # <<<<<<<<<<<<<<
+ * 
+ * 
 */
 struct __pyx_ctuple_int__and_int {
   int f0;
   int f1;
+};
+
+/* "utils.pxd":48
+ * 
+ * # Similar to Go's stringsCutPrefix()
+ * cdef inline (string, cbool) cut_prefix(const string& s, const string& prefix) noexcept nogil:             # <<<<<<<<<<<<<<
+ *     cdef size_t p_len = prefix.length()
+ * 
+*/
+struct __pyx_ctuple_6libcpp_6string_std__in_string__and_6libcpp_bool {
+  std::string f0;
+  bool f1;
 };
 struct __pyx_t_5lexer_Token;
 
@@ -1624,7 +1641,7 @@ struct __pyx_obj_5lexer_Lexer {
  * 
  * cdef class Lexer:             # <<<<<<<<<<<<<<
  * 
- *     def __init__(self, bytes file_content, bint is_idd):
+ *     # Accepts raw bytes of the entire file.
 */
 
 struct __pyx_vtabstruct_5lexer_Lexer {
@@ -1829,6 +1846,11 @@ static void __Pyx_Raise(PyObject *type, PyObject *value, PyObject *tb, PyObject 
   #define __PYX_STD_MOVE_IF_SUPPORTED(x) x
 #endif
 
+/* WriteUnraisableException.proto */
+static void __Pyx_WriteUnraisable(const char *name, int clineno,
+                                  int lineno, const char *filename,
+                                  int full_traceback, int nogil);
+
 /* TupleAndListFromArray.proto (used by fastcall) */
 #if CYTHON_COMPILING_IN_CPYTHON
 static CYTHON_INLINE PyObject* __Pyx_PyList_FromArray(PyObject *const *src, Py_ssize_t n);
@@ -2020,11 +2042,6 @@ static int __Pyx__ArgTypeTest(PyObject *obj, PyTypeObject *type, const char *nam
 #define __Pyx_ArgTypeTest(obj, type, none_allowed, name, exact)\
     ((likely(__Pyx_IS_TYPE(obj, type) | (none_allowed && (obj == Py_None)))) ? 1 :\
         __Pyx__ArgTypeTest(obj, type, name, exact))
-
-/* WriteUnraisableException.proto */
-static void __Pyx_WriteUnraisable(const char *name, int clineno,
-                                  int lineno, const char *filename,
-                                  int full_traceback, int nogil);
 
 /* RejectKeywords.export */
 static void __Pyx_RejectKeywords(const char* function_name, PyObject *kwds);
@@ -2226,9 +2243,6 @@ static int __Pyx__DelItemOnTypeDict(PyTypeObject *tp, PyObject *k);
 
 /* SetupReduce.proto */
 static int __Pyx_setup_reduce(PyObject* type_obj);
-
-/* FunctionImport.proto */
-static int __Pyx_ImportFunction_3_2_4(PyObject *module, const char *funcname, void (**f)(void), const char *sig);
 
 /* dict_setdefault.proto (used by FetchCommonType) */
 static CYTHON_INLINE PyObject *__Pyx_PyDict_SetDefault(PyObject *d, PyObject *key, PyObject *default_value);
@@ -2622,7 +2636,7 @@ static void __pyx_f_5lexer_5Lexer_push_text_token(struct __pyx_obj_5lexer_Lexer 
 /* Module declarations from "libcpp" */
 
 /* Module declarations from "utils" */
-static std::string (*__pyx_f_5utils_trim_string)(std::string const &); /*proto*/
+static CYTHON_INLINE std::string __pyx_f_5utils_trim_string(std::string const &); /*proto*/
 
 /* Module declarations from "lexer" */
 static PyObject *__pyx_f_5lexer___pyx_unpickle_Lexer__set_state(struct __pyx_obj_5lexer_Lexer *, PyObject *); /*proto*/
@@ -2643,10 +2657,12 @@ int __pyx_module_is_main_lexer = 0;
 /* Implementation of "lexer" */
 /* #### Code section: global_var ### */
 /* #### Code section: string_decls ### */
-static const char __pyx_k_[] = "\n";
-static const char __pyx_k__2[] = "!";
-static const char __pyx_k__3[] = ",";
-static const char __pyx_k__4[] = ";";
+static const char __pyx_k_[] = " \t\r\n";
+static const char __pyx_k__2[] = "";
+static const char __pyx_k__3[] = "\n";
+static const char __pyx_k__4[] = "!";
+static const char __pyx_k__5[] = ",";
+static const char __pyx_k__6[] = ";";
 static const char __pyx_k_a_mapping[] = "a mapping";
 static const char __pyx_k_buffer_buffer_idx_content_is_idd[] = "buffer, buffer_idx, content, is_idd, line_num, pos";
 /* #### Code section: decls ### */
@@ -2682,7 +2698,7 @@ typedef struct {
   __Pyx_CachedCFunction __pyx_umethod_PyDict_Type_pop;
   __Pyx_CachedCFunction __pyx_umethod_PyDict_Type_values;
   PyObject *__pyx_codeobj_tab[4];
-  PyObject *__pyx_string_tab[62];
+  PyObject *__pyx_string_tab[61];
   PyObject *__pyx_number_tab[1];
 /* #### Code section: module_state_contents ### */
 /* CommonTypesMetaclass.module_state_decls */
@@ -2727,7 +2743,7 @@ static __pyx_mstatetype * const __pyx_mstate_global = &__pyx_mstate_global_stati
 #define __pyx_kp_u_No_value_specified_for_struct_at __pyx_string_tab[0]
 #define __pyx_kp_u_No_value_specified_for_struct_at_2 __pyx_string_tab[1]
 #define __pyx_kp_u_Note_that_Cython_is_deliberately __pyx_string_tab[2]
-#define __pyx_kp_u__5 __pyx_string_tab[3]
+#define __pyx_kp_u__7 __pyx_string_tab[3]
 #define __pyx_kp_u_add_note __pyx_string_tab[4]
 #define __pyx_kp_u_disable __pyx_string_tab[5]
 #define __pyx_kp_u_enable __pyx_string_tab[6]
@@ -2785,7 +2801,6 @@ static __pyx_mstatetype * const __pyx_mstate_global = &__pyx_mstate_global_stati
 #define __pyx_kp_b_iso88591_A_d_Q_3gS_gQa_s_1_q __pyx_string_tab[58]
 #define __pyx_kp_b_iso88591_T_m4z_Yd_UYYZ_G1F_a_vWE_Q_q_q_q __pyx_string_tab[59]
 #define __pyx_kp_b_iso88591_q_0_kQR_5_7_q_a_1 __pyx_string_tab[60]
-#define __pyx_kp_b_std_string_std_string_const_trim __pyx_string_tab[61]
 #define __pyx_int_100572577 __pyx_number_tab[0]
 /* #### Code section: module_state_clear ### */
 #if CYTHON_USE_MODULE_STATE
@@ -2804,7 +2819,7 @@ static CYTHON_SMALL_CODE int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_ptype_5lexer_Lexer);
   Py_CLEAR(clear_module_state->__pyx_type_5lexer_Lexer);
   for (int i=0; i<4; ++i) { Py_CLEAR(clear_module_state->__pyx_codeobj_tab[i]); }
-  for (int i=0; i<62; ++i) { Py_CLEAR(clear_module_state->__pyx_string_tab[i]); }
+  for (int i=0; i<61; ++i) { Py_CLEAR(clear_module_state->__pyx_string_tab[i]); }
   for (int i=0; i<1; ++i) { Py_CLEAR(clear_module_state->__pyx_number_tab[i]); }
 /* #### Code section: module_state_clear_contents ### */
 /* CommonTypesMetaclass.module_state_clear */
@@ -2831,7 +2846,7 @@ static CYTHON_SMALL_CODE int __pyx_m_traverse(PyObject *m, visitproc visit, void
   Py_VISIT(traverse_module_state->__pyx_ptype_5lexer_Lexer);
   Py_VISIT(traverse_module_state->__pyx_type_5lexer_Lexer);
   for (int i=0; i<4; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_codeobj_tab[i]); }
-  for (int i=0; i<62; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_string_tab[i]); }
+  for (int i=0; i<61; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_string_tab[i]); }
   for (int i=0; i<1; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_number_tab[i]); }
 /* #### Code section: module_state_traverse_contents ### */
 /* CommonTypesMetaclass.module_state_traverse */
@@ -3864,20 +3879,547 @@ static std::vector<struct __pyx_t_5lexer_Token>  __pyx_convert_vector_from_py_st
   return __pyx_r;
 }
 
-/* "lexer.pyx":11
- * cdef class Lexer:
+/* "utils.pxd":14
  * 
+ * # Convert string to lowercase.
+ * cdef inline string to_lower(string s) noexcept nogil:             # <<<<<<<<<<<<<<
+ *     cdef size_t i
+ *     for i in range(s.length()):
+*/
+
+static CYTHON_INLINE std::string __pyx_f_5utils_to_lower(std::string __pyx_v_s) {
+  size_t __pyx_v_i;
+  std::string __pyx_r;
+  size_t __pyx_t_1;
+  size_t __pyx_t_2;
+  size_t __pyx_t_3;
+  char __pyx_t_4;
+  int __pyx_t_5;
+
+  /* "utils.pxd":16
+ * cdef inline string to_lower(string s) noexcept nogil:
+ *     cdef size_t i
+ *     for i in range(s.length()):             # <<<<<<<<<<<<<<
+ *         if b'A' <= s[i] <= b'Z':
+ *             s[i] = s[i] + 32
+*/
+  __pyx_t_1 = __pyx_v_s.length();
+  __pyx_t_2 = __pyx_t_1;
+  for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
+    __pyx_v_i = __pyx_t_3;
+
+    /* "utils.pxd":17
+ *     cdef size_t i
+ *     for i in range(s.length()):
+ *         if b'A' <= s[i] <= b'Z':             # <<<<<<<<<<<<<<
+ *             s[i] = s[i] + 32
+ *     return s
+*/
+    __pyx_t_4 = (__pyx_v_s[__pyx_v_i]);
+    __pyx_t_5 = ('A' <= __pyx_t_4);
+    if (__pyx_t_5) {
+      __pyx_t_5 = (__pyx_t_4 <= 'Z');
+    }
+    if (__pyx_t_5) {
+
+      /* "utils.pxd":18
+ *     for i in range(s.length()):
+ *         if b'A' <= s[i] <= b'Z':
+ *             s[i] = s[i] + 32             # <<<<<<<<<<<<<<
+ *     return s
+ * 
+*/
+      (__pyx_v_s[__pyx_v_i]) = ((__pyx_v_s[__pyx_v_i]) + 32);
+
+      /* "utils.pxd":17
+ *     cdef size_t i
+ *     for i in range(s.length()):
+ *         if b'A' <= s[i] <= b'Z':             # <<<<<<<<<<<<<<
+ *             s[i] = s[i] + 32
+ *     return s
+*/
+    }
+  }
+
+  /* "utils.pxd":19
+ *         if b'A' <= s[i] <= b'Z':
+ *             s[i] = s[i] + 32
+ *     return s             # <<<<<<<<<<<<<<
+ * 
+ * # Convert string to uppercase.
+*/
+  __pyx_r = __pyx_v_s;
+  goto __pyx_L0;
+
+  /* "utils.pxd":14
+ * 
+ * # Convert string to lowercase.
+ * cdef inline string to_lower(string s) noexcept nogil:             # <<<<<<<<<<<<<<
+ *     cdef size_t i
+ *     for i in range(s.length()):
+*/
+
+  /* function exit code */
+  __pyx_L0:;
+  return __pyx_r;
+}
+
+/* "utils.pxd":22
+ * 
+ * # Convert string to uppercase.
+ * cdef inline string to_upper(string s) noexcept nogil:             # <<<<<<<<<<<<<<
+ *     cdef size_t i
+ *     for i in range(s.length()):
+*/
+
+static CYTHON_INLINE std::string __pyx_f_5utils_to_upper(std::string __pyx_v_s) {
+  size_t __pyx_v_i;
+  std::string __pyx_r;
+  size_t __pyx_t_1;
+  size_t __pyx_t_2;
+  size_t __pyx_t_3;
+  char __pyx_t_4;
+  int __pyx_t_5;
+
+  /* "utils.pxd":24
+ * cdef inline string to_upper(string s) noexcept nogil:
+ *     cdef size_t i
+ *     for i in range(s.length()):             # <<<<<<<<<<<<<<
+ *         if b'A' <= s[i] <= b'Z':
+ *             s[i] = s[i] - 32
+*/
+  __pyx_t_1 = __pyx_v_s.length();
+  __pyx_t_2 = __pyx_t_1;
+  for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
+    __pyx_v_i = __pyx_t_3;
+
+    /* "utils.pxd":25
+ *     cdef size_t i
+ *     for i in range(s.length()):
+ *         if b'A' <= s[i] <= b'Z':             # <<<<<<<<<<<<<<
+ *             s[i] = s[i] - 32
+ *     return s
+*/
+    __pyx_t_4 = (__pyx_v_s[__pyx_v_i]);
+    __pyx_t_5 = ('A' <= __pyx_t_4);
+    if (__pyx_t_5) {
+      __pyx_t_5 = (__pyx_t_4 <= 'Z');
+    }
+    if (__pyx_t_5) {
+
+      /* "utils.pxd":26
+ *     for i in range(s.length()):
+ *         if b'A' <= s[i] <= b'Z':
+ *             s[i] = s[i] - 32             # <<<<<<<<<<<<<<
+ *     return s
+ * 
+*/
+      (__pyx_v_s[__pyx_v_i]) = ((__pyx_v_s[__pyx_v_i]) - 32);
+
+      /* "utils.pxd":25
+ *     cdef size_t i
+ *     for i in range(s.length()):
+ *         if b'A' <= s[i] <= b'Z':             # <<<<<<<<<<<<<<
+ *             s[i] = s[i] - 32
+ *     return s
+*/
+    }
+  }
+
+  /* "utils.pxd":27
+ *         if b'A' <= s[i] <= b'Z':
+ *             s[i] = s[i] - 32
+ *     return s             # <<<<<<<<<<<<<<
+ * 
+ * # Remove leading and trailing whitespace from a C++ string.
+*/
+  __pyx_r = __pyx_v_s;
+  goto __pyx_L0;
+
+  /* "utils.pxd":22
+ * 
+ * # Convert string to uppercase.
+ * cdef inline string to_upper(string s) noexcept nogil:             # <<<<<<<<<<<<<<
+ *     cdef size_t i
+ *     for i in range(s.length()):
+*/
+
+  /* function exit code */
+  __pyx_L0:;
+  return __pyx_r;
+}
+
+/* "utils.pxd":30
+ * 
+ * # Remove leading and trailing whitespace from a C++ string.
+ * cdef inline string trim_string(const string& s) noexcept nogil:             # <<<<<<<<<<<<<<
+ *     cdef size_t first = s.find_first_not_of(b" \t\r\n")
+ *     if first == npos:
+*/
+
+static CYTHON_INLINE std::string __pyx_f_5utils_trim_string(std::string const &__pyx_v_s) {
+  size_t __pyx_v_first;
+  size_t __pyx_v_last;
+  std::string __pyx_r;
+  int __pyx_t_1;
+  std::string __pyx_t_2;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyGILState_STATE __pyx_gilstate_save;
+
+  /* "utils.pxd":31
+ * # Remove leading and trailing whitespace from a C++ string.
+ * cdef inline string trim_string(const string& s) noexcept nogil:
+ *     cdef size_t first = s.find_first_not_of(b" \t\r\n")             # <<<<<<<<<<<<<<
+ *     if first == npos:
+ *         return <const char*>b""
+*/
+  __pyx_v_first = __pyx_v_s.find_first_not_of(__pyx_k_);
+
+  /* "utils.pxd":32
+ * cdef inline string trim_string(const string& s) noexcept nogil:
+ *     cdef size_t first = s.find_first_not_of(b" \t\r\n")
+ *     if first == npos:             # <<<<<<<<<<<<<<
+ *         return <const char*>b""
+ *     cdef size_t last = s.find_last_not_of(b" \t\r\n")
+*/
+  __pyx_t_1 = (__pyx_v_first == std::string::npos);
+  if (__pyx_t_1) {
+
+    /* "utils.pxd":33
+ *     cdef size_t first = s.find_first_not_of(b" \t\r\n")
+ *     if first == npos:
+ *         return <const char*>b""             # <<<<<<<<<<<<<<
+ *     cdef size_t last = s.find_last_not_of(b" \t\r\n")
+ *     return s.substr(first, (last - first + 1))
+*/
+    __pyx_r = ((char const *)__pyx_k__2);
+    goto __pyx_L0;
+
+    /* "utils.pxd":32
+ * cdef inline string trim_string(const string& s) noexcept nogil:
+ *     cdef size_t first = s.find_first_not_of(b" \t\r\n")
+ *     if first == npos:             # <<<<<<<<<<<<<<
+ *         return <const char*>b""
+ *     cdef size_t last = s.find_last_not_of(b" \t\r\n")
+*/
+  }
+
+  /* "utils.pxd":34
+ *     if first == npos:
+ *         return <const char*>b""
+ *     cdef size_t last = s.find_last_not_of(b" \t\r\n")             # <<<<<<<<<<<<<<
+ *     return s.substr(first, (last - first + 1))
+ * 
+*/
+  __pyx_v_last = __pyx_v_s.find_last_not_of(__pyx_k_);
+
+  /* "utils.pxd":35
+ *         return <const char*>b""
+ *     cdef size_t last = s.find_last_not_of(b" \t\r\n")
+ *     return s.substr(first, (last - first + 1))             # <<<<<<<<<<<<<<
+ * 
+ * # Similar to Go's strings.HasPrefix()
+*/
+  try {
+    __pyx_t_2 = __pyx_v_s.substr(__pyx_v_first, ((__pyx_v_last - __pyx_v_first) + 1));
+  } catch(...) {
+    PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
+    __Pyx_CppExn2PyErr();
+    __Pyx_PyGILState_Release(__pyx_gilstate_save);
+    __PYX_ERR(2, 35, __pyx_L1_error)
+  }
+  __pyx_r = __pyx_t_2;
+  goto __pyx_L0;
+
+  /* "utils.pxd":30
+ * 
+ * # Remove leading and trailing whitespace from a C++ string.
+ * cdef inline string trim_string(const string& s) noexcept nogil:             # <<<<<<<<<<<<<<
+ *     cdef size_t first = s.find_first_not_of(b" \t\r\n")
+ *     if first == npos:
+*/
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
+  __Pyx_WriteUnraisable("utils.trim_string", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
+  __Pyx_pretend_to_initialize(&__pyx_r);
+  __Pyx_PyGILState_Release(__pyx_gilstate_save);
+  __pyx_L0:;
+  return __pyx_r;
+}
+
+/* "utils.pxd":38
+ * 
+ * # Similar to Go's strings.HasPrefix()
+ * cdef inline cbool has_prefix(const string&s, const string& prefix) noexcept nogil:             # <<<<<<<<<<<<<<
+ *     cdef size_t p_len = prefix.length()
+ *     return s.length() >= p_len and s.compare(0, p_len, prefix) == 0
+*/
+
+static CYTHON_INLINE bool __pyx_f_5utils_has_prefix(std::string const &__pyx_v_s, std::string const &__pyx_v_prefix) {
+  size_t __pyx_v_p_len;
+  bool __pyx_r;
+  bool __pyx_t_1;
+  int __pyx_t_2;
+  int __pyx_t_3;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyGILState_STATE __pyx_gilstate_save;
+
+  /* "utils.pxd":39
+ * # Similar to Go's strings.HasPrefix()
+ * cdef inline cbool has_prefix(const string&s, const string& prefix) noexcept nogil:
+ *     cdef size_t p_len = prefix.length()             # <<<<<<<<<<<<<<
+ *     return s.length() >= p_len and s.compare(0, p_len, prefix) == 0
+ * 
+*/
+  __pyx_v_p_len = __pyx_v_prefix.length();
+
+  /* "utils.pxd":40
+ * cdef inline cbool has_prefix(const string&s, const string& prefix) noexcept nogil:
+ *     cdef size_t p_len = prefix.length()
+ *     return s.length() >= p_len and s.compare(0, p_len, prefix) == 0             # <<<<<<<<<<<<<<
+ * 
+ * # Similar to Go's strings.HasSuffix()
+*/
+  __pyx_t_2 = (__pyx_v_s.length() >= __pyx_v_p_len);
+  if (__pyx_t_2) {
+  } else {
+    __pyx_t_1 = __pyx_t_2;
+    goto __pyx_L3_bool_binop_done;
+  }
+  try {
+    __pyx_t_3 = __pyx_v_s.compare(0, __pyx_v_p_len, __pyx_v_prefix);
+  } catch(...) {
+    PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
+    __Pyx_CppExn2PyErr();
+    __Pyx_PyGILState_Release(__pyx_gilstate_save);
+    __PYX_ERR(2, 40, __pyx_L1_error)
+  }
+  __pyx_t_2 = (__pyx_t_3 == 0);
+  __pyx_t_1 = __pyx_t_2;
+  __pyx_L3_bool_binop_done:;
+  __pyx_r = __pyx_t_1;
+  goto __pyx_L0;
+
+  /* "utils.pxd":38
+ * 
+ * # Similar to Go's strings.HasPrefix()
+ * cdef inline cbool has_prefix(const string&s, const string& prefix) noexcept nogil:             # <<<<<<<<<<<<<<
+ *     cdef size_t p_len = prefix.length()
+ *     return s.length() >= p_len and s.compare(0, p_len, prefix) == 0
+*/
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
+  __Pyx_WriteUnraisable("utils.has_prefix", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
+  __pyx_r = 0;
+  __Pyx_PyGILState_Release(__pyx_gilstate_save);
+  __pyx_L0:;
+  return __pyx_r;
+}
+
+/* "utils.pxd":43
+ * 
+ * # Similar to Go's strings.HasSuffix()
+ * cdef inline cbool has_suffix(const string&s, const string& suffix) noexcept nogil:             # <<<<<<<<<<<<<<
+ *     cdef size_t s_len = suffix.length()
+ *     return s.length() >= s_len and s.compare(s.length() - s_len, s_len, suffix) == 0
+*/
+
+static CYTHON_INLINE bool __pyx_f_5utils_has_suffix(std::string const &__pyx_v_s, std::string const &__pyx_v_suffix) {
+  size_t __pyx_v_s_len;
+  bool __pyx_r;
+  bool __pyx_t_1;
+  int __pyx_t_2;
+  int __pyx_t_3;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyGILState_STATE __pyx_gilstate_save;
+
+  /* "utils.pxd":44
+ * # Similar to Go's strings.HasSuffix()
+ * cdef inline cbool has_suffix(const string&s, const string& suffix) noexcept nogil:
+ *     cdef size_t s_len = suffix.length()             # <<<<<<<<<<<<<<
+ *     return s.length() >= s_len and s.compare(s.length() - s_len, s_len, suffix) == 0
+ * 
+*/
+  __pyx_v_s_len = __pyx_v_suffix.length();
+
+  /* "utils.pxd":45
+ * cdef inline cbool has_suffix(const string&s, const string& suffix) noexcept nogil:
+ *     cdef size_t s_len = suffix.length()
+ *     return s.length() >= s_len and s.compare(s.length() - s_len, s_len, suffix) == 0             # <<<<<<<<<<<<<<
+ * 
+ * # Similar to Go's stringsCutPrefix()
+*/
+  __pyx_t_2 = (__pyx_v_s.length() >= __pyx_v_s_len);
+  if (__pyx_t_2) {
+  } else {
+    __pyx_t_1 = __pyx_t_2;
+    goto __pyx_L3_bool_binop_done;
+  }
+  try {
+    __pyx_t_3 = __pyx_v_s.compare((__pyx_v_s.length() - __pyx_v_s_len), __pyx_v_s_len, __pyx_v_suffix);
+  } catch(...) {
+    PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
+    __Pyx_CppExn2PyErr();
+    __Pyx_PyGILState_Release(__pyx_gilstate_save);
+    __PYX_ERR(2, 45, __pyx_L1_error)
+  }
+  __pyx_t_2 = (__pyx_t_3 == 0);
+  __pyx_t_1 = __pyx_t_2;
+  __pyx_L3_bool_binop_done:;
+  __pyx_r = __pyx_t_1;
+  goto __pyx_L0;
+
+  /* "utils.pxd":43
+ * 
+ * # Similar to Go's strings.HasSuffix()
+ * cdef inline cbool has_suffix(const string&s, const string& suffix) noexcept nogil:             # <<<<<<<<<<<<<<
+ *     cdef size_t s_len = suffix.length()
+ *     return s.length() >= s_len and s.compare(s.length() - s_len, s_len, suffix) == 0
+*/
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
+  __Pyx_WriteUnraisable("utils.has_suffix", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
+  __pyx_r = 0;
+  __Pyx_PyGILState_Release(__pyx_gilstate_save);
+  __pyx_L0:;
+  return __pyx_r;
+}
+
+/* "utils.pxd":48
+ * 
+ * # Similar to Go's stringsCutPrefix()
+ * cdef inline (string, cbool) cut_prefix(const string& s, const string& prefix) noexcept nogil:             # <<<<<<<<<<<<<<
+ *     cdef size_t p_len = prefix.length()
+ * 
+*/
+
+static CYTHON_INLINE __pyx_ctuple_6libcpp_6string_std__in_string__and_6libcpp_bool __pyx_f_5utils_cut_prefix(std::string const &__pyx_v_s, std::string const &__pyx_v_prefix) {
+  size_t __pyx_v_p_len;
+  __pyx_ctuple_6libcpp_6string_std__in_string__and_6libcpp_bool __pyx_r;
+  int __pyx_t_1;
+  int __pyx_t_2;
+  int __pyx_t_3;
+  std::string __pyx_t_4;
+  __pyx_ctuple_6libcpp_6string_std__in_string__and_6libcpp_bool __pyx_t_5;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyGILState_STATE __pyx_gilstate_save;
+
+  /* "utils.pxd":49
+ * # Similar to Go's stringsCutPrefix()
+ * cdef inline (string, cbool) cut_prefix(const string& s, const string& prefix) noexcept nogil:
+ *     cdef size_t p_len = prefix.length()             # <<<<<<<<<<<<<<
+ * 
+ *     if s.length() >= p_len and s.compare(0, p_len, prefix) == 0:
+*/
+  __pyx_v_p_len = __pyx_v_prefix.length();
+
+  /* "utils.pxd":51
+ *     cdef size_t p_len = prefix.length()
+ * 
+ *     if s.length() >= p_len and s.compare(0, p_len, prefix) == 0:             # <<<<<<<<<<<<<<
+ *         return (s.substr(p_len), True)
+ * 
+*/
+  __pyx_t_2 = (__pyx_v_s.length() >= __pyx_v_p_len);
+  if (__pyx_t_2) {
+  } else {
+    __pyx_t_1 = __pyx_t_2;
+    goto __pyx_L4_bool_binop_done;
+  }
+  try {
+    __pyx_t_3 = __pyx_v_s.compare(0, __pyx_v_p_len, __pyx_v_prefix);
+  } catch(...) {
+    PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
+    __Pyx_CppExn2PyErr();
+    __Pyx_PyGILState_Release(__pyx_gilstate_save);
+    __PYX_ERR(2, 51, __pyx_L1_error)
+  }
+  __pyx_t_2 = (__pyx_t_3 == 0);
+  __pyx_t_1 = __pyx_t_2;
+  __pyx_L4_bool_binop_done:;
+  if (__pyx_t_1) {
+
+    /* "utils.pxd":52
+ * 
+ *     if s.length() >= p_len and s.compare(0, p_len, prefix) == 0:
+ *         return (s.substr(p_len), True)             # <<<<<<<<<<<<<<
+ * 
+ *     return (s, False)
+*/
+    try {
+      __pyx_t_4 = __pyx_v_s.substr(__pyx_v_p_len);
+    } catch(...) {
+      PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
+      __Pyx_CppExn2PyErr();
+      __Pyx_PyGILState_Release(__pyx_gilstate_save);
+      __PYX_ERR(2, 52, __pyx_L1_error)
+    }
+    __pyx_t_5.f0 = __pyx_t_4;
+    __pyx_t_5.f1 = 1;
+    __pyx_r = __pyx_t_5;
+    goto __pyx_L0;
+
+    /* "utils.pxd":51
+ *     cdef size_t p_len = prefix.length()
+ * 
+ *     if s.length() >= p_len and s.compare(0, p_len, prefix) == 0:             # <<<<<<<<<<<<<<
+ *         return (s.substr(p_len), True)
+ * 
+*/
+  }
+
+  /* "utils.pxd":54
+ *         return (s.substr(p_len), True)
+ * 
+ *     return (s, False)             # <<<<<<<<<<<<<<
+*/
+  __pyx_t_5.f0 = __pyx_v_s;
+  __pyx_t_5.f1 = 0;
+  __pyx_r = __pyx_t_5;
+  goto __pyx_L0;
+
+  /* "utils.pxd":48
+ * 
+ * # Similar to Go's stringsCutPrefix()
+ * cdef inline (string, cbool) cut_prefix(const string& s, const string& prefix) noexcept nogil:             # <<<<<<<<<<<<<<
+ *     cdef size_t p_len = prefix.length()
+ * 
+*/
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
+  __Pyx_WriteUnraisable("utils.cut_prefix", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
+  __Pyx_pretend_to_initialize(&__pyx_r);
+  __Pyx_PyGILState_Release(__pyx_gilstate_save);
+  __pyx_L0:;
+  return __pyx_r;
+}
+
+/* "lexer.pyx":12
+ * 
+ *     # Accepts raw bytes of the entire file.
  *     def __init__(self, bytes file_content, bint is_idd):             # <<<<<<<<<<<<<<
- *         """
- *         Accepts raw bytes of the entire file.
+ *         # Python 'bytes' is automatically converted to C++ std::string
+ *         self.content = file_content
 */
 
 /* Python wrapper */
 static int __pyx_pw_5lexer_5Lexer_1__init__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-PyDoc_STRVAR(__pyx_doc_5lexer_5Lexer___init__, "\n        Accepts raw bytes of the entire file.\n        ");
-#if CYTHON_UPDATE_DESCRIPTOR_DOC
-struct wrapperbase __pyx_wrapperbase_5lexer_5Lexer___init__;
-#endif
 static int __pyx_pw_5lexer_5Lexer_1__init__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_file_content = 0;
   int __pyx_v_is_idd;
@@ -3899,39 +4441,39 @@ static int __pyx_pw_5lexer_5Lexer_1__init__(PyObject *__pyx_v_self, PyObject *__
   {
     PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_file_content,&__pyx_mstate_global->__pyx_n_u_is_idd,0};
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_VARARGS(__pyx_kwds) : 0;
-    if (unlikely(__pyx_kwds_len) < 0) __PYX_ERR(0, 11, __pyx_L3_error)
+    if (unlikely(__pyx_kwds_len) < 0) __PYX_ERR(0, 12, __pyx_L3_error)
     if (__pyx_kwds_len > 0) {
       switch (__pyx_nargs) {
         case  2:
         values[1] = __Pyx_ArgRef_VARARGS(__pyx_args, 1);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 11, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 12, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  1:
         values[0] = __Pyx_ArgRef_VARARGS(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 11, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 12, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  0: break;
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "__init__", 0) < (0)) __PYX_ERR(0, 11, __pyx_L3_error)
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "__init__", 0) < (0)) __PYX_ERR(0, 12, __pyx_L3_error)
       for (Py_ssize_t i = __pyx_nargs; i < 2; i++) {
-        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("__init__", 1, 2, 2, i); __PYX_ERR(0, 11, __pyx_L3_error) }
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("__init__", 1, 2, 2, i); __PYX_ERR(0, 12, __pyx_L3_error) }
       }
     } else if (unlikely(__pyx_nargs != 2)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_ArgRef_VARARGS(__pyx_args, 0);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 11, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 12, __pyx_L3_error)
       values[1] = __Pyx_ArgRef_VARARGS(__pyx_args, 1);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 11, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 12, __pyx_L3_error)
     }
     __pyx_v_file_content = ((PyObject*)values[0]);
-    __pyx_v_is_idd = __Pyx_PyObject_IsTrue(values[1]); if (unlikely((__pyx_v_is_idd == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 11, __pyx_L3_error)
+    __pyx_v_is_idd = __Pyx_PyObject_IsTrue(values[1]); if (unlikely((__pyx_v_is_idd == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 12, __pyx_L3_error)
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 11, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 12, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -3942,7 +4484,7 @@ static int __pyx_pw_5lexer_5Lexer_1__init__(PyObject *__pyx_v_self, PyObject *__
   __Pyx_RefNannyFinishContext();
   return -1;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_file_content), (&PyBytes_Type), 1, "file_content", 1))) __PYX_ERR(0, 11, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_file_content), (&PyBytes_Type), 1, "file_content", 1))) __PYX_ERR(0, 12, __pyx_L1_error)
   __pyx_r = __pyx_pf_5lexer_5Lexer___init__(((struct __pyx_obj_5lexer_Lexer *)__pyx_v_self), __pyx_v_file_content, __pyx_v_is_idd);
 
   /* function exit code */
@@ -3969,17 +4511,17 @@ static int __pyx_pf_5lexer_5Lexer___init__(struct __pyx_obj_5lexer_Lexer *__pyx_
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
 
-  /* "lexer.pyx":16
- *         """
+  /* "lexer.pyx":14
+ *     def __init__(self, bytes file_content, bint is_idd):
  *         # Python 'bytes' is automatically converted to C++ std::string
  *         self.content = file_content             # <<<<<<<<<<<<<<
  *         self.pos = 0
  *         self.line_num = 0
 */
-  __pyx_t_1 = __pyx_convert_string_from_py_6libcpp_6string_std__in_string(__pyx_v_file_content); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 16, __pyx_L1_error)
+  __pyx_t_1 = __pyx_convert_string_from_py_6libcpp_6string_std__in_string(__pyx_v_file_content); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 14, __pyx_L1_error)
   __pyx_v_self->content = __PYX_STD_MOVE_IF_SUPPORTED(__pyx_t_1);
 
-  /* "lexer.pyx":17
+  /* "lexer.pyx":15
  *         # Python 'bytes' is automatically converted to C++ std::string
  *         self.content = file_content
  *         self.pos = 0             # <<<<<<<<<<<<<<
@@ -3988,7 +4530,7 @@ static int __pyx_pf_5lexer_5Lexer___init__(struct __pyx_obj_5lexer_Lexer *__pyx_
 */
   __pyx_v_self->pos = 0;
 
-  /* "lexer.pyx":18
+  /* "lexer.pyx":16
  *         self.content = file_content
  *         self.pos = 0
  *         self.line_num = 0             # <<<<<<<<<<<<<<
@@ -3997,7 +4539,7 @@ static int __pyx_pf_5lexer_5Lexer___init__(struct __pyx_obj_5lexer_Lexer *__pyx_
 */
   __pyx_v_self->line_num = 0;
 
-  /* "lexer.pyx":19
+  /* "lexer.pyx":17
  *         self.pos = 0
  *         self.line_num = 0
  *         self.is_idd = is_idd             # <<<<<<<<<<<<<<
@@ -4006,7 +4548,7 @@ static int __pyx_pf_5lexer_5Lexer___init__(struct __pyx_obj_5lexer_Lexer *__pyx_
 */
   __pyx_v_self->is_idd = __pyx_v_is_idd;
 
-  /* "lexer.pyx":22
+  /* "lexer.pyx":20
  * 
  *         # Initialize buffer and index pointer
  *         self.buffer.clear()             # <<<<<<<<<<<<<<
@@ -4015,21 +4557,21 @@ static int __pyx_pf_5lexer_5Lexer___init__(struct __pyx_obj_5lexer_Lexer *__pyx_
 */
   __pyx_v_self->buffer.clear();
 
-  /* "lexer.pyx":23
+  /* "lexer.pyx":21
  *         # Initialize buffer and index pointer
  *         self.buffer.clear()
  *         self.buffer_idx = 0             # <<<<<<<<<<<<<<
  * 
- *     cdef cbool scan_next_line(self, string& line) noexcept nogil:
+ *     # Extracts next line from content and stores it in the provided `line` reference.
 */
   __pyx_v_self->buffer_idx = 0;
 
-  /* "lexer.pyx":11
- * cdef class Lexer:
+  /* "lexer.pyx":12
  * 
+ *     # Accepts raw bytes of the entire file.
  *     def __init__(self, bytes file_content, bint is_idd):             # <<<<<<<<<<<<<<
- *         """
- *         Accepts raw bytes of the entire file.
+ *         # Python 'bytes' is automatically converted to C++ std::string
+ *         self.content = file_content
 */
 
   /* function exit code */
@@ -4042,12 +4584,12 @@ static int __pyx_pf_5lexer_5Lexer___init__(struct __pyx_obj_5lexer_Lexer *__pyx_
   return __pyx_r;
 }
 
-/* "lexer.pyx":25
- *         self.buffer_idx = 0
- * 
+/* "lexer.pyx":26
+ *     # Advances `pos` past the next `\n` character.
+ *     # Returns True if a line was successfully read, or False if EOF is reached.
  *     cdef cbool scan_next_line(self, string& line) noexcept nogil:             # <<<<<<<<<<<<<<
- *         """
- *         Extracts next line from content and stores it in the provided `line` reference.
+ *         if self.pos >= self.content.size():
+ *             return False
 */
 
 static bool __pyx_f_5lexer_5Lexer_scan_next_line(struct __pyx_obj_5lexer_Lexer *__pyx_v_self, std::string &__pyx_v_line) {
@@ -4061,9 +4603,9 @@ static bool __pyx_f_5lexer_5Lexer_scan_next_line(struct __pyx_obj_5lexer_Lexer *
   int __pyx_clineno = 0;
   PyGILState_STATE __pyx_gilstate_save;
 
-  /* "lexer.pyx":31
- *         Returns True if a line was successfully read, or False if EOF is reached.
- *         """
+  /* "lexer.pyx":27
+ *     # Returns True if a line was successfully read, or False if EOF is reached.
+ *     cdef cbool scan_next_line(self, string& line) noexcept nogil:
  *         if self.pos >= self.content.size():             # <<<<<<<<<<<<<<
  *             return False
  * 
@@ -4071,8 +4613,8 @@ static bool __pyx_f_5lexer_5Lexer_scan_next_line(struct __pyx_obj_5lexer_Lexer *
   __pyx_t_1 = (__pyx_v_self->pos >= __pyx_v_self->content.size());
   if (__pyx_t_1) {
 
-    /* "lexer.pyx":32
- *         """
+    /* "lexer.pyx":28
+ *     cdef cbool scan_next_line(self, string& line) noexcept nogil:
  *         if self.pos >= self.content.size():
  *             return False             # <<<<<<<<<<<<<<
  * 
@@ -4081,25 +4623,25 @@ static bool __pyx_f_5lexer_5Lexer_scan_next_line(struct __pyx_obj_5lexer_Lexer *
     __pyx_r = 0;
     goto __pyx_L0;
 
-    /* "lexer.pyx":31
- *         Returns True if a line was successfully read, or False if EOF is reached.
- *         """
+    /* "lexer.pyx":27
+ *     # Returns True if a line was successfully read, or False if EOF is reached.
+ *     cdef cbool scan_next_line(self, string& line) noexcept nogil:
  *         if self.pos >= self.content.size():             # <<<<<<<<<<<<<<
  *             return False
  * 
 */
   }
 
-  /* "lexer.pyx":34
+  /* "lexer.pyx":30
  *             return False
  * 
  *         cdef size_t next_newline = self.content.find(b'\n', self.pos)             # <<<<<<<<<<<<<<
  * 
  *         if next_newline == npos:
 */
-  __pyx_v_next_newline = __pyx_v_self->content.find(__pyx_k_, __pyx_v_self->pos);
+  __pyx_v_next_newline = __pyx_v_self->content.find(__pyx_k__3, __pyx_v_self->pos);
 
-  /* "lexer.pyx":36
+  /* "lexer.pyx":32
  *         cdef size_t next_newline = self.content.find(b'\n', self.pos)
  * 
  *         if next_newline == npos:             # <<<<<<<<<<<<<<
@@ -4109,7 +4651,7 @@ static bool __pyx_f_5lexer_5Lexer_scan_next_line(struct __pyx_obj_5lexer_Lexer *
   __pyx_t_1 = (__pyx_v_next_newline == std::string::npos);
   if (__pyx_t_1) {
 
-    /* "lexer.pyx":37
+    /* "lexer.pyx":33
  * 
  *         if next_newline == npos:
  *             line = self.content.substr(self.pos)             # <<<<<<<<<<<<<<
@@ -4122,11 +4664,11 @@ static bool __pyx_f_5lexer_5Lexer_scan_next_line(struct __pyx_obj_5lexer_Lexer *
       PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
       __Pyx_CppExn2PyErr();
       __Pyx_PyGILState_Release(__pyx_gilstate_save);
-      __PYX_ERR(0, 37, __pyx_L1_error)
+      __PYX_ERR(0, 33, __pyx_L1_error)
     }
     __pyx_v_line = __pyx_t_2;
 
-    /* "lexer.pyx":38
+    /* "lexer.pyx":34
  *         if next_newline == npos:
  *             line = self.content.substr(self.pos)
  *             self.pos = self.content.size()             # <<<<<<<<<<<<<<
@@ -4135,7 +4677,7 @@ static bool __pyx_f_5lexer_5Lexer_scan_next_line(struct __pyx_obj_5lexer_Lexer *
 */
     __pyx_v_self->pos = __pyx_v_self->content.size();
 
-    /* "lexer.pyx":36
+    /* "lexer.pyx":32
  *         cdef size_t next_newline = self.content.find(b'\n', self.pos)
  * 
  *         if next_newline == npos:             # <<<<<<<<<<<<<<
@@ -4145,7 +4687,7 @@ static bool __pyx_f_5lexer_5Lexer_scan_next_line(struct __pyx_obj_5lexer_Lexer *
     goto __pyx_L4;
   }
 
-  /* "lexer.pyx":40
+  /* "lexer.pyx":36
  *             self.pos = self.content.size()
  *         else:
  *             line = self.content.substr(self.pos, next_newline - self.pos)             # <<<<<<<<<<<<<<
@@ -4159,11 +4701,11 @@ static bool __pyx_f_5lexer_5Lexer_scan_next_line(struct __pyx_obj_5lexer_Lexer *
       PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
       __Pyx_CppExn2PyErr();
       __Pyx_PyGILState_Release(__pyx_gilstate_save);
-      __PYX_ERR(0, 40, __pyx_L1_error)
+      __PYX_ERR(0, 36, __pyx_L1_error)
     }
     __pyx_v_line = __pyx_t_2;
 
-    /* "lexer.pyx":41
+    /* "lexer.pyx":37
  *         else:
  *             line = self.content.substr(self.pos, next_newline - self.pos)
  *             self.pos = next_newline + 1             # <<<<<<<<<<<<<<
@@ -4174,7 +4716,7 @@ static bool __pyx_f_5lexer_5Lexer_scan_next_line(struct __pyx_obj_5lexer_Lexer *
   }
   __pyx_L4:;
 
-  /* "lexer.pyx":44
+  /* "lexer.pyx":40
  * 
  *         # Handle CRLF (\r\n)
  *         if not line.empty() and line.back() == b'\r':             # <<<<<<<<<<<<<<
@@ -4192,7 +4734,7 @@ static bool __pyx_f_5lexer_5Lexer_scan_next_line(struct __pyx_obj_5lexer_Lexer *
   __pyx_L6_bool_binop_done:;
   if (__pyx_t_1) {
 
-    /* "lexer.pyx":45
+    /* "lexer.pyx":41
  *         # Handle CRLF (\r\n)
  *         if not line.empty() and line.back() == b'\r':
  *             line.pop_back()             # <<<<<<<<<<<<<<
@@ -4201,7 +4743,7 @@ static bool __pyx_f_5lexer_5Lexer_scan_next_line(struct __pyx_obj_5lexer_Lexer *
 */
     __pyx_v_line.pop_back();
 
-    /* "lexer.pyx":44
+    /* "lexer.pyx":40
  * 
  *         # Handle CRLF (\r\n)
  *         if not line.empty() and line.back() == b'\r':             # <<<<<<<<<<<<<<
@@ -4210,7 +4752,7 @@ static bool __pyx_f_5lexer_5Lexer_scan_next_line(struct __pyx_obj_5lexer_Lexer *
 */
   }
 
-  /* "lexer.pyx":47
+  /* "lexer.pyx":43
  *             line.pop_back()
  * 
  *         self.line_num += 1             # <<<<<<<<<<<<<<
@@ -4219,22 +4761,22 @@ static bool __pyx_f_5lexer_5Lexer_scan_next_line(struct __pyx_obj_5lexer_Lexer *
 */
   __pyx_v_self->line_num = (__pyx_v_self->line_num + 1);
 
-  /* "lexer.pyx":48
+  /* "lexer.pyx":44
  * 
  *         self.line_num += 1
  *         return True             # <<<<<<<<<<<<<<
  * 
- *     cdef Token next_token(self) noexcept nogil:
+ *     # Return next token when parser requests.
 */
   __pyx_r = 1;
   goto __pyx_L0;
 
-  /* "lexer.pyx":25
- *         self.buffer_idx = 0
- * 
+  /* "lexer.pyx":26
+ *     # Advances `pos` past the next `\n` character.
+ *     # Returns True if a line was successfully read, or False if EOF is reached.
  *     cdef cbool scan_next_line(self, string& line) noexcept nogil:             # <<<<<<<<<<<<<<
- *         """
- *         Extracts next line from content and stores it in the provided `line` reference.
+ *         if self.pos >= self.content.size():
+ *             return False
 */
 
   /* function exit code */
@@ -4247,12 +4789,12 @@ static bool __pyx_f_5lexer_5Lexer_scan_next_line(struct __pyx_obj_5lexer_Lexer *
   return __pyx_r;
 }
 
-/* "lexer.pyx":50
- *         return True
+/* "lexer.pyx":47
  * 
+ *     # Return next token when parser requests.
  *     cdef Token next_token(self) noexcept nogil:             # <<<<<<<<<<<<<<
- *         """
- *         Return next token when parser requests.
+ *         cdef Token tok
+ *         cdef string line
 */
 
 static struct __pyx_t_5lexer_Token __pyx_f_5lexer_5Lexer_next_token(struct __pyx_obj_5lexer_Lexer *__pyx_v_self) {
@@ -4262,7 +4804,7 @@ static struct __pyx_t_5lexer_Token __pyx_f_5lexer_5Lexer_next_token(struct __pyx
   struct __pyx_t_5lexer_Token __pyx_r;
   int __pyx_t_1;
 
-  /* "lexer.pyx":59
+  /* "lexer.pyx":53
  * 
  *         # If there is a remaining token in the buffer
  *         if self.buffer_idx < self.buffer.size():             # <<<<<<<<<<<<<<
@@ -4272,7 +4814,7 @@ static struct __pyx_t_5lexer_Token __pyx_f_5lexer_5Lexer_next_token(struct __pyx
   __pyx_t_1 = (__pyx_v_self->buffer_idx < __pyx_v_self->buffer.size());
   if (__pyx_t_1) {
 
-    /* "lexer.pyx":60
+    /* "lexer.pyx":54
  *         # If there is a remaining token in the buffer
  *         if self.buffer_idx < self.buffer.size():
  *             tok = self.buffer[self.buffer_idx]             # <<<<<<<<<<<<<<
@@ -4281,7 +4823,7 @@ static struct __pyx_t_5lexer_Token __pyx_f_5lexer_5Lexer_next_token(struct __pyx
 */
     __pyx_v_tok = (__pyx_v_self->buffer[__pyx_v_self->buffer_idx]);
 
-    /* "lexer.pyx":61
+    /* "lexer.pyx":55
  *         if self.buffer_idx < self.buffer.size():
  *             tok = self.buffer[self.buffer_idx]
  *             self.buffer_idx += 1             # <<<<<<<<<<<<<<
@@ -4290,7 +4832,7 @@ static struct __pyx_t_5lexer_Token __pyx_f_5lexer_5Lexer_next_token(struct __pyx
 */
     __pyx_v_self->buffer_idx = (__pyx_v_self->buffer_idx + 1);
 
-    /* "lexer.pyx":62
+    /* "lexer.pyx":56
  *             tok = self.buffer[self.buffer_idx]
  *             self.buffer_idx += 1
  *             return tok             # <<<<<<<<<<<<<<
@@ -4300,7 +4842,7 @@ static struct __pyx_t_5lexer_Token __pyx_f_5lexer_5Lexer_next_token(struct __pyx
     __pyx_r = __pyx_v_tok;
     goto __pyx_L0;
 
-    /* "lexer.pyx":59
+    /* "lexer.pyx":53
  * 
  *         # If there is a remaining token in the buffer
  *         if self.buffer_idx < self.buffer.size():             # <<<<<<<<<<<<<<
@@ -4309,7 +4851,7 @@ static struct __pyx_t_5lexer_Token __pyx_f_5lexer_5Lexer_next_token(struct __pyx
 */
   }
 
-  /* "lexer.pyx":65
+  /* "lexer.pyx":59
  * 
  *         # Clear buffer
  *         self.buffer.clear()             # <<<<<<<<<<<<<<
@@ -4318,7 +4860,7 @@ static struct __pyx_t_5lexer_Token __pyx_f_5lexer_5Lexer_next_token(struct __pyx
 */
   __pyx_v_self->buffer.clear();
 
-  /* "lexer.pyx":66
+  /* "lexer.pyx":60
  *         # Clear buffer
  *         self.buffer.clear()
  *         self.buffer_idx = 0             # <<<<<<<<<<<<<<
@@ -4327,7 +4869,7 @@ static struct __pyx_t_5lexer_Token __pyx_f_5lexer_5Lexer_next_token(struct __pyx
 */
   __pyx_v_self->buffer_idx = 0;
 
-  /* "lexer.pyx":69
+  /* "lexer.pyx":63
  * 
  *         # Read next line
  *         while True:             # <<<<<<<<<<<<<<
@@ -4336,7 +4878,7 @@ static struct __pyx_t_5lexer_Token __pyx_f_5lexer_5Lexer_next_token(struct __pyx
 */
   while (1) {
 
-    /* "lexer.pyx":70
+    /* "lexer.pyx":64
  *         # Read next line
  *         while True:
  *             has_more_lines = self.scan_next_line(line)             # <<<<<<<<<<<<<<
@@ -4345,7 +4887,7 @@ static struct __pyx_t_5lexer_Token __pyx_f_5lexer_5Lexer_next_token(struct __pyx
 */
     __pyx_v_has_more_lines = ((struct __pyx_vtabstruct_5lexer_Lexer *)__pyx_v_self->__pyx_vtab)->scan_next_line(__pyx_v_self, __pyx_v_line);
 
-    /* "lexer.pyx":72
+    /* "lexer.pyx":66
  *             has_more_lines = self.scan_next_line(line)
  * 
  *             if not has_more_lines:             # <<<<<<<<<<<<<<
@@ -4355,7 +4897,7 @@ static struct __pyx_t_5lexer_Token __pyx_f_5lexer_5Lexer_next_token(struct __pyx
     __pyx_t_1 = (!(__pyx_v_has_more_lines != 0));
     if (__pyx_t_1) {
 
-      /* "lexer.pyx":73
+      /* "lexer.pyx":67
  * 
  *             if not has_more_lines:
  *                 break             # <<<<<<<<<<<<<<
@@ -4364,7 +4906,7 @@ static struct __pyx_t_5lexer_Token __pyx_f_5lexer_5Lexer_next_token(struct __pyx
 */
       goto __pyx_L5_break;
 
-      /* "lexer.pyx":72
+      /* "lexer.pyx":66
  *             has_more_lines = self.scan_next_line(line)
  * 
  *             if not has_more_lines:             # <<<<<<<<<<<<<<
@@ -4373,7 +4915,7 @@ static struct __pyx_t_5lexer_Token __pyx_f_5lexer_5Lexer_next_token(struct __pyx
 */
     }
 
-    /* "lexer.pyx":75
+    /* "lexer.pyx":69
  *                 break
  * 
  *             self.tokenize_line(line)             # <<<<<<<<<<<<<<
@@ -4382,7 +4924,7 @@ static struct __pyx_t_5lexer_Token __pyx_f_5lexer_5Lexer_next_token(struct __pyx
 */
     ((struct __pyx_vtabstruct_5lexer_Lexer *)__pyx_v_self->__pyx_vtab)->tokenize_line(__pyx_v_self, __pyx_v_line);
 
-    /* "lexer.pyx":78
+    /* "lexer.pyx":72
  * 
  *             # If tokens were generated, return first one and move pointer
  *             if self.buffer.size() > 0:             # <<<<<<<<<<<<<<
@@ -4392,7 +4934,7 @@ static struct __pyx_t_5lexer_Token __pyx_f_5lexer_5Lexer_next_token(struct __pyx
     __pyx_t_1 = (__pyx_v_self->buffer.size() > 0);
     if (__pyx_t_1) {
 
-      /* "lexer.pyx":79
+      /* "lexer.pyx":73
  *             # If tokens were generated, return first one and move pointer
  *             if self.buffer.size() > 0:
  *                 tok = self.buffer[0]             # <<<<<<<<<<<<<<
@@ -4401,7 +4943,7 @@ static struct __pyx_t_5lexer_Token __pyx_f_5lexer_5Lexer_next_token(struct __pyx
 */
       __pyx_v_tok = (__pyx_v_self->buffer[0]);
 
-      /* "lexer.pyx":80
+      /* "lexer.pyx":74
  *             if self.buffer.size() > 0:
  *                 tok = self.buffer[0]
  *                 self.buffer_idx = 1             # <<<<<<<<<<<<<<
@@ -4410,7 +4952,7 @@ static struct __pyx_t_5lexer_Token __pyx_f_5lexer_5Lexer_next_token(struct __pyx
 */
       __pyx_v_self->buffer_idx = 1;
 
-      /* "lexer.pyx":81
+      /* "lexer.pyx":75
  *                 tok = self.buffer[0]
  *                 self.buffer_idx = 1
  *                 return tok             # <<<<<<<<<<<<<<
@@ -4420,7 +4962,7 @@ static struct __pyx_t_5lexer_Token __pyx_f_5lexer_5Lexer_next_token(struct __pyx
       __pyx_r = __pyx_v_tok;
       goto __pyx_L0;
 
-      /* "lexer.pyx":78
+      /* "lexer.pyx":72
  * 
  *             # If tokens were generated, return first one and move pointer
  *             if self.buffer.size() > 0:             # <<<<<<<<<<<<<<
@@ -4431,7 +4973,7 @@ static struct __pyx_t_5lexer_Token __pyx_f_5lexer_5Lexer_next_token(struct __pyx
   }
   __pyx_L5_break:;
 
-  /* "lexer.pyx":84
+  /* "lexer.pyx":78
  * 
  *         # Return EOF if no more content
  *         tok.type = TOKEN_EOF             # <<<<<<<<<<<<<<
@@ -4440,7 +4982,7 @@ static struct __pyx_t_5lexer_Token __pyx_f_5lexer_5Lexer_next_token(struct __pyx
 */
   __pyx_v_tok.type = __pyx_e_5lexer_TOKEN_EOF;
 
-  /* "lexer.pyx":85
+  /* "lexer.pyx":79
  *         # Return EOF if no more content
  *         tok.type = TOKEN_EOF
  *         tok.value.clear()  # instead of tok.value = b""             # <<<<<<<<<<<<<<
@@ -4449,22 +4991,22 @@ static struct __pyx_t_5lexer_Token __pyx_f_5lexer_5Lexer_next_token(struct __pyx
 */
   __pyx_v_tok.value.clear();
 
-  /* "lexer.pyx":86
+  /* "lexer.pyx":80
  *         tok.type = TOKEN_EOF
  *         tok.value.clear()  # instead of tok.value = b""
  *         return tok             # <<<<<<<<<<<<<<
  * 
- *     cdef void tokenize_line(self, const string& line) noexcept nogil:
+ *     # Read line and split by commas and semicolons.
 */
   __pyx_r = __pyx_v_tok;
   goto __pyx_L0;
 
-  /* "lexer.pyx":50
- *         return True
+  /* "lexer.pyx":47
  * 
+ *     # Return next token when parser requests.
  *     cdef Token next_token(self) noexcept nogil:             # <<<<<<<<<<<<<<
- *         """
- *         Return next token when parser requests.
+ *         cdef Token tok
+ *         cdef string line
 */
 
   /* function exit code */
@@ -4472,9 +5014,9 @@ static struct __pyx_t_5lexer_Token __pyx_f_5lexer_5Lexer_next_token(struct __pyx
   return __pyx_r;
 }
 
-/* "lexer.pyx":88
- *         return tok
+/* "lexer.pyx":83
  * 
+ *     # Read line and split by commas and semicolons.
  *     cdef void tokenize_line(self, const string& line) noexcept nogil:             # <<<<<<<<<<<<<<
  *         # Find position of comment
  *         cdef size_t limit = line.find(b'!')
@@ -4495,16 +5037,16 @@ static void __pyx_f_5lexer_5Lexer_tokenize_line(struct __pyx_obj_5lexer_Lexer *_
   int __pyx_clineno = 0;
   PyGILState_STATE __pyx_gilstate_save;
 
-  /* "lexer.pyx":90
+  /* "lexer.pyx":85
  *     cdef void tokenize_line(self, const string& line) noexcept nogil:
  *         # Find position of comment
  *         cdef size_t limit = line.find(b'!')             # <<<<<<<<<<<<<<
  * 
  *         # If no comment is found, set limit to end of string
 */
-  __pyx_v_limit = __pyx_v_line.find(__pyx_k__2);
+  __pyx_v_limit = __pyx_v_line.find(__pyx_k__4);
 
-  /* "lexer.pyx":93
+  /* "lexer.pyx":88
  * 
  *         # If no comment is found, set limit to end of string
  *         if limit == npos:             # <<<<<<<<<<<<<<
@@ -4514,7 +5056,7 @@ static void __pyx_f_5lexer_5Lexer_tokenize_line(struct __pyx_obj_5lexer_Lexer *_
   __pyx_t_1 = (__pyx_v_limit == std::string::npos);
   if (__pyx_t_1) {
 
-    /* "lexer.pyx":94
+    /* "lexer.pyx":89
  *         # If no comment is found, set limit to end of string
  *         if limit == npos:
  *             limit = line.size()             # <<<<<<<<<<<<<<
@@ -4523,7 +5065,7 @@ static void __pyx_f_5lexer_5Lexer_tokenize_line(struct __pyx_obj_5lexer_Lexer *_
 */
     __pyx_v_limit = __pyx_v_line.size();
 
-    /* "lexer.pyx":93
+    /* "lexer.pyx":88
  * 
  *         # If no comment is found, set limit to end of string
  *         if limit == npos:             # <<<<<<<<<<<<<<
@@ -4532,7 +5074,7 @@ static void __pyx_f_5lexer_5Lexer_tokenize_line(struct __pyx_obj_5lexer_Lexer *_
 */
   }
 
-  /* "lexer.pyx":97
+  /* "lexer.pyx":92
  * 
  *         cdef string text_builder  # empty string
  *         cdef size_t byte_idx = 0             # <<<<<<<<<<<<<<
@@ -4541,7 +5083,7 @@ static void __pyx_f_5lexer_5Lexer_tokenize_line(struct __pyx_obj_5lexer_Lexer *_
 */
   __pyx_v_byte_idx = 0;
 
-  /* "lexer.pyx":103
+  /* "lexer.pyx":98
  * 
  *         # Iterate up to the `limit`
  *         while byte_idx < limit:             # <<<<<<<<<<<<<<
@@ -4552,7 +5094,7 @@ static void __pyx_f_5lexer_5Lexer_tokenize_line(struct __pyx_obj_5lexer_Lexer *_
     __pyx_t_1 = (__pyx_v_byte_idx < __pyx_v_limit);
     if (!__pyx_t_1) break;
 
-    /* "lexer.pyx":104
+    /* "lexer.pyx":99
  *         # Iterate up to the `limit`
  *         while byte_idx < limit:
  *             c = line[byte_idx]             # <<<<<<<<<<<<<<
@@ -4561,7 +5103,7 @@ static void __pyx_f_5lexer_5Lexer_tokenize_line(struct __pyx_obj_5lexer_Lexer *_
 */
     __pyx_v_c = (__pyx_v_line[__pyx_v_byte_idx]);
 
-    /* "lexer.pyx":106
+    /* "lexer.pyx":101
  *             c = line[byte_idx]
  * 
  *             if self.is_idd and c == b'\\':             # <<<<<<<<<<<<<<
@@ -4579,7 +5121,7 @@ static void __pyx_f_5lexer_5Lexer_tokenize_line(struct __pyx_obj_5lexer_Lexer *_
     __pyx_L7_bool_binop_done:;
     if (__pyx_t_1) {
 
-      /* "lexer.pyx":107
+      /* "lexer.pyx":102
  * 
  *             if self.is_idd and c == b'\\':
  *                 self.push_text_token(text_builder)             # <<<<<<<<<<<<<<
@@ -4588,7 +5130,7 @@ static void __pyx_f_5lexer_5Lexer_tokenize_line(struct __pyx_obj_5lexer_Lexer *_
 */
       ((struct __pyx_vtabstruct_5lexer_Lexer *)__pyx_v_self->__pyx_vtab)->push_text_token(__pyx_v_self, __pyx_v_text_builder);
 
-      /* "lexer.pyx":108
+      /* "lexer.pyx":103
  *             if self.is_idd and c == b'\\':
  *                 self.push_text_token(text_builder)
  *                 remainder = line.substr(byte_idx, limit - byte_idx)             # <<<<<<<<<<<<<<
@@ -4601,11 +5143,11 @@ static void __pyx_f_5lexer_5Lexer_tokenize_line(struct __pyx_obj_5lexer_Lexer *_
         PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
         __Pyx_CppExn2PyErr();
         __Pyx_PyGILState_Release(__pyx_gilstate_save);
-        __PYX_ERR(0, 108, __pyx_L1_error)
+        __PYX_ERR(0, 103, __pyx_L1_error)
       }
       __pyx_v_remainder = __PYX_STD_MOVE_IF_SUPPORTED(__pyx_t_3);
 
-      /* "lexer.pyx":109
+      /* "lexer.pyx":104
  *                 self.push_text_token(text_builder)
  *                 remainder = line.substr(byte_idx, limit - byte_idx)
  *                 remainder = trim_string(remainder)             # <<<<<<<<<<<<<<
@@ -4614,7 +5156,7 @@ static void __pyx_f_5lexer_5Lexer_tokenize_line(struct __pyx_obj_5lexer_Lexer *_
 */
       __pyx_v_remainder = __pyx_f_5utils_trim_string(__pyx_v_remainder);
 
-      /* "lexer.pyx":110
+      /* "lexer.pyx":105
  *                 remainder = line.substr(byte_idx, limit - byte_idx)
  *                 remainder = trim_string(remainder)
  *                 if not remainder.empty():             # <<<<<<<<<<<<<<
@@ -4624,7 +5166,7 @@ static void __pyx_f_5lexer_5Lexer_tokenize_line(struct __pyx_obj_5lexer_Lexer *_
       __pyx_t_1 = (!__pyx_v_remainder.empty());
       if (__pyx_t_1) {
 
-        /* "lexer.pyx":111
+        /* "lexer.pyx":106
  *                 remainder = trim_string(remainder)
  *                 if not remainder.empty():
  *                     self.buffer.push_back(Token(TOKEN_TEXT, remainder))             # <<<<<<<<<<<<<<
@@ -4639,10 +5181,10 @@ static void __pyx_f_5lexer_5Lexer_tokenize_line(struct __pyx_obj_5lexer_Lexer *_
           PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
           __Pyx_CppExn2PyErr();
           __Pyx_PyGILState_Release(__pyx_gilstate_save);
-          __PYX_ERR(0, 111, __pyx_L1_error)
+          __PYX_ERR(0, 106, __pyx_L1_error)
         }
 
-        /* "lexer.pyx":110
+        /* "lexer.pyx":105
  *                 remainder = line.substr(byte_idx, limit - byte_idx)
  *                 remainder = trim_string(remainder)
  *                 if not remainder.empty():             # <<<<<<<<<<<<<<
@@ -4651,7 +5193,7 @@ static void __pyx_f_5lexer_5Lexer_tokenize_line(struct __pyx_obj_5lexer_Lexer *_
 */
       }
 
-      /* "lexer.pyx":112
+      /* "lexer.pyx":107
  *                 if not remainder.empty():
  *                     self.buffer.push_back(Token(TOKEN_TEXT, remainder))
  *                 break             # <<<<<<<<<<<<<<
@@ -4660,7 +5202,7 @@ static void __pyx_f_5lexer_5Lexer_tokenize_line(struct __pyx_obj_5lexer_Lexer *_
 */
       goto __pyx_L5_break;
 
-      /* "lexer.pyx":106
+      /* "lexer.pyx":101
  *             c = line[byte_idx]
  * 
  *             if self.is_idd and c == b'\\':             # <<<<<<<<<<<<<<
@@ -4669,7 +5211,7 @@ static void __pyx_f_5lexer_5Lexer_tokenize_line(struct __pyx_obj_5lexer_Lexer *_
 */
     }
 
-    /* "lexer.pyx":114
+    /* "lexer.pyx":109
  *                 break
  * 
  *             if c == b',':             # <<<<<<<<<<<<<<
@@ -4679,7 +5221,7 @@ static void __pyx_f_5lexer_5Lexer_tokenize_line(struct __pyx_obj_5lexer_Lexer *_
     switch (__pyx_v_c) {
       case ',':
 
-      /* "lexer.pyx":115
+      /* "lexer.pyx":110
  * 
  *             if c == b',':
  *                 self.push_text_token(text_builder)             # <<<<<<<<<<<<<<
@@ -4688,7 +5230,7 @@ static void __pyx_f_5lexer_5Lexer_tokenize_line(struct __pyx_obj_5lexer_Lexer *_
 */
       ((struct __pyx_vtabstruct_5lexer_Lexer *)__pyx_v_self->__pyx_vtab)->push_text_token(__pyx_v_self, __pyx_v_text_builder);
 
-      /* "lexer.pyx":116
+      /* "lexer.pyx":111
  *             if c == b',':
  *                 self.push_text_token(text_builder)
  *                 self.buffer.push_back(Token(TOKEN_COMMA, <const char*>b","))             # <<<<<<<<<<<<<<
@@ -4696,17 +5238,17 @@ static void __pyx_f_5lexer_5Lexer_tokenize_line(struct __pyx_obj_5lexer_Lexer *_
  *                 self.push_text_token(text_builder)
 */
       __pyx_t_4.type = __pyx_e_5lexer_TOKEN_COMMA;
-      __pyx_t_4.value = ((char const *)__pyx_k__3);
+      __pyx_t_4.value = ((char const *)__pyx_k__5);
       try {
         __pyx_v_self->buffer.push_back(__pyx_t_4);
       } catch(...) {
         PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
         __Pyx_CppExn2PyErr();
         __Pyx_PyGILState_Release(__pyx_gilstate_save);
-        __PYX_ERR(0, 116, __pyx_L1_error)
+        __PYX_ERR(0, 111, __pyx_L1_error)
       }
 
-      /* "lexer.pyx":114
+      /* "lexer.pyx":109
  *                 break
  * 
  *             if c == b',':             # <<<<<<<<<<<<<<
@@ -4716,7 +5258,7 @@ static void __pyx_f_5lexer_5Lexer_tokenize_line(struct __pyx_obj_5lexer_Lexer *_
       break;
       case ';':
 
-      /* "lexer.pyx":118
+      /* "lexer.pyx":113
  *                 self.buffer.push_back(Token(TOKEN_COMMA, <const char*>b","))
  *             elif c == b';':
  *                 self.push_text_token(text_builder)             # <<<<<<<<<<<<<<
@@ -4725,7 +5267,7 @@ static void __pyx_f_5lexer_5Lexer_tokenize_line(struct __pyx_obj_5lexer_Lexer *_
 */
       ((struct __pyx_vtabstruct_5lexer_Lexer *)__pyx_v_self->__pyx_vtab)->push_text_token(__pyx_v_self, __pyx_v_text_builder);
 
-      /* "lexer.pyx":119
+      /* "lexer.pyx":114
  *             elif c == b';':
  *                 self.push_text_token(text_builder)
  *                 self.buffer.push_back(Token(TOKEN_SEMICOLON, <const char*>b";"))             # <<<<<<<<<<<<<<
@@ -4733,17 +5275,17 @@ static void __pyx_f_5lexer_5Lexer_tokenize_line(struct __pyx_obj_5lexer_Lexer *_
  *                 text_builder.push_back(c)
 */
       __pyx_t_4.type = __pyx_e_5lexer_TOKEN_SEMICOLON;
-      __pyx_t_4.value = ((char const *)__pyx_k__4);
+      __pyx_t_4.value = ((char const *)__pyx_k__6);
       try {
         __pyx_v_self->buffer.push_back(__pyx_t_4);
       } catch(...) {
         PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
         __Pyx_CppExn2PyErr();
         __Pyx_PyGILState_Release(__pyx_gilstate_save);
-        __PYX_ERR(0, 119, __pyx_L1_error)
+        __PYX_ERR(0, 114, __pyx_L1_error)
       }
 
-      /* "lexer.pyx":117
+      /* "lexer.pyx":112
  *                 self.push_text_token(text_builder)
  *                 self.buffer.push_back(Token(TOKEN_COMMA, <const char*>b","))
  *             elif c == b';':             # <<<<<<<<<<<<<<
@@ -4753,7 +5295,7 @@ static void __pyx_f_5lexer_5Lexer_tokenize_line(struct __pyx_obj_5lexer_Lexer *_
       break;
       default:
 
-      /* "lexer.pyx":121
+      /* "lexer.pyx":116
  *                 self.buffer.push_back(Token(TOKEN_SEMICOLON, <const char*>b";"))
  *             else:
  *                 text_builder.push_back(c)             # <<<<<<<<<<<<<<
@@ -4766,12 +5308,12 @@ static void __pyx_f_5lexer_5Lexer_tokenize_line(struct __pyx_obj_5lexer_Lexer *_
         PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
         __Pyx_CppExn2PyErr();
         __Pyx_PyGILState_Release(__pyx_gilstate_save);
-        __PYX_ERR(0, 121, __pyx_L1_error)
+        __PYX_ERR(0, 116, __pyx_L1_error)
       }
       break;
     }
 
-    /* "lexer.pyx":123
+    /* "lexer.pyx":118
  *                 text_builder.push_back(c)
  * 
  *             byte_idx += 1             # <<<<<<<<<<<<<<
@@ -4782,18 +5324,18 @@ static void __pyx_f_5lexer_5Lexer_tokenize_line(struct __pyx_obj_5lexer_Lexer *_
   }
   __pyx_L5_break:;
 
-  /* "lexer.pyx":126
+  /* "lexer.pyx":121
  * 
  *         # Final flush
  *         self.push_text_token(text_builder)             # <<<<<<<<<<<<<<
  * 
- *     cdef void push_text_token(self, string& builder) noexcept nogil:
+ *     # Trims and pushes to buffer using reference.
 */
   ((struct __pyx_vtabstruct_5lexer_Lexer *)__pyx_v_self->__pyx_vtab)->push_text_token(__pyx_v_self, __pyx_v_text_builder);
 
-  /* "lexer.pyx":88
- *         return tok
+  /* "lexer.pyx":83
  * 
+ *     # Read line and split by commas and semicolons.
  *     cdef void tokenize_line(self, const string& line) noexcept nogil:             # <<<<<<<<<<<<<<
  *         # Find position of comment
  *         cdef size_t limit = line.find(b'!')
@@ -4808,12 +5350,12 @@ static void __pyx_f_5lexer_5Lexer_tokenize_line(struct __pyx_obj_5lexer_Lexer *_
   __pyx_L0:;
 }
 
-/* "lexer.pyx":128
- *         self.push_text_token(text_builder)
+/* "lexer.pyx":124
  * 
+ *     # Trims and pushes to buffer using reference.
  *     cdef void push_text_token(self, string& builder) noexcept nogil:             # <<<<<<<<<<<<<<
- *         """
- *         Trims and pushes to buffer using reference.
+ *         cdef string trimmed = trim_string(builder)
+ *         if not trimmed.empty():
 */
 
 static void __pyx_f_5lexer_5Lexer_push_text_token(struct __pyx_obj_5lexer_Lexer *__pyx_v_self, std::string &__pyx_v_builder) {
@@ -4825,17 +5367,17 @@ static void __pyx_f_5lexer_5Lexer_push_text_token(struct __pyx_obj_5lexer_Lexer 
   int __pyx_clineno = 0;
   PyGILState_STATE __pyx_gilstate_save;
 
-  /* "lexer.pyx":132
- *         Trims and pushes to buffer using reference.
- *         """
+  /* "lexer.pyx":125
+ *     # Trims and pushes to buffer using reference.
+ *     cdef void push_text_token(self, string& builder) noexcept nogil:
  *         cdef string trimmed = trim_string(builder)             # <<<<<<<<<<<<<<
  *         if not trimmed.empty():
  *             self.buffer.push_back(Token(TOKEN_TEXT, trimmed))
 */
   __pyx_v_trimmed = __pyx_f_5utils_trim_string(__pyx_v_builder);
 
-  /* "lexer.pyx":133
- *         """
+  /* "lexer.pyx":126
+ *     cdef void push_text_token(self, string& builder) noexcept nogil:
  *         cdef string trimmed = trim_string(builder)
  *         if not trimmed.empty():             # <<<<<<<<<<<<<<
  *             self.buffer.push_back(Token(TOKEN_TEXT, trimmed))
@@ -4844,7 +5386,7 @@ static void __pyx_f_5lexer_5Lexer_push_text_token(struct __pyx_obj_5lexer_Lexer 
   __pyx_t_1 = (!__pyx_v_trimmed.empty());
   if (__pyx_t_1) {
 
-    /* "lexer.pyx":134
+    /* "lexer.pyx":127
  *         cdef string trimmed = trim_string(builder)
  *         if not trimmed.empty():
  *             self.buffer.push_back(Token(TOKEN_TEXT, trimmed))             # <<<<<<<<<<<<<<
@@ -4859,11 +5401,11 @@ static void __pyx_f_5lexer_5Lexer_push_text_token(struct __pyx_obj_5lexer_Lexer 
       PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
       __Pyx_CppExn2PyErr();
       __Pyx_PyGILState_Release(__pyx_gilstate_save);
-      __PYX_ERR(0, 134, __pyx_L1_error)
+      __PYX_ERR(0, 127, __pyx_L1_error)
     }
 
-    /* "lexer.pyx":133
- *         """
+    /* "lexer.pyx":126
+ *     cdef void push_text_token(self, string& builder) noexcept nogil:
  *         cdef string trimmed = trim_string(builder)
  *         if not trimmed.empty():             # <<<<<<<<<<<<<<
  *             self.buffer.push_back(Token(TOKEN_TEXT, trimmed))
@@ -4871,7 +5413,7 @@ static void __pyx_f_5lexer_5Lexer_push_text_token(struct __pyx_obj_5lexer_Lexer 
 */
   }
 
-  /* "lexer.pyx":136
+  /* "lexer.pyx":129
  *             self.buffer.push_back(Token(TOKEN_TEXT, trimmed))
  *         # Clear builder to reuse its allocated capacity
  *         builder.clear()             # <<<<<<<<<<<<<<
@@ -4880,12 +5422,12 @@ static void __pyx_f_5lexer_5Lexer_push_text_token(struct __pyx_obj_5lexer_Lexer 
 */
   __pyx_v_builder.clear();
 
-  /* "lexer.pyx":128
- *         self.push_text_token(text_builder)
+  /* "lexer.pyx":124
  * 
+ *     # Trims and pushes to buffer using reference.
  *     cdef void push_text_token(self, string& builder) noexcept nogil:             # <<<<<<<<<<<<<<
- *         """
- *         Trims and pushes to buffer using reference.
+ *         cdef string trimmed = trim_string(builder)
+ *         if not trimmed.empty():
 */
 
   /* function exit code */
@@ -4897,7 +5439,7 @@ static void __pyx_f_5lexer_5Lexer_push_text_token(struct __pyx_obj_5lexer_Lexer 
   __pyx_L0:;
 }
 
-/* "lexer.pyx":138
+/* "lexer.pyx":131
  *         builder.clear()
  * 
  *     def test(self):             # <<<<<<<<<<<<<<
@@ -4962,19 +5504,19 @@ static PyObject *__pyx_pf_5lexer_5Lexer_2test(struct __pyx_obj_5lexer_Lexer *__p
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("test", 0);
 
-  /* "lexer.pyx":140
+  /* "lexer.pyx":133
  *     def test(self):
  *         cdef Token tok
  *         tokens = []             # <<<<<<<<<<<<<<
  * 
  *         while True:
 */
-  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 140, __pyx_L1_error)
+  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 133, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_tokens = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "lexer.pyx":142
+  /* "lexer.pyx":135
  *         tokens = []
  * 
  *         while True:             # <<<<<<<<<<<<<<
@@ -4983,7 +5525,7 @@ static PyObject *__pyx_pf_5lexer_5Lexer_2test(struct __pyx_obj_5lexer_Lexer *__p
 */
   while (1) {
 
-    /* "lexer.pyx":143
+    /* "lexer.pyx":136
  * 
  *         while True:
  *             with nogil:             # <<<<<<<<<<<<<<
@@ -4996,7 +5538,7 @@ static PyObject *__pyx_pf_5lexer_5Lexer_2test(struct __pyx_obj_5lexer_Lexer *__p
         __Pyx_FastGIL_Remember();
         /*try:*/ {
 
-          /* "lexer.pyx":144
+          /* "lexer.pyx":137
  *         while True:
  *             with nogil:
  *                 tok = self.next_token()             # <<<<<<<<<<<<<<
@@ -5006,7 +5548,7 @@ static PyObject *__pyx_pf_5lexer_5Lexer_2test(struct __pyx_obj_5lexer_Lexer *__p
           __pyx_v_tok = ((struct __pyx_vtabstruct_5lexer_Lexer *)__pyx_v_self->__pyx_vtab)->next_token(__pyx_v_self);
         }
 
-        /* "lexer.pyx":143
+        /* "lexer.pyx":136
  * 
  *         while True:
  *             with nogil:             # <<<<<<<<<<<<<<
@@ -5023,29 +5565,29 @@ static PyObject *__pyx_pf_5lexer_5Lexer_2test(struct __pyx_obj_5lexer_Lexer *__p
         }
     }
 
-    /* "lexer.pyx":147
+    /* "lexer.pyx":140
  * 
  *             # Convert C++ struct the Python Tuple
  *             tokens.append((tok.type, tok.value.decode("utf-8")))             # <<<<<<<<<<<<<<
  * 
  *             if tok.type == TOKEN_EOF:
 */
-    __pyx_t_1 = __Pyx_PyLong_From_enum____pyx_t_5lexer_TokenType(__pyx_v_tok.type); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 147, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyLong_From_enum____pyx_t_5lexer_TokenType(__pyx_v_tok.type); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 140, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = __Pyx_decode_cpp_string(__pyx_v_tok.value, 0, PY_SSIZE_T_MAX, NULL, NULL, PyUnicode_DecodeUTF8); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 147, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_decode_cpp_string(__pyx_v_tok.value, 0, PY_SSIZE_T_MAX, NULL, NULL, PyUnicode_DecodeUTF8); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 140, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 147, __pyx_L1_error)
+    __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 140, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_GIVEREF(__pyx_t_1);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_1) != (0)) __PYX_ERR(0, 147, __pyx_L1_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_1) != (0)) __PYX_ERR(0, 140, __pyx_L1_error);
     __Pyx_GIVEREF(__pyx_t_2);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_2) != (0)) __PYX_ERR(0, 147, __pyx_L1_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_2) != (0)) __PYX_ERR(0, 140, __pyx_L1_error);
     __pyx_t_1 = 0;
     __pyx_t_2 = 0;
-    __pyx_t_4 = __Pyx_PyList_Append(__pyx_v_tokens, __pyx_t_3); if (unlikely(__pyx_t_4 == ((int)-1))) __PYX_ERR(0, 147, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyList_Append(__pyx_v_tokens, __pyx_t_3); if (unlikely(__pyx_t_4 == ((int)-1))) __PYX_ERR(0, 140, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-    /* "lexer.pyx":149
+    /* "lexer.pyx":142
  *             tokens.append((tok.type, tok.value.decode("utf-8")))
  * 
  *             if tok.type == TOKEN_EOF:             # <<<<<<<<<<<<<<
@@ -5055,7 +5597,7 @@ static PyObject *__pyx_pf_5lexer_5Lexer_2test(struct __pyx_obj_5lexer_Lexer *__p
     __pyx_t_5 = (__pyx_v_tok.type == __pyx_e_5lexer_TOKEN_EOF);
     if (__pyx_t_5) {
 
-      /* "lexer.pyx":150
+      /* "lexer.pyx":143
  * 
  *             if tok.type == TOKEN_EOF:
  *                 break             # <<<<<<<<<<<<<<
@@ -5064,7 +5606,7 @@ static PyObject *__pyx_pf_5lexer_5Lexer_2test(struct __pyx_obj_5lexer_Lexer *__p
 */
       goto __pyx_L4_break;
 
-      /* "lexer.pyx":149
+      /* "lexer.pyx":142
  *             tokens.append((tok.type, tok.value.decode("utf-8")))
  * 
  *             if tok.type == TOKEN_EOF:             # <<<<<<<<<<<<<<
@@ -5075,7 +5617,7 @@ static PyObject *__pyx_pf_5lexer_5Lexer_2test(struct __pyx_obj_5lexer_Lexer *__p
   }
   __pyx_L4_break:;
 
-  /* "lexer.pyx":152
+  /* "lexer.pyx":145
  *                 break
  * 
  *         return tokens             # <<<<<<<<<<<<<<
@@ -5085,7 +5627,7 @@ static PyObject *__pyx_pf_5lexer_5Lexer_2test(struct __pyx_obj_5lexer_Lexer *__p
   __pyx_r = __pyx_v_tokens;
   goto __pyx_L0;
 
-  /* "lexer.pyx":138
+  /* "lexer.pyx":131
  *         builder.clear()
  * 
  *     def test(self):             # <<<<<<<<<<<<<<
@@ -6078,16 +6620,6 @@ static int __Pyx_modinit_type_init_code(__pyx_mstatetype *__pyx_mstate) {
     __pyx_mstate->__pyx_ptype_5lexer_Lexer->tp_getattro = PyObject_GenericGetAttr;
   }
   #endif
-  #if CYTHON_UPDATE_DESCRIPTOR_DOC
-  {
-    PyObject *wrapper = PyObject_GetAttrString((PyObject *)__pyx_mstate->__pyx_ptype_5lexer_Lexer, "__init__"); if (unlikely(!wrapper)) __PYX_ERR(0, 9, __pyx_L1_error)
-    if (__Pyx_IS_TYPE(wrapper, &PyWrapperDescr_Type)) {
-      __pyx_wrapperbase_5lexer_5Lexer___init__ = *((PyWrapperDescrObject *)wrapper)->d_base;
-      __pyx_wrapperbase_5lexer_5Lexer___init__.doc = __pyx_doc_5lexer_5Lexer___init__;
-      ((PyWrapperDescrObject *)wrapper)->d_base = &__pyx_wrapperbase_5lexer_5Lexer___init__;
-    }
-  }
-  #endif
   if (__Pyx_SetVtable(__pyx_mstate->__pyx_ptype_5lexer_Lexer, __pyx_vtabptr_5lexer_Lexer) < (0)) __PYX_ERR(0, 9, __pyx_L1_error)
   if (__Pyx_MergeVtables(__pyx_mstate->__pyx_ptype_5lexer_Lexer) < (0)) __PYX_ERR(0, 9, __pyx_L1_error)
   if (PyObject_SetAttr(__pyx_m, __pyx_mstate_global->__pyx_n_u_Lexer, (PyObject *) __pyx_mstate->__pyx_ptype_5lexer_Lexer) < (0)) __PYX_ERR(0, 9, __pyx_L1_error)
@@ -6120,38 +6652,10 @@ static int __Pyx_modinit_variable_import_code(__pyx_mstatetype *__pyx_mstate) {
 static int __Pyx_modinit_function_import_code(__pyx_mstatetype *__pyx_mstate) {
   __Pyx_RefNannyDeclarations
   CYTHON_UNUSED_VAR(__pyx_mstate);
-  PyObject *__pyx_t_1 = NULL;
-  int __pyx_lineno = 0;
-  const char *__pyx_filename = NULL;
-  int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__Pyx_modinit_function_import_code", 0);
   /*--- Function import code ---*/
-  {
-    __pyx_t_1 = PyImport_ImportModule("utils"); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 1, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-    const char * __pyx_import_signature = __Pyx_PyBytes_AsString(__pyx_mstate_global->__pyx_kp_b_std_string_std_string_const_trim);
-    #if !CYTHON_ASSUME_SAFE_MACROS
-    if (unlikely(!__pyx_import_signature)) __PYX_ERR(0, 1, __pyx_L1_error)
-    #endif
-    const char * __pyx_import_name = __pyx_import_signature + 34;
-    void (**const __pyx_import_pointers[])(void) = {(void (**)(void))&__pyx_f_5utils_trim_string, (void (**)(void)) NULL};
-    void (**const *__pyx_import_pointer)(void) = __pyx_import_pointers;
-    const char *__pyx_import_current_signature = __pyx_import_signature;
-    while (*__pyx_import_pointer) {
-      if (__Pyx_ImportFunction_3_2_4(__pyx_t_1, __pyx_import_name, *__pyx_import_pointer, __pyx_import_current_signature) < (0)) __PYX_ERR(0, 1, __pyx_L1_error)
-      ++__pyx_import_pointer;
-      __pyx_import_name = strchr(__pyx_import_name, '\0') + 1;
-      __pyx_import_signature = strchr(__pyx_import_signature, '\0') + 1;
-      if (*__pyx_import_signature != '\0') __pyx_import_current_signature = __pyx_import_signature;
-    }
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  }
   __Pyx_RefNannyFinishContext();
   return 0;
-  __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_RefNannyFinishContext();
-  return -1;
 }
 
 #if CYTHON_PEP489_MULTI_PHASE_INIT
@@ -6417,22 +6921,22 @@ __Pyx_RefNannySetupContext("PyInit_lexer", 0);
   if (unlikely((__Pyx_modinit_type_init_code(__pyx_mstate) < 0))) __PYX_ERR(0, 1, __pyx_L1_error)
   (void)__Pyx_modinit_type_import_code(__pyx_mstate);
   (void)__Pyx_modinit_variable_import_code(__pyx_mstate);
-  if (unlikely((__Pyx_modinit_function_import_code(__pyx_mstate) < 0))) __PYX_ERR(0, 1, __pyx_L1_error)
+  (void)__Pyx_modinit_function_import_code(__pyx_mstate);
   /*--- Execution code ---*/
 
-  /* "lexer.pyx":138
+  /* "lexer.pyx":131
  *         builder.clear()
  * 
  *     def test(self):             # <<<<<<<<<<<<<<
  *         cdef Token tok
  *         tokens = []
 */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_5lexer_5Lexer_3test, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_Lexer_test, NULL, __pyx_mstate_global->__pyx_n_u_lexer, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[0])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 138, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_5lexer_5Lexer_3test, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global->__pyx_n_u_Lexer_test, NULL, __pyx_mstate_global->__pyx_n_u_lexer, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[0])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 131, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_2);
   #endif
-  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_5lexer_Lexer, __pyx_mstate_global->__pyx_n_u_test, __pyx_t_2) < (0)) __PYX_ERR(0, 138, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict(__pyx_mstate_global->__pyx_ptype_5lexer_Lexer, __pyx_mstate_global->__pyx_n_u_test, __pyx_t_2) < (0)) __PYX_ERR(0, 131, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "(tree fragment)":1
@@ -6547,25 +7051,25 @@ static int __Pyx_InitCachedConstants(__pyx_mstatetype *__pyx_mstate) {
 static int __Pyx_InitConstants(__pyx_mstatetype *__pyx_mstate) {
   CYTHON_UNUSED_VAR(__pyx_mstate);
   {
-    const struct { const unsigned int length: 8; } index[] = {{46},{47},{179},{1},{8},{7},{6},{2},{9},{9},{14},{5},{23},{25},{10},{20},{18},{18},{8},{5},{12},{8},{12},{13},{6},{5},{5},{8},{10},{8},{7},{3},{14},{12},{11},{10},{20},{14},{12},{10},{17},{13},{4},{12},{10},{12},{19},{5},{4},{8},{3},{6},{4},{6},{12},{5},{6},{11},{64},{113},{55},{45}};
-    #if (CYTHON_COMPRESS_STRINGS) == 2 /* compression: bz2 (805 bytes) */
-const char* const cstring = "BZh91AY&SY}\361\213\320\000\000_\377\377\357\357\375\240\355\357n\335\257\245~\260\277\377\377\364@@@@@@@@@@@@@\000@\000@\002\235T\000\0205M4\236\223\004\217\022\014C\3222hmM\006\203@\320\032\017P\006\236\211\211\246\236\232djz\207\003@\320\r\003C@\006\206CM\0004\320\r\000\001\220\304\000\032\034\r\003@4\r\r\000\032\031\r4\000\323@4\000\006C\020\000h%5\0012!\244\364\002)\372\236\246\247\224\365\014\231\032\032\031\003@\000\000h\0326Q\372\232jN^\006\016\267\217\304\336>\221\274\252\235_\3666tZ)$J7K|\235e\360\352%\235\025e\213$\322\255:b\305\210\306\010\310z\311\316\312-\372\267\353 -\242\365_\240\216\024\023A\005D/\203\002\025B\237)L\267ke\317\300\273\217\354\031m \320\316\356\354\366\235N\373\262\323\002\364S\313wZ\207\303\356\341\021\023\263\205\201?&SQ\267\226\326b\305\"\354\025\232\201\302\r\n\003\324\310\rV4f\253E\323\345\"DO%\313\311\263\032i\251\343\034\303\334\301\342|XJ\013\236/Y\372w\357\214\310\355\267\263\010\302\327\021\2072\013D\234\347\020\343p\021LA\316\252&\364\211:j\274\377\225\235\277\017K\023o\367n\354<\206h\344c\032\301\026\021\3638wh\274\337\274,q}\321\010\352\231\036HN\032MU\260\331Ra2\000\212\253\314\271\256\234+`\2474\307\247\315\201\330\321C\030\265\343~]\332\316$\2356\223\341\010$\260\223\244SO\2231\226\225\210U\335\0309\360\272\022*\3738\340u\331\266D\307X\265r\305\236\270SI\360R\327\316dB]\033:!y\230\247\021J\204|\016\354\372\323m\210j\340e\347\326\365w)`\263F\234r\253\310\025E\217\245\363\275\361Q{\360B\334\343\207\026\314\351\251\256\204\357&M\314A\357\272\r\2429\337\211\362p\220\223\210\360N\316\345\226eD\323\017\3239\326\242\3405\226n\266\006\326!y\247P\343\025\025\370j1]\222$DI_\310\206\303\265\311\247\227\325X\215 hX\363\326\324^\351\0011\021\233\257p\366Z\3518D\261\341E\253\216\006\306\315k\\M\t\177\036\031\367H\377\217,E\235z\273NG\361\020\346t\025\231\207\221\364\\\315\241\017\320>\214%\242\312p\316\37142\007\023\030\255#\030\227\314\316c\324\206\225\254XzS\244\235\177K\316@\334dc\225\360\252\363iuT\307\026\227@\317-\317\314\010@""q\000\013q*\223'\014L\201H\304\007SRMl\333\276\307|9gO\2649\215\325mBH\342\333\275\366= \240\3448\033\356\276\276\010_\303m\347\331\305\325\004\260\314T\227`X\326\020]\306\274\301)\270\333`L\247\251r%\333\022\372\3221zj\022;S\344/\236\032\243\374d\304bJ\211H\377\027rE8P\220}\361\213\320";
-    PyObject *data = __Pyx_DecompressString(cstring, 805, 2);
+    const struct { const unsigned int length: 8; } index[] = {{46},{47},{179},{1},{8},{7},{6},{2},{9},{9},{14},{5},{23},{25},{10},{20},{18},{18},{8},{5},{12},{8},{12},{13},{6},{5},{5},{8},{10},{8},{7},{3},{14},{12},{11},{10},{20},{14},{12},{10},{17},{13},{4},{12},{10},{12},{19},{5},{4},{8},{3},{6},{4},{6},{12},{5},{6},{11},{64},{113},{55}};
+    #if (CYTHON_COMPRESS_STRINGS) == 2 /* compression: bz2 (786 bytes) */
+const char* const cstring = "BZh91AY&SY\031\201\227w\000\000Z\177\377\357\357\375\240\355\217n\315\257\245~\260\277\377\377\364@@@@@@@@@@@@@\000@\000@\002}\333\267\032\326\207\006\252z\223e6D\307\244\320\t\351421\251\201\030\0106\210\014C\001\244\304\306I\351\352\203DM$\366\246&S\324?J4\030\236\221\240\0002\r\006 4\000\320\r\000`ji\210\251\372&\243\324\032\031\000\000\000\006A\240\000\000\001\241\246\206\232\002SR`\210h4\232m)\211\352h4\032\001\240\000\000\000\r\000b14\224{\254\033_\226\332\337\033\374\247\301\375\274\316\203A$\210\302\344wb\351\337\177\001\034h\251\225\355\351\307$\373\231\016\273\234\036\275L\231R\236u=4\035\3253\373\303\276\022\010\221\217\272\241\300\216#k\234\360\212\215\237&R7\226\027DRl\342\001\352\0037\371|\345 \364\201\036\016\243\240\026\357H\340A\026?\367\"\206\230\3764R\322s L9\243\214\307\r\001e\266\204\227\363cw'\265\017\3129H;^K\"\014r4\202\024A\265\200{\032\260\021!US)\265\353VW\205\275\217%\025#hT\304 #\004MkC\371\216\002\t\207\271\315\027$A\321T\355\374.\363\266w\330\223\17753\331\274c\205\366+V\"d4\370Y\362`7wBn0]\200C,\210t\237'\350\231df\244\210Dx\"\225\207\035Q\305\\\305)&:\034\233\r|\224\225\212\332\350\303\236\323I'I\243C\336\364\225\221tC\214\376\300\020\270\265\000\264}D\204\264\353M\205\246\372\203By\026\"\203\353Q.\025\022Ni\223iz\215\273e\364%\271\233q\370\014e:E5C\276\355}\2116d5V\030v\355\241]\343\223\0268`\254F\"\205\201\302W\312jJgj@\257\332.\244\2374\231\t\320\017\224<=\254\010s\r\262?B\213\324I\302BN!\212S\351\316xQ$Q\243)RU\210\264\236{\2175\030|\014\214 <\341\301\024a\347f((\030l\340\220\301E\243#(\353\233\301\200\014#\177\005r\314`tBB!'`qC+i\223\340N\200\245e\325y\231\252k\204P\223\377h\320D5$\354n\264\243\214\352\324\360\224\020\326s5\224X:\226\022\262t\345\226\030\263\357\205\254^\270B\0200H\304V\020\251\211\034\270\316.\277\277A\304\r2\2665h}K=7jR\034\\.\274\307\035:,\022\031\001{\253v\234LnX\034X\241\265\256Oc&\317\251\275\236_n\177\010\365\337\205\336&Hf\256\347\\kc\247\331\235J\371\376\027S;ve\375\332\377w\213\t\207\355u\025 \267Xa}""\345\210\036*eR\021&\364gh\252\204\326@\376+s\210l\222\016,1\315'\201\350\203\007.\220;\374]\311\024\341B@f\006]\334";
+    PyObject *data = __Pyx_DecompressString(cstring, 786, 2);
     if (unlikely(!data)) __PYX_ERR(0, 1, __pyx_L1_error)
     const char* const bytes = __Pyx_PyBytes_AsString(data);
     #if !CYTHON_ASSUME_SAFE_MACROS
     if (likely(bytes)); else { Py_DECREF(data); __PYX_ERR(0, 1, __pyx_L1_error) }
     #endif
-    #elif (CYTHON_COMPRESS_STRINGS) != 0 /* compression: zlib (700 bytes) */
-const char* const cstring = "x\332\215R\317O\023A\024\206X\261\006\004\nD\343\311!\032\252A\033\211\030\014\032\215Q0&\204P\324\020\274L\2463\257e\354v\266\335\231\301\326x\350\261\307=\356q\217=\366\330#G\217=\356\261\177\002\177\202ov\001Q.nv\337\274\337\357{\337\316\256O\216\231g\201\350&pY\225 H\325\017\2106\201\345\2060c\002Y\261\006H\321t\232P\334\375\337\3544\013\323Q7G\314\220w\035s\344+\"5\021\340\311\n\004\314\200\327q\205\222\033\010\\\222\"{[{O\326_\254\023\246\004\t\340\033p\243\211\266\025\3561\255A\023\277J*VzF*\342\300\350\022\371X%\035\337\022\005\210\303\370\244\211y\227\013\314\021(\242\3018\205\024\231R\276aF\372\212b\271T\265\"\0212\300!\362\030\\\3656\3634\224\3360!(&\202\220\232U<\000\345d\215K\235i\302\2036\004\245f\247\375\312\201W5\355\333\200\303\353\035\347NE\211\322\000\204\345@y\2724\245\347n\204\242\021\301\277\001\003\332P\272\327i\343\367\036\351\240\273\3206\373Pe\272\243\270\364K\334\017|\213[\203\346\036J*q\201\200q\2500^\247T\270\212\354\250J\017{\373\312\200BW\325*\216\001Z;\237J\251\324\364\242\031\352R\010i\240\241\323\225(m0\354\214O\303\027\326s\351T\261Fv\302wJ\233~\023\005\242\344G\300\353\33262+\000m=\223\351gs\234\352\376P\246Y\325\224\274\216\rw\2621\316wl\034\227\256u\3132\357|\314\031m\364\n\201\027\016h;\026\275j\312\345\031<\324\004\222\225\202\320\177v\275\312vjed\237I\277\216/(\355\300\332\246\300\260\325pQ\230\336\341T\350\356d\222\273\037\257\305\333\375\345\356\333q\276\020\026\306\371\233Ia!\231\277\035\212h5.\237NM\334Z\014\213\321B\364,\252\305\237\372S\375\332\240<`\343\231\271\236\016W\242k\321Z2\2175s\275Vw\3624?q}\266\3679\274\033=\210\032\375\365\376\217\341\322\360\360D\374Z\035}9\034\035~Mr3\275\017\341Z\270\035=\216Y\222\273\321=\356\035\204[\321RTN\362\013\341r\222\277\023\266\306N\270X+\311\317\215\346Vb\321_\356o\014V\207\007'\010\357/O\271;9\316\335\213Z#\362t0=|yR\037\225\367\223\334b\370<\312\307\223q\3015\371\031nD\330\267\030\267\372\371\301\354\020\207N\367\326\264\021\233\233\331\025'\017/\033x\301\264!+\217&\320l\320""\314\371\033Fi\254U";
-    PyObject *data = __Pyx_DecompressString(cstring, 700, 1);
+    #elif (CYTHON_COMPRESS_STRINGS) != 0 /* compression: zlib (678 bytes) */
+const char* const cstring = "x\332\215R=o\323@\030&\"\024\243\226\266i+\020\023W\201\232\241\020\021QT$\020\010A\213\220\252\252)\240\252,\247\313\335\233\344\210sv|w!A\014\0313z\364\350\321c\306\214\035\0313z\314O\350O\340\316N\313G\027,\373\275\307\357\347\363>\366\241\207z\304\325\200\244\017\224780\324\360\002$U\240\251BD\251\200\327\265\002TV\003\037\312\207\377\233\235e\231t\203U\213(\364v\240Z\236@\\\"\006.\257C@\024\270\003[\310\251\202\300&\tt\264w\364x\347\371\016\"\202\241\000\276\002U\022I]\247.\221\022$\362\032\250\256\271\253\270@\226\214\254\240\017\r4\3604\022`x(\017\371&\357\317\002\325\002\201$(\013P\231\010\341)\242\270'\260)\347\242YF\214\007f\010\357\201\255\336'\256\204\312k\302\0306\211\300\270$u\027@X\333\244\\\346\210\271\320\207\240\342\017\372/-y\321\224\236\016(\274:\260\356\314T0\016\200i\n\230fKc|\3416T\244a\360o@\201T\030\037\r\372\346yg\344\300\207\320W\307\320 r (\367*\324\013<m\266\006I]c17\013\004\204B\235\3206\306\314V\344G\203\273\246\267'\024\010\343jhAM\0007/\246b\314%\276lf0g\214+\350\310l%\214;\304t6W\307c\332\265\351X\220N~\3027\214}\3177\306\260\244-\240m\251;\371[\000R\273*\307\3639\026\332/\224#-|N\333\246\341A>\306\372z\312ji[w5q/\306\314e\303W\004\274t@\337\252\35062-\347\364\014bF\254\214\204\374\275\353U\265\263\267\\\354\271\365\332\346\006!-Y\3553\023\326\022.\013\263\17783rXH\213\017\342j\274\237l\016\337\314\234RX\2329\267\322\322Z\272z'd\321v\\;_\270v{=,Gk\321\323\250\031\177L\026\222\346\2706&\263\245\225\221\014\267\242\353Q5]55+\243\356\260p\356\\\273\261<\372\024\336\213\036F\235d'\371>\331\230\234\236\261\237\333\323\317\247\323\323/iqi\364>\254\206\373\321\243\230\244\305\233\303\336\350$\334\2136\242Z\352\254\205\233\251s7\354\316\254\261\261n\352\254LW\266b\226l&\273\343\355\311\311\231\241\367\227\2476,\314\212\367\243\356\024=\031/N^\234\265\247\265\343\264\270\036>\213\234\270\020\227l\223\037\341nd\372\226\343n\342\214\227'f\350\342\250\372\013c2\233\371";
+    PyObject *data = __Pyx_DecompressString(cstring, 678, 1);
     if (unlikely(!data)) __PYX_ERR(0, 1, __pyx_L1_error)
     const char* const bytes = __Pyx_PyBytes_AsString(data);
     #if !CYTHON_ASSUME_SAFE_MACROS
     if (likely(bytes)); else { Py_DECREF(data); __PYX_ERR(0, 1, __pyx_L1_error) }
     #endif
-    #else /* compression: none (1094 bytes) */
-const char* const bytes = "No value specified for struct attribute 'type'No value specified for struct attribute 'value'Note that Cython is deliberately stricter than PEP-484 and rejects subclasses of builtin types. If you need to pass subclasses then set the 'annotation_typing' directive to False.?add_notedisableenablegcisenabledlexer.pyx<stringsource>LexerLexer.__reduce_cython__Lexer.__setstate_cython__Lexer.test__Pyx_PyDict_NextRefasyncio.coroutinescline_in_traceback__dict___dictfile_content__func____getstate___is_coroutineis_idditemslexer__main____module____name____new__pop__pyx_checksum__pyx_result__pyx_state__pyx_type__pyx_unpickle_Lexer__pyx_vtable____qualname____reduce____reduce_cython____reduce_ex__self__set_name__setdefault__setstate____setstate_cython__statetest__test__toktokenstypeupdateuse_setstatevaluevalues\200\001\330\004#\2401\240F\250!\200A\340\010\021\220\021\340\010\t\330\021\022\330\020\026\220d\230+\240Q\360\006\000\r\023\220'\230\022\2303\230g\240S\250\006\250g\260Q\260a\340\014\017\210s\220&\230\003\2301\330\020\021\340\010\017\210q\200\001\360\010\000\005\016\210T\220\031\230$\230m\2504\250z\270\024\270Y\300d\310+\320UY\320YZ\330\004\014\210G\2201\220F\230,\240a\330\004\007\200v\210W\220E\230\024\230Q\330\010\022\220!\330\010\027\220q\340\010\027\220q\330\004\007\200q\330\010\017\320\017&\240d\250!\2507\260+\270W\300A\340\010\017\320\017&\240d\250!\2507\260+\270Q\200\001\340\004\037\230q\320 0\260\013\270;\300k\320QR\330\004\023\2205\230\010\240\001\240\021\330\004\007\200|\2207\230!\330\010'\240q\250\010\260\016\270a\330\004\013\2101std::string (std::string const &)\000trim_string";
+    #else /* compression: none (1049 bytes) */
+const char* const bytes = "No value specified for struct attribute 'type'No value specified for struct attribute 'value'Note that Cython is deliberately stricter than PEP-484 and rejects subclasses of builtin types. If you need to pass subclasses then set the 'annotation_typing' directive to False.?add_notedisableenablegcisenabledlexer.pyx<stringsource>LexerLexer.__reduce_cython__Lexer.__setstate_cython__Lexer.test__Pyx_PyDict_NextRefasyncio.coroutinescline_in_traceback__dict___dictfile_content__func____getstate___is_coroutineis_idditemslexer__main____module____name____new__pop__pyx_checksum__pyx_result__pyx_state__pyx_type__pyx_unpickle_Lexer__pyx_vtable____qualname____reduce____reduce_cython____reduce_ex__self__set_name__setdefault__setstate____setstate_cython__statetest__test__toktokenstypeupdateuse_setstatevaluevalues\200\001\330\004#\2401\240F\250!\200A\340\010\021\220\021\340\010\t\330\021\022\330\020\026\220d\230+\240Q\360\006\000\r\023\220'\230\022\2303\230g\240S\250\006\250g\260Q\260a\340\014\017\210s\220&\230\003\2301\330\020\021\340\010\017\210q\200\001\360\010\000\005\016\210T\220\031\230$\230m\2504\250z\270\024\270Y\300d\310+\320UY\320YZ\330\004\014\210G\2201\220F\230,\240a\330\004\007\200v\210W\220E\230\024\230Q\330\010\022\220!\330\010\027\220q\340\010\027\220q\330\004\007\200q\330\010\017\320\017&\240d\250!\2507\260+\270W\300A\340\010\017\320\017&\240d\250!\2507\260+\270Q\200\001\340\004\037\230q\320 0\260\013\270;\300k\320QR\330\004\023\2205\230\010\240\001\240\021\330\004\007\200|\2207\230!\330\010'\240q\250\010\260\016\270a\330\004\013\2101";
     PyObject *data = NULL;
     CYTHON_UNUSED_VAR(__Pyx_DecompressString);
     #endif
@@ -6582,7 +7086,7 @@ const char* const bytes = "No value specified for struct attribute 'type'No valu
       stringtab[i] = string;
       pos += bytes_length;
     }
-    for (int i = 57; i < 62; i++) {
+    for (int i = 57; i < 61; i++) {
       Py_ssize_t bytes_length = index[i].length;
       PyObject *string = PyBytes_FromStringAndSize(bytes + pos, bytes_length);
       stringtab[i] = string;
@@ -6593,7 +7097,7 @@ const char* const bytes = "No value specified for struct attribute 'type'No valu
       }
     }
     Py_XDECREF(data);
-    for (Py_ssize_t i = 0; i < 62; i++) {
+    for (Py_ssize_t i = 0; i < 61; i++) {
       if (unlikely(PyObject_Hash(stringtab[i]) == -1)) {
         __PYX_ERR(0, 1, __pyx_L1_error)
       }
@@ -6601,7 +7105,7 @@ const char* const bytes = "No value specified for struct attribute 'type'No valu
     #if CYTHON_IMMORTAL_CONSTANTS
     {
       PyObject **table = stringtab + 57;
-      for (Py_ssize_t i=0; i<5; ++i) {
+      for (Py_ssize_t i=0; i<4; ++i) {
         #if CYTHON_COMPILING_IN_CPYTHON_FREETHREADING
         #if PY_VERSION_HEX < 0x030E0000
         if (_Py_IsOwnedByCurrentThread(table[i]) && Py_REFCNT(table[i]) == 1)
@@ -6673,7 +7177,7 @@ static int __Pyx_CreateCodeObjects(__pyx_mstatetype *__pyx_mstate) {
   PyObject* tuple_dedup_map = PyDict_New();
   if (unlikely(!tuple_dedup_map)) return -1;
   {
-    const __Pyx_PyCode_New_function_description descr = {1, 0, 0, 3, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 138};
+    const __Pyx_PyCode_New_function_description descr = {1, 0, 0, 3, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 131};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_tok, __pyx_mstate->__pyx_n_u_tokens};
     __pyx_mstate_global->__pyx_codeobj_tab[0] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_lexer_pyx, __pyx_mstate->__pyx_n_u_test, __pyx_mstate->__pyx_kp_b_iso88591_A_d_Q_3gS_gQa_s_1_q, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[0])) goto bad;
   }
@@ -7296,6 +7800,42 @@ static void __Pyx_Raise(PyObject *type, PyObject *value, PyObject *tb, PyObject 
 bad:
     Py_XDECREF(owned_instance);
     return;
+}
+
+/* WriteUnraisableException */
+static void __Pyx_WriteUnraisable(const char *name, int clineno,
+                                  int lineno, const char *filename,
+                                  int full_traceback, int nogil) {
+    PyObject *old_exc, *old_val, *old_tb;
+    PyObject *ctx;
+    __Pyx_PyThreadState_declare
+    PyGILState_STATE state;
+    if (nogil)
+        state = PyGILState_Ensure();
+    else state = (PyGILState_STATE)0;
+    CYTHON_UNUSED_VAR(clineno);
+    CYTHON_UNUSED_VAR(lineno);
+    CYTHON_UNUSED_VAR(filename);
+    CYTHON_MAYBE_UNUSED_VAR(nogil);
+    __Pyx_PyThreadState_assign
+    __Pyx_ErrFetch(&old_exc, &old_val, &old_tb);
+    if (full_traceback) {
+        Py_XINCREF(old_exc);
+        Py_XINCREF(old_val);
+        Py_XINCREF(old_tb);
+        __Pyx_ErrRestore(old_exc, old_val, old_tb);
+        PyErr_PrintEx(0);
+    }
+    ctx = PyUnicode_FromString(name);
+    __Pyx_ErrRestore(old_exc, old_val, old_tb);
+    if (!ctx) {
+        PyErr_WriteUnraisable(Py_None);
+    } else {
+        PyErr_WriteUnraisable(ctx);
+        Py_DECREF(ctx);
+    }
+    if (nogil)
+        PyGILState_Release(state);
 }
 
 /* TupleAndListFromArray (used by fastcall) */
@@ -8266,42 +8806,6 @@ static int __Pyx__ArgTypeTest(PyObject *obj, PyTypeObject *type, const char *nam
     __Pyx_DECREF_TypeName(type_name);
     __Pyx_DECREF_TypeName(obj_type_name);
     return 0;
-}
-
-/* WriteUnraisableException */
-static void __Pyx_WriteUnraisable(const char *name, int clineno,
-                                  int lineno, const char *filename,
-                                  int full_traceback, int nogil) {
-    PyObject *old_exc, *old_val, *old_tb;
-    PyObject *ctx;
-    __Pyx_PyThreadState_declare
-    PyGILState_STATE state;
-    if (nogil)
-        state = PyGILState_Ensure();
-    else state = (PyGILState_STATE)0;
-    CYTHON_UNUSED_VAR(clineno);
-    CYTHON_UNUSED_VAR(lineno);
-    CYTHON_UNUSED_VAR(filename);
-    CYTHON_MAYBE_UNUSED_VAR(nogil);
-    __Pyx_PyThreadState_assign
-    __Pyx_ErrFetch(&old_exc, &old_val, &old_tb);
-    if (full_traceback) {
-        Py_XINCREF(old_exc);
-        Py_XINCREF(old_val);
-        Py_XINCREF(old_tb);
-        __Pyx_ErrRestore(old_exc, old_val, old_tb);
-        PyErr_PrintEx(0);
-    }
-    ctx = PyUnicode_FromString(name);
-    __Pyx_ErrRestore(old_exc, old_val, old_tb);
-    if (!ctx) {
-        PyErr_WriteUnraisable(Py_None);
-    } else {
-        PyErr_WriteUnraisable(ctx);
-        Py_DECREF(ctx);
-    }
-    if (nogil)
-        PyGILState_Release(state);
 }
 
 /* RejectKeywords */
@@ -9345,62 +9849,6 @@ __PYX_GOOD:
     Py_XDECREF(setstate_cython);
     return ret;
 }
-
-/* PxdImportShared (used by FunctionImport) */
-#ifndef __PYX_HAVE_RT_ImportFromPxd_3_2_4
-#define __PYX_HAVE_RT_ImportFromPxd_3_2_4
-static int __Pyx_ImportFromPxd_3_2_4(PyObject *module, const char *name, void **p, const char *sig, const char *what) {
-    PyObject *d = 0;
-    PyObject *cobj = 0;
-    d = PyObject_GetAttrString(module, "__pyx_capi__");
-    if (!d)
-        goto bad;
-#if (defined(Py_LIMITED_API) && Py_LIMITED_API >= 0x030d0000) || (!defined(Py_LIMITED_API) && PY_VERSION_HEX >= 0x030d0000)
-    PyDict_GetItemStringRef(d, name, &cobj);
-#else
-    cobj = PyDict_GetItemString(d, name);
-    Py_XINCREF(cobj);
-#endif
-    if (!cobj) {
-        PyErr_Format(PyExc_ImportError,
-            "%.200s does not export expected C %.8s %.200s",
-                PyModule_GetName(module), what, name);
-        goto bad;
-    }
-    if (!PyCapsule_IsValid(cobj, sig)) {
-        PyErr_Format(PyExc_TypeError,
-            "C %.8s %.200s.%.200s has wrong signature (expected %.500s, got %.500s)",
-             what, PyModule_GetName(module), name, sig, PyCapsule_GetName(cobj));
-        goto bad;
-    }
-    *p = PyCapsule_GetPointer(cobj, sig);
-    if (!(*p))
-        goto bad;
-    Py_DECREF(d);
-    Py_DECREF(cobj);
-    return 0;
-bad:
-    Py_XDECREF(d);
-    Py_XDECREF(cobj);
-    return -1;
-}
-#endif
-
-/* FunctionImport */
-#ifndef __PYX_HAVE_RT_ImportFunction_3_2_4
-#define __PYX_HAVE_RT_ImportFunction_3_2_4
-static int __Pyx_ImportFunction_3_2_4(PyObject *module, const char *funcname, void (**f)(void), const char *sig) {
-    union {
-        void (*fp)(void);
-        void *p;
-    } tmp;
-    int result = __Pyx_ImportFromPxd_3_2_4(module, funcname, &tmp.p, sig, "function");
-    if (result == 0) {
-        *f = tmp.fp;
-    }
-    return result;
-}
-#endif
 
 /* dict_setdefault (used by FetchCommonType) */
 static CYTHON_INLINE PyObject *__Pyx_PyDict_SetDefault(PyObject *d, PyObject *key, PyObject *default_value) {
@@ -12434,7 +12882,7 @@ __Pyx_PyType_GetFullyQualifiedName(PyTypeObject* tp)
         result = name;
         name = NULL;
     } else {
-        result = __Pyx_NewRef(__pyx_mstate_global->__pyx_kp_u__5);
+        result = __Pyx_NewRef(__pyx_mstate_global->__pyx_kp_u__7);
     }
     goto done;
 }

@@ -1368,6 +1368,7 @@ static const char *__pyx_filename;
 static const char* const __pyx_f[] = {
   "utils.pyx",
   "<stringsource>",
+  "utils.pxd",
 };
 /* #### Code section: utility_code_proto_before_types ### */
 /* ForceInitThreads.proto */
@@ -1526,15 +1527,31 @@ static const char* const __pyx_f[] = {
 /*--- Type declarations ---*/
 struct __pyx_ctuple_int__and_int;
 typedef struct __pyx_ctuple_int__and_int __pyx_ctuple_int__and_int;
+struct __pyx_ctuple_6libcpp_6string_std__in_string__and_6libcpp_bool;
+typedef struct __pyx_ctuple_6libcpp_6string_std__in_string__and_6libcpp_bool __pyx_ctuple_6libcpp_6string_std__in_string__and_6libcpp_bool;
 
-/* "utils.pxd":5
- * cdef string trim_string(const string& s) noexcept nogil
+/* "utils.pxd":8
+ * 
  * cdef string any_to_string(object value) except *
  * cdef (int, int) get_continuous_digits_indices(const string& name) noexcept nogil             # <<<<<<<<<<<<<<
+ * 
+ * 
 */
 struct __pyx_ctuple_int__and_int {
   int f0;
   int f1;
+};
+
+/* "utils.pxd":48
+ * 
+ * # Similar to Go's stringsCutPrefix()
+ * cdef inline (string, cbool) cut_prefix(const string& s, const string& prefix) noexcept nogil:             # <<<<<<<<<<<<<<
+ *     cdef size_t p_len = prefix.length()
+ * 
+*/
+struct __pyx_ctuple_6libcpp_6string_std__in_string__and_6libcpp_bool {
+  std::string f0;
+  bool f1;
 };
 /* #### Code section: utility_code_proto ### */
 
@@ -1753,6 +1770,11 @@ static void __pyx_insert_code_object(int code_line, __Pyx_CachedCodeObjectType* 
 static void __Pyx_AddTraceback(const char *funcname, int c_line,
                                int py_line, const char *filename);
 
+/* GCCDiagnostics.proto */
+#if !defined(__INTEL_COMPILER) && defined(__GNUC__) && (__GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 6))
+#define __Pyx_HAS_GCC_DIAGNOSTIC
+#endif
+
 /* CppExceptionConversion.proto */
 #ifndef __Pyx_CppExn2PyErr
 #include <new>
@@ -1795,16 +1817,11 @@ static void __Pyx_CppExn2PyErr() {
 }
 #endif
 
-/* GCCDiagnostics.proto */
-#if !defined(__INTEL_COMPILER) && defined(__GNUC__) && (__GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 6))
-#define __Pyx_HAS_GCC_DIAGNOSTIC
-#endif
+/* CIntFromPy.proto */
+static CYTHON_INLINE size_t __Pyx_PyLong_As_size_t(PyObject *);
 
 /* CIntFromPy.proto */
 static CYTHON_INLINE PY_LONG_LONG __Pyx_PyLong_As_PY_LONG_LONG(PyObject *);
-
-/* CIntFromPy.proto */
-static CYTHON_INLINE size_t __Pyx_PyLong_As_size_t(PyObject *);
 
 /* FormatTypeName.proto */
 #if CYTHON_COMPILING_IN_LIMITED_API
@@ -2152,15 +2169,185 @@ static std::string __pyx_convert_string_from_py_6libcpp_6string_std__in_string(P
   return __pyx_r;
 }
 
-/* "utils.pyx":10
- *     string to_string(double val)
+/* "utils.pxd":14
  * 
- * cdef string trim_string(const string& s) noexcept nogil:             # <<<<<<<<<<<<<<
- *     """Remove leading and trailing whitespace from a C++ string."""
- *     cdef size_t first = s.find_first_not_of(b" \t\r\n")
+ * # Convert string to lowercase.
+ * cdef inline string to_lower(string s) noexcept nogil:             # <<<<<<<<<<<<<<
+ *     cdef size_t i
+ *     for i in range(s.length()):
 */
 
-static std::string __pyx_f_5utils_trim_string(std::string const &__pyx_v_s) {
+static CYTHON_INLINE std::string __pyx_f_5utils_to_lower(std::string __pyx_v_s) {
+  size_t __pyx_v_i;
+  std::string __pyx_r;
+  size_t __pyx_t_1;
+  size_t __pyx_t_2;
+  size_t __pyx_t_3;
+  char __pyx_t_4;
+  int __pyx_t_5;
+
+  /* "utils.pxd":16
+ * cdef inline string to_lower(string s) noexcept nogil:
+ *     cdef size_t i
+ *     for i in range(s.length()):             # <<<<<<<<<<<<<<
+ *         if b'A' <= s[i] <= b'Z':
+ *             s[i] = s[i] + 32
+*/
+  __pyx_t_1 = __pyx_v_s.length();
+  __pyx_t_2 = __pyx_t_1;
+  for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
+    __pyx_v_i = __pyx_t_3;
+
+    /* "utils.pxd":17
+ *     cdef size_t i
+ *     for i in range(s.length()):
+ *         if b'A' <= s[i] <= b'Z':             # <<<<<<<<<<<<<<
+ *             s[i] = s[i] + 32
+ *     return s
+*/
+    __pyx_t_4 = (__pyx_v_s[__pyx_v_i]);
+    __pyx_t_5 = ('A' <= __pyx_t_4);
+    if (__pyx_t_5) {
+      __pyx_t_5 = (__pyx_t_4 <= 'Z');
+    }
+    if (__pyx_t_5) {
+
+      /* "utils.pxd":18
+ *     for i in range(s.length()):
+ *         if b'A' <= s[i] <= b'Z':
+ *             s[i] = s[i] + 32             # <<<<<<<<<<<<<<
+ *     return s
+ * 
+*/
+      (__pyx_v_s[__pyx_v_i]) = ((__pyx_v_s[__pyx_v_i]) + 32);
+
+      /* "utils.pxd":17
+ *     cdef size_t i
+ *     for i in range(s.length()):
+ *         if b'A' <= s[i] <= b'Z':             # <<<<<<<<<<<<<<
+ *             s[i] = s[i] + 32
+ *     return s
+*/
+    }
+  }
+
+  /* "utils.pxd":19
+ *         if b'A' <= s[i] <= b'Z':
+ *             s[i] = s[i] + 32
+ *     return s             # <<<<<<<<<<<<<<
+ * 
+ * # Convert string to uppercase.
+*/
+  __pyx_r = __pyx_v_s;
+  goto __pyx_L0;
+
+  /* "utils.pxd":14
+ * 
+ * # Convert string to lowercase.
+ * cdef inline string to_lower(string s) noexcept nogil:             # <<<<<<<<<<<<<<
+ *     cdef size_t i
+ *     for i in range(s.length()):
+*/
+
+  /* function exit code */
+  __pyx_L0:;
+  return __pyx_r;
+}
+
+/* "utils.pxd":22
+ * 
+ * # Convert string to uppercase.
+ * cdef inline string to_upper(string s) noexcept nogil:             # <<<<<<<<<<<<<<
+ *     cdef size_t i
+ *     for i in range(s.length()):
+*/
+
+static CYTHON_INLINE std::string __pyx_f_5utils_to_upper(std::string __pyx_v_s) {
+  size_t __pyx_v_i;
+  std::string __pyx_r;
+  size_t __pyx_t_1;
+  size_t __pyx_t_2;
+  size_t __pyx_t_3;
+  char __pyx_t_4;
+  int __pyx_t_5;
+
+  /* "utils.pxd":24
+ * cdef inline string to_upper(string s) noexcept nogil:
+ *     cdef size_t i
+ *     for i in range(s.length()):             # <<<<<<<<<<<<<<
+ *         if b'A' <= s[i] <= b'Z':
+ *             s[i] = s[i] - 32
+*/
+  __pyx_t_1 = __pyx_v_s.length();
+  __pyx_t_2 = __pyx_t_1;
+  for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
+    __pyx_v_i = __pyx_t_3;
+
+    /* "utils.pxd":25
+ *     cdef size_t i
+ *     for i in range(s.length()):
+ *         if b'A' <= s[i] <= b'Z':             # <<<<<<<<<<<<<<
+ *             s[i] = s[i] - 32
+ *     return s
+*/
+    __pyx_t_4 = (__pyx_v_s[__pyx_v_i]);
+    __pyx_t_5 = ('A' <= __pyx_t_4);
+    if (__pyx_t_5) {
+      __pyx_t_5 = (__pyx_t_4 <= 'Z');
+    }
+    if (__pyx_t_5) {
+
+      /* "utils.pxd":26
+ *     for i in range(s.length()):
+ *         if b'A' <= s[i] <= b'Z':
+ *             s[i] = s[i] - 32             # <<<<<<<<<<<<<<
+ *     return s
+ * 
+*/
+      (__pyx_v_s[__pyx_v_i]) = ((__pyx_v_s[__pyx_v_i]) - 32);
+
+      /* "utils.pxd":25
+ *     cdef size_t i
+ *     for i in range(s.length()):
+ *         if b'A' <= s[i] <= b'Z':             # <<<<<<<<<<<<<<
+ *             s[i] = s[i] - 32
+ *     return s
+*/
+    }
+  }
+
+  /* "utils.pxd":27
+ *         if b'A' <= s[i] <= b'Z':
+ *             s[i] = s[i] - 32
+ *     return s             # <<<<<<<<<<<<<<
+ * 
+ * # Remove leading and trailing whitespace from a C++ string.
+*/
+  __pyx_r = __pyx_v_s;
+  goto __pyx_L0;
+
+  /* "utils.pxd":22
+ * 
+ * # Convert string to uppercase.
+ * cdef inline string to_upper(string s) noexcept nogil:             # <<<<<<<<<<<<<<
+ *     cdef size_t i
+ *     for i in range(s.length()):
+*/
+
+  /* function exit code */
+  __pyx_L0:;
+  return __pyx_r;
+}
+
+/* "utils.pxd":30
+ * 
+ * # Remove leading and trailing whitespace from a C++ string.
+ * cdef inline string trim_string(const string& s) noexcept nogil:             # <<<<<<<<<<<<<<
+ *     cdef size_t first = s.find_first_not_of(b" \t\r\n")
+ *     if first == npos:
+*/
+
+static CYTHON_INLINE std::string __pyx_f_5utils_trim_string(std::string const &__pyx_v_s) {
   size_t __pyx_v_first;
   size_t __pyx_v_last;
   std::string __pyx_r;
@@ -2171,17 +2358,17 @@ static std::string __pyx_f_5utils_trim_string(std::string const &__pyx_v_s) {
   int __pyx_clineno = 0;
   PyGILState_STATE __pyx_gilstate_save;
 
-  /* "utils.pyx":12
- * cdef string trim_string(const string& s) noexcept nogil:
- *     """Remove leading and trailing whitespace from a C++ string."""
+  /* "utils.pxd":31
+ * # Remove leading and trailing whitespace from a C++ string.
+ * cdef inline string trim_string(const string& s) noexcept nogil:
  *     cdef size_t first = s.find_first_not_of(b" \t\r\n")             # <<<<<<<<<<<<<<
  *     if first == npos:
  *         return <const char*>b""
 */
   __pyx_v_first = __pyx_v_s.find_first_not_of(__pyx_k_);
 
-  /* "utils.pyx":13
- *     """Remove leading and trailing whitespace from a C++ string."""
+  /* "utils.pxd":32
+ * cdef inline string trim_string(const string& s) noexcept nogil:
  *     cdef size_t first = s.find_first_not_of(b" \t\r\n")
  *     if first == npos:             # <<<<<<<<<<<<<<
  *         return <const char*>b""
@@ -2190,7 +2377,7 @@ static std::string __pyx_f_5utils_trim_string(std::string const &__pyx_v_s) {
   __pyx_t_1 = (__pyx_v_first == std::string::npos);
   if (__pyx_t_1) {
 
-    /* "utils.pyx":14
+    /* "utils.pxd":33
  *     cdef size_t first = s.find_first_not_of(b" \t\r\n")
  *     if first == npos:
  *         return <const char*>b""             # <<<<<<<<<<<<<<
@@ -2200,8 +2387,8 @@ static std::string __pyx_f_5utils_trim_string(std::string const &__pyx_v_s) {
     __pyx_r = ((char const *)__pyx_k__2);
     goto __pyx_L0;
 
-    /* "utils.pyx":13
- *     """Remove leading and trailing whitespace from a C++ string."""
+    /* "utils.pxd":32
+ * cdef inline string trim_string(const string& s) noexcept nogil:
  *     cdef size_t first = s.find_first_not_of(b" \t\r\n")
  *     if first == npos:             # <<<<<<<<<<<<<<
  *         return <const char*>b""
@@ -2209,7 +2396,7 @@ static std::string __pyx_f_5utils_trim_string(std::string const &__pyx_v_s) {
 */
   }
 
-  /* "utils.pyx":15
+  /* "utils.pxd":34
  *     if first == npos:
  *         return <const char*>b""
  *     cdef size_t last = s.find_last_not_of(b" \t\r\n")             # <<<<<<<<<<<<<<
@@ -2218,12 +2405,12 @@ static std::string __pyx_f_5utils_trim_string(std::string const &__pyx_v_s) {
 */
   __pyx_v_last = __pyx_v_s.find_last_not_of(__pyx_k_);
 
-  /* "utils.pyx":16
+  /* "utils.pxd":35
  *         return <const char*>b""
  *     cdef size_t last = s.find_last_not_of(b" \t\r\n")
  *     return s.substr(first, (last - first + 1))             # <<<<<<<<<<<<<<
  * 
- * cdef string any_to_string(object value) except *:
+ * # Similar to Go's strings.HasPrefix()
 */
   try {
     __pyx_t_2 = __pyx_v_s.substr(__pyx_v_first, ((__pyx_v_last - __pyx_v_first) + 1));
@@ -2231,17 +2418,17 @@ static std::string __pyx_f_5utils_trim_string(std::string const &__pyx_v_s) {
     PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
     __Pyx_CppExn2PyErr();
     __Pyx_PyGILState_Release(__pyx_gilstate_save);
-    __PYX_ERR(0, 16, __pyx_L1_error)
+    __PYX_ERR(2, 35, __pyx_L1_error)
   }
   __pyx_r = __pyx_t_2;
   goto __pyx_L0;
 
-  /* "utils.pyx":10
- *     string to_string(double val)
+  /* "utils.pxd":30
  * 
- * cdef string trim_string(const string& s) noexcept nogil:             # <<<<<<<<<<<<<<
- *     """Remove leading and trailing whitespace from a C++ string."""
+ * # Remove leading and trailing whitespace from a C++ string.
+ * cdef inline string trim_string(const string& s) noexcept nogil:             # <<<<<<<<<<<<<<
  *     cdef size_t first = s.find_first_not_of(b" \t\r\n")
+ *     if first == npos:
 */
 
   /* function exit code */
@@ -2254,12 +2441,271 @@ static std::string __pyx_f_5utils_trim_string(std::string const &__pyx_v_s) {
   return __pyx_r;
 }
 
-/* "utils.pyx":18
- *     return s.substr(first, (last - first + 1))
+/* "utils.pxd":38
  * 
+ * # Similar to Go's strings.HasPrefix()
+ * cdef inline cbool has_prefix(const string&s, const string& prefix) noexcept nogil:             # <<<<<<<<<<<<<<
+ *     cdef size_t p_len = prefix.length()
+ *     return s.length() >= p_len and s.compare(0, p_len, prefix) == 0
+*/
+
+static CYTHON_INLINE bool __pyx_f_5utils_has_prefix(std::string const &__pyx_v_s, std::string const &__pyx_v_prefix) {
+  size_t __pyx_v_p_len;
+  bool __pyx_r;
+  bool __pyx_t_1;
+  int __pyx_t_2;
+  int __pyx_t_3;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyGILState_STATE __pyx_gilstate_save;
+
+  /* "utils.pxd":39
+ * # Similar to Go's strings.HasPrefix()
+ * cdef inline cbool has_prefix(const string&s, const string& prefix) noexcept nogil:
+ *     cdef size_t p_len = prefix.length()             # <<<<<<<<<<<<<<
+ *     return s.length() >= p_len and s.compare(0, p_len, prefix) == 0
+ * 
+*/
+  __pyx_v_p_len = __pyx_v_prefix.length();
+
+  /* "utils.pxd":40
+ * cdef inline cbool has_prefix(const string&s, const string& prefix) noexcept nogil:
+ *     cdef size_t p_len = prefix.length()
+ *     return s.length() >= p_len and s.compare(0, p_len, prefix) == 0             # <<<<<<<<<<<<<<
+ * 
+ * # Similar to Go's strings.HasSuffix()
+*/
+  __pyx_t_2 = (__pyx_v_s.length() >= __pyx_v_p_len);
+  if (__pyx_t_2) {
+  } else {
+    __pyx_t_1 = __pyx_t_2;
+    goto __pyx_L3_bool_binop_done;
+  }
+  try {
+    __pyx_t_3 = __pyx_v_s.compare(0, __pyx_v_p_len, __pyx_v_prefix);
+  } catch(...) {
+    PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
+    __Pyx_CppExn2PyErr();
+    __Pyx_PyGILState_Release(__pyx_gilstate_save);
+    __PYX_ERR(2, 40, __pyx_L1_error)
+  }
+  __pyx_t_2 = (__pyx_t_3 == 0);
+  __pyx_t_1 = __pyx_t_2;
+  __pyx_L3_bool_binop_done:;
+  __pyx_r = __pyx_t_1;
+  goto __pyx_L0;
+
+  /* "utils.pxd":38
+ * 
+ * # Similar to Go's strings.HasPrefix()
+ * cdef inline cbool has_prefix(const string&s, const string& prefix) noexcept nogil:             # <<<<<<<<<<<<<<
+ *     cdef size_t p_len = prefix.length()
+ *     return s.length() >= p_len and s.compare(0, p_len, prefix) == 0
+*/
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
+  __Pyx_WriteUnraisable("utils.has_prefix", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
+  __pyx_r = 0;
+  __Pyx_PyGILState_Release(__pyx_gilstate_save);
+  __pyx_L0:;
+  return __pyx_r;
+}
+
+/* "utils.pxd":43
+ * 
+ * # Similar to Go's strings.HasSuffix()
+ * cdef inline cbool has_suffix(const string&s, const string& suffix) noexcept nogil:             # <<<<<<<<<<<<<<
+ *     cdef size_t s_len = suffix.length()
+ *     return s.length() >= s_len and s.compare(s.length() - s_len, s_len, suffix) == 0
+*/
+
+static CYTHON_INLINE bool __pyx_f_5utils_has_suffix(std::string const &__pyx_v_s, std::string const &__pyx_v_suffix) {
+  size_t __pyx_v_s_len;
+  bool __pyx_r;
+  bool __pyx_t_1;
+  int __pyx_t_2;
+  int __pyx_t_3;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyGILState_STATE __pyx_gilstate_save;
+
+  /* "utils.pxd":44
+ * # Similar to Go's strings.HasSuffix()
+ * cdef inline cbool has_suffix(const string&s, const string& suffix) noexcept nogil:
+ *     cdef size_t s_len = suffix.length()             # <<<<<<<<<<<<<<
+ *     return s.length() >= s_len and s.compare(s.length() - s_len, s_len, suffix) == 0
+ * 
+*/
+  __pyx_v_s_len = __pyx_v_suffix.length();
+
+  /* "utils.pxd":45
+ * cdef inline cbool has_suffix(const string&s, const string& suffix) noexcept nogil:
+ *     cdef size_t s_len = suffix.length()
+ *     return s.length() >= s_len and s.compare(s.length() - s_len, s_len, suffix) == 0             # <<<<<<<<<<<<<<
+ * 
+ * # Similar to Go's stringsCutPrefix()
+*/
+  __pyx_t_2 = (__pyx_v_s.length() >= __pyx_v_s_len);
+  if (__pyx_t_2) {
+  } else {
+    __pyx_t_1 = __pyx_t_2;
+    goto __pyx_L3_bool_binop_done;
+  }
+  try {
+    __pyx_t_3 = __pyx_v_s.compare((__pyx_v_s.length() - __pyx_v_s_len), __pyx_v_s_len, __pyx_v_suffix);
+  } catch(...) {
+    PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
+    __Pyx_CppExn2PyErr();
+    __Pyx_PyGILState_Release(__pyx_gilstate_save);
+    __PYX_ERR(2, 45, __pyx_L1_error)
+  }
+  __pyx_t_2 = (__pyx_t_3 == 0);
+  __pyx_t_1 = __pyx_t_2;
+  __pyx_L3_bool_binop_done:;
+  __pyx_r = __pyx_t_1;
+  goto __pyx_L0;
+
+  /* "utils.pxd":43
+ * 
+ * # Similar to Go's strings.HasSuffix()
+ * cdef inline cbool has_suffix(const string&s, const string& suffix) noexcept nogil:             # <<<<<<<<<<<<<<
+ *     cdef size_t s_len = suffix.length()
+ *     return s.length() >= s_len and s.compare(s.length() - s_len, s_len, suffix) == 0
+*/
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
+  __Pyx_WriteUnraisable("utils.has_suffix", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
+  __pyx_r = 0;
+  __Pyx_PyGILState_Release(__pyx_gilstate_save);
+  __pyx_L0:;
+  return __pyx_r;
+}
+
+/* "utils.pxd":48
+ * 
+ * # Similar to Go's stringsCutPrefix()
+ * cdef inline (string, cbool) cut_prefix(const string& s, const string& prefix) noexcept nogil:             # <<<<<<<<<<<<<<
+ *     cdef size_t p_len = prefix.length()
+ * 
+*/
+
+static CYTHON_INLINE __pyx_ctuple_6libcpp_6string_std__in_string__and_6libcpp_bool __pyx_f_5utils_cut_prefix(std::string const &__pyx_v_s, std::string const &__pyx_v_prefix) {
+  size_t __pyx_v_p_len;
+  __pyx_ctuple_6libcpp_6string_std__in_string__and_6libcpp_bool __pyx_r;
+  int __pyx_t_1;
+  int __pyx_t_2;
+  int __pyx_t_3;
+  std::string __pyx_t_4;
+  __pyx_ctuple_6libcpp_6string_std__in_string__and_6libcpp_bool __pyx_t_5;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyGILState_STATE __pyx_gilstate_save;
+
+  /* "utils.pxd":49
+ * # Similar to Go's stringsCutPrefix()
+ * cdef inline (string, cbool) cut_prefix(const string& s, const string& prefix) noexcept nogil:
+ *     cdef size_t p_len = prefix.length()             # <<<<<<<<<<<<<<
+ * 
+ *     if s.length() >= p_len and s.compare(0, p_len, prefix) == 0:
+*/
+  __pyx_v_p_len = __pyx_v_prefix.length();
+
+  /* "utils.pxd":51
+ *     cdef size_t p_len = prefix.length()
+ * 
+ *     if s.length() >= p_len and s.compare(0, p_len, prefix) == 0:             # <<<<<<<<<<<<<<
+ *         return (s.substr(p_len), True)
+ * 
+*/
+  __pyx_t_2 = (__pyx_v_s.length() >= __pyx_v_p_len);
+  if (__pyx_t_2) {
+  } else {
+    __pyx_t_1 = __pyx_t_2;
+    goto __pyx_L4_bool_binop_done;
+  }
+  try {
+    __pyx_t_3 = __pyx_v_s.compare(0, __pyx_v_p_len, __pyx_v_prefix);
+  } catch(...) {
+    PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
+    __Pyx_CppExn2PyErr();
+    __Pyx_PyGILState_Release(__pyx_gilstate_save);
+    __PYX_ERR(2, 51, __pyx_L1_error)
+  }
+  __pyx_t_2 = (__pyx_t_3 == 0);
+  __pyx_t_1 = __pyx_t_2;
+  __pyx_L4_bool_binop_done:;
+  if (__pyx_t_1) {
+
+    /* "utils.pxd":52
+ * 
+ *     if s.length() >= p_len and s.compare(0, p_len, prefix) == 0:
+ *         return (s.substr(p_len), True)             # <<<<<<<<<<<<<<
+ * 
+ *     return (s, False)
+*/
+    try {
+      __pyx_t_4 = __pyx_v_s.substr(__pyx_v_p_len);
+    } catch(...) {
+      PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
+      __Pyx_CppExn2PyErr();
+      __Pyx_PyGILState_Release(__pyx_gilstate_save);
+      __PYX_ERR(2, 52, __pyx_L1_error)
+    }
+    __pyx_t_5.f0 = __pyx_t_4;
+    __pyx_t_5.f1 = 1;
+    __pyx_r = __pyx_t_5;
+    goto __pyx_L0;
+
+    /* "utils.pxd":51
+ *     cdef size_t p_len = prefix.length()
+ * 
+ *     if s.length() >= p_len and s.compare(0, p_len, prefix) == 0:             # <<<<<<<<<<<<<<
+ *         return (s.substr(p_len), True)
+ * 
+*/
+  }
+
+  /* "utils.pxd":54
+ *         return (s.substr(p_len), True)
+ * 
+ *     return (s, False)             # <<<<<<<<<<<<<<
+*/
+  __pyx_t_5.f0 = __pyx_v_s;
+  __pyx_t_5.f1 = 0;
+  __pyx_r = __pyx_t_5;
+  goto __pyx_L0;
+
+  /* "utils.pxd":48
+ * 
+ * # Similar to Go's stringsCutPrefix()
+ * cdef inline (string, cbool) cut_prefix(const string& s, const string& prefix) noexcept nogil:             # <<<<<<<<<<<<<<
+ *     cdef size_t p_len = prefix.length()
+ * 
+*/
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
+  __Pyx_WriteUnraisable("utils.cut_prefix", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
+  __Pyx_pretend_to_initialize(&__pyx_r);
+  __Pyx_PyGILState_Release(__pyx_gilstate_save);
+  __pyx_L0:;
+  return __pyx_r;
+}
+
+/* "utils.pyx":10
+ * 
+ * # Get Python object and convert it to C++ std::string.
  * cdef string any_to_string(object value) except *:             # <<<<<<<<<<<<<<
- *     """
- *     Get Python object and convert it to C++ std::string.
+ *     if value is None:
+ *         return <const char*>b""
 */
 
 static std::string __pyx_f_5utils_any_to_string(PyObject *__pyx_v_value) {
@@ -2277,9 +2723,9 @@ static std::string __pyx_f_5utils_any_to_string(PyObject *__pyx_v_value) {
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("any_to_string", 0);
 
-  /* "utils.pyx":22
- *     Get Python object and convert it to C++ std::string.
- *     """
+  /* "utils.pyx":11
+ * # Get Python object and convert it to C++ std::string.
+ * cdef string any_to_string(object value) except *:
  *     if value is None:             # <<<<<<<<<<<<<<
  *         return <const char*>b""
  *     elif isinstance(value, bool):
@@ -2287,8 +2733,8 @@ static std::string __pyx_f_5utils_any_to_string(PyObject *__pyx_v_value) {
   __pyx_t_1 = (__pyx_v_value == Py_None);
   if (__pyx_t_1) {
 
-    /* "utils.pyx":23
- *     """
+    /* "utils.pyx":12
+ * cdef string any_to_string(object value) except *:
  *     if value is None:
  *         return <const char*>b""             # <<<<<<<<<<<<<<
  *     elif isinstance(value, bool):
@@ -2297,16 +2743,16 @@ static std::string __pyx_f_5utils_any_to_string(PyObject *__pyx_v_value) {
     __pyx_r = ((char const *)__pyx_k__2);
     goto __pyx_L0;
 
-    /* "utils.pyx":22
- *     Get Python object and convert it to C++ std::string.
- *     """
+    /* "utils.pyx":11
+ * # Get Python object and convert it to C++ std::string.
+ * cdef string any_to_string(object value) except *:
  *     if value is None:             # <<<<<<<<<<<<<<
  *         return <const char*>b""
  *     elif isinstance(value, bool):
 */
   }
 
-  /* "utils.pyx":24
+  /* "utils.pyx":13
  *     if value is None:
  *         return <const char*>b""
  *     elif isinstance(value, bool):             # <<<<<<<<<<<<<<
@@ -2316,14 +2762,14 @@ static std::string __pyx_f_5utils_any_to_string(PyObject *__pyx_v_value) {
   __pyx_t_1 = PyBool_Check(__pyx_v_value); 
   if (__pyx_t_1) {
 
-    /* "utils.pyx":26
+    /* "utils.pyx":15
  *     elif isinstance(value, bool):
  *         # EnergyPlus Yes/No convention
  *         return <const char*>b"Yes" if value else <const char*>b"No"             # <<<<<<<<<<<<<<
  *     elif isinstance(value, int):
  *         return to_string(<long long>value)
 */
-    __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_v_value); if (unlikely((__pyx_t_1 < 0))) __PYX_ERR(0, 26, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_IsTrue(__pyx_v_value); if (unlikely((__pyx_t_1 < 0))) __PYX_ERR(0, 15, __pyx_L1_error)
     if (__pyx_t_1) {
       __pyx_t_2 = ((char const *)__pyx_k_Yes);
     } else {
@@ -2332,7 +2778,7 @@ static std::string __pyx_f_5utils_any_to_string(PyObject *__pyx_v_value) {
     __pyx_r = __pyx_t_2;
     goto __pyx_L0;
 
-    /* "utils.pyx":24
+    /* "utils.pyx":13
  *     if value is None:
  *         return <const char*>b""
  *     elif isinstance(value, bool):             # <<<<<<<<<<<<<<
@@ -2341,7 +2787,7 @@ static std::string __pyx_f_5utils_any_to_string(PyObject *__pyx_v_value) {
 */
   }
 
-  /* "utils.pyx":27
+  /* "utils.pyx":16
  *         # EnergyPlus Yes/No convention
  *         return <const char*>b"Yes" if value else <const char*>b"No"
  *     elif isinstance(value, int):             # <<<<<<<<<<<<<<
@@ -2351,18 +2797,18 @@ static std::string __pyx_f_5utils_any_to_string(PyObject *__pyx_v_value) {
   __pyx_t_1 = PyLong_Check(__pyx_v_value); 
   if (__pyx_t_1) {
 
-    /* "utils.pyx":28
+    /* "utils.pyx":17
  *         return <const char*>b"Yes" if value else <const char*>b"No"
  *     elif isinstance(value, int):
  *         return to_string(<long long>value)             # <<<<<<<<<<<<<<
  *     elif isinstance(value, float):
  *         # Note: to_string(double) only preserves until six decimal places
 */
-    __pyx_t_3 = __Pyx_PyLong_As_PY_LONG_LONG(__pyx_v_value); if (unlikely((__pyx_t_3 == (PY_LONG_LONG)-1) && PyErr_Occurred())) __PYX_ERR(0, 28, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyLong_As_PY_LONG_LONG(__pyx_v_value); if (unlikely((__pyx_t_3 == (PY_LONG_LONG)-1) && PyErr_Occurred())) __PYX_ERR(0, 17, __pyx_L1_error)
     __pyx_r = std::to_string(((PY_LONG_LONG)__pyx_t_3));
     goto __pyx_L0;
 
-    /* "utils.pyx":27
+    /* "utils.pyx":16
  *         # EnergyPlus Yes/No convention
  *         return <const char*>b"Yes" if value else <const char*>b"No"
  *     elif isinstance(value, int):             # <<<<<<<<<<<<<<
@@ -2371,7 +2817,7 @@ static std::string __pyx_f_5utils_any_to_string(PyObject *__pyx_v_value) {
 */
   }
 
-  /* "utils.pyx":29
+  /* "utils.pyx":18
  *     elif isinstance(value, int):
  *         return to_string(<long long>value)
  *     elif isinstance(value, float):             # <<<<<<<<<<<<<<
@@ -2381,18 +2827,18 @@ static std::string __pyx_f_5utils_any_to_string(PyObject *__pyx_v_value) {
   __pyx_t_1 = PyFloat_Check(__pyx_v_value); 
   if (__pyx_t_1) {
 
-    /* "utils.pyx":32
+    /* "utils.pyx":21
  *         # Note: to_string(double) only preserves until six decimal places
  *         # consider using str(value).encode('utf-8')
  *         return to_string(<double>value)             # <<<<<<<<<<<<<<
  *     elif isinstance(value, str):
  *         # Fast cast from Python str to C++ std::string using UTF-8 encoding
 */
-    __pyx_t_4 = __Pyx_PyFloat_AsDouble(__pyx_v_value); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 32, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyFloat_AsDouble(__pyx_v_value); if (unlikely((__pyx_t_4 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 21, __pyx_L1_error)
     __pyx_r = std::to_string(((double)__pyx_t_4));
     goto __pyx_L0;
 
-    /* "utils.pyx":29
+    /* "utils.pyx":18
  *     elif isinstance(value, int):
  *         return to_string(<long long>value)
  *     elif isinstance(value, float):             # <<<<<<<<<<<<<<
@@ -2401,7 +2847,7 @@ static std::string __pyx_f_5utils_any_to_string(PyObject *__pyx_v_value) {
 */
   }
 
-  /* "utils.pyx":33
+  /* "utils.pyx":22
  *         # consider using str(value).encode('utf-8')
  *         return to_string(<double>value)
  *     elif isinstance(value, str):             # <<<<<<<<<<<<<<
@@ -2411,7 +2857,7 @@ static std::string __pyx_f_5utils_any_to_string(PyObject *__pyx_v_value) {
   __pyx_t_1 = PyUnicode_Check(__pyx_v_value); 
   if (__pyx_t_1) {
 
-    /* "utils.pyx":35
+    /* "utils.pyx":24
  *     elif isinstance(value, str):
  *         # Fast cast from Python str to C++ std::string using UTF-8 encoding
  *         return (<str>value).encode('utf-8')             # <<<<<<<<<<<<<<
@@ -2420,16 +2866,16 @@ static std::string __pyx_f_5utils_any_to_string(PyObject *__pyx_v_value) {
 */
     if (unlikely(__pyx_v_value == Py_None)) {
       PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%.30s'", "encode");
-      __PYX_ERR(0, 35, __pyx_L1_error)
+      __PYX_ERR(0, 24, __pyx_L1_error)
     }
-    __pyx_t_5 = PyUnicode_AsUTF8String(((PyObject*)__pyx_v_value)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 35, __pyx_L1_error)
+    __pyx_t_5 = PyUnicode_AsUTF8String(((PyObject*)__pyx_v_value)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 24, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_6 = __pyx_convert_string_from_py_6libcpp_6string_std__in_string(__pyx_t_5); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 35, __pyx_L1_error)
+    __pyx_t_6 = __pyx_convert_string_from_py_6libcpp_6string_std__in_string(__pyx_t_5); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 24, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __pyx_r = __pyx_t_6;
     goto __pyx_L0;
 
-    /* "utils.pyx":33
+    /* "utils.pyx":22
  *         # consider using str(value).encode('utf-8')
  *         return to_string(<double>value)
  *     elif isinstance(value, str):             # <<<<<<<<<<<<<<
@@ -2438,31 +2884,31 @@ static std::string __pyx_f_5utils_any_to_string(PyObject *__pyx_v_value) {
 */
   }
 
-  /* "utils.pyx":39
+  /* "utils.pyx":28
  *         # Fallback for other types.
  *         # Uses Python's built-in str() function, then encodes it.
  *         return str(value).encode('utf-8')             # <<<<<<<<<<<<<<
  * 
- * cdef (int, int) get_continuous_digits_indices(const string& name) noexcept nogil:
+ * # Get start and end indices of continous digits (first appearance).
 */
   /*else*/ {
-    __pyx_t_5 = __Pyx_PyObject_Unicode(__pyx_v_value); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 39, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_Unicode(__pyx_v_value); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 28, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_7 = PyUnicode_AsUTF8String(((PyObject*)__pyx_t_5)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 39, __pyx_L1_error)
+    __pyx_t_7 = PyUnicode_AsUTF8String(((PyObject*)__pyx_t_5)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 28, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __pyx_t_6 = __pyx_convert_string_from_py_6libcpp_6string_std__in_string(__pyx_t_7); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 39, __pyx_L1_error)
+    __pyx_t_6 = __pyx_convert_string_from_py_6libcpp_6string_std__in_string(__pyx_t_7); if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 28, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __pyx_r = __pyx_t_6;
     goto __pyx_L0;
   }
 
-  /* "utils.pyx":18
- *     return s.substr(first, (last - first + 1))
+  /* "utils.pyx":10
  * 
+ * # Get Python object and convert it to C++ std::string.
  * cdef string any_to_string(object value) except *:             # <<<<<<<<<<<<<<
- *     """
- *     Get Python object and convert it to C++ std::string.
+ *     if value is None:
+ *         return <const char*>b""
 */
 
   /* function exit code */
@@ -2476,12 +2922,12 @@ static std::string __pyx_f_5utils_any_to_string(PyObject *__pyx_v_value) {
   return __pyx_r;
 }
 
-/* "utils.pyx":41
- *         return str(value).encode('utf-8')
+/* "utils.pyx":31
  * 
+ * # Get start and end indices of continous digits (first appearance).
  * cdef (int, int) get_continuous_digits_indices(const string& name) noexcept nogil:             # <<<<<<<<<<<<<<
- *     """
- *     Get start and end indices of continous digits (first appearance)
+ *     cdef int start_idx = -1
+ *     cdef int end_idx = -1
 */
 
 static __pyx_ctuple_int__and_int __pyx_f_5utils_get_continuous_digits_indices(std::string const &__pyx_v_name) {
@@ -2497,17 +2943,17 @@ static __pyx_ctuple_int__and_int __pyx_f_5utils_get_continuous_digits_indices(st
   int __pyx_t_5;
   __pyx_ctuple_int__and_int __pyx_t_6;
 
-  /* "utils.pyx":45
- *     Get start and end indices of continous digits (first appearance)
- *     """
+  /* "utils.pyx":32
+ * # Get start and end indices of continous digits (first appearance).
+ * cdef (int, int) get_continuous_digits_indices(const string& name) noexcept nogil:
  *     cdef int start_idx = -1             # <<<<<<<<<<<<<<
  *     cdef int end_idx = -1
  *     cdef size_t i = 0
 */
   __pyx_v_start_idx = -1;
 
-  /* "utils.pyx":46
- *     """
+  /* "utils.pyx":33
+ * cdef (int, int) get_continuous_digits_indices(const string& name) noexcept nogil:
  *     cdef int start_idx = -1
  *     cdef int end_idx = -1             # <<<<<<<<<<<<<<
  *     cdef size_t i = 0
@@ -2515,7 +2961,7 @@ static __pyx_ctuple_int__and_int __pyx_f_5utils_get_continuous_digits_indices(st
 */
   __pyx_v_end_idx = -1;
 
-  /* "utils.pyx":47
+  /* "utils.pyx":34
  *     cdef int start_idx = -1
  *     cdef int end_idx = -1
  *     cdef size_t i = 0             # <<<<<<<<<<<<<<
@@ -2524,7 +2970,7 @@ static __pyx_ctuple_int__and_int __pyx_f_5utils_get_continuous_digits_indices(st
 */
   __pyx_v_i = 0;
 
-  /* "utils.pyx":50
+  /* "utils.pyx":37
  *     cdef char c
  * 
  *     for i in range(name.length()):             # <<<<<<<<<<<<<<
@@ -2536,7 +2982,7 @@ static __pyx_ctuple_int__and_int __pyx_f_5utils_get_continuous_digits_indices(st
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_i = __pyx_t_3;
 
-    /* "utils.pyx":51
+    /* "utils.pyx":38
  * 
  *     for i in range(name.length()):
  *         c = name[i]             # <<<<<<<<<<<<<<
@@ -2545,7 +2991,7 @@ static __pyx_ctuple_int__and_int __pyx_f_5utils_get_continuous_digits_indices(st
 */
     __pyx_v_c = (__pyx_v_name[__pyx_v_i]);
 
-    /* "utils.pyx":53
+    /* "utils.pyx":40
  *         c = name[i]
  *         # Check if the character is a digit (ASCII 0-9)
  *         if b'0' <= c <= b'9':             # <<<<<<<<<<<<<<
@@ -2558,7 +3004,7 @@ static __pyx_ctuple_int__and_int __pyx_f_5utils_get_continuous_digits_indices(st
     }
     if (__pyx_t_4) {
 
-      /* "utils.pyx":54
+      /* "utils.pyx":41
  *         # Check if the character is a digit (ASCII 0-9)
  *         if b'0' <= c <= b'9':
  *             if start_idx == -1:             # <<<<<<<<<<<<<<
@@ -2568,7 +3014,7 @@ static __pyx_ctuple_int__and_int __pyx_f_5utils_get_continuous_digits_indices(st
       __pyx_t_4 = (__pyx_v_start_idx == -1L);
       if (__pyx_t_4) {
 
-        /* "utils.pyx":55
+        /* "utils.pyx":42
  *         if b'0' <= c <= b'9':
  *             if start_idx == -1:
  *                 start_idx = i             # <<<<<<<<<<<<<<
@@ -2577,7 +3023,7 @@ static __pyx_ctuple_int__and_int __pyx_f_5utils_get_continuous_digits_indices(st
 */
         __pyx_v_start_idx = __pyx_v_i;
 
-        /* "utils.pyx":54
+        /* "utils.pyx":41
  *         # Check if the character is a digit (ASCII 0-9)
  *         if b'0' <= c <= b'9':
  *             if start_idx == -1:             # <<<<<<<<<<<<<<
@@ -2586,7 +3032,7 @@ static __pyx_ctuple_int__and_int __pyx_f_5utils_get_continuous_digits_indices(st
 */
       }
 
-      /* "utils.pyx":53
+      /* "utils.pyx":40
  *         c = name[i]
  *         # Check if the character is a digit (ASCII 0-9)
  *         if b'0' <= c <= b'9':             # <<<<<<<<<<<<<<
@@ -2596,7 +3042,7 @@ static __pyx_ctuple_int__and_int __pyx_f_5utils_get_continuous_digits_indices(st
       goto __pyx_L5;
     }
 
-    /* "utils.pyx":56
+    /* "utils.pyx":43
  *             if start_idx == -1:
  *                 start_idx = i
  *         elif start_idx != -1:             # <<<<<<<<<<<<<<
@@ -2606,7 +3052,7 @@ static __pyx_ctuple_int__and_int __pyx_f_5utils_get_continuous_digits_indices(st
     __pyx_t_4 = (__pyx_v_start_idx != -1L);
     if (__pyx_t_4) {
 
-      /* "utils.pyx":57
+      /* "utils.pyx":44
  *                 start_idx = i
  *         elif start_idx != -1:
  *             end_idx = i             # <<<<<<<<<<<<<<
@@ -2615,7 +3061,7 @@ static __pyx_ctuple_int__and_int __pyx_f_5utils_get_continuous_digits_indices(st
 */
       __pyx_v_end_idx = __pyx_v_i;
 
-      /* "utils.pyx":58
+      /* "utils.pyx":45
  *         elif start_idx != -1:
  *             end_idx = i
  *             break             # <<<<<<<<<<<<<<
@@ -2624,7 +3070,7 @@ static __pyx_ctuple_int__and_int __pyx_f_5utils_get_continuous_digits_indices(st
 */
       goto __pyx_L4_break;
 
-      /* "utils.pyx":56
+      /* "utils.pyx":43
  *             if start_idx == -1:
  *                 start_idx = i
  *         elif start_idx != -1:             # <<<<<<<<<<<<<<
@@ -2636,7 +3082,7 @@ static __pyx_ctuple_int__and_int __pyx_f_5utils_get_continuous_digits_indices(st
   }
   __pyx_L4_break:;
 
-  /* "utils.pyx":60
+  /* "utils.pyx":47
  *             break
  * 
  *     if start_idx != -1 and end_idx == -1:             # <<<<<<<<<<<<<<
@@ -2654,7 +3100,7 @@ static __pyx_ctuple_int__and_int __pyx_f_5utils_get_continuous_digits_indices(st
   __pyx_L8_bool_binop_done:;
   if (__pyx_t_4) {
 
-    /* "utils.pyx":61
+    /* "utils.pyx":48
  * 
  *     if start_idx != -1 and end_idx == -1:
  *         end_idx = name.length()             # <<<<<<<<<<<<<<
@@ -2663,7 +3109,7 @@ static __pyx_ctuple_int__and_int __pyx_f_5utils_get_continuous_digits_indices(st
 */
     __pyx_v_end_idx = __pyx_v_name.length();
 
-    /* "utils.pyx":60
+    /* "utils.pyx":47
  *             break
  * 
  *     if start_idx != -1 and end_idx == -1:             # <<<<<<<<<<<<<<
@@ -2672,7 +3118,7 @@ static __pyx_ctuple_int__and_int __pyx_f_5utils_get_continuous_digits_indices(st
 */
   }
 
-  /* "utils.pyx":63
+  /* "utils.pyx":50
  *         end_idx = name.length()
  * 
  *     return start_idx, end_idx             # <<<<<<<<<<<<<<
@@ -2682,12 +3128,12 @@ static __pyx_ctuple_int__and_int __pyx_f_5utils_get_continuous_digits_indices(st
   __pyx_r = __pyx_t_6;
   goto __pyx_L0;
 
-  /* "utils.pyx":41
- *         return str(value).encode('utf-8')
+  /* "utils.pyx":31
  * 
+ * # Get start and end indices of continous digits (first appearance).
  * cdef (int, int) get_continuous_digits_indices(const string& name) noexcept nogil:             # <<<<<<<<<<<<<<
- *     """
- *     Get start and end indices of continous digits (first appearance)
+ *     cdef int start_idx = -1
+ *     cdef int end_idx = -1
 */
 
   /* function exit code */
@@ -2748,8 +3194,8 @@ static int __Pyx_modinit_function_export_code(__pyx_mstatetype *__pyx_mstate) {
     #if !CYTHON_ASSUME_SAFE_MACROS
     if (unlikely(!__pyx_export_signature)) __PYX_ERR(0, 1, __pyx_L1_error)
     #endif
-    const char * __pyx_export_name = __pyx_export_signature + 107;
-    void (*const __pyx_export_pointers[])(void) = {(void (*)(void))&__pyx_f_5utils_get_continuous_digits_indices, (void (*)(void))&__pyx_f_5utils_any_to_string, (void (*)(void))&__pyx_f_5utils_trim_string, (void (*)(void)) NULL};
+    const char * __pyx_export_name = __pyx_export_signature + 73;
+    void (*const __pyx_export_pointers[])(void) = {(void (*)(void))&__pyx_f_5utils_get_continuous_digits_indices, (void (*)(void))&__pyx_f_5utils_any_to_string, (void (*)(void)) NULL};
     void (*const *__pyx_export_pointer)(void) = __pyx_export_pointers;
     const char *__pyx_export_current_signature = __pyx_export_signature;
     while (*__pyx_export_pointer) {
@@ -3074,7 +3520,7 @@ __Pyx_RefNannySetupContext("PyInit_utils", 0);
   /* "utils.pyx":1
  * # distutils: language = c++             # <<<<<<<<<<<<<<
  * 
- * from libcpp.string cimport string, npos
+ * from libcpp.string cimport string
 */
   __pyx_t_2 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
@@ -3133,25 +3579,25 @@ static int __Pyx_InitCachedConstants(__pyx_mstatetype *__pyx_mstate) {
 static int __Pyx_InitConstants(__pyx_mstatetype *__pyx_mstate) {
   CYTHON_UNUSED_VAR(__pyx_mstate);
   {
-    const struct { const unsigned int length: 8; } index[] = {{1},{18},{8},{10},{8},{12},{12},{10},{8},{162}};
-    #if (CYTHON_COMPRESS_STRINGS) == 2 /* compression: bz2 (196 bytes) */
-const char* const cstring = "BZh91AY&SY\320,p\345\000\000\021\337\200@\000Ap\000\020\200\000\300\000\277\277\376`0\000\272hjb$\364z\024\365=4\324cCPJ\2324\214@\320\000\000J\024z\201\240\000\000\323\267\202\nc\340\242\212L\204\345-\200@\0365\324\210\234\346CU\336Fx\262\336\322\201\270^\347\005\363wa\243+su\341\327\324\271\374\033\221T\005\"?\235\373\r8\367S~\366W\206R~f-I\211 a\210B\322\266\207\232+\320A\001* \002\200\201#j\302,\212\244\030\360&\346\312b\274\340^A1(\223[l\034\010\365B\n2>\261Y>3\340a\272\217\342\356H\247\n\022\032\005\216\034\240";
-    PyObject *data = __Pyx_DecompressString(cstring, 196, 2);
+    const struct { const unsigned int length: 7; } index[] = {{1},{18},{8},{10},{8},{12},{12},{10},{8},{116}};
+    #if (CYTHON_COMPRESS_STRINGS) == 2 /* compression: bz2 (179 bytes) */
+const char* const cstring = "BZh91AY&SY\347\320XD\000\000\013\337\200@\000Ap\000\020\200\000\300\000\277\277\376` \000\225\010\247\224\364M\036\241\246\214M\0311\006\232&\241\204OS\023\3244\310\3659y\240=lA\301#\222\367\023\017zI\0218\334N\307\323+\335M`h\25693\322\322\372\346\013\214\350\236\252\235\014\344k\027\202\010\223\252\3202\332\257&y\024f\034\361l\301\335\206vE\024\245\264\264\226-\212\212P\031\263 \324\202Vz\304F\007$p*\313*\301\370\370\037l$\253\246L\013\300\206L\360\276\372c\235x\027\206\303\370\273\222)\302\204\207>\202\302 ";
+    PyObject *data = __Pyx_DecompressString(cstring, 179, 2);
     if (unlikely(!data)) __PYX_ERR(0, 1, __pyx_L1_error)
     const char* const bytes = __Pyx_PyBytes_AsString(data);
     #if !CYTHON_ASSUME_SAFE_MACROS
     if (likely(bytes)); else { Py_DECREF(data); __PYX_ERR(0, 1, __pyx_L1_error) }
     #endif
-    #elif (CYTHON_COMPRESS_STRINGS) != 0 /* compression: zlib (153 bytes) */
-const char* const cstring = "x\332m\215Q\016\3020\010\206w\224>\231\351\021\366\342\021\364\006\204\265\270\240-\235\203&\356\366\266\316\030c\344\001>~\370\341\350#\013\001\013\330\202\236F\3647\200\204\265\257\221r(\221\032\t\246W\235\327\007x\234\271\361\275`\334t%\013t\301\022\r\300H\355\263ie\216\355xUPB\003\327\253\205aP[X&\347\263\250\271\335\276\373\026\373\363z\032\257\344\315\035~\006\177\255\023\031\324\306XJ.\n\201'6\255\257\002{\322\016e\005\313\260\231\272\232\323\233\237\310H^\236";
-    PyObject *data = __Pyx_DecompressString(cstring, 153, 1);
+    #elif (CYTHON_COMPRESS_STRINGS) != 0 /* compression: zlib (145 bytes) */
+const char* const cstring = "x\332M\214\301\r\3020\014E;JN\250e\204^\030\0016\260\\\307T\206\324)\265#\321\355I\250\204\360\305\317O\337\377BI\224A\024|C\342\t\351\t\260`\275\353,9\226\304\215\024\227\357^\3677\020\256\322\370U0\035\336\330#\337\261$\007p6\377%\275\254\251\225W\203\032\033\204\336<\216\243\371&:\007\312j\036NC\367/\373\333~\235\036L\036\316C7\263CM\271h\311\305 \312,n\265(\n\261u\250;x\206\343\361\003\225\242NB";
+    PyObject *data = __Pyx_DecompressString(cstring, 145, 1);
     if (unlikely(!data)) __PYX_ERR(0, 1, __pyx_L1_error)
     const char* const bytes = __Pyx_PyBytes_AsString(data);
     #if !CYTHON_ASSUME_SAFE_MACROS
     if (likely(bytes)); else { Py_DECREF(data); __PYX_ERR(0, 1, __pyx_L1_error) }
     #endif
-    #else /* compression: none (249 bytes) */
-const char* const bytes = "?cline_in_traceback__main____module____name____pyx_capi____qualname__setdefault__test____pyx_ctuple_int__and_int (std::string const &)\000std::string (PyObject *)\000std::string (std::string const &)\000get_continuous_digits_indices\000any_to_string\000trim_string";
+    #else /* compression: none (203 bytes) */
+const char* const bytes = "?cline_in_traceback__main____module____name____pyx_capi____qualname__setdefault__test____pyx_ctuple_int__and_int (std::string const &)\000std::string (PyObject *)\000get_continuous_digits_indices\000any_to_string";
     PyObject *data = NULL;
     CYTHON_UNUSED_VAR(__Pyx_DecompressString);
     #endif
@@ -3835,256 +4281,6 @@ bad:
     }
 
 /* CIntFromPy */
-static CYTHON_INLINE PY_LONG_LONG __Pyx_PyLong_As_PY_LONG_LONG(PyObject *x) {
-#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wconversion"
-#endif
-    const PY_LONG_LONG neg_one = (PY_LONG_LONG) -1, const_zero = (PY_LONG_LONG) 0;
-#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
-#pragma GCC diagnostic pop
-#endif
-    const int is_unsigned = neg_one > const_zero;
-    if (unlikely(!PyLong_Check(x))) {
-        PY_LONG_LONG val;
-        PyObject *tmp = __Pyx_PyNumber_Long(x);
-        if (!tmp) return (PY_LONG_LONG) -1;
-        val = __Pyx_PyLong_As_PY_LONG_LONG(tmp);
-        Py_DECREF(tmp);
-        return val;
-    }
-    if (is_unsigned) {
-#if CYTHON_USE_PYLONG_INTERNALS
-        if (unlikely(__Pyx_PyLong_IsNeg(x))) {
-            goto raise_neg_overflow;
-        } else if (__Pyx_PyLong_IsCompact(x)) {
-            __PYX_VERIFY_RETURN_INT(PY_LONG_LONG, __Pyx_compact_upylong, __Pyx_PyLong_CompactValueUnsigned(x))
-        } else {
-            const digit* digits = __Pyx_PyLong_Digits(x);
-            assert(__Pyx_PyLong_DigitCount(x) > 1);
-            switch (__Pyx_PyLong_DigitCount(x)) {
-                case 2:
-                    if ((8 * sizeof(PY_LONG_LONG) > 1 * PyLong_SHIFT)) {
-                        if ((8 * sizeof(unsigned long) > 2 * PyLong_SHIFT)) {
-                            __PYX_VERIFY_RETURN_INT(PY_LONG_LONG, unsigned long, (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                        } else if ((8 * sizeof(PY_LONG_LONG) >= 2 * PyLong_SHIFT)) {
-                            return (PY_LONG_LONG) (((((PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[0]));
-                        }
-                    }
-                    break;
-                case 3:
-                    if ((8 * sizeof(PY_LONG_LONG) > 2 * PyLong_SHIFT)) {
-                        if ((8 * sizeof(unsigned long) > 3 * PyLong_SHIFT)) {
-                            __PYX_VERIFY_RETURN_INT(PY_LONG_LONG, unsigned long, (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                        } else if ((8 * sizeof(PY_LONG_LONG) >= 3 * PyLong_SHIFT)) {
-                            return (PY_LONG_LONG) (((((((PY_LONG_LONG)digits[2]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[0]));
-                        }
-                    }
-                    break;
-                case 4:
-                    if ((8 * sizeof(PY_LONG_LONG) > 3 * PyLong_SHIFT)) {
-                        if ((8 * sizeof(unsigned long) > 4 * PyLong_SHIFT)) {
-                            __PYX_VERIFY_RETURN_INT(PY_LONG_LONG, unsigned long, (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                        } else if ((8 * sizeof(PY_LONG_LONG) >= 4 * PyLong_SHIFT)) {
-                            return (PY_LONG_LONG) (((((((((PY_LONG_LONG)digits[3]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[2]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[0]));
-                        }
-                    }
-                    break;
-            }
-        }
-#endif
-#if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX < 0x030C00A7
-        if (unlikely(Py_SIZE(x) < 0)) {
-            goto raise_neg_overflow;
-        }
-#else
-        {
-            int result = PyObject_RichCompareBool(x, Py_False, Py_LT);
-            if (unlikely(result < 0))
-                return (PY_LONG_LONG) -1;
-            if (unlikely(result == 1))
-                goto raise_neg_overflow;
-        }
-#endif
-        if ((sizeof(PY_LONG_LONG) <= sizeof(unsigned long))) {
-            __PYX_VERIFY_RETURN_INT_EXC(PY_LONG_LONG, unsigned long, PyLong_AsUnsignedLong(x))
-        } else if ((sizeof(PY_LONG_LONG) <= sizeof(unsigned PY_LONG_LONG))) {
-            __PYX_VERIFY_RETURN_INT_EXC(PY_LONG_LONG, unsigned PY_LONG_LONG, PyLong_AsUnsignedLongLong(x))
-        }
-    } else {
-#if CYTHON_USE_PYLONG_INTERNALS
-        if (__Pyx_PyLong_IsCompact(x)) {
-            __PYX_VERIFY_RETURN_INT(PY_LONG_LONG, __Pyx_compact_pylong, __Pyx_PyLong_CompactValue(x))
-        } else {
-            const digit* digits = __Pyx_PyLong_Digits(x);
-            assert(__Pyx_PyLong_DigitCount(x) > 1);
-            switch (__Pyx_PyLong_SignedDigitCount(x)) {
-                case -2:
-                    if ((8 * sizeof(PY_LONG_LONG) - 1 > 1 * PyLong_SHIFT)) {
-                        if ((8 * sizeof(unsigned long) > 2 * PyLong_SHIFT)) {
-                            __PYX_VERIFY_RETURN_INT(PY_LONG_LONG, long, -(long) (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                        } else if ((8 * sizeof(PY_LONG_LONG) - 1 > 2 * PyLong_SHIFT)) {
-                            return (PY_LONG_LONG) (((PY_LONG_LONG)-1)*(((((PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[0])));
-                        }
-                    }
-                    break;
-                case 2:
-                    if ((8 * sizeof(PY_LONG_LONG) > 1 * PyLong_SHIFT)) {
-                        if ((8 * sizeof(unsigned long) > 2 * PyLong_SHIFT)) {
-                            __PYX_VERIFY_RETURN_INT(PY_LONG_LONG, unsigned long, (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                        } else if ((8 * sizeof(PY_LONG_LONG) - 1 > 2 * PyLong_SHIFT)) {
-                            return (PY_LONG_LONG) ((((((PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[0])));
-                        }
-                    }
-                    break;
-                case -3:
-                    if ((8 * sizeof(PY_LONG_LONG) - 1 > 2 * PyLong_SHIFT)) {
-                        if ((8 * sizeof(unsigned long) > 3 * PyLong_SHIFT)) {
-                            __PYX_VERIFY_RETURN_INT(PY_LONG_LONG, long, -(long) (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                        } else if ((8 * sizeof(PY_LONG_LONG) - 1 > 3 * PyLong_SHIFT)) {
-                            return (PY_LONG_LONG) (((PY_LONG_LONG)-1)*(((((((PY_LONG_LONG)digits[2]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[0])));
-                        }
-                    }
-                    break;
-                case 3:
-                    if ((8 * sizeof(PY_LONG_LONG) > 2 * PyLong_SHIFT)) {
-                        if ((8 * sizeof(unsigned long) > 3 * PyLong_SHIFT)) {
-                            __PYX_VERIFY_RETURN_INT(PY_LONG_LONG, unsigned long, (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                        } else if ((8 * sizeof(PY_LONG_LONG) - 1 > 3 * PyLong_SHIFT)) {
-                            return (PY_LONG_LONG) ((((((((PY_LONG_LONG)digits[2]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[0])));
-                        }
-                    }
-                    break;
-                case -4:
-                    if ((8 * sizeof(PY_LONG_LONG) - 1 > 3 * PyLong_SHIFT)) {
-                        if ((8 * sizeof(unsigned long) > 4 * PyLong_SHIFT)) {
-                            __PYX_VERIFY_RETURN_INT(PY_LONG_LONG, long, -(long) (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                        } else if ((8 * sizeof(PY_LONG_LONG) - 1 > 4 * PyLong_SHIFT)) {
-                            return (PY_LONG_LONG) (((PY_LONG_LONG)-1)*(((((((((PY_LONG_LONG)digits[3]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[2]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[0])));
-                        }
-                    }
-                    break;
-                case 4:
-                    if ((8 * sizeof(PY_LONG_LONG) > 3 * PyLong_SHIFT)) {
-                        if ((8 * sizeof(unsigned long) > 4 * PyLong_SHIFT)) {
-                            __PYX_VERIFY_RETURN_INT(PY_LONG_LONG, unsigned long, (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                        } else if ((8 * sizeof(PY_LONG_LONG) - 1 > 4 * PyLong_SHIFT)) {
-                            return (PY_LONG_LONG) ((((((((((PY_LONG_LONG)digits[3]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[2]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[0])));
-                        }
-                    }
-                    break;
-            }
-        }
-#endif
-        if ((sizeof(PY_LONG_LONG) <= sizeof(long))) {
-            __PYX_VERIFY_RETURN_INT_EXC(PY_LONG_LONG, long, PyLong_AsLong(x))
-        } else if ((sizeof(PY_LONG_LONG) <= sizeof(PY_LONG_LONG))) {
-            __PYX_VERIFY_RETURN_INT_EXC(PY_LONG_LONG, PY_LONG_LONG, PyLong_AsLongLong(x))
-        }
-    }
-    {
-        PY_LONG_LONG val;
-        int ret = -1;
-#if PY_VERSION_HEX >= 0x030d00A6 && !CYTHON_COMPILING_IN_LIMITED_API
-        Py_ssize_t bytes_copied = PyLong_AsNativeBytes(
-            x, &val, sizeof(val), Py_ASNATIVEBYTES_NATIVE_ENDIAN | (is_unsigned ? Py_ASNATIVEBYTES_UNSIGNED_BUFFER | Py_ASNATIVEBYTES_REJECT_NEGATIVE : 0));
-        if (unlikely(bytes_copied == -1)) {
-        } else if (unlikely(bytes_copied > (Py_ssize_t) sizeof(val))) {
-            goto raise_overflow;
-        } else {
-            ret = 0;
-        }
-#elif PY_VERSION_HEX < 0x030d0000 && !(CYTHON_COMPILING_IN_PYPY || CYTHON_COMPILING_IN_LIMITED_API) || defined(_PyLong_AsByteArray)
-        int one = 1; int is_little = (int)*(unsigned char *)&one;
-        unsigned char *bytes = (unsigned char *)&val;
-        ret = _PyLong_AsByteArray((PyLongObject *)x,
-                                    bytes, sizeof(val),
-                                    is_little, !is_unsigned);
-#else
-        PyObject *v;
-        PyObject *stepval = NULL, *mask = NULL, *shift = NULL;
-        int bits, remaining_bits, is_negative = 0;
-        int chunk_size = (sizeof(long) < 8) ? 30 : 62;
-        if (likely(PyLong_CheckExact(x))) {
-            v = __Pyx_NewRef(x);
-        } else {
-            v = PyNumber_Long(x);
-            if (unlikely(!v)) return (PY_LONG_LONG) -1;
-            assert(PyLong_CheckExact(v));
-        }
-        {
-            int result = PyObject_RichCompareBool(v, Py_False, Py_LT);
-            if (unlikely(result < 0)) {
-                Py_DECREF(v);
-                return (PY_LONG_LONG) -1;
-            }
-            is_negative = result == 1;
-        }
-        if (is_unsigned && unlikely(is_negative)) {
-            Py_DECREF(v);
-            goto raise_neg_overflow;
-        } else if (is_negative) {
-            stepval = PyNumber_Invert(v);
-            Py_DECREF(v);
-            if (unlikely(!stepval))
-                return (PY_LONG_LONG) -1;
-        } else {
-            stepval = v;
-        }
-        v = NULL;
-        val = (PY_LONG_LONG) 0;
-        mask = PyLong_FromLong((1L << chunk_size) - 1); if (unlikely(!mask)) goto done;
-        shift = PyLong_FromLong(chunk_size); if (unlikely(!shift)) goto done;
-        for (bits = 0; bits < (int) sizeof(PY_LONG_LONG) * 8 - chunk_size; bits += chunk_size) {
-            PyObject *tmp, *digit;
-            long idigit;
-            digit = PyNumber_And(stepval, mask);
-            if (unlikely(!digit)) goto done;
-            idigit = PyLong_AsLong(digit);
-            Py_DECREF(digit);
-            if (unlikely(idigit < 0)) goto done;
-            val |= ((PY_LONG_LONG) idigit) << bits;
-            tmp = PyNumber_Rshift(stepval, shift);
-            if (unlikely(!tmp)) goto done;
-            Py_DECREF(stepval); stepval = tmp;
-        }
-        Py_DECREF(shift); shift = NULL;
-        Py_DECREF(mask); mask = NULL;
-        {
-            long idigit = PyLong_AsLong(stepval);
-            if (unlikely(idigit < 0)) goto done;
-            remaining_bits = ((int) sizeof(PY_LONG_LONG) * 8) - bits - (is_unsigned ? 0 : 1);
-            if (unlikely(idigit >= (1L << remaining_bits)))
-                goto raise_overflow;
-            val |= ((PY_LONG_LONG) idigit) << bits;
-        }
-        if (!is_unsigned) {
-            if (unlikely(val & (((PY_LONG_LONG) 1) << (sizeof(PY_LONG_LONG) * 8 - 1))))
-                goto raise_overflow;
-            if (is_negative)
-                val = ~val;
-        }
-        ret = 0;
-    done:
-        Py_XDECREF(shift);
-        Py_XDECREF(mask);
-        Py_XDECREF(stepval);
-#endif
-        if (unlikely(ret))
-            return (PY_LONG_LONG) -1;
-        return val;
-    }
-raise_overflow:
-    PyErr_SetString(PyExc_OverflowError,
-        "value too large to convert to PY_LONG_LONG");
-    return (PY_LONG_LONG) -1;
-raise_neg_overflow:
-    PyErr_SetString(PyExc_OverflowError,
-        "can't convert negative value to PY_LONG_LONG");
-    return (PY_LONG_LONG) -1;
-}
-
-/* CIntFromPy */
 static CYTHON_INLINE size_t __Pyx_PyLong_As_size_t(PyObject *x) {
 #ifdef __Pyx_HAS_GCC_DIAGNOSTIC
 #pragma GCC diagnostic push
@@ -4332,6 +4528,256 @@ raise_neg_overflow:
     PyErr_SetString(PyExc_OverflowError,
         "can't convert negative value to size_t");
     return (size_t) -1;
+}
+
+/* CIntFromPy */
+static CYTHON_INLINE PY_LONG_LONG __Pyx_PyLong_As_PY_LONG_LONG(PyObject *x) {
+#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wconversion"
+#endif
+    const PY_LONG_LONG neg_one = (PY_LONG_LONG) -1, const_zero = (PY_LONG_LONG) 0;
+#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
+#pragma GCC diagnostic pop
+#endif
+    const int is_unsigned = neg_one > const_zero;
+    if (unlikely(!PyLong_Check(x))) {
+        PY_LONG_LONG val;
+        PyObject *tmp = __Pyx_PyNumber_Long(x);
+        if (!tmp) return (PY_LONG_LONG) -1;
+        val = __Pyx_PyLong_As_PY_LONG_LONG(tmp);
+        Py_DECREF(tmp);
+        return val;
+    }
+    if (is_unsigned) {
+#if CYTHON_USE_PYLONG_INTERNALS
+        if (unlikely(__Pyx_PyLong_IsNeg(x))) {
+            goto raise_neg_overflow;
+        } else if (__Pyx_PyLong_IsCompact(x)) {
+            __PYX_VERIFY_RETURN_INT(PY_LONG_LONG, __Pyx_compact_upylong, __Pyx_PyLong_CompactValueUnsigned(x))
+        } else {
+            const digit* digits = __Pyx_PyLong_Digits(x);
+            assert(__Pyx_PyLong_DigitCount(x) > 1);
+            switch (__Pyx_PyLong_DigitCount(x)) {
+                case 2:
+                    if ((8 * sizeof(PY_LONG_LONG) > 1 * PyLong_SHIFT)) {
+                        if ((8 * sizeof(unsigned long) > 2 * PyLong_SHIFT)) {
+                            __PYX_VERIFY_RETURN_INT(PY_LONG_LONG, unsigned long, (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if ((8 * sizeof(PY_LONG_LONG) >= 2 * PyLong_SHIFT)) {
+                            return (PY_LONG_LONG) (((((PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[0]));
+                        }
+                    }
+                    break;
+                case 3:
+                    if ((8 * sizeof(PY_LONG_LONG) > 2 * PyLong_SHIFT)) {
+                        if ((8 * sizeof(unsigned long) > 3 * PyLong_SHIFT)) {
+                            __PYX_VERIFY_RETURN_INT(PY_LONG_LONG, unsigned long, (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if ((8 * sizeof(PY_LONG_LONG) >= 3 * PyLong_SHIFT)) {
+                            return (PY_LONG_LONG) (((((((PY_LONG_LONG)digits[2]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[0]));
+                        }
+                    }
+                    break;
+                case 4:
+                    if ((8 * sizeof(PY_LONG_LONG) > 3 * PyLong_SHIFT)) {
+                        if ((8 * sizeof(unsigned long) > 4 * PyLong_SHIFT)) {
+                            __PYX_VERIFY_RETURN_INT(PY_LONG_LONG, unsigned long, (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if ((8 * sizeof(PY_LONG_LONG) >= 4 * PyLong_SHIFT)) {
+                            return (PY_LONG_LONG) (((((((((PY_LONG_LONG)digits[3]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[2]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[0]));
+                        }
+                    }
+                    break;
+            }
+        }
+#endif
+#if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX < 0x030C00A7
+        if (unlikely(Py_SIZE(x) < 0)) {
+            goto raise_neg_overflow;
+        }
+#else
+        {
+            int result = PyObject_RichCompareBool(x, Py_False, Py_LT);
+            if (unlikely(result < 0))
+                return (PY_LONG_LONG) -1;
+            if (unlikely(result == 1))
+                goto raise_neg_overflow;
+        }
+#endif
+        if ((sizeof(PY_LONG_LONG) <= sizeof(unsigned long))) {
+            __PYX_VERIFY_RETURN_INT_EXC(PY_LONG_LONG, unsigned long, PyLong_AsUnsignedLong(x))
+        } else if ((sizeof(PY_LONG_LONG) <= sizeof(unsigned PY_LONG_LONG))) {
+            __PYX_VERIFY_RETURN_INT_EXC(PY_LONG_LONG, unsigned PY_LONG_LONG, PyLong_AsUnsignedLongLong(x))
+        }
+    } else {
+#if CYTHON_USE_PYLONG_INTERNALS
+        if (__Pyx_PyLong_IsCompact(x)) {
+            __PYX_VERIFY_RETURN_INT(PY_LONG_LONG, __Pyx_compact_pylong, __Pyx_PyLong_CompactValue(x))
+        } else {
+            const digit* digits = __Pyx_PyLong_Digits(x);
+            assert(__Pyx_PyLong_DigitCount(x) > 1);
+            switch (__Pyx_PyLong_SignedDigitCount(x)) {
+                case -2:
+                    if ((8 * sizeof(PY_LONG_LONG) - 1 > 1 * PyLong_SHIFT)) {
+                        if ((8 * sizeof(unsigned long) > 2 * PyLong_SHIFT)) {
+                            __PYX_VERIFY_RETURN_INT(PY_LONG_LONG, long, -(long) (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if ((8 * sizeof(PY_LONG_LONG) - 1 > 2 * PyLong_SHIFT)) {
+                            return (PY_LONG_LONG) (((PY_LONG_LONG)-1)*(((((PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[0])));
+                        }
+                    }
+                    break;
+                case 2:
+                    if ((8 * sizeof(PY_LONG_LONG) > 1 * PyLong_SHIFT)) {
+                        if ((8 * sizeof(unsigned long) > 2 * PyLong_SHIFT)) {
+                            __PYX_VERIFY_RETURN_INT(PY_LONG_LONG, unsigned long, (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if ((8 * sizeof(PY_LONG_LONG) - 1 > 2 * PyLong_SHIFT)) {
+                            return (PY_LONG_LONG) ((((((PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[0])));
+                        }
+                    }
+                    break;
+                case -3:
+                    if ((8 * sizeof(PY_LONG_LONG) - 1 > 2 * PyLong_SHIFT)) {
+                        if ((8 * sizeof(unsigned long) > 3 * PyLong_SHIFT)) {
+                            __PYX_VERIFY_RETURN_INT(PY_LONG_LONG, long, -(long) (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if ((8 * sizeof(PY_LONG_LONG) - 1 > 3 * PyLong_SHIFT)) {
+                            return (PY_LONG_LONG) (((PY_LONG_LONG)-1)*(((((((PY_LONG_LONG)digits[2]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[0])));
+                        }
+                    }
+                    break;
+                case 3:
+                    if ((8 * sizeof(PY_LONG_LONG) > 2 * PyLong_SHIFT)) {
+                        if ((8 * sizeof(unsigned long) > 3 * PyLong_SHIFT)) {
+                            __PYX_VERIFY_RETURN_INT(PY_LONG_LONG, unsigned long, (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if ((8 * sizeof(PY_LONG_LONG) - 1 > 3 * PyLong_SHIFT)) {
+                            return (PY_LONG_LONG) ((((((((PY_LONG_LONG)digits[2]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[0])));
+                        }
+                    }
+                    break;
+                case -4:
+                    if ((8 * sizeof(PY_LONG_LONG) - 1 > 3 * PyLong_SHIFT)) {
+                        if ((8 * sizeof(unsigned long) > 4 * PyLong_SHIFT)) {
+                            __PYX_VERIFY_RETURN_INT(PY_LONG_LONG, long, -(long) (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if ((8 * sizeof(PY_LONG_LONG) - 1 > 4 * PyLong_SHIFT)) {
+                            return (PY_LONG_LONG) (((PY_LONG_LONG)-1)*(((((((((PY_LONG_LONG)digits[3]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[2]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[0])));
+                        }
+                    }
+                    break;
+                case 4:
+                    if ((8 * sizeof(PY_LONG_LONG) > 3 * PyLong_SHIFT)) {
+                        if ((8 * sizeof(unsigned long) > 4 * PyLong_SHIFT)) {
+                            __PYX_VERIFY_RETURN_INT(PY_LONG_LONG, unsigned long, (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if ((8 * sizeof(PY_LONG_LONG) - 1 > 4 * PyLong_SHIFT)) {
+                            return (PY_LONG_LONG) ((((((((((PY_LONG_LONG)digits[3]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[2]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[1]) << PyLong_SHIFT) | (PY_LONG_LONG)digits[0])));
+                        }
+                    }
+                    break;
+            }
+        }
+#endif
+        if ((sizeof(PY_LONG_LONG) <= sizeof(long))) {
+            __PYX_VERIFY_RETURN_INT_EXC(PY_LONG_LONG, long, PyLong_AsLong(x))
+        } else if ((sizeof(PY_LONG_LONG) <= sizeof(PY_LONG_LONG))) {
+            __PYX_VERIFY_RETURN_INT_EXC(PY_LONG_LONG, PY_LONG_LONG, PyLong_AsLongLong(x))
+        }
+    }
+    {
+        PY_LONG_LONG val;
+        int ret = -1;
+#if PY_VERSION_HEX >= 0x030d00A6 && !CYTHON_COMPILING_IN_LIMITED_API
+        Py_ssize_t bytes_copied = PyLong_AsNativeBytes(
+            x, &val, sizeof(val), Py_ASNATIVEBYTES_NATIVE_ENDIAN | (is_unsigned ? Py_ASNATIVEBYTES_UNSIGNED_BUFFER | Py_ASNATIVEBYTES_REJECT_NEGATIVE : 0));
+        if (unlikely(bytes_copied == -1)) {
+        } else if (unlikely(bytes_copied > (Py_ssize_t) sizeof(val))) {
+            goto raise_overflow;
+        } else {
+            ret = 0;
+        }
+#elif PY_VERSION_HEX < 0x030d0000 && !(CYTHON_COMPILING_IN_PYPY || CYTHON_COMPILING_IN_LIMITED_API) || defined(_PyLong_AsByteArray)
+        int one = 1; int is_little = (int)*(unsigned char *)&one;
+        unsigned char *bytes = (unsigned char *)&val;
+        ret = _PyLong_AsByteArray((PyLongObject *)x,
+                                    bytes, sizeof(val),
+                                    is_little, !is_unsigned);
+#else
+        PyObject *v;
+        PyObject *stepval = NULL, *mask = NULL, *shift = NULL;
+        int bits, remaining_bits, is_negative = 0;
+        int chunk_size = (sizeof(long) < 8) ? 30 : 62;
+        if (likely(PyLong_CheckExact(x))) {
+            v = __Pyx_NewRef(x);
+        } else {
+            v = PyNumber_Long(x);
+            if (unlikely(!v)) return (PY_LONG_LONG) -1;
+            assert(PyLong_CheckExact(v));
+        }
+        {
+            int result = PyObject_RichCompareBool(v, Py_False, Py_LT);
+            if (unlikely(result < 0)) {
+                Py_DECREF(v);
+                return (PY_LONG_LONG) -1;
+            }
+            is_negative = result == 1;
+        }
+        if (is_unsigned && unlikely(is_negative)) {
+            Py_DECREF(v);
+            goto raise_neg_overflow;
+        } else if (is_negative) {
+            stepval = PyNumber_Invert(v);
+            Py_DECREF(v);
+            if (unlikely(!stepval))
+                return (PY_LONG_LONG) -1;
+        } else {
+            stepval = v;
+        }
+        v = NULL;
+        val = (PY_LONG_LONG) 0;
+        mask = PyLong_FromLong((1L << chunk_size) - 1); if (unlikely(!mask)) goto done;
+        shift = PyLong_FromLong(chunk_size); if (unlikely(!shift)) goto done;
+        for (bits = 0; bits < (int) sizeof(PY_LONG_LONG) * 8 - chunk_size; bits += chunk_size) {
+            PyObject *tmp, *digit;
+            long idigit;
+            digit = PyNumber_And(stepval, mask);
+            if (unlikely(!digit)) goto done;
+            idigit = PyLong_AsLong(digit);
+            Py_DECREF(digit);
+            if (unlikely(idigit < 0)) goto done;
+            val |= ((PY_LONG_LONG) idigit) << bits;
+            tmp = PyNumber_Rshift(stepval, shift);
+            if (unlikely(!tmp)) goto done;
+            Py_DECREF(stepval); stepval = tmp;
+        }
+        Py_DECREF(shift); shift = NULL;
+        Py_DECREF(mask); mask = NULL;
+        {
+            long idigit = PyLong_AsLong(stepval);
+            if (unlikely(idigit < 0)) goto done;
+            remaining_bits = ((int) sizeof(PY_LONG_LONG) * 8) - bits - (is_unsigned ? 0 : 1);
+            if (unlikely(idigit >= (1L << remaining_bits)))
+                goto raise_overflow;
+            val |= ((PY_LONG_LONG) idigit) << bits;
+        }
+        if (!is_unsigned) {
+            if (unlikely(val & (((PY_LONG_LONG) 1) << (sizeof(PY_LONG_LONG) * 8 - 1))))
+                goto raise_overflow;
+            if (is_negative)
+                val = ~val;
+        }
+        ret = 0;
+    done:
+        Py_XDECREF(shift);
+        Py_XDECREF(mask);
+        Py_XDECREF(stepval);
+#endif
+        if (unlikely(ret))
+            return (PY_LONG_LONG) -1;
+        return val;
+    }
+raise_overflow:
+    PyErr_SetString(PyExc_OverflowError,
+        "value too large to convert to PY_LONG_LONG");
+    return (PY_LONG_LONG) -1;
+raise_neg_overflow:
+    PyErr_SetString(PyExc_OverflowError,
+        "can't convert negative value to PY_LONG_LONG");
+    return (PY_LONG_LONG) -1;
 }
 
 /* FormatTypeName */
