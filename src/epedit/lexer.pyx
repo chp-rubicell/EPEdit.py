@@ -8,10 +8,8 @@ from utils cimport trim_string
 
 cdef class Lexer:
 
+    # Accepts raw bytes of the entire file.
     def __init__(self, bytes file_content, bint is_idd):
-        """
-        Accepts raw bytes of the entire file.
-        """
         # Python 'bytes' is automatically converted to C++ std::string
         self.content = file_content
         self.pos = 0
@@ -22,12 +20,10 @@ cdef class Lexer:
         self.buffer.clear()
         self.buffer_idx = 0
 
+    # Extracts next line from content and stores it in the provided `line` reference.
+    # Advances `pos` past the next `\n` character.
+    # Returns True if a line was successfully read, or False if EOF is reached.
     cdef cbool scan_next_line(self, string& line) noexcept nogil:
-        """
-        Extracts next line from content and stores it in the provided `line` reference.
-        Advances `pos` past the next `\n` character.
-        Returns True if a line was successfully read, or False if EOF is reached.
-        """
         if self.pos >= self.content.size():
             return False
 
@@ -47,10 +43,8 @@ cdef class Lexer:
         self.line_num += 1
         return True
 
+    # Return next token when parser requests.
     cdef Token next_token(self) noexcept nogil:
-        """
-        Return next token when parser requests.
-        """
         cdef Token tok
         cdef string line
         cdef cbool has_more_lines
@@ -85,6 +79,7 @@ cdef class Lexer:
         tok.value.clear()  # instead of tok.value = b""
         return tok
 
+    # Read line and split by commas and semicolons.
     cdef void tokenize_line(self, const string& line) noexcept nogil:
         # Find position of comment
         cdef size_t limit = line.find(b'!')
@@ -125,10 +120,8 @@ cdef class Lexer:
         # Final flush
         self.push_text_token(text_builder)
 
+    # Trims and pushes to buffer using reference.
     cdef void push_text_token(self, string& builder) noexcept nogil:
-        """
-        Trims and pushes to buffer using reference.
-        """
         cdef string trimmed = trim_string(builder)
         if not trimmed.empty():
             self.buffer.push_back(Token(TOKEN_TEXT, trimmed))
