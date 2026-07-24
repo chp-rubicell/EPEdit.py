@@ -3985,7 +3985,7 @@ static CYTHON_INLINE std::string __pyx_f_5utils_to_upper(std::string __pyx_v_s) 
  * cdef inline string to_upper(string s) noexcept nogil:
  *     cdef size_t i
  *     for i in range(s.length()):             # <<<<<<<<<<<<<<
- *         if b'A' <= s[i] <= b'Z':
+ *         if b'a' <= s[i] <= b'z':
  *             s[i] = s[i] - 32
 */
   __pyx_t_1 = __pyx_v_s.length();
@@ -3996,20 +3996,20 @@ static CYTHON_INLINE std::string __pyx_f_5utils_to_upper(std::string __pyx_v_s) 
     /* "utils.pxd":25
  *     cdef size_t i
  *     for i in range(s.length()):
- *         if b'A' <= s[i] <= b'Z':             # <<<<<<<<<<<<<<
+ *         if b'a' <= s[i] <= b'z':             # <<<<<<<<<<<<<<
  *             s[i] = s[i] - 32
  *     return s
 */
     __pyx_t_4 = (__pyx_v_s[__pyx_v_i]);
-    __pyx_t_5 = ('A' <= __pyx_t_4);
+    __pyx_t_5 = ('a' <= __pyx_t_4);
     if (__pyx_t_5) {
-      __pyx_t_5 = (__pyx_t_4 <= 'Z');
+      __pyx_t_5 = (__pyx_t_4 <= 'z');
     }
     if (__pyx_t_5) {
 
       /* "utils.pxd":26
  *     for i in range(s.length()):
- *         if b'A' <= s[i] <= b'Z':
+ *         if b'a' <= s[i] <= b'z':
  *             s[i] = s[i] - 32             # <<<<<<<<<<<<<<
  *     return s
  * 
@@ -4019,7 +4019,7 @@ static CYTHON_INLINE std::string __pyx_f_5utils_to_upper(std::string __pyx_v_s) 
       /* "utils.pxd":25
  *     cdef size_t i
  *     for i in range(s.length()):
- *         if b'A' <= s[i] <= b'Z':             # <<<<<<<<<<<<<<
+ *         if b'a' <= s[i] <= b'z':             # <<<<<<<<<<<<<<
  *             s[i] = s[i] - 32
  *     return s
 */
@@ -4027,7 +4027,7 @@ static CYTHON_INLINE std::string __pyx_f_5utils_to_upper(std::string __pyx_v_s) 
   }
 
   /* "utils.pxd":27
- *         if b'A' <= s[i] <= b'Z':
+ *         if b'a' <= s[i] <= b'z':
  *             s[i] = s[i] - 32
  *     return s             # <<<<<<<<<<<<<<
  * 

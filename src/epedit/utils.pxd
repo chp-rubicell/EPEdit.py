@@ -22,7 +22,7 @@ cdef inline string to_lower(string s) noexcept nogil:
 cdef inline string to_upper(string s) noexcept nogil:
     cdef size_t i
     for i in range(s.length()):
-        if b'A' <= s[i] <= b'Z':
+        if b'a' <= s[i] <= b'z':
             s[i] = s[i] - 32
     return s
 
