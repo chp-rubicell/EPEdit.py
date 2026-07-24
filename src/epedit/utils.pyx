@@ -7,6 +7,22 @@ cdef extern from "<string>" namespace "std":
     string to_string(long long val)
     string to_string(double val)
 
+cdef string to_lower(string s) noexcept nogil:
+    """Convert string to lowercase."""
+    cdef size_t i
+    for i in range(s.length()):
+        if b'A' <= s[i] <= b'Z':
+            s[i] = s[i] + 32
+    return s
+
+cdef string to_upper(string s) noexcept nogil:
+    """Convert string to uppercase."""
+    cdef size_t i
+    for i in range(s.length()):
+        if b'A' <= s[i] <= b'Z':
+            s[i] = s[i] - 32
+    return s
+
 cdef string trim_string(const string& s) noexcept nogil:
     """Remove leading and trailing whitespace from a C++ string."""
     cdef size_t first = s.find_first_not_of(b" \t\r\n")
@@ -15,7 +31,11 @@ cdef string trim_string(const string& s) noexcept nogil:
     cdef size_t last = s.find_last_not_of(b" \t\r\n")
     return s.substr(first, (last - first + 1))
 
-# Similar to Go's CutPrefix()
+# Similar to Go's strings.HasPrefix()
+cdef inline cbool has_prefix(const string&s, const string& prefix) noexcept nogil:
+    return s.length() >= prefix.length() and s.compare(0, prefix.
+
+# Similar to Go's stringsCutPrefix()
 cdef (string, cbool) cut_prefix(const string& s, const string& prefix) noexcept nogil:
     cdef size_t p_len = prefix.length()
 
