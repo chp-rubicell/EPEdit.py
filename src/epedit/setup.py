@@ -10,6 +10,7 @@ if len(sys.argv) == 1:
 ext_modules = [
     Extension("*", sources=["utils.pyx"], language="c++"),
     Extension("*", sources=["lexer.pyx"], language="c++"),
+    Extension("*", sources=["idd.pyx"], language="c++"),
 ]
 
 setup(

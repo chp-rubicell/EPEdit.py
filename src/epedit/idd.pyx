@@ -7,7 +7,7 @@ from libcpp.unordered_map cimport unordered_map
 from libcpp cimport bool as cbool
 
 from lexer cimport Lexer, Token, TokenType, TOKEN_TEXT, TOKEN_COMMA, TOKEN_SEMICOLON, TOKEN_EOF, TOKEN_ERROR
-from utils cimport to_lower, to_upper, has_prefix, has_suffix, cut_prefix, get_continuous_digits_indices
+from utils cimport to_lower, to_upper, trim_string, has_prefix, has_suffix, cut_prefix, get_continuous_digits_indices
 
 
 # * Helper functions for parsing class and field property
@@ -17,7 +17,7 @@ cdef void parse_class_property(ClassDef& cls, const string& val) noexcept nogil:
     cdef cbool found
     cdef int start_idx, end_idx
 
-    after, found = cut_prefix(val, b"\\extensible")
+    after, found = cut_prefix(val, <const char*>b"\\extensible")
     if found:
         cls.extensible.has_extensible = True
         cls.extensible.begin_index = -1  # -1 indicates before parsing the value
@@ -30,7 +30,7 @@ cdef void parse_class_property(ClassDef& cls, const string& val) noexcept nogil:
             cls.extensible.size = atoi(after.substr(start_idx, end_idx - start_idx).c_str())
         return
 
-    after, found = cut_prefix(val, b"\\min-fields")
+    after, found = cut_prefix(val, <const char*>b"\\min-fields")
     if found:
         start_idx, end_idx = get_continuous_digits_indices(after)
         if start_idx > -1:
@@ -46,28 +46,28 @@ cdef void parse_field_property(ClassDef& cls, FieldDef& field, const string& val
     cdef string after
     cdef cbool found
 
-    after, found = cut_prefix(val, b"\\field")
+    after, found = cut_prefix(val, <const char*>b"\\field")
     if found:
         # replace temporary names (ex. A1, N1)
         field.name = trim_string(after)
         return
 
-    if trimmed_val == b"\\required-field":
+    if trimmed_val == <const char*>b"\\required-field":
         field.required = True
         return
 
-    if trimmed_val == b"\\begin-extensible":
+    if trimmed_val == <const char*>b"\\begin-extensible":
         # current field is the starting field of extensibles
         if cls.extensible.has_extensible:
             cls.extensible.begin_index = <int>(cls.fields.size() - 1)
         return
 
-    after, found = cut_prefix(val, b"\\units")
+    after, found = cut_prefix(val, <const char*>b"\\units")
     if found:
         field.units = trim_string(after)
         return
 
-    after, found = cut_prefix(val, b"\\default")
+    after, found = cut_prefix(val, <const char*>b"\\default")
     if found:
         field.default_val = trim_string(after)
         # if field has default value, add index to cache
@@ -75,20 +75,20 @@ cdef void parse_field_property(ClassDef& cls, FieldDef& field, const string& val
             cls.field_idx_with_default.push_back(<int>(cls.fields.size() - 1))
         return
 
-    if trimmed_val == b"\\autosizable":
+    if trimmed_val == <const char*>b"\\autosizable":
         field.autosizable = True
         return
 
-    if trimmed_val == b"\\autocalculatable":
+    if trimmed_val == <const char*>b"\\autocalculatable":
         field.autocalculatable = True
         return
 
-    after, found = cut_prefix(val, b"\\type")
+    after, found = cut_prefix(val, <const char*>b"\\type")
     if found:
         field.field_type = trim_string(after)
         return
 
-    after, found = cut_prefix(val, b"\\key")
+    after, found = cut_prefix(val, <const char*>b"\\key")
     if found:
         field.choices.push_back(trim_string(after))
         return
@@ -167,8 +167,8 @@ cdef ExtPattern extract_prefix_suffix(const string& name) noexcept nogil:
         extpat.prefix = name.substr(0, start_idx)
         extpat.suffix = name.substr(end_idx)
     else:
-        extpat.prefix = name + b""
-        extpat.suffix = b""  #TODO Check <const char*>
+        extpat.prefix = name + <const char*>b""
+        extpat.suffix = <const char*>b""
 
     extpat.search_prefix = to_lower(extpat.prefix)
     extpat.search_suffix = to_lower(extpat.suffix)
@@ -245,7 +245,7 @@ cdef void build_indices(ClassDef& cls) noexcept nogil:
 # * Parse IDD file into c_IDD
 
 # Returns parsed c_IDD struct using Lexer.
-cdef c_IDD parse_idd(Lexer& lexer) except * nogil:
+cdef c_IDD parse_idd(Lexer lexer) except * nogil:
     cdef c_IDD c_idd
 
     cdef Token tok
@@ -278,7 +278,7 @@ cdef c_IDD parse_idd(Lexer& lexer) except * nogil:
         if tok.type == TOKEN_TEXT:
             if not tok.value.empty() and tok.value.front() == b'\\':
                 # property
-                after, found = cut_prefix(tok.value, b"\\group")
+                after, found = cut_prefix(tok.value, <const char*>b"\\group")
                 if found:
                     current_group = trim_string(after)
 

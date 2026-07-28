@@ -3,6 +3,8 @@ from libcpp.vector cimport vector
 from libcpp.unordered_map cimport unordered_map
 from libcpp cimport bool as cbool
 
+from lexer cimport Lexer
+
 # * Field and class definition
 
 # store extensible field names as Prefix + # + Suffix
@@ -46,3 +48,6 @@ cdef struct c_IDD:
     string version
     unordered_map[string, size_t] class_map  # map for fast search (uppercase class name -> ordered_classes idx)
     vector[ClassDef] ordered_classes  # for preserving order during export
+
+# Returns parsed c_IDD struct using Lexer.
+cdef c_IDD parse_idd(Lexer lexer) except * nogil
