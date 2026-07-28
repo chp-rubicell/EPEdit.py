@@ -4,7 +4,7 @@ from libcpp cimport bool as cbool
 
 # * Function declarations
 
-cdef string any_to_string(object value) except *
+cdef string any_to_string(object value) except *  #TODO
 cdef (int, int) get_continuous_digits_indices(const string& name) noexcept nogil
 
 

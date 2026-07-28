@@ -1,6 +1,7 @@
 from libcpp.string cimport string
 from libcpp.vector cimport vector
 from libcpp.unordered_map cimport unordered_map
+from libcpp cimport bool as cbool
 
 # * Field and class definition
 
