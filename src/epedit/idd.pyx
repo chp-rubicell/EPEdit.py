@@ -5,6 +5,7 @@ from libcpp.string cimport string, npos
 from libcpp.vector cimport vector
 from libcpp.unordered_map cimport unordered_map
 from libcpp cimport bool as cbool
+from libc.stdio cimport printf  #? For debugging
 
 from lexer cimport Lexer, Token, TokenType, TOKEN_TEXT, TOKEN_COMMA, TOKEN_SEMICOLON, TOKEN_EOF, TOKEN_ERROR
 from utils cimport to_lower, to_upper, trim_string, has_prefix, has_suffix, cut_prefix, get_continuous_digits_indices
@@ -106,6 +107,7 @@ cdef inline void add_new_class(
     int& current_class_idx,
     int& current_field_idx,
 ) noexcept nogil:
+    # printf("%s", class_name.c_str())  #!!!
 
     cdef ClassDef new_class
     new_class.name                      = class_name
@@ -244,9 +246,15 @@ cdef void build_indices(ClassDef& cls) noexcept nogil:
 
 # * Parse IDD file into c_IDD
 
+# state for tracking current parser mode
+cdef enum ParseState:
+    STATE_LOOKING_FOR_CLASS = 0
+    STATE_IN_CLASS          = 1
+
 # Returns parsed c_IDD struct using Lexer.
 cdef c_IDD parse_idd(Lexer lexer) except * nogil:
     cdef c_IDD c_idd
+    cdef ParseState state = STATE_LOOKING_FOR_CLASS  # state machine
 
     cdef Token tok
     cdef string current_group
@@ -263,7 +271,6 @@ cdef c_IDD parse_idd(Lexer lexer) except * nogil:
     cdef cbool found
 
     while True:
-        # Release Python GIL
         tok = lexer.next_token()
 
         # 1. Handle EOF and errors
@@ -308,7 +315,7 @@ cdef c_IDD parse_idd(Lexer lexer) except * nogil:
 
         # 3. Handle comma tokens (register new class or field)
         elif tok.type == TOKEN_COMMA:
-            if current_class_idx == -1:
+            if state == STATE_LOOKING_FOR_CLASS:
                 # No current active class -> create new class
                 # last_text is the new class name
                 add_new_class(
@@ -318,7 +325,9 @@ cdef c_IDD parse_idd(Lexer lexer) except * nogil:
                     current_class_idx,
                     current_field_idx,
                 )
-            else:
+                state = STATE_IN_CLASS
+
+            elif state == STATE_IN_CLASS:
                 # Add new field to current class
                 add_new_field(
                     c_idd.ordered_classes[current_class_idx],
@@ -330,17 +339,7 @@ cdef c_IDD parse_idd(Lexer lexer) except * nogil:
 
         # 4. Handle semicolon tokens (terminate current class)
         elif tok.type == TOKEN_SEMICOLON:
-            if current_class_idx == -1:
-                # No current active class -> create new class
-                # last_text is the new class name
-                add_new_class(
-                    c_idd,
-                    last_text,
-                    current_group,
-                    current_class_idx,
-                    current_field_idx,
-                )
-            else:
+            if state == STATE_IN_CLASS:
                 # Add final field to current class
                 add_new_field(
                     c_idd.ordered_classes[current_class_idx],
@@ -349,6 +348,7 @@ cdef c_IDD parse_idd(Lexer lexer) except * nogil:
                 )
 
             last_text.clear()
+            state = STATE_LOOKING_FOR_CLASS
             # don't reset current_class_idx and current_field_idx to -1
             # more field info can follow after ;
 
@@ -363,3 +363,40 @@ cdef c_IDD parse_idd(Lexer lexer) except * nogil:
 
 
 # * Python Wrapper Class (End User API)
+
+cdef class IDD:
+    """
+    Python wrapper for the C++ c_IDD data structure.
+    """
+    cdef c_IDD _c_idd
+
+    def __init__(self, bytes idd_content):
+        # Initialize lexer
+        cdef Lexer lexer = Lexer(idd_content, True)
+
+        # Parse IDD
+        self._c_idd = parse_idd(lexer)
+
+    @classmethod
+    def from_file(cls, str filepath):
+        """Parse IDD file"""
+        cdef bytes raw_bytes
+
+        with open(filepath, "rb") as file:
+            raw_bytes = file.read()
+
+        return cls(raw_bytes)
+
+    @property
+    def num_classes(self):
+        """Returns the total number of classes parsed."""
+        return self._c_idd.ordered_classes.size()
+
+    def get_class_name(self, int index) -> str:
+        if index < 0 or index >= <int>self._c_idd.ordered_classes.size():
+            raise IndexError("Class index out of range.")
+
+        return self._c_idd.ordered_classes[index].name.decode("utf-8")
+
+
+# * API (Read)
