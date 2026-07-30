@@ -435,7 +435,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 /* … */
   }
 </pre><pre class="cython line score-0">&#xA0;<span class="">20</span>:         <span class="c"># Note: to_string(double) only preserves until six decimal places</span></pre>
-<pre class="cython line score-0">&#xA0;<span class="">21</span>:         <span class="c"># consider using str(value).encode(&#39;utf-8&#39;)</span></pre>
+<pre class="cython line score-0">&#xA0;<span class="">21</span>:         <span class="c"># consider using str(value).encode(&quot;utf-8&quot;)</span></pre>
 <pre class="cython line score-7" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">22</span>:         <span class="k">return</span> <span class="n">to_string</span><span class="p">(&lt;</span><span class="kt">double</span><span class="p">&gt;</span><span class="n">value</span><span class="p">)</span></pre>
 <pre class='cython code score-7 '>    __pyx_t_4 = <span class='pyx_c_api'>__Pyx_PyFloat_AsDouble</span>(__pyx_v_value); if (unlikely((__pyx_t_4 == (double)-1) &amp;&amp; <span class='py_c_api'>PyErr_Occurred</span>())) <span class='error_goto'>__PYX_ERR(0, 22, __pyx_L1_error)</span>
     __pyx_r = std::to_string(((double)__pyx_t_4));

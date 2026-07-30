@@ -3595,14 +3595,14 @@ static std::string __pyx_f_5utils_any_to_string(PyObject *__pyx_v_value) {
  *         return to_string(<long long>value)
  *     elif isinstance(value, float):             # <<<<<<<<<<<<<<
  *         # Note: to_string(double) only preserves until six decimal places
- *         # consider using str(value).encode('utf-8')
+ *         # consider using str(value).encode("utf-8")
 */
   __pyx_t_1 = PyFloat_Check(__pyx_v_value); 
   if (__pyx_t_1) {
 
     /* "utils.pyx":22
  *         # Note: to_string(double) only preserves until six decimal places
- *         # consider using str(value).encode('utf-8')
+ *         # consider using str(value).encode("utf-8")
  *         return to_string(<double>value)             # <<<<<<<<<<<<<<
  *     elif isinstance(value, str):
  *         # Fast cast from Python str to C++ std::string using UTF-8 encoding
@@ -3616,12 +3616,12 @@ static std::string __pyx_f_5utils_any_to_string(PyObject *__pyx_v_value) {
  *         return to_string(<long long>value)
  *     elif isinstance(value, float):             # <<<<<<<<<<<<<<
  *         # Note: to_string(double) only preserves until six decimal places
- *         # consider using str(value).encode('utf-8')
+ *         # consider using str(value).encode("utf-8")
 */
   }
 
   /* "utils.pyx":23
- *         # consider using str(value).encode('utf-8')
+ *         # consider using str(value).encode("utf-8")
  *         return to_string(<double>value)
  *     elif isinstance(value, str):             # <<<<<<<<<<<<<<
  *         # Fast cast from Python str to C++ std::string using UTF-8 encoding
@@ -3649,7 +3649,7 @@ static std::string __pyx_f_5utils_any_to_string(PyObject *__pyx_v_value) {
     goto __pyx_L0;
 
     /* "utils.pyx":23
- *         # consider using str(value).encode('utf-8')
+ *         # consider using str(value).encode("utf-8")
  *         return to_string(<double>value)
  *     elif isinstance(value, str):             # <<<<<<<<<<<<<<
  *         # Fast cast from Python str to C++ std::string using UTF-8 encoding

@@ -18,7 +18,7 @@ cdef string any_to_string(object value) except *:
         return to_string(<long long>value)
     elif isinstance(value, float):
         # Note: to_string(double) only preserves until six decimal places
-        # consider using str(value).encode('utf-8')
+        # consider using str(value).encode("utf-8")
         return to_string(<double>value)
     elif isinstance(value, str):
         # Fast cast from Python str to C++ std::string using UTF-8 encoding

@@ -112,6 +112,7 @@ cdef inline void add_new_class(
     cdef ClassDef new_class
     new_class.name                      = class_name
     new_class.group                     = group_name
+    new_class.min_fields                = 0
     new_class.extensible.has_extensible = False
     new_class.extensible.begin_index    = -1
     new_class.extensible.size           = -1
@@ -369,13 +370,20 @@ cdef class IDD:
     Python wrapper for the C++ c_IDD data structure.
     """
     cdef c_IDD _c_idd
+    cdef cbool _initialized
 
     def __init__(self, bytes idd_content):
+        if self._initialized:
+            raise RuntimeError(f"{type(self).__name__} is already initialized.")
+
         # Initialize lexer
         cdef Lexer lexer = Lexer(idd_content, True)
 
         # Parse IDD
         self._c_idd = parse_idd(lexer)
+
+        # Flag as initialized
+        self._initialized = True
 
     @classmethod
     def from_file(cls, str filepath):
