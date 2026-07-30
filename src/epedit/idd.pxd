@@ -48,6 +48,7 @@ cdef struct c_IDD:
     string version
     unordered_map[string, size_t] class_map  # map for fast search (uppercase class name -> ordered_classes idx)
     vector[ClassDef] ordered_classes  # for preserving order during export
+    # ! if more are added, must be initialized in parse_idd()
 
 # Returns parsed c_IDD struct using Lexer.
-cdef c_IDD parse_idd(Lexer lexer) except * nogil
+cdef int parse_idd(Lexer lexer, c_IDD& c_idd) except -1 nogil

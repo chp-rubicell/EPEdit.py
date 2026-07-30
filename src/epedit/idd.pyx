@@ -253,8 +253,12 @@ cdef enum ParseState:
     STATE_IN_CLASS          = 1
 
 # Returns parsed c_IDD struct using Lexer.
-cdef c_IDD parse_idd(Lexer lexer) except * nogil:
-    cdef c_IDD c_idd
+cdef int parse_idd(Lexer lexer, c_IDD& c_idd) except -1 nogil:
+
+    c_idd.version.clear()
+    c_idd.class_map.clear()
+    c_idd.ordered_classes.clear()
+
     cdef ParseState state = STATE_LOOKING_FOR_CLASS  # state machine
 
     cdef Token tok
@@ -360,7 +364,7 @@ cdef c_IDD parse_idd(Lexer lexer) except * nogil:
         fix_missing_begin_index(c_idd.ordered_classes[i])
         build_indices(c_idd.ordered_classes[i])
 
-    return c_idd
+    return 0
 
 
 # * Python Wrapper Class (End User API)
@@ -380,7 +384,8 @@ cdef class IDD:
         cdef Lexer lexer = Lexer(idd_content, True)
 
         # Parse IDD
-        self._c_idd = parse_idd(lexer)
+        with nogil:
+            parse_idd(lexer, self._c_idd)
 
         # Flag as initialized
         self._initialized = True
