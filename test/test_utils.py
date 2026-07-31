@@ -20,6 +20,11 @@ def run_test():
     print()
     print(repr(utils.test_cut_prefix("test", "te")))
     print(repr(utils.test_cut_prefix("test", "st")))
+    print(repr(utils.test_cut_prefix("test", "")))
+    print()
+    print(repr(utils.test_cut_suffix("test", "te")))
+    print(repr(utils.test_cut_suffix("test", "st")))
+    print(repr(utils.test_cut_suffix("test", "")))
 
 if __name__ == "__main__":
     run_test()

@@ -74,3 +74,11 @@ def test_cut_prefix(str s, str prefix):
         (<str>prefix).encode("utf-8"),
     )
     return (after.decode("utf-8"), found)
+def test_cut_suffix(str s, str suffix):
+    cdef string after
+    cdef cbool found
+    after, found = cut_suffix(
+        (<str>s).encode("utf-8"),
+        (<str>suffix).encode("utf-8"),
+    )
+    return (after.decode("utf-8"), found)

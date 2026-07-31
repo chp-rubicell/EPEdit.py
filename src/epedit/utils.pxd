@@ -44,11 +44,21 @@ cdef inline cbool has_suffix(const string&s, const string& suffix) noexcept nogi
     cdef size_t s_len = suffix.length()
     return s.length() >= s_len and s.compare(s.length() - s_len, s_len, suffix) == 0
 
-# Similar to Go's stringsCutPrefix()
+# Similar to Go's strings.CutPrefix()
 cdef inline (string, cbool) cut_prefix(const string& s, const string& prefix) noexcept nogil:
     cdef size_t p_len = prefix.length()
 
     if s.length() >= p_len and s.compare(0, p_len, prefix) == 0:
         return (s.substr(p_len), True)
+
+    return (s, False)
+
+# Similar to Go's strings.CutSuffix()
+cdef inline (string, cbool) cut_suffix(const string& s, const string& suffix) noexcept nogil:
+    cdef size_t str_len = s.length()
+    cdef size_t s_len = suffix.length()
+
+    if str_len >= s_len and s.compare(str_len-s_len, str_len, suffix) == 0:
+        return (s.substr(0, str_len-s_len), True)
 
     return (s, False)
