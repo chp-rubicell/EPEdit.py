@@ -252,7 +252,7 @@ cdef enum ParseState:
     STATE_LOOKING_FOR_CLASS = 0
     STATE_IN_CLASS          = 1
 
-# Returns parsed c_IDD struct using Lexer.
+# Input parsed data in Lexer to given c_IDD.
 cdef int parse_idd(Lexer lexer, c_IDD& c_idd) except -1 nogil:
 
     c_idd.version.clear()
@@ -284,7 +284,7 @@ cdef int parse_idd(Lexer lexer, c_IDD& c_idd) except -1 nogil:
         elif tok.type == TOKEN_ERROR:
             # Raise Python exception (requires GIL)
             with gil:
-                raise ValueError(f"Parsing error (Line {lexer.line_num}): {repr(tok.value.decode('utf-8'))}")
+                raise ValueError(f"IDD parsing error (Line {lexer.line_num}): {repr(tok.value.decode('utf-8'))}")
 
         # 2. Handle text tokens (class/field names or property tags)
         if tok.type == TOKEN_TEXT:
@@ -299,7 +299,7 @@ cdef int parse_idd(Lexer lexer, c_IDD& c_idd) except -1 nogil:
                     if current_class_idx == -1:
                         # Raise Python exception (requires GIL)
                         with gil:
-                            raise ValueError(f"Parsing error (Line {lexer.line_num}): Field property '{tok.value.decode('utf-8')}' found, but no class exists.")
+                            raise ValueError(f"IDD parsing error (Line {lexer.line_num}): Field property '{tok.value.decode('utf-8')}' found, but no class exists.")
                     parse_field_property(
                         c_idd.ordered_classes[current_class_idx],
                         c_idd.ordered_classes[current_class_idx].fields[current_field_idx],
@@ -373,11 +373,9 @@ cdef class IDD:
     """
     Python wrapper for the C++ c_IDD data structure.
     """
-    cdef c_IDD _c_idd
-    cdef cbool _initialized
 
     def __init__(self, bytes idd_content):
-        if self._initialized:
+        if self.initialized:
             raise RuntimeError(f"{type(self).__name__} is already initialized.")
 
         # Initialize lexer
@@ -385,10 +383,10 @@ cdef class IDD:
 
         # Parse IDD
         with nogil:
-            parse_idd(lexer, self._c_idd)
+            parse_idd(lexer, self.c_idd)
 
         # Flag as initialized
-        self._initialized = True
+        self.initialized = True
 
     @classmethod
     def from_file(cls, str filepath):
@@ -403,13 +401,13 @@ cdef class IDD:
     @property
     def num_classes(self):
         """Returns the total number of classes parsed."""
-        return self._c_idd.ordered_classes.size()
+        return self.c_idd.ordered_classes.size()
 
     def get_class_name(self, int index) -> str:
-        if index < 0 or index >= <int>self._c_idd.ordered_classes.size():
+        if index < 0 or index >= <int>self.c_idd.ordered_classes.size():
             raise IndexError("Class index out of range.")
 
-        return self._c_idd.ordered_classes[index].name.decode("utf-8")
+        return self.c_idd.ordered_classes[index].name.decode("utf-8")
 
 
 # * API (Read)

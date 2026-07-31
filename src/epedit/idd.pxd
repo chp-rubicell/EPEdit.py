@@ -52,3 +52,8 @@ cdef struct c_IDD:
 
 # Returns parsed c_IDD struct using Lexer.
 cdef int parse_idd(Lexer lexer, c_IDD& c_idd) except -1 nogil
+
+# Python wrapper for the C++ c_IDD data structure.
+cdef class IDD:
+    cdef c_IDD c_idd
+    cdef cbool initialized  # to check if already initialized
