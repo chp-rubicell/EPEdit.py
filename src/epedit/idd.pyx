@@ -89,7 +89,17 @@ cdef void parse_field_property(ClassDef& cls, FieldDef& field, const string& val
 
     after, found = cut_prefix(val, <const char*>b"\\type")
     if found:
-        field.field_type = trim_string(after)
+        after = to_lower(trim_string(after))
+        if after == <const char*>b"integer":
+            field.field_type = FIELDTYPE_INTEGER
+        elif after == <const char*>b"real":
+            field.field_type = FIELDTYPE_REAL
+        elif after == <const char*>b"alpha":
+            field.field_type = FIELDTYPE_ALPHA
+        elif after == <const char*>b"choice":
+            field.field_type = FIELDTYPE_CHOICE
+        else:
+            field.field_type = FIELDTYPE_DEFAULT
         return
 
     after, found = cut_prefix(val, <const char*>b"\\key")
@@ -465,6 +475,7 @@ def test_find_field_index(IDD idd, str class_name, str field_name):
     return field_idx
 
 
+# Get field name from index
 cdef string get_field_name(const ClassDef& cls, int field_idx, cbool add_units) noexcept nogil:
     if field_idx < 0:
         return <const char*>b""

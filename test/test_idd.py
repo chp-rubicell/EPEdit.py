@@ -8,9 +8,13 @@ from idd import IDD, test_find_field_index, test_get_field_name
 def test_idd_parser(file_path: str):
     idd = IDD.from_file(file_path)
 
+    print()
     print("====")
     print("Parse test")
     print(idd.num_classes)
+    if idd.num_classes != 848:
+        raise ValueError
+    print()
 
     for i in range(min(10, idd.num_classes)):
     # for i in range(idd.num_classes):

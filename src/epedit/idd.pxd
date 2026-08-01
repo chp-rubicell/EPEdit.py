@@ -22,6 +22,14 @@ cdef struct ExtensibleDef:
     int size  # size of the extensible fields (ex. X, Y, Z coords -> 3)
     vector[ExtPattern] patterns
 
+# Field type for FieldDef
+cdef enum FieldType:
+    FIELDTYPE_DEFAULT = 0
+    FIELDTYPE_INTEGER = 1
+    FIELDTYPE_REAL    = 2
+    FIELDTYPE_ALPHA   = 3
+    FIELDTYPE_CHOICE  = 4
+
 # IDD field definition (ex. Outside_Boundary_Condition)
 cdef struct FieldDef:
     string name
@@ -30,7 +38,7 @@ cdef struct FieldDef:
     string default_val
     cbool autosizable
     cbool autocalculatable
-    string field_type  # alpha, real, integer, choice, etc.
+    FieldType field_type  # enum (alpha, real, integer, choice, etc.)
     vector[string] choices  # possible values for "\type choice"
 
 # IDD class definition (ex. Building, Zone)
@@ -57,3 +65,9 @@ cdef int parse_idd(Lexer lexer, c_IDD& c_idd) except -1 nogil
 cdef class IDD:
     cdef c_IDD c_idd
     cdef cbool initialized  # to check if already initialized
+
+# Get index from field name (case-insensitive)
+cdef int find_field_index(const ClassDef& cls, const string& field_name) noexcept nogil
+
+# Get field name from index
+cdef string get_field_name(const ClassDef& cls, int field_idx, cbool add_units) noexcept nogil
