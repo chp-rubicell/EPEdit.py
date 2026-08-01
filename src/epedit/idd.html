@@ -2454,7 +2454,6 @@ static PyObject *__pyx_pf_3idd_test_find_field_index(CYTHON_UNUSED PyObject *__p
   int __pyx_v_group_num;
   size_t __pyx_v_offset;
   struct __pyx_t_3idd_ExtPattern const *__pyx_v_pat;
-  std::string __pyx_v_units;
   std::string __pyx_r;
 /* … */
   /* function exit code */
@@ -2513,22 +2512,14 @@ static PyObject *__pyx_pf_3idd_test_find_field_index(CYTHON_UNUSED PyObject *__p
 </pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">481</span>:         <span class="n">field_name</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">name</span></pre>
 <pre class='cython code score-0 '>    __pyx_t_3 = __pyx_v_field-&gt;name;
     __pyx_v_field_name = __PYX_STD_MOVE_IF_SUPPORTED(__pyx_t_3);
-</pre><pre class="cython line score-4" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">482</span>:         <span class="k">if</span> <span class="n">add_units</span> <span class="ow">and</span> <span class="n">field</span><span class="o">.</span><span class="n">units</span><span class="o">.</span><span class="n">compare</span><span class="p">(</span><span class="o">&lt;</span><span class="n">const</span> <span class="n">char</span><span class="o">*&gt;</span><span class="n">b</span><span class="s">&quot;&quot;</span><span class="p">):</span></pre>
-<pre class='cython code score-4 '>    __pyx_t_2 = (__pyx_v_add_units != 0);
+</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">482</span>:         <span class="k">if</span> <span class="n">add_units</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">field</span><span class="o">.</span><span class="n">units</span><span class="o">.</span><span class="n">empty</span><span class="p">():</span></pre>
+<pre class='cython code score-0 '>    __pyx_t_2 = (__pyx_v_add_units != 0);
     if (__pyx_t_2) {
     } else {
       __pyx_t_1 = __pyx_t_2;
       goto __pyx_L10_bool_binop_done;
     }
-    try {
-      __pyx_t_4 = __pyx_v_field-&gt;units.compare(((char const *)__pyx_k__2));
-    } catch(...) {
-      PyGILState_STATE __pyx_gilstate_save = <span class='pyx_c_api'>__Pyx_PyGILState_Ensure</span>();
-      __Pyx_CppExn2PyErr();
-      <span class='pyx_c_api'>__Pyx_PyGILState_Release</span>(__pyx_gilstate_save);
-      <span class='error_goto'>__PYX_ERR(0, 482, __pyx_L1_error)</span>
-    }
-    __pyx_t_2 = (__pyx_t_4 != 0);
+    __pyx_t_2 = (!__pyx_v_field-&gt;units.empty());
     __pyx_t_1 = __pyx_t_2;
     __pyx_L10_bool_binop_done:;
     if (__pyx_t_1) {
@@ -2570,16 +2561,8 @@ static PyObject *__pyx_pf_3idd_test_find_field_index(CYTHON_UNUSED PyObject *__p
   }
   __pyx_v_offset = __Pyx_mod_int(__pyx_t_4, __pyx_v_ext-&gt;size, 0);
 </pre><pre class="cython line score-0">&#xA0;<span class="">491</span>: </pre>
-<pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">492</span>:     <span class="k">if</span> <span class="n">offset</span> <span class="o">&lt;</span> <span class="mf">0</span> <span class="ow">or</span> <span class="n">offset</span> <span class="o">&gt;=</span> <span class="n">ext</span><span class="o">.</span><span class="n">patterns</span><span class="o">.</span><span class="n">size</span><span class="p">():</span></pre>
-<pre class='cython code score-0 '>  __pyx_t_2 = (__pyx_v_offset &lt; 0);
-  if (!__pyx_t_2) {
-  } else {
-    __pyx_t_1 = __pyx_t_2;
-    goto __pyx_L13_bool_binop_done;
-  }
-  __pyx_t_2 = (__pyx_v_offset &gt;= __pyx_v_ext-&gt;patterns.size());
-  __pyx_t_1 = __pyx_t_2;
-  __pyx_L13_bool_binop_done:;
+<pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">492</span>:     <span class="k">if</span> <span class="n">offset</span> <span class="o">&gt;=</span> <span class="n">ext</span><span class="o">.</span><span class="n">patterns</span><span class="o">.</span><span class="n">size</span><span class="p">():</span></pre>
+<pre class='cython code score-0 '>  __pyx_t_1 = (__pyx_v_offset &gt;= __pyx_v_ext-&gt;patterns.size());
   if (__pyx_t_1) {
 /* … */
   }
@@ -2589,51 +2572,41 @@ static PyObject *__pyx_pf_3idd_test_find_field_index(CYTHON_UNUSED PyObject *__p
 </pre><pre class="cython line score-0">&#xA0;<span class="">494</span>: </pre>
 <pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">495</span>:     <span class="k">cdef</span> <span class="kt">const</span> <span class="kt">ExtPattern</span>* <span class="nf">pat</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">ext</span><span class="o">.</span><span class="n">patterns</span><span class="p">[</span><span class="n">offset</span><span class="p">]</span></pre>
 <pre class='cython code score-0 '>  __pyx_v_pat = (&amp;(__pyx_v_ext-&gt;patterns[__pyx_v_offset]));
-</pre><pre class="cython line score-0">&#xA0;<span class="">496</span>: </pre>
-<pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">497</span>:     <span class="n">field_name</span> <span class="o">=</span> <span class="n">pat</span><span class="o">.</span><span class="n">prefix</span></pre>
+</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">496</span>:     <span class="n">field</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">cls</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="n">ext</span><span class="o">.</span><span class="n">begin_index</span> <span class="o">+</span> <span class="n">offset</span><span class="p">]</span></pre>
+<pre class='cython code score-0 '>  __pyx_v_field = (&amp;(__pyx_v_cls.fields[(__pyx_v_ext-&gt;begin_index + __pyx_v_offset)]));
+</pre><pre class="cython line score-0">&#xA0;<span class="">497</span>: </pre>
+<pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">498</span>:     <span class="n">field_name</span> <span class="o">=</span> <span class="n">pat</span><span class="o">.</span><span class="n">prefix</span></pre>
 <pre class='cython code score-0 '>  __pyx_t_3 = __pyx_v_pat-&gt;prefix;
   __pyx_v_field_name = __PYX_STD_MOVE_IF_SUPPORTED(__pyx_t_3);
-</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">498</span>:     <span class="n">field_name</span> <span class="o">+=</span> <span class="n">to_string</span><span class="p">(</span><span class="n">group_num</span><span class="p">)</span></pre>
+</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">499</span>:     <span class="n">field_name</span> <span class="o">+=</span> <span class="n">to_string</span><span class="p">(</span><span class="n">group_num</span><span class="p">)</span></pre>
 <pre class='cython code score-0 '>  __pyx_v_field_name += std::to_string(__pyx_v_group_num);
-</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">499</span>:     <span class="n">field_name</span> <span class="o">+=</span>  <span class="n">pat</span><span class="o">.</span><span class="n">suffix</span></pre>
+</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">500</span>:     <span class="n">field_name</span> <span class="o">+=</span>  <span class="n">pat</span><span class="o">.</span><span class="n">suffix</span></pre>
 <pre class='cython code score-0 '>  __pyx_v_field_name += __pyx_v_pat-&gt;suffix;
-</pre><pre class="cython line score-0">&#xA0;<span class="">500</span>: </pre>
-<pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">501</span>:     <span class="k">cdef</span> <span class="kt">string</span> <span class="nf">units</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="n">ext</span><span class="o">.</span><span class="n">begin_index</span> <span class="o">+</span> <span class="n">offset</span><span class="p">]</span><span class="o">.</span><span class="n">units</span></pre>
-<pre class='cython code score-0 '>  __pyx_t_3 = (__pyx_v_cls.fields[(__pyx_v_ext-&gt;begin_index + __pyx_v_offset)]).units;
-  __pyx_v_units = __PYX_STD_MOVE_IF_SUPPORTED(__pyx_t_3);
-</pre><pre class="cython line score-0">&#xA0;<span class="">502</span>: </pre>
-<pre class="cython line score-4" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">503</span>:     <span class="k">if</span> <span class="n">add_units</span> <span class="ow">and</span> <span class="n">units</span><span class="o">.</span><span class="n">compare</span><span class="p">(</span><span class="o">&lt;</span><span class="n">const</span> <span class="n">char</span><span class="o">*&gt;</span><span class="n">b</span><span class="s">&quot;&quot;</span><span class="p">):</span></pre>
-<pre class='cython code score-4 '>  __pyx_t_2 = (__pyx_v_add_units != 0);
+</pre><pre class="cython line score-0">&#xA0;<span class="">501</span>: </pre>
+<pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">502</span>:     <span class="k">if</span> <span class="n">add_units</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">field</span><span class="o">.</span><span class="n">units</span><span class="o">.</span><span class="n">empty</span><span class="p">():</span></pre>
+<pre class='cython code score-0 '>  __pyx_t_2 = (__pyx_v_add_units != 0);
   if (__pyx_t_2) {
   } else {
     __pyx_t_1 = __pyx_t_2;
-    goto __pyx_L16_bool_binop_done;
+    goto __pyx_L14_bool_binop_done;
   }
-  try {
-    __pyx_t_4 = __pyx_v_units.compare(((char const *)__pyx_k__2));
-  } catch(...) {
-    PyGILState_STATE __pyx_gilstate_save = <span class='pyx_c_api'>__Pyx_PyGILState_Ensure</span>();
-    __Pyx_CppExn2PyErr();
-    <span class='pyx_c_api'>__Pyx_PyGILState_Release</span>(__pyx_gilstate_save);
-    <span class='error_goto'>__PYX_ERR(0, 503, __pyx_L1_error)</span>
-  }
-  __pyx_t_2 = (__pyx_t_4 != 0);
+  __pyx_t_2 = (!__pyx_v_field-&gt;units.empty());
   __pyx_t_1 = __pyx_t_2;
-  __pyx_L16_bool_binop_done:;
+  __pyx_L14_bool_binop_done:;
   if (__pyx_t_1) {
 /* … */
   }
-</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">504</span>:         <span class="n">field_name</span> <span class="o">+=</span> <span class="o">&lt;</span><span class="n">const</span> <span class="n">char</span><span class="o">*&gt;</span><span class="n">b</span><span class="s">&quot; {&quot;</span></pre>
+</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">503</span>:         <span class="n">field_name</span> <span class="o">+=</span> <span class="o">&lt;</span><span class="n">const</span> <span class="n">char</span><span class="o">*&gt;</span><span class="n">b</span><span class="s">&quot; {&quot;</span></pre>
 <pre class='cython code score-0 '>    __pyx_v_field_name += ((char const *)__pyx_k__4);
-</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">505</span>:         <span class="n">field_name</span> <span class="o">+=</span> <span class="n">units</span></pre>
-<pre class='cython code score-0 '>    __pyx_v_field_name += __pyx_v_units;
-</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">506</span>:         <span class="n">field_name</span> <span class="o">+=</span> <span class="o">&lt;</span><span class="n">const</span> <span class="n">char</span><span class="o">*&gt;</span><span class="n">b</span><span class="s">&quot;}&quot;</span></pre>
+</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">504</span>:         <span class="n">field_name</span> <span class="o">+=</span> <span class="n">field</span><span class="o">.</span><span class="n">units</span></pre>
+<pre class='cython code score-0 '>    __pyx_v_field_name += __pyx_v_field-&gt;units;
+</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">505</span>:         <span class="n">field_name</span> <span class="o">+=</span> <span class="o">&lt;</span><span class="n">const</span> <span class="n">char</span><span class="o">*&gt;</span><span class="n">b</span><span class="s">&quot;}&quot;</span></pre>
 <pre class='cython code score-0 '>    __pyx_v_field_name += ((char const *)__pyx_k__5);
-</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">507</span>:     <span class="k">return</span> <span class="n">field_name</span></pre>
+</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">506</span>:     <span class="k">return</span> <span class="n">field_name</span></pre>
 <pre class='cython code score-0 '>  __pyx_r = __pyx_v_field_name;
   goto __pyx_L0;
-</pre><pre class="cython line score-0">&#xA0;<span class="">508</span>: </pre>
-<pre class="cython line score-60" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">509</span>: <span class="k">def</span> <span class="nf">test_get_field_name</span><span class="p">(</span><span class="n">IDD</span> <span class="n">idd</span><span class="p">,</span> <span class="nb">str</span> <span class="n">class_name</span><span class="p">,</span> <span class="nb">int</span> <span class="n">field_idx</span><span class="p">,</span> <span class="nb">bool</span> <span class="n">add_units</span><span class="p">):</span></pre>
+</pre><pre class="cython line score-0">&#xA0;<span class="">507</span>: </pre>
+<pre class="cython line score-60" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">508</span>: <span class="k">def</span> <span class="nf">test_get_field_name</span><span class="p">(</span><span class="n">IDD</span> <span class="n">idd</span><span class="p">,</span> <span class="nb">str</span> <span class="n">class_name</span><span class="p">,</span> <span class="nb">int</span> <span class="n">field_idx</span><span class="p">,</span> <span class="nb">bool</span> <span class="n">add_units</span><span class="p">):</span></pre>
 <pre class='cython code score-60 '>/* Python wrapper */
 static PyObject *__pyx_pw_3idd_3test_get_field_name(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
@@ -2673,53 +2646,53 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
     PyObject ** const __pyx_pyargnames[] = {&amp;__pyx_mstate_global-&gt;__pyx_n_u_idd,&amp;__pyx_mstate_global-&gt;__pyx_n_u_class_name,&amp;__pyx_mstate_global-&gt;__pyx_n_u_field_idx,&amp;__pyx_mstate_global-&gt;__pyx_n_u_add_units,0};
   PyObject* values[4] = {0,0,0,0};
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? <span class='pyx_c_api'>__Pyx_NumKwargs_FASTCALL</span>(__pyx_kwds) : 0;
-    if (unlikely(__pyx_kwds_len) &lt; 0) <span class='error_goto'>__PYX_ERR(0, 509, __pyx_L3_error)</span>
+    if (unlikely(__pyx_kwds_len) &lt; 0) <span class='error_goto'>__PYX_ERR(0, 508, __pyx_L3_error)</span>
     if (__pyx_kwds_len &gt; 0) {
       switch (__pyx_nargs) {
         case  4:
         values[3] = <span class='pyx_c_api'>__Pyx_ArgRef_FASTCALL</span>(__pyx_args, 3);
-        if (!CYTHON_ASSUME_SAFE_MACROS &amp;&amp; unlikely(!values[3])) <span class='error_goto'>__PYX_ERR(0, 509, __pyx_L3_error)</span>
+        if (!CYTHON_ASSUME_SAFE_MACROS &amp;&amp; unlikely(!values[3])) <span class='error_goto'>__PYX_ERR(0, 508, __pyx_L3_error)</span>
         CYTHON_FALLTHROUGH;
         case  3:
         values[2] = <span class='pyx_c_api'>__Pyx_ArgRef_FASTCALL</span>(__pyx_args, 2);
-        if (!CYTHON_ASSUME_SAFE_MACROS &amp;&amp; unlikely(!values[2])) <span class='error_goto'>__PYX_ERR(0, 509, __pyx_L3_error)</span>
+        if (!CYTHON_ASSUME_SAFE_MACROS &amp;&amp; unlikely(!values[2])) <span class='error_goto'>__PYX_ERR(0, 508, __pyx_L3_error)</span>
         CYTHON_FALLTHROUGH;
         case  2:
         values[1] = <span class='pyx_c_api'>__Pyx_ArgRef_FASTCALL</span>(__pyx_args, 1);
-        if (!CYTHON_ASSUME_SAFE_MACROS &amp;&amp; unlikely(!values[1])) <span class='error_goto'>__PYX_ERR(0, 509, __pyx_L3_error)</span>
+        if (!CYTHON_ASSUME_SAFE_MACROS &amp;&amp; unlikely(!values[1])) <span class='error_goto'>__PYX_ERR(0, 508, __pyx_L3_error)</span>
         CYTHON_FALLTHROUGH;
         case  1:
         values[0] = <span class='pyx_c_api'>__Pyx_ArgRef_FASTCALL</span>(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS &amp;&amp; unlikely(!values[0])) <span class='error_goto'>__PYX_ERR(0, 509, __pyx_L3_error)</span>
+        if (!CYTHON_ASSUME_SAFE_MACROS &amp;&amp; unlikely(!values[0])) <span class='error_goto'>__PYX_ERR(0, 508, __pyx_L3_error)</span>
         CYTHON_FALLTHROUGH;
         case  0: break;
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (<span class='pyx_c_api'>__Pyx_ParseKeywords</span>(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "test_get_field_name", 0) &lt; (0)) <span class='error_goto'>__PYX_ERR(0, 509, __pyx_L3_error)</span>
+      if (<span class='pyx_c_api'>__Pyx_ParseKeywords</span>(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "test_get_field_name", 0) &lt; (0)) <span class='error_goto'>__PYX_ERR(0, 508, __pyx_L3_error)</span>
       for (Py_ssize_t i = __pyx_nargs; i &lt; 4; i++) {
-        if (unlikely(!values[i])) { <span class='pyx_c_api'>__Pyx_RaiseArgtupleInvalid</span>("test_get_field_name", 1, 4, 4, i); <span class='error_goto'>__PYX_ERR(0, 509, __pyx_L3_error)</span> }
+        if (unlikely(!values[i])) { <span class='pyx_c_api'>__Pyx_RaiseArgtupleInvalid</span>("test_get_field_name", 1, 4, 4, i); <span class='error_goto'>__PYX_ERR(0, 508, __pyx_L3_error)</span> }
       }
     } else if (unlikely(__pyx_nargs != 4)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = <span class='pyx_c_api'>__Pyx_ArgRef_FASTCALL</span>(__pyx_args, 0);
-      if (!CYTHON_ASSUME_SAFE_MACROS &amp;&amp; unlikely(!values[0])) <span class='error_goto'>__PYX_ERR(0, 509, __pyx_L3_error)</span>
+      if (!CYTHON_ASSUME_SAFE_MACROS &amp;&amp; unlikely(!values[0])) <span class='error_goto'>__PYX_ERR(0, 508, __pyx_L3_error)</span>
       values[1] = <span class='pyx_c_api'>__Pyx_ArgRef_FASTCALL</span>(__pyx_args, 1);
-      if (!CYTHON_ASSUME_SAFE_MACROS &amp;&amp; unlikely(!values[1])) <span class='error_goto'>__PYX_ERR(0, 509, __pyx_L3_error)</span>
+      if (!CYTHON_ASSUME_SAFE_MACROS &amp;&amp; unlikely(!values[1])) <span class='error_goto'>__PYX_ERR(0, 508, __pyx_L3_error)</span>
       values[2] = <span class='pyx_c_api'>__Pyx_ArgRef_FASTCALL</span>(__pyx_args, 2);
-      if (!CYTHON_ASSUME_SAFE_MACROS &amp;&amp; unlikely(!values[2])) <span class='error_goto'>__PYX_ERR(0, 509, __pyx_L3_error)</span>
+      if (!CYTHON_ASSUME_SAFE_MACROS &amp;&amp; unlikely(!values[2])) <span class='error_goto'>__PYX_ERR(0, 508, __pyx_L3_error)</span>
       values[3] = <span class='pyx_c_api'>__Pyx_ArgRef_FASTCALL</span>(__pyx_args, 3);
-      if (!CYTHON_ASSUME_SAFE_MACROS &amp;&amp; unlikely(!values[3])) <span class='error_goto'>__PYX_ERR(0, 509, __pyx_L3_error)</span>
+      if (!CYTHON_ASSUME_SAFE_MACROS &amp;&amp; unlikely(!values[3])) <span class='error_goto'>__PYX_ERR(0, 508, __pyx_L3_error)</span>
     }
     __pyx_v_idd = ((struct __pyx_obj_3idd_IDD *)values[0]);
     __pyx_v_class_name = ((PyObject*)values[1]);
-    __pyx_v_field_idx = <span class='pyx_c_api'>__Pyx_PyLong_As_int</span>(values[2]); if (unlikely((__pyx_v_field_idx == (int)-1) &amp;&amp; <span class='py_c_api'>PyErr_Occurred</span>())) <span class='error_goto'>__PYX_ERR(0, 509, __pyx_L3_error)</span>
+    __pyx_v_field_idx = <span class='pyx_c_api'>__Pyx_PyLong_As_int</span>(values[2]); if (unlikely((__pyx_v_field_idx == (int)-1) &amp;&amp; <span class='py_c_api'>PyErr_Occurred</span>())) <span class='error_goto'>__PYX_ERR(0, 508, __pyx_L3_error)</span>
     __pyx_v_add_units = ((PyObject*)values[3]);
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  <span class='pyx_c_api'>__Pyx_RaiseArgtupleInvalid</span>("test_get_field_name", 1, 4, 4, __pyx_nargs); <span class='error_goto'>__PYX_ERR(0, 509, __pyx_L3_error)</span>
+  <span class='pyx_c_api'>__Pyx_RaiseArgtupleInvalid</span>("test_get_field_name", 1, 4, 4, __pyx_nargs); <span class='error_goto'>__PYX_ERR(0, 508, __pyx_L3_error)</span>
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -2730,9 +2703,9 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   <span class='refnanny'>__Pyx_RefNannyFinishContext</span>();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!<span class='pyx_c_api'>__Pyx_ArgTypeTest</span>(((PyObject *)__pyx_v_idd), __pyx_mstate_global-&gt;__pyx_ptype_3idd_IDD, 1, "idd", 0))) <span class='error_goto'>__PYX_ERR(0, 509, __pyx_L1_error)</span>
-  if (unlikely(!<span class='pyx_c_api'>__Pyx_ArgTypeTest</span>(((PyObject *)__pyx_v_class_name), (&amp;PyUnicode_Type), 1, "class_name", 1))) <span class='error_goto'>__PYX_ERR(0, 509, __pyx_L1_error)</span>
-  if (unlikely(!<span class='pyx_c_api'>__Pyx_ArgTypeTest</span>(((PyObject *)__pyx_v_add_units), (&amp;PyBool_Type), 1, "add_units", 1))) <span class='error_goto'>__PYX_ERR(0, 509, __pyx_L1_error)</span>
+  if (unlikely(!<span class='pyx_c_api'>__Pyx_ArgTypeTest</span>(((PyObject *)__pyx_v_idd), __pyx_mstate_global-&gt;__pyx_ptype_3idd_IDD, 1, "idd", 0))) <span class='error_goto'>__PYX_ERR(0, 508, __pyx_L1_error)</span>
+  if (unlikely(!<span class='pyx_c_api'>__Pyx_ArgTypeTest</span>(((PyObject *)__pyx_v_class_name), (&amp;PyUnicode_Type), 1, "class_name", 1))) <span class='error_goto'>__PYX_ERR(0, 508, __pyx_L1_error)</span>
+  if (unlikely(!<span class='pyx_c_api'>__Pyx_ArgTypeTest</span>(((PyObject *)__pyx_v_add_units), (&amp;PyBool_Type), 1, "add_units", 1))) <span class='error_goto'>__PYX_ERR(0, 508, __pyx_L1_error)</span>
   __pyx_r = __pyx_pf_3idd_2test_get_field_name(__pyx_self, __pyx_v_idd, __pyx_v_class_name, __pyx_v_field_idx, __pyx_v_add_units);
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
@@ -2759,28 +2732,28 @@ static PyObject *__pyx_pf_3idd_2test_get_field_name(CYTHON_UNUSED PyObject *__py
   struct __pyx_t_3idd_ClassDef __pyx_v_cls;
   PyObject *__pyx_r = NULL;
 /* … */
-  __pyx_t_2 = <span class='pyx_c_api'>__Pyx_CyFunction_New</span>(&amp;__pyx_mdef_3idd_3test_get_field_name, 0, __pyx_mstate_global-&gt;__pyx_n_u_test_get_field_name, NULL, __pyx_mstate_global-&gt;__pyx_n_u_idd, __pyx_mstate_global-&gt;__pyx_d, ((PyObject *)__pyx_mstate_global-&gt;__pyx_codeobj_tab[5]));<span class='error_goto'> if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 509, __pyx_L1_error)</span>
+  __pyx_t_2 = <span class='pyx_c_api'>__Pyx_CyFunction_New</span>(&amp;__pyx_mdef_3idd_3test_get_field_name, 0, __pyx_mstate_global-&gt;__pyx_n_u_test_get_field_name, NULL, __pyx_mstate_global-&gt;__pyx_n_u_idd, __pyx_mstate_global-&gt;__pyx_d, ((PyObject *)__pyx_mstate_global-&gt;__pyx_codeobj_tab[5]));<span class='error_goto'> if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 508, __pyx_L1_error)</span>
   <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON &amp;&amp; PY_VERSION_HEX &gt;= 0x030E0000
   <span class='py_c_api'>PyUnstable_Object_EnableDeferredRefcount</span>(__pyx_t_2);
   #endif
-  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_mstate_global-&gt;__pyx_d, __pyx_mstate_global-&gt;__pyx_n_u_test_get_field_name, __pyx_t_2) &lt; (0)) <span class='error_goto'>__PYX_ERR(0, 509, __pyx_L1_error)</span>
+  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_mstate_global-&gt;__pyx_d, __pyx_mstate_global-&gt;__pyx_n_u_test_get_field_name, __pyx_t_2) &lt; (0)) <span class='error_goto'>__PYX_ERR(0, 508, __pyx_L1_error)</span>
   <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_2); __pyx_t_2 = 0;
-</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">510</span>:     <span class="n">cls</span> <span class="o">=</span> <span class="n">idd</span><span class="o">.</span><span class="n">c_idd</span><span class="o">.</span><span class="n">ordered_classes</span><span class="p">[</span></pre>
+</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">509</span>:     <span class="n">cls</span> <span class="o">=</span> <span class="n">idd</span><span class="o">.</span><span class="n">c_idd</span><span class="o">.</span><span class="n">ordered_classes</span><span class="p">[</span></pre>
 <pre class='cython code score-0 '>  __pyx_v_cls = (__pyx_v_idd-&gt;c_idd.ordered_classes[(__pyx_v_idd-&gt;c_idd.class_map[__pyx_t_3])]);
-</pre><pre class="cython line score-2" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">511</span>:         <span class="n">idd</span><span class="o">.</span><span class="n">c_idd</span><span class="o">.</span><span class="n">class_map</span><span class="p">[</span><span class="n">class_name</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">&quot;utf-8&quot;</span><span class="p">)]</span></pre>
-<pre class='cython code score-2 '>  __pyx_t_1 = __Pyx_CallUnboundCMethod0(&amp;__pyx_mstate_global-&gt;__pyx_umethod_PyUnicode_Type__upper, __pyx_v_class_name);<span class='error_goto'> if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 511, __pyx_L1_error)</span>
+</pre><pre class="cython line score-2" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">510</span>:         <span class="n">idd</span><span class="o">.</span><span class="n">c_idd</span><span class="o">.</span><span class="n">class_map</span><span class="p">[</span><span class="n">class_name</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">&quot;utf-8&quot;</span><span class="p">)]</span></pre>
+<pre class='cython code score-2 '>  __pyx_t_1 = __Pyx_CallUnboundCMethod0(&amp;__pyx_mstate_global-&gt;__pyx_umethod_PyUnicode_Type__upper, __pyx_v_class_name);<span class='error_goto'> if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 510, __pyx_L1_error)</span>
   <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_1);
-  __pyx_t_2 = PyUnicode_AsUTF8String(((PyObject*)__pyx_t_1));<span class='error_goto'> if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 511, __pyx_L1_error)</span>
+  __pyx_t_2 = PyUnicode_AsUTF8String(((PyObject*)__pyx_t_1));<span class='error_goto'> if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 510, __pyx_L1_error)</span>
   <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_2);
   <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_3 = __pyx_convert_string_from_py_6libcpp_6string_std__in_string(__pyx_t_2);<span class='error_goto'> if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 511, __pyx_L1_error)</span>
+  __pyx_t_3 = __pyx_convert_string_from_py_6libcpp_6string_std__in_string(__pyx_t_2);<span class='error_goto'> if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 510, __pyx_L1_error)</span>
   <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_2); __pyx_t_2 = 0;
-</pre><pre class="cython line score-0">&#xA0;<span class="">512</span>:     <span class="p">]</span></pre>
-<pre class="cython line score-8" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">513</span>:     <span class="k">return</span> <span class="n">get_field_name</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">field_idx</span><span class="p">,</span> <span class="n">add_units</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">&quot;utf-8&quot;</span><span class="p">)</span></pre>
+</pre><pre class="cython line score-0">&#xA0;<span class="">511</span>:     <span class="p">]</span></pre>
+<pre class="cython line score-8" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">512</span>:     <span class="k">return</span> <span class="n">get_field_name</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">field_idx</span><span class="p">,</span> <span class="n">add_units</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">&quot;utf-8&quot;</span><span class="p">)</span></pre>
 <pre class='cython code score-8 '>  <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_r);
-  __pyx_t_4 = <span class='pyx_c_api'>__Pyx_PyObject_IsTrue</span>(__pyx_v_add_units); if (unlikely((__pyx_t_4 == ((bool)-1)) &amp;&amp; <span class='py_c_api'>PyErr_Occurred</span>())) <span class='error_goto'>__PYX_ERR(0, 513, __pyx_L1_error)</span>
-  __pyx_t_2 = __Pyx_decode_cpp_string(__pyx_f_3idd_get_field_name(__pyx_v_cls, __pyx_v_field_idx, __pyx_t_4), 0, PY_SSIZE_T_MAX, NULL, NULL, PyUnicode_DecodeUTF8);<span class='error_goto'> if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 513, __pyx_L1_error)</span>
+  __pyx_t_4 = <span class='pyx_c_api'>__Pyx_PyObject_IsTrue</span>(__pyx_v_add_units); if (unlikely((__pyx_t_4 == ((bool)-1)) &amp;&amp; <span class='py_c_api'>PyErr_Occurred</span>())) <span class='error_goto'>__PYX_ERR(0, 512, __pyx_L1_error)</span>
+  __pyx_t_2 = __Pyx_decode_cpp_string(__pyx_f_3idd_get_field_name(__pyx_v_cls, __pyx_v_field_idx, __pyx_t_4), 0, PY_SSIZE_T_MAX, NULL, NULL, PyUnicode_DecodeUTF8);<span class='error_goto'> if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 512, __pyx_L1_error)</span>
   <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;

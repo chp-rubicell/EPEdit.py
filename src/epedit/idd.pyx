@@ -479,7 +479,7 @@ cdef string get_field_name(const ClassDef& cls, int field_idx, cbool add_units) 
             return <const char*>b""
         field = &cls.fields[field_idx]
         field_name = field.name
-        if add_units and field.units.compare(<const char*>b""):
+        if add_units and not field.units.empty():
             field_name += <const char*>b" {"
             field_name += field.units
             field_name += <const char*>b"}"
@@ -489,20 +489,19 @@ cdef string get_field_name(const ClassDef& cls, int field_idx, cbool add_units) 
     cdef int group_num = (field_idx - ext.begin_index) // ext.size + 1
     cdef size_t offset = (field_idx - ext.begin_index) % ext.size
 
-    if offset < 0 or offset >= ext.patterns.size():
+    if offset >= ext.patterns.size():
         return <const char*>b""
 
     cdef const ExtPattern* pat = &ext.patterns[offset]
+    field = &cls.fields[ext.begin_index + offset]
 
     field_name = pat.prefix
     field_name += to_string(group_num)
     field_name +=  pat.suffix
 
-    cdef string units = cls.fields[ext.begin_index + offset].units
-
-    if add_units and units.compare(<const char*>b""):
+    if add_units and not field.units.empty():
         field_name += <const char*>b" {"
-        field_name += units
+        field_name += field.units
         field_name += <const char*>b"}"
     return field_name
 
