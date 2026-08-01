@@ -7,8 +7,11 @@ from libcpp.unordered_map cimport unordered_map
 from libcpp cimport bool as cbool
 from libc.stdio cimport printf  #? For debugging
 
+cdef extern from "<string>" namespace "std" nogil:
+    string to_string(int val)
+
 from lexer cimport Lexer, Token, TokenType, TOKEN_TEXT, TOKEN_COMMA, TOKEN_SEMICOLON, TOKEN_EOF, TOKEN_ERROR
-from utils cimport to_lower, to_upper, trim_string, has_prefix, has_suffix, cut_prefix, get_continuous_digits_indices
+from utils cimport to_lower, to_upper, trim_string, has_prefix, has_suffix, cut_prefix, cut_suffix, get_continuous_digits_indices
 
 
 # * Helper functions for parsing class and field property
@@ -20,7 +23,7 @@ cdef void parse_class_property(ClassDef& cls, const string& val) noexcept nogil:
 
     after, found = cut_prefix(val, <const char*>b"\\extensible")
     if found:
-        cls.extensible.has_extensible = True
+        cls.extensible.is_extensible = True
         cls.extensible.begin_index = -1  # -1 indicates before parsing the value
         cls.extensible.size = -1
 
@@ -59,7 +62,7 @@ cdef void parse_field_property(ClassDef& cls, FieldDef& field, const string& val
 
     if trimmed_val == <const char*>b"\\begin-extensible":
         # current field is the starting field of extensibles
-        if cls.extensible.has_extensible:
+        if cls.extensible.is_extensible:
             cls.extensible.begin_index = <int>(cls.fields.size() - 1)
         return
 
@@ -110,12 +113,12 @@ cdef inline void add_new_class(
     # printf("%s", class_name.c_str())  #!!!
 
     cdef ClassDef new_class
-    new_class.name                      = class_name
-    new_class.group                     = group_name
-    new_class.min_fields                = 0
-    new_class.extensible.has_extensible = False
-    new_class.extensible.begin_index    = -1
-    new_class.extensible.size           = -1
+    new_class.name                     = class_name
+    new_class.group                    = group_name
+    new_class.min_fields               = 0
+    new_class.extensible.is_extensible = False
+    new_class.extensible.begin_index   = -1
+    new_class.extensible.size          = -1
 
     c_idd.ordered_classes.push_back(new_class)
     current_class_idx = <int>(c_idd.ordered_classes.size() - 1)
@@ -137,7 +140,7 @@ cdef inline void add_new_field(
     # Check extensible field limits
     cdef int limit = -1  # field count limit (cap to first extensible fields set)
     if (
-        current_class.extensible.has_extensible
+        current_class.extensible.is_extensible
         and current_class.extensible.begin_index >= 0
     ):
         # first set of extensible fields
@@ -184,7 +187,7 @@ cdef void fix_missing_begin_index(ClassDef& cls) noexcept nogil:
     cdef ExtensibleDef* ext = &cls.extensible
 
     # filter when size is defined but begin_index is -1
-    if not ext.has_extensible or ext.begin_index != -1 or ext.size <= 0:
+    if not ext.is_extensible or ext.begin_index != -1 or ext.size <= 0:
         return
 
     cdef int num_fields = <int>cls.fields.size()
@@ -192,7 +195,7 @@ cdef void fix_missing_begin_index(ClassDef& cls) noexcept nogil:
         return
 
     # 1. Extract patterns(prefix/suffix) from the last fields
-    cdef vector[ExtPattern] patterns  # emporary patterns for matching
+    cdef vector[ExtPattern] patterns  # temporary patterns for matching
 
     cdef int i
     for i in range(ext.size):
@@ -225,7 +228,7 @@ cdef void fix_missing_begin_index(ClassDef& cls) noexcept nogil:
 # Run after IDD parsing to build indices.
 cdef void build_indices(ClassDef& cls) noexcept nogil:
     cdef int limit = <int>cls.fields.size()
-    if cls.extensible.has_extensible and cls.extensible.begin_index >= 0:
+    if cls.extensible.is_extensible and cls.extensible.begin_index >= 0:
         limit = cls.extensible.begin_index
 
     cdef int i
@@ -236,7 +239,7 @@ cdef void build_indices(ClassDef& cls) noexcept nogil:
         cls.base_field_index_map[to_lower(cls.fields[i].name)] = i
 
     # Add extensible fields to extensible.patterns
-    if cls.extensible.has_extensible and limit < <int>cls.fields.size():
+    if cls.extensible.is_extensible and limit < <int>cls.fields.size():
         cls.extensible.patterns.clear()
         for i in range(cls.extensible.size):
             if limit + i < <int>cls.fields.size():
@@ -411,3 +414,100 @@ cdef class IDD:
 
 
 # * API (Read)
+
+# Get index from field name (case-insensitive)
+cdef int find_field_index(const ClassDef& cls, const string& field_name) noexcept nogil:
+    if field_name.empty():
+        return -1
+
+    cdef string search_key = to_lower(field_name)
+
+    # 1. Base fields
+    if cls.base_field_index_map.find(search_key) != cls.base_field_index_map.end():
+        return cls.base_field_index_map.at(search_key)
+
+    # 2. Extensible fields
+
+    # Use pointer(*) to reference extensible
+    cdef const ExtensibleDef* ext = &cls.extensible
+
+
+    cdef size_t offset
+    cdef const ExtPattern* pat
+
+    # Temporary variables for cut_prefix(), cut_suffix()
+    cdef string after
+    cdef cbool found
+
+    cdef int group_num
+
+    if ext.is_extensible and ext.begin_index >= 0 and ext.size > 0:
+        for offset in range(ext.patterns.size()):
+            pat = &ext.patterns[offset]
+
+            after, found = cut_prefix(search_key, pat.search_prefix)
+            if found:
+                after, found = cut_suffix(after, pat.search_suffix)
+                if found:
+                    group_num = atoi(after.c_str())
+                    if group_num > 0:
+                        return ext.begin_index + (group_num-1) * ext.size + offset
+
+    return -1
+
+def test_find_field_index(IDD idd, str class_name, str field_name):
+    cls = idd.c_idd.ordered_classes[
+        idd.c_idd.class_map[class_name.upper().encode("utf-8")]
+    ]
+    cdef int field_idx = find_field_index(cls, field_name.encode("utf-8"))
+    if field_idx < 0:
+        raise ValueError
+    return field_idx
+
+
+cdef string get_field_name(const ClassDef& cls, int field_idx, cbool add_units) noexcept nogil:
+    if field_idx < 0:
+        return <const char*>b""
+
+    cdef const ExtensibleDef* ext = &cls.extensible
+    cdef const FieldDef* field
+    cdef string field_name
+
+    # 1. Base fields
+    if not ext.is_extensible or ext.begin_index < 0 or field_idx < ext.begin_index:
+        if field_idx >= <int>cls.fields.size():
+            return <const char*>b""
+        field = &cls.fields[field_idx]
+        field_name = field.name
+        if add_units and field.units.compare(<const char*>b""):
+            field_name += <const char*>b" {"
+            field_name += field.units
+            field_name += <const char*>b"}"
+        return field_name
+
+    # 2. Extensible fields
+    cdef int group_num = (field_idx - ext.begin_index) // ext.size + 1
+    cdef size_t offset = (field_idx - ext.begin_index) % ext.size
+
+    if offset < 0 or offset >= ext.patterns.size():
+        return <const char*>b""
+
+    cdef const ExtPattern* pat = &ext.patterns[offset]
+
+    field_name = pat.prefix
+    field_name += to_string(group_num)
+    field_name +=  pat.suffix
+
+    cdef string units = cls.fields[ext.begin_index + offset].units
+
+    if add_units and units.compare(<const char*>b""):
+        field_name += <const char*>b" {"
+        field_name += units
+        field_name += <const char*>b"}"
+    return field_name
+
+def test_get_field_name(IDD idd, str class_name, int field_idx, bool add_units):
+    cls = idd.c_idd.ordered_classes[
+        idd.c_idd.class_map[class_name.upper().encode("utf-8")]
+    ]
+    return get_field_name(cls, field_idx, add_units).decode("utf-8")

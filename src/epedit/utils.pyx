@@ -3,7 +3,7 @@
 from libcpp.string cimport string
 from libcpp cimport bool as cbool
 
-cdef extern from "<string>" namespace "std":
+cdef extern from "<string>" namespace "std" nogil:
     string to_string(long long val)
     string to_string(double val)
 

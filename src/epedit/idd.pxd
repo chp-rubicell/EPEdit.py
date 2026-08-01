@@ -17,7 +17,7 @@ cdef struct ExtPattern:
 
 # IDD extensible field properties (used in ClassDef)
 cdef struct ExtensibleDef:
-    cbool has_extensible
+    cbool is_extensible
     int begin_index  # start index of the extensible fields
     int size  # size of the extensible fields (ex. X, Y, Z coords -> 3)
     vector[ExtPattern] patterns

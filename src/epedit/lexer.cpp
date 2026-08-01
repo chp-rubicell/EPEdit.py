@@ -1578,7 +1578,7 @@ struct __pyx_ctuple_int__and_int {
 
 /* "utils.pxd":48
  * 
- * # Similar to Go's stringsCutPrefix()
+ * # Similar to Go's strings.CutPrefix()
  * cdef inline (string, cbool) cut_prefix(const string& s, const string& prefix) noexcept nogil:             # <<<<<<<<<<<<<<
  *     cdef size_t p_len = prefix.length()
  * 
@@ -4257,7 +4257,7 @@ static CYTHON_INLINE bool __pyx_f_5utils_has_suffix(std::string const &__pyx_v_s
  *     cdef size_t s_len = suffix.length()
  *     return s.length() >= s_len and s.compare(s.length() - s_len, s_len, suffix) == 0             # <<<<<<<<<<<<<<
  * 
- * # Similar to Go's stringsCutPrefix()
+ * # Similar to Go's strings.CutPrefix()
 */
   __pyx_t_2 = (__pyx_v_s.length() >= __pyx_v_s_len);
   if (__pyx_t_2) {
@@ -4299,7 +4299,7 @@ static CYTHON_INLINE bool __pyx_f_5utils_has_suffix(std::string const &__pyx_v_s
 
 /* "utils.pxd":48
  * 
- * # Similar to Go's stringsCutPrefix()
+ * # Similar to Go's strings.CutPrefix()
  * cdef inline (string, cbool) cut_prefix(const string& s, const string& prefix) noexcept nogil:             # <<<<<<<<<<<<<<
  *     cdef size_t p_len = prefix.length()
  * 
@@ -4319,7 +4319,7 @@ static CYTHON_INLINE __pyx_ctuple_6libcpp_6string_std__in_string__and_6libcpp_bo
   PyGILState_STATE __pyx_gilstate_save;
 
   /* "utils.pxd":49
- * # Similar to Go's stringsCutPrefix()
+ * # Similar to Go's strings.CutPrefix()
  * cdef inline (string, cbool) cut_prefix(const string& s, const string& prefix) noexcept nogil:
  *     cdef size_t p_len = prefix.length()             # <<<<<<<<<<<<<<
  * 
@@ -4386,6 +4386,8 @@ static CYTHON_INLINE __pyx_ctuple_6libcpp_6string_std__in_string__and_6libcpp_bo
  *         return (s.substr(p_len), True)
  * 
  *     return (s, False)             # <<<<<<<<<<<<<<
+ * 
+ * # Similar to Go's strings.CutSuffix()
 */
   __pyx_t_5.f0 = __pyx_v_s;
   __pyx_t_5.f1 = 0;
@@ -4394,7 +4396,7 @@ static CYTHON_INLINE __pyx_ctuple_6libcpp_6string_std__in_string__and_6libcpp_bo
 
   /* "utils.pxd":48
  * 
- * # Similar to Go's stringsCutPrefix()
+ * # Similar to Go's strings.CutPrefix()
  * cdef inline (string, cbool) cut_prefix(const string& s, const string& prefix) noexcept nogil:             # <<<<<<<<<<<<<<
  *     cdef size_t p_len = prefix.length()
  * 
@@ -4404,6 +4406,129 @@ static CYTHON_INLINE __pyx_ctuple_6libcpp_6string_std__in_string__and_6libcpp_bo
   __pyx_L1_error:;
   __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
   __Pyx_WriteUnraisable("utils.cut_prefix", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
+  __Pyx_pretend_to_initialize(&__pyx_r);
+  __Pyx_PyGILState_Release(__pyx_gilstate_save);
+  __pyx_L0:;
+  return __pyx_r;
+}
+
+/* "utils.pxd":57
+ * 
+ * # Similar to Go's strings.CutSuffix()
+ * cdef inline (string, cbool) cut_suffix(const string& s, const string& suffix) noexcept nogil:             # <<<<<<<<<<<<<<
+ *     cdef size_t str_len = s.length()
+ *     cdef size_t s_len = suffix.length()
+*/
+
+static CYTHON_INLINE __pyx_ctuple_6libcpp_6string_std__in_string__and_6libcpp_bool __pyx_f_5utils_cut_suffix(std::string const &__pyx_v_s, std::string const &__pyx_v_suffix) {
+  size_t __pyx_v_str_len;
+  size_t __pyx_v_s_len;
+  __pyx_ctuple_6libcpp_6string_std__in_string__and_6libcpp_bool __pyx_r;
+  int __pyx_t_1;
+  int __pyx_t_2;
+  int __pyx_t_3;
+  std::string __pyx_t_4;
+  __pyx_ctuple_6libcpp_6string_std__in_string__and_6libcpp_bool __pyx_t_5;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyGILState_STATE __pyx_gilstate_save;
+
+  /* "utils.pxd":58
+ * # Similar to Go's strings.CutSuffix()
+ * cdef inline (string, cbool) cut_suffix(const string& s, const string& suffix) noexcept nogil:
+ *     cdef size_t str_len = s.length()             # <<<<<<<<<<<<<<
+ *     cdef size_t s_len = suffix.length()
+ * 
+*/
+  __pyx_v_str_len = __pyx_v_s.length();
+
+  /* "utils.pxd":59
+ * cdef inline (string, cbool) cut_suffix(const string& s, const string& suffix) noexcept nogil:
+ *     cdef size_t str_len = s.length()
+ *     cdef size_t s_len = suffix.length()             # <<<<<<<<<<<<<<
+ * 
+ *     if str_len >= s_len and s.compare(str_len-s_len, str_len, suffix) == 0:
+*/
+  __pyx_v_s_len = __pyx_v_suffix.length();
+
+  /* "utils.pxd":61
+ *     cdef size_t s_len = suffix.length()
+ * 
+ *     if str_len >= s_len and s.compare(str_len-s_len, str_len, suffix) == 0:             # <<<<<<<<<<<<<<
+ *         return (s.substr(0, str_len-s_len), True)
+ * 
+*/
+  __pyx_t_2 = (__pyx_v_str_len >= __pyx_v_s_len);
+  if (__pyx_t_2) {
+  } else {
+    __pyx_t_1 = __pyx_t_2;
+    goto __pyx_L4_bool_binop_done;
+  }
+  try {
+    __pyx_t_3 = __pyx_v_s.compare((__pyx_v_str_len - __pyx_v_s_len), __pyx_v_str_len, __pyx_v_suffix);
+  } catch(...) {
+    PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
+    __Pyx_CppExn2PyErr();
+    __Pyx_PyGILState_Release(__pyx_gilstate_save);
+    __PYX_ERR(2, 61, __pyx_L1_error)
+  }
+  __pyx_t_2 = (__pyx_t_3 == 0);
+  __pyx_t_1 = __pyx_t_2;
+  __pyx_L4_bool_binop_done:;
+  if (__pyx_t_1) {
+
+    /* "utils.pxd":62
+ * 
+ *     if str_len >= s_len and s.compare(str_len-s_len, str_len, suffix) == 0:
+ *         return (s.substr(0, str_len-s_len), True)             # <<<<<<<<<<<<<<
+ * 
+ *     return (s, False)
+*/
+    try {
+      __pyx_t_4 = __pyx_v_s.substr(0, (__pyx_v_str_len - __pyx_v_s_len));
+    } catch(...) {
+      PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
+      __Pyx_CppExn2PyErr();
+      __Pyx_PyGILState_Release(__pyx_gilstate_save);
+      __PYX_ERR(2, 62, __pyx_L1_error)
+    }
+    __pyx_t_5.f0 = __pyx_t_4;
+    __pyx_t_5.f1 = 1;
+    __pyx_r = __pyx_t_5;
+    goto __pyx_L0;
+
+    /* "utils.pxd":61
+ *     cdef size_t s_len = suffix.length()
+ * 
+ *     if str_len >= s_len and s.compare(str_len-s_len, str_len, suffix) == 0:             # <<<<<<<<<<<<<<
+ *         return (s.substr(0, str_len-s_len), True)
+ * 
+*/
+  }
+
+  /* "utils.pxd":64
+ *         return (s.substr(0, str_len-s_len), True)
+ * 
+ *     return (s, False)             # <<<<<<<<<<<<<<
+*/
+  __pyx_t_5.f0 = __pyx_v_s;
+  __pyx_t_5.f1 = 0;
+  __pyx_r = __pyx_t_5;
+  goto __pyx_L0;
+
+  /* "utils.pxd":57
+ * 
+ * # Similar to Go's strings.CutSuffix()
+ * cdef inline (string, cbool) cut_suffix(const string& s, const string& suffix) noexcept nogil:             # <<<<<<<<<<<<<<
+ *     cdef size_t str_len = s.length()
+ *     cdef size_t s_len = suffix.length()
+*/
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
+  __Pyx_WriteUnraisable("utils.cut_suffix", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
   __Pyx_pretend_to_initialize(&__pyx_r);
   __Pyx_PyGILState_Release(__pyx_gilstate_save);
   __pyx_L0:;
