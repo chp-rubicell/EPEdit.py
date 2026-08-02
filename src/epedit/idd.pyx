@@ -392,6 +392,15 @@ cdef class IDD:
     Python wrapper for the C++ c_IDD data structure.
     """
 
+    # ——— Properties ——————
+
+    @property
+    def num_classes(self) -> int:
+        """Returns the total number of classes parsed."""
+        return self.c_idd.ordered_classes.size()
+
+    # ——— Initializations ——————
+
     def __init__(self, bytes idd_content):
         if self.initialized:
             raise RuntimeError(f"{type(self).__name__} is already initialized.")
@@ -402,6 +411,15 @@ cdef class IDD:
         # Parse IDD
         with nogil:
             parse_idd(lexer, self.c_idd)
+
+        # Precache Python str of uppercase class names
+        cdef size_t i
+        cdef const ClassDef* cls
+        cdef size_t num_classes = self.c_idd.ordered_classes.size()
+        self.py_class_names_upper = [None] * <int>num_classes
+        for i in range(num_classes):
+            cls = &self.c_idd.ordered_classes[i]
+            self.py_class_names_upper[i] = to_upper(cls.name).decode("utf-8")
 
         # Flag as initialized
         self.initialized = True
@@ -416,16 +434,27 @@ cdef class IDD:
 
         return cls(raw_bytes)
 
-    @property
-    def num_classes(self) -> int:
-        """Returns the total number of classes parsed."""
-        return self.c_idd.ordered_classes.size()
+    # ——— Helper functions ——————
 
     def get_class_name(self, int index) -> str:
         if index < 0 or index >= <int>self.c_idd.ordered_classes.size():
             raise IndexError("Class index out of range.")
 
         return self.c_idd.ordered_classes[index].name.decode("utf-8")
+
+    # ——— Debugging ——————
+
+    def _get_field_names(self, str class_name):
+        cdef const ClassDef* cls = &self.c_idd.ordered_classes.at(
+            self.c_idd.class_map[class_name.upper().encode("utf-8")]
+        )
+        cdef const FieldDef* field
+        cdef size_t i
+        cdef list field_names = []
+        for i in range(cls.fields.size()):
+            field = &cls.fields[i]
+            field_names.append(field.name.decode("utf-8"))
+        return field_names
 
 
 # * API (Read)
