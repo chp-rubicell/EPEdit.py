@@ -4,7 +4,7 @@ from libcpp.string cimport string, npos
 from libcpp.vector cimport vector
 from libcpp cimport bool as cbool
 
-from utils cimport trim_string
+from .utils cimport trim_string
 
 cdef class Lexer:
 

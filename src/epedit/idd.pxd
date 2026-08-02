@@ -3,7 +3,7 @@ from libcpp.vector cimport vector
 from libcpp.unordered_map cimport unordered_map
 from libcpp cimport bool as cbool
 
-from lexer cimport Lexer
+from .lexer cimport Lexer
 
 # * Field and class definition
 

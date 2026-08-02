@@ -5,16 +5,15 @@ from libcpp.string cimport string, npos
 from libcpp.vector cimport vector
 from libcpp.unordered_map cimport unordered_map
 from libcpp cimport bool as cbool
-from libc.stdio cimport printf  #? For debugging
 
 cdef extern from "<string>" namespace "std" nogil:
     string to_string(int val)
 
-from lexer cimport (
+from .lexer cimport (
     Lexer, Token, TokenType,
     TOKEN_TEXT, TOKEN_COMMA, TOKEN_SEMICOLON, TOKEN_EOF, TOKEN_ERROR,
 )
-from utils cimport (
+from .utils cimport (
     to_lower, to_upper, trim_string,
     has_prefix, has_suffix, cut_prefix, cut_suffix,
     get_continuous_digits_indices,
@@ -127,7 +126,6 @@ cdef inline void add_new_class(
     int& current_class_idx,
     int& current_field_idx,
 ) noexcept nogil:
-    # printf("%s", class_name.c_str())  #!!!
 
     cdef ClassDef new_class
     new_class.name                     = class_name
@@ -473,9 +471,9 @@ cdef int find_field_index(const ClassDef* cls, const string& field_name) noexcep
     return -1
 
 def test_find_field_index(IDD idd, str class_name, str field_name):
-    cdef const ClassDef* cls = &idd.c_idd.ordered_classes[
+    cdef const ClassDef* cls = &idd.c_idd.ordered_classes.at(
         idd.c_idd.class_map[class_name.upper().encode("utf-8")]
-    ]
+    )
     cdef int field_idx = find_field_index(cls, field_name.encode("utf-8"))
     if field_idx < 0:
         raise ValueError
@@ -524,7 +522,7 @@ cdef string get_field_name(const ClassDef* cls, int field_idx, cbool add_units) 
     return field_name
 
 def test_get_field_name(IDD idd, str class_name, int field_idx, bool add_units):
-    cdef const ClassDef* cls = &idd.c_idd.ordered_classes[
+    cdef const ClassDef* cls = &idd.c_idd.ordered_classes.at(
         idd.c_idd.class_map[class_name.upper().encode("utf-8")]
-    ]
+    )
     return get_field_name(cls, field_idx, add_units).decode("utf-8")

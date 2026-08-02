@@ -379,22 +379,22 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <pre class="cython line score-0">&#xA0;<span class="">004</span>: <span class="k">from</span> <span class="nn">libcpp.vector</span> <span class="k">cimport</span> <span class="n">vector</span></pre>
 <pre class="cython line score-0">&#xA0;<span class="">005</span>: <span class="k">from</span> <span class="nn">libcpp</span> <span class="k">cimport</span> <span class="nb">bool</span> <span class="k">as</span> <span class="n">cbool</span></pre>
 <pre class="cython line score-0">&#xA0;<span class="">006</span>: </pre>
-<pre class="cython line score-0">&#xA0;<span class="">007</span>: <span class="k">from</span> <span class="nn">utils</span> <span class="k">cimport</span> <span class="n">trim_string</span></pre>
+<pre class="cython line score-0">&#xA0;<span class="">007</span>: <span class="k">from</span> <span class="nn">.utils</span> <span class="k">cimport</span> <span class="n">trim_string</span></pre>
 <pre class="cython line score-0">&#xA0;<span class="">008</span>: </pre>
 <pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">009</span>: <span class="k">cdef</span> <span class="k">class</span> <span class="nf">Lexer</span><span class="p">:</span></pre>
-<pre class='cython code score-0 '>struct __pyx_vtabstruct_5lexer_Lexer {
-  bool (*scan_next_line)(struct __pyx_obj_5lexer_Lexer *, std::string &amp;);
-  struct __pyx_t_5lexer_Token (*next_token)(struct __pyx_obj_5lexer_Lexer *);
-  void (*tokenize_line)(struct __pyx_obj_5lexer_Lexer *, std::string const &amp;);
-  void (*push_text_token)(struct __pyx_obj_5lexer_Lexer *, std::string &amp;);
+<pre class='cython code score-0 '>struct __pyx_vtabstruct_6epedit_5lexer_Lexer {
+  bool (*scan_next_line)(struct __pyx_obj_6epedit_5lexer_Lexer *, std::string &amp;);
+  struct __pyx_t_6epedit_5lexer_Token (*next_token)(struct __pyx_obj_6epedit_5lexer_Lexer *);
+  void (*tokenize_line)(struct __pyx_obj_6epedit_5lexer_Lexer *, std::string const &amp;);
+  void (*push_text_token)(struct __pyx_obj_6epedit_5lexer_Lexer *, std::string &amp;);
 };
-static struct __pyx_vtabstruct_5lexer_Lexer *__pyx_vtabptr_5lexer_Lexer;
+static struct __pyx_vtabstruct_6epedit_5lexer_Lexer *__pyx_vtabptr_6epedit_5lexer_Lexer;
 </pre><pre class="cython line score-0">&#xA0;<span class="">010</span>: </pre>
 <pre class="cython line score-0">&#xA0;<span class="">011</span>:     <span class="c"># Accepts raw bytes of the entire file.</span></pre>
 <pre class="cython line score-37" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">012</span>:     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">bytes</span> <span class="n">file_content</span><span class="p">,</span> <span class="nb">bint</span> <span class="n">is_idd</span><span class="p">):</span></pre>
 <pre class='cython code score-37 '>/* Python wrapper */
-static int __pyx_pw_5lexer_5Lexer_1__init__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static int __pyx_pw_5lexer_5Lexer_1__init__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static int __pyx_pw_6epedit_5lexer_5Lexer_1__init__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static int __pyx_pw_6epedit_5lexer_5Lexer_1__init__(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_file_content = 0;
   int __pyx_v_is_idd;
   CYTHON_UNUSED Py_ssize_t __pyx_nargs;
@@ -451,12 +451,12 @@ static int __pyx_pw_5lexer_5Lexer_1__init__(PyObject *__pyx_v_self, PyObject *__
   for (Py_ssize_t __pyx_temp=0; __pyx_temp &lt; (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
     Py_XDECREF(values[__pyx_temp]);
   }
-  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("lexer.Lexer.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("epedit.lexer.Lexer.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   <span class='refnanny'>__Pyx_RefNannyFinishContext</span>();
   return -1;
   __pyx_L4_argument_unpacking_done:;
   if (unlikely(!<span class='pyx_c_api'>__Pyx_ArgTypeTest</span>(((PyObject *)__pyx_v_file_content), (&amp;PyBytes_Type), 1, "file_content", 1))) <span class='error_goto'>__PYX_ERR(0, 12, __pyx_L1_error)</span>
-  __pyx_r = __pyx_pf_5lexer_5Lexer___init__(((struct __pyx_obj_5lexer_Lexer *)__pyx_v_self), __pyx_v_file_content, __pyx_v_is_idd);
+  __pyx_r = __pyx_pf_6epedit_5lexer_5Lexer___init__(((struct __pyx_obj_6epedit_5lexer_Lexer *)__pyx_v_self), __pyx_v_file_content, __pyx_v_is_idd);
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -478,14 +478,14 @@ static int __pyx_pw_5lexer_5Lexer_1__init__(PyObject *__pyx_v_self, PyObject *__
   return __pyx_r;
 }
 
-static int __pyx_pf_5lexer_5Lexer___init__(struct __pyx_obj_5lexer_Lexer *__pyx_v_self, PyObject *__pyx_v_file_content, int __pyx_v_is_idd) {
+static int __pyx_pf_6epedit_5lexer_5Lexer___init__(struct __pyx_obj_6epedit_5lexer_Lexer *__pyx_v_self, PyObject *__pyx_v_file_content, int __pyx_v_is_idd) {
   int __pyx_r;
 /* … */
   /* function exit code */
   __pyx_r = 0;
   goto __pyx_L0;
   __pyx_L1_error:;
-  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("lexer.Lexer.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("epedit.lexer.Lexer.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = -1;
   __pyx_L0:;
   return __pyx_r;
@@ -511,14 +511,14 @@ static int __pyx_pf_5lexer_5Lexer___init__(struct __pyx_obj_5lexer_Lexer *__pyx_
 <pre class="cython line score-0">&#xA0;<span class="">024</span>:     <span class="c"># Advances `pos` past the next `\n` character.</span></pre>
 <pre class="cython line score-0">&#xA0;<span class="">025</span>:     <span class="c"># Returns True if a line was successfully read, or False if EOF is reached.</span></pre>
 <pre class="cython line score-6" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">026</span>:     <span class="k">cdef</span> <span class="kt">cbool</span> <span class="nf">scan_next_line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="o">&amp;</span> <span class="n">line</span><span class="p">)</span> <span class="n">noexcept</span> <span class="k">nogil</span><span class="p">:</span></pre>
-<pre class='cython code score-6 '>static bool __pyx_f_5lexer_5Lexer_scan_next_line(struct __pyx_obj_5lexer_Lexer *__pyx_v_self, std::string &amp;__pyx_v_line) {
+<pre class='cython code score-6 '>static bool __pyx_f_6epedit_5lexer_5Lexer_scan_next_line(struct __pyx_obj_6epedit_5lexer_Lexer *__pyx_v_self, std::string &amp;__pyx_v_line) {
   size_t __pyx_v_next_newline;
   bool __pyx_r;
 /* … */
   /* function exit code */
   __pyx_L1_error:;
   __pyx_gilstate_save = <span class='pyx_c_api'>__Pyx_PyGILState_Ensure</span>();
-  <span class='pyx_c_api'>__Pyx_WriteUnraisable</span>("lexer.Lexer.scan_next_line", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
+  <span class='pyx_c_api'>__Pyx_WriteUnraisable</span>("epedit.lexer.Lexer.scan_next_line", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
   __pyx_r = 0;
   <span class='pyx_c_api'>__Pyx_PyGILState_Release</span>(__pyx_gilstate_save);
   __pyx_L0:;
@@ -596,11 +596,11 @@ static int __pyx_pf_5lexer_5Lexer___init__(struct __pyx_obj_5lexer_Lexer *__pyx_
 </pre><pre class="cython line score-0">&#xA0;<span class="">045</span>: </pre>
 <pre class="cython line score-0">&#xA0;<span class="">046</span>:     <span class="c"># Return next token when parser requests.</span></pre>
 <pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">047</span>:     <span class="k">cdef</span> <span class="kt">Token</span> <span class="nf">next_token</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="n">noexcept</span> <span class="k">nogil</span><span class="p">:</span></pre>
-<pre class='cython code score-0 '>static struct __pyx_t_5lexer_Token __pyx_f_5lexer_5Lexer_next_token(struct __pyx_obj_5lexer_Lexer *__pyx_v_self) {
-  struct __pyx_t_5lexer_Token __pyx_v_tok;
+<pre class='cython code score-0 '>static struct __pyx_t_6epedit_5lexer_Token __pyx_f_6epedit_5lexer_5Lexer_next_token(struct __pyx_obj_6epedit_5lexer_Lexer *__pyx_v_self) {
+  struct __pyx_t_6epedit_5lexer_Token __pyx_v_tok;
   std::string __pyx_v_line;
   bool __pyx_v_has_more_lines;
-  struct __pyx_t_5lexer_Token __pyx_r;
+  struct __pyx_t_6epedit_5lexer_Token __pyx_r;
 /* … */
   /* function exit code */
   __pyx_L0:;
@@ -634,7 +634,7 @@ static int __pyx_pf_5lexer_5Lexer___init__(struct __pyx_obj_5lexer_Lexer *__pyx_
 <pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">063</span>:         <span class="k">while</span> <span class="bp">True</span><span class="p">:</span></pre>
 <pre class='cython code score-0 '>  while (1) {
 </pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">064</span>:             <span class="n">has_more_lines</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scan_next_line</span><span class="p">(</span><span class="n">line</span><span class="p">)</span></pre>
-<pre class='cython code score-0 '>    __pyx_v_has_more_lines = ((struct __pyx_vtabstruct_5lexer_Lexer *)__pyx_v_self-&gt;__pyx_vtab)-&gt;scan_next_line(__pyx_v_self, __pyx_v_line);
+<pre class='cython code score-0 '>    __pyx_v_has_more_lines = ((struct __pyx_vtabstruct_6epedit_5lexer_Lexer *)__pyx_v_self-&gt;__pyx_vtab)-&gt;scan_next_line(__pyx_v_self, __pyx_v_line);
 </pre><pre class="cython line score-0">&#xA0;<span class="">065</span>: </pre>
 <pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">066</span>:             <span class="k">if</span> <span class="ow">not</span> <span class="n">has_more_lines</span><span class="p">:</span></pre>
 <pre class='cython code score-0 '>    __pyx_t_1 = (!(__pyx_v_has_more_lines != 0));
@@ -645,7 +645,7 @@ static int __pyx_pf_5lexer_5Lexer___init__(struct __pyx_obj_5lexer_Lexer *__pyx_
 <pre class='cython code score-0 '>      goto __pyx_L5_break;
 </pre><pre class="cython line score-0">&#xA0;<span class="">068</span>: </pre>
 <pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">069</span>:             <span class="bp">self</span><span class="o">.</span><span class="n">tokenize_line</span><span class="p">(</span><span class="n">line</span><span class="p">)</span></pre>
-<pre class='cython code score-0 '>    ((struct __pyx_vtabstruct_5lexer_Lexer *)__pyx_v_self-&gt;__pyx_vtab)-&gt;tokenize_line(__pyx_v_self, __pyx_v_line);
+<pre class='cython code score-0 '>    ((struct __pyx_vtabstruct_6epedit_5lexer_Lexer *)__pyx_v_self-&gt;__pyx_vtab)-&gt;tokenize_line(__pyx_v_self, __pyx_v_line);
 </pre><pre class="cython line score-0">&#xA0;<span class="">070</span>: </pre>
 <pre class="cython line score-0">&#xA0;<span class="">071</span>:             <span class="c"># If tokens were generated, return first one and move pointer</span></pre>
 <pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">072</span>:             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="o">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">0</span><span class="p">:</span></pre>
@@ -665,7 +665,7 @@ static int __pyx_pf_5lexer_5Lexer___init__(struct __pyx_obj_5lexer_Lexer *__pyx_
 </pre><pre class="cython line score-0">&#xA0;<span class="">076</span>: </pre>
 <pre class="cython line score-0">&#xA0;<span class="">077</span>:         <span class="c"># Return EOF if no more content</span></pre>
 <pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">078</span>:         <span class="n">tok</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="n">TOKEN_EOF</span></pre>
-<pre class='cython code score-0 '>  __pyx_v_tok.type = __pyx_e_5lexer_TOKEN_EOF;
+<pre class='cython code score-0 '>  __pyx_v_tok.type = __pyx_e_6epedit_5lexer_TOKEN_EOF;
 </pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">079</span>:         <span class="n">tok</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>  <span class="c"># instead of tok.value = b&quot;&quot;</span></pre>
 <pre class='cython code score-0 '>  __pyx_v_tok.value.clear();
 </pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">080</span>:         <span class="k">return</span> <span class="n">tok</span></pre>
@@ -674,7 +674,7 @@ static int __pyx_pf_5lexer_5Lexer___init__(struct __pyx_obj_5lexer_Lexer *__pyx_
 </pre><pre class="cython line score-0">&#xA0;<span class="">081</span>: </pre>
 <pre class="cython line score-0">&#xA0;<span class="">082</span>:     <span class="c"># Read line and split by commas and semicolons.</span></pre>
 <pre class="cython line score-6" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">083</span>:     <span class="k">cdef</span> <span class="kt">void</span> <span class="nf">tokenize_line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">const</span> <span class="n">string</span><span class="o">&amp;</span> <span class="n">line</span><span class="p">)</span> <span class="n">noexcept</span> <span class="k">nogil</span><span class="p">:</span></pre>
-<pre class='cython code score-6 '>static void __pyx_f_5lexer_5Lexer_tokenize_line(struct __pyx_obj_5lexer_Lexer *__pyx_v_self, std::string const &amp;__pyx_v_line) {
+<pre class='cython code score-6 '>static void __pyx_f_6epedit_5lexer_5Lexer_tokenize_line(struct __pyx_obj_6epedit_5lexer_Lexer *__pyx_v_self, std::string const &amp;__pyx_v_line) {
   size_t __pyx_v_limit;
   std::string __pyx_v_text_builder;
   size_t __pyx_v_byte_idx;
@@ -685,7 +685,7 @@ static int __pyx_pf_5lexer_5Lexer___init__(struct __pyx_obj_5lexer_Lexer *__pyx_
   goto __pyx_L0;
   __pyx_L1_error:;
   __pyx_gilstate_save = <span class='pyx_c_api'>__Pyx_PyGILState_Ensure</span>();
-  <span class='pyx_c_api'>__Pyx_WriteUnraisable</span>("lexer.Lexer.tokenize_line", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
+  <span class='pyx_c_api'>__Pyx_WriteUnraisable</span>("epedit.lexer.Lexer.tokenize_line", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
   <span class='pyx_c_api'>__Pyx_PyGILState_Release</span>(__pyx_gilstate_save);
   __pyx_L0:;
 }
@@ -731,7 +731,7 @@ static int __pyx_pf_5lexer_5Lexer___init__(struct __pyx_obj_5lexer_Lexer *__pyx_
 /* … */
     }
 </pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">102</span>:                 <span class="bp">self</span><span class="o">.</span><span class="n">push_text_token</span><span class="p">(</span><span class="n">text_builder</span><span class="p">)</span></pre>
-<pre class='cython code score-0 '>      ((struct __pyx_vtabstruct_5lexer_Lexer *)__pyx_v_self-&gt;__pyx_vtab)-&gt;push_text_token(__pyx_v_self, __pyx_v_text_builder);
+<pre class='cython code score-0 '>      ((struct __pyx_vtabstruct_6epedit_5lexer_Lexer *)__pyx_v_self-&gt;__pyx_vtab)-&gt;push_text_token(__pyx_v_self, __pyx_v_text_builder);
 </pre><pre class="cython line score-4" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">103</span>:                 <span class="n">remainder</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">substr</span><span class="p">(</span><span class="n">byte_idx</span><span class="p">,</span> <span class="n">limit</span> <span class="o">-</span> <span class="n">byte_idx</span><span class="p">)</span></pre>
 <pre class='cython code score-4 '>      try {
         __pyx_t_3 = __pyx_v_line.substr(__pyx_v_byte_idx, (__pyx_v_limit - __pyx_v_byte_idx));
@@ -743,14 +743,14 @@ static int __pyx_pf_5lexer_5Lexer___init__(struct __pyx_obj_5lexer_Lexer *__pyx_
       }
       __pyx_v_remainder = __PYX_STD_MOVE_IF_SUPPORTED(__pyx_t_3);
 </pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">104</span>:                 <span class="n">remainder</span> <span class="o">=</span> <span class="n">trim_string</span><span class="p">(</span><span class="n">remainder</span><span class="p">)</span></pre>
-<pre class='cython code score-0 '>      __pyx_v_remainder = __pyx_f_5utils_trim_string(__pyx_v_remainder);
+<pre class='cython code score-0 '>      __pyx_v_remainder = __pyx_f_6epedit_5utils_trim_string(__pyx_v_remainder);
 </pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">105</span>:                 <span class="k">if</span> <span class="ow">not</span> <span class="n">remainder</span><span class="o">.</span><span class="n">empty</span><span class="p">():</span></pre>
 <pre class='cython code score-0 '>      __pyx_t_1 = (!__pyx_v_remainder.empty());
       if (__pyx_t_1) {
 /* … */
       }
 </pre><pre class="cython line score-4" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">106</span>:                     <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="o">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">Token</span><span class="p">(</span><span class="n">TOKEN_TEXT</span><span class="p">,</span> <span class="n">remainder</span><span class="p">))</span></pre>
-<pre class='cython code score-4 '>        __pyx_t_4.type = __pyx_e_5lexer_TOKEN_TEXT;
+<pre class='cython code score-4 '>        __pyx_t_4.type = __pyx_e_6epedit_5lexer_TOKEN_TEXT;
         __pyx_t_4.value = __pyx_v_remainder;
         try {
           __pyx_v_self-&gt;buffer.push_back(__pyx_t_4);
@@ -770,9 +770,9 @@ static int __pyx_pf_5lexer_5Lexer___init__(struct __pyx_obj_5lexer_Lexer *__pyx_
       break;
       case ';':
 </pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">110</span>:                 <span class="bp">self</span><span class="o">.</span><span class="n">push_text_token</span><span class="p">(</span><span class="n">text_builder</span><span class="p">)</span></pre>
-<pre class='cython code score-0 '>      ((struct __pyx_vtabstruct_5lexer_Lexer *)__pyx_v_self-&gt;__pyx_vtab)-&gt;push_text_token(__pyx_v_self, __pyx_v_text_builder);
+<pre class='cython code score-0 '>      ((struct __pyx_vtabstruct_6epedit_5lexer_Lexer *)__pyx_v_self-&gt;__pyx_vtab)-&gt;push_text_token(__pyx_v_self, __pyx_v_text_builder);
 </pre><pre class="cython line score-4" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">111</span>:                 <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="o">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">Token</span><span class="p">(</span><span class="n">TOKEN_COMMA</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">const</span> <span class="n">char</span><span class="o">*&gt;</span><span class="n">b</span><span class="s">&quot;,&quot;</span><span class="p">))</span></pre>
-<pre class='cython code score-4 '>      __pyx_t_4.type = __pyx_e_5lexer_TOKEN_COMMA;
+<pre class='cython code score-4 '>      __pyx_t_4.type = __pyx_e_6epedit_5lexer_TOKEN_COMMA;
       __pyx_t_4.value = ((char const *)__pyx_k__5);
       try {
         __pyx_v_self-&gt;buffer.push_back(__pyx_t_4);
@@ -786,9 +786,9 @@ static int __pyx_pf_5lexer_5Lexer___init__(struct __pyx_obj_5lexer_Lexer *__pyx_
 <pre class='cython code score-0 '>      break;
       default:
 </pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">113</span>:                 <span class="bp">self</span><span class="o">.</span><span class="n">push_text_token</span><span class="p">(</span><span class="n">text_builder</span><span class="p">)</span></pre>
-<pre class='cython code score-0 '>      ((struct __pyx_vtabstruct_5lexer_Lexer *)__pyx_v_self-&gt;__pyx_vtab)-&gt;push_text_token(__pyx_v_self, __pyx_v_text_builder);
+<pre class='cython code score-0 '>      ((struct __pyx_vtabstruct_6epedit_5lexer_Lexer *)__pyx_v_self-&gt;__pyx_vtab)-&gt;push_text_token(__pyx_v_self, __pyx_v_text_builder);
 </pre><pre class="cython line score-4" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">114</span>:                 <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="o">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">Token</span><span class="p">(</span><span class="n">TOKEN_SEMICOLON</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">const</span> <span class="n">char</span><span class="o">*&gt;</span><span class="n">b</span><span class="s">&quot;;&quot;</span><span class="p">))</span></pre>
-<pre class='cython code score-4 '>      __pyx_t_4.type = __pyx_e_5lexer_TOKEN_SEMICOLON;
+<pre class='cython code score-4 '>      __pyx_t_4.type = __pyx_e_6epedit_5lexer_TOKEN_SEMICOLON;
       __pyx_t_4.value = ((char const *)__pyx_k__6);
       try {
         __pyx_v_self-&gt;buffer.push_back(__pyx_t_4);
@@ -818,30 +818,30 @@ static int __pyx_pf_5lexer_5Lexer___init__(struct __pyx_obj_5lexer_Lexer *__pyx_
 </pre><pre class="cython line score-0">&#xA0;<span class="">119</span>: </pre>
 <pre class="cython line score-0">&#xA0;<span class="">120</span>:         <span class="c"># Final flush</span></pre>
 <pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">121</span>:         <span class="bp">self</span><span class="o">.</span><span class="n">push_text_token</span><span class="p">(</span><span class="n">text_builder</span><span class="p">)</span></pre>
-<pre class='cython code score-0 '>  ((struct __pyx_vtabstruct_5lexer_Lexer *)__pyx_v_self-&gt;__pyx_vtab)-&gt;push_text_token(__pyx_v_self, __pyx_v_text_builder);
+<pre class='cython code score-0 '>  ((struct __pyx_vtabstruct_6epedit_5lexer_Lexer *)__pyx_v_self-&gt;__pyx_vtab)-&gt;push_text_token(__pyx_v_self, __pyx_v_text_builder);
 </pre><pre class="cython line score-0">&#xA0;<span class="">122</span>: </pre>
 <pre class="cython line score-0">&#xA0;<span class="">123</span>:     <span class="c"># Trims and pushes to buffer using reference.</span></pre>
 <pre class="cython line score-6" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">124</span>:     <span class="k">cdef</span> <span class="kt">void</span> <span class="nf">push_text_token</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="o">&amp;</span> <span class="n">builder</span><span class="p">)</span> <span class="n">noexcept</span> <span class="k">nogil</span><span class="p">:</span></pre>
-<pre class='cython code score-6 '>static void __pyx_f_5lexer_5Lexer_push_text_token(struct __pyx_obj_5lexer_Lexer *__pyx_v_self, std::string &amp;__pyx_v_builder) {
+<pre class='cython code score-6 '>static void __pyx_f_6epedit_5lexer_5Lexer_push_text_token(struct __pyx_obj_6epedit_5lexer_Lexer *__pyx_v_self, std::string &amp;__pyx_v_builder) {
   std::string __pyx_v_trimmed;
 /* … */
   /* function exit code */
   goto __pyx_L0;
   __pyx_L1_error:;
   __pyx_gilstate_save = <span class='pyx_c_api'>__Pyx_PyGILState_Ensure</span>();
-  <span class='pyx_c_api'>__Pyx_WriteUnraisable</span>("lexer.Lexer.push_text_token", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
+  <span class='pyx_c_api'>__Pyx_WriteUnraisable</span>("epedit.lexer.Lexer.push_text_token", __pyx_clineno, __pyx_lineno, __pyx_filename, 1, 0);
   <span class='pyx_c_api'>__Pyx_PyGILState_Release</span>(__pyx_gilstate_save);
   __pyx_L0:;
 }
 </pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">125</span>:         <span class="k">cdef</span> <span class="kt">string</span> <span class="nf">trimmed</span> <span class="o">=</span> <span class="n">trim_string</span><span class="p">(</span><span class="n">builder</span><span class="p">)</span></pre>
-<pre class='cython code score-0 '>  __pyx_v_trimmed = __pyx_f_5utils_trim_string(__pyx_v_builder);
+<pre class='cython code score-0 '>  __pyx_v_trimmed = __pyx_f_6epedit_5utils_trim_string(__pyx_v_builder);
 </pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">126</span>:         <span class="k">if</span> <span class="ow">not</span> <span class="n">trimmed</span><span class="o">.</span><span class="n">empty</span><span class="p">():</span></pre>
 <pre class='cython code score-0 '>  __pyx_t_1 = (!__pyx_v_trimmed.empty());
   if (__pyx_t_1) {
 /* … */
   }
 </pre><pre class="cython line score-4" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">127</span>:             <span class="bp">self</span><span class="o">.</span><span class="n">buffer</span><span class="o">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">Token</span><span class="p">(</span><span class="n">TOKEN_TEXT</span><span class="p">,</span> <span class="n">trimmed</span><span class="p">))</span></pre>
-<pre class='cython code score-4 '>    __pyx_t_2.type = __pyx_e_5lexer_TOKEN_TEXT;
+<pre class='cython code score-4 '>    __pyx_t_2.type = __pyx_e_6epedit_5lexer_TOKEN_TEXT;
     __pyx_t_2.value = __pyx_v_trimmed;
     try {
       __pyx_v_self-&gt;buffer.push_back(__pyx_t_2);
@@ -857,15 +857,15 @@ static int __pyx_pf_5lexer_5Lexer___init__(struct __pyx_obj_5lexer_Lexer *__pyx_
 </pre><pre class="cython line score-0">&#xA0;<span class="">130</span>: </pre>
 <pre class="cython line score-30" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">131</span>:     <span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span></pre>
 <pre class='cython code score-30 '>/* Python wrapper */
-static PyObject *__pyx_pw_5lexer_5Lexer_3test(PyObject *__pyx_v_self, 
+static PyObject *__pyx_pw_6epedit_5lexer_5Lexer_3test(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_5lexer_5Lexer_3test = {"test", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_5lexer_5Lexer_3test, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_5lexer_5Lexer_3test(PyObject *__pyx_v_self, 
+static PyMethodDef __pyx_mdef_6epedit_5lexer_5Lexer_3test = {"test", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6epedit_5lexer_5Lexer_3test, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_6epedit_5lexer_5Lexer_3test(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -891,15 +891,15 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   const Py_ssize_t __pyx_kwds_len = unlikely(__pyx_kwds) ? <span class='pyx_c_api'>__Pyx_NumKwargs_FASTCALL</span>(__pyx_kwds) : 0;
   if (unlikely(__pyx_kwds_len &lt; 0)) return NULL;
   if (unlikely(__pyx_kwds_len &gt; 0)) {<span class='pyx_c_api'>__Pyx_RejectKeywords</span>("test", __pyx_kwds); return NULL;}
-  __pyx_r = __pyx_pf_5lexer_5Lexer_2test(((struct __pyx_obj_5lexer_Lexer *)__pyx_v_self));
+  __pyx_r = __pyx_pf_6epedit_5lexer_5Lexer_2test(((struct __pyx_obj_6epedit_5lexer_Lexer *)__pyx_v_self));
 
   /* function exit code */
   <span class='refnanny'>__Pyx_RefNannyFinishContext</span>();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_5lexer_5Lexer_2test(struct __pyx_obj_5lexer_Lexer *__pyx_v_self) {
-  struct __pyx_t_5lexer_Token __pyx_v_tok;
+static PyObject *__pyx_pf_6epedit_5lexer_5Lexer_2test(struct __pyx_obj_6epedit_5lexer_Lexer *__pyx_v_self) {
+  struct __pyx_t_6epedit_5lexer_Token __pyx_v_tok;
   PyObject *__pyx_v_tokens = NULL;
   PyObject *__pyx_r = NULL;
 /* … */
@@ -908,7 +908,7 @@ static PyObject *__pyx_pf_5lexer_5Lexer_2test(struct __pyx_obj_5lexer_Lexer *__p
   <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_t_1);
   <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_t_2);
   <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_t_3);
-  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("lexer.Lexer.test", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("epedit.lexer.Lexer.test", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_v_tokens);
@@ -917,12 +917,12 @@ static PyObject *__pyx_pf_5lexer_5Lexer_2test(struct __pyx_obj_5lexer_Lexer *__p
   return __pyx_r;
 }
 /* … */
-  __pyx_t_2 = <span class='pyx_c_api'>__Pyx_CyFunction_New</span>(&amp;__pyx_mdef_5lexer_5Lexer_3test, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global-&gt;__pyx_n_u_Lexer_test, NULL, __pyx_mstate_global-&gt;__pyx_n_u_lexer, __pyx_mstate_global-&gt;__pyx_d, ((PyObject *)__pyx_mstate_global-&gt;__pyx_codeobj_tab[0]));<span class='error_goto'> if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 131, __pyx_L1_error)</span>
+  __pyx_t_2 = <span class='pyx_c_api'>__Pyx_CyFunction_New</span>(&amp;__pyx_mdef_6epedit_5lexer_5Lexer_3test, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global-&gt;__pyx_n_u_Lexer_test, NULL, __pyx_mstate_global-&gt;__pyx_n_u_epedit_lexer, __pyx_mstate_global-&gt;__pyx_d, ((PyObject *)__pyx_mstate_global-&gt;__pyx_codeobj_tab[0]));<span class='error_goto'> if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 131, __pyx_L1_error)</span>
   <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON &amp;&amp; PY_VERSION_HEX &gt;= 0x030E0000
   <span class='py_c_api'>PyUnstable_Object_EnableDeferredRefcount</span>(__pyx_t_2);
   #endif
-  if (<span class='pyx_c_api'>__Pyx_SetItemOnTypeDict</span>(__pyx_mstate_global-&gt;__pyx_ptype_5lexer_Lexer, __pyx_mstate_global-&gt;__pyx_n_u_test, __pyx_t_2) &lt; (0)) <span class='error_goto'>__PYX_ERR(0, 131, __pyx_L1_error)</span>
+  if (<span class='pyx_c_api'>__Pyx_SetItemOnTypeDict</span>(__pyx_mstate_global-&gt;__pyx_ptype_6epedit_5lexer_Lexer, __pyx_mstate_global-&gt;__pyx_n_u_test, __pyx_t_2) &lt; (0)) <span class='error_goto'>__PYX_ERR(0, 131, __pyx_L1_error)</span>
   <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_2); __pyx_t_2 = 0;
 </pre><pre class="cython line score-0">&#xA0;<span class="">132</span>:         <span class="k">cdef</span> <span class="kt">Token</span> <span class="nf">tok</span></pre>
 <pre class="cython line score-5" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">133</span>:         <span class="n">tokens</span> <span class="o">=</span> <span class="p">[]</span></pre>
@@ -950,12 +950,12 @@ static PyObject *__pyx_pf_5lexer_5Lexer_2test(struct __pyx_obj_5lexer_Lexer *__p
         }
     }
 </pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">137</span>:                 <span class="n">tok</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">next_token</span><span class="p">()</span></pre>
-<pre class='cython code score-0 '>          __pyx_v_tok = ((struct __pyx_vtabstruct_5lexer_Lexer *)__pyx_v_self-&gt;__pyx_vtab)-&gt;next_token(__pyx_v_self);
+<pre class='cython code score-0 '>          __pyx_v_tok = ((struct __pyx_vtabstruct_6epedit_5lexer_Lexer *)__pyx_v_self-&gt;__pyx_vtab)-&gt;next_token(__pyx_v_self);
         }
 </pre><pre class="cython line score-0">&#xA0;<span class="">138</span>: </pre>
 <pre class="cython line score-0">&#xA0;<span class="">139</span>:             <span class="c"># Convert C++ struct the Python Tuple</span></pre>
 <pre class="cython line score-12" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">140</span>:             <span class="n">tokens</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">tok</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="n">tok</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">&quot;utf-8&quot;</span><span class="p">)))</span></pre>
-<pre class='cython code score-12 '>    __pyx_t_1 = __Pyx_PyLong_From_enum____pyx_t_5lexer_TokenType(__pyx_v_tok.type);<span class='error_goto'> if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 140, __pyx_L1_error)</span>
+<pre class='cython code score-12 '>    __pyx_t_1 = __Pyx_PyLong_From_enum____pyx_t_6epedit_5lexer_TokenType(__pyx_v_tok.type);<span class='error_goto'> if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 140, __pyx_L1_error)</span>
     <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_1);
     __pyx_t_2 = __Pyx_decode_cpp_string(__pyx_v_tok.value, 0, PY_SSIZE_T_MAX, NULL, NULL, PyUnicode_DecodeUTF8);<span class='error_goto'> if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 140, __pyx_L1_error)</span>
     <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_2);
@@ -971,7 +971,7 @@ static PyObject *__pyx_pf_5lexer_5Lexer_2test(struct __pyx_obj_5lexer_Lexer *__p
     <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_3); __pyx_t_3 = 0;
 </pre><pre class="cython line score-0">&#xA0;<span class="">141</span>: </pre>
 <pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">142</span>:             <span class="k">if</span> <span class="n">tok</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">TOKEN_EOF</span><span class="p">:</span></pre>
-<pre class='cython code score-0 '>    __pyx_t_5 = (__pyx_v_tok.type == __pyx_e_5lexer_TOKEN_EOF);
+<pre class='cython code score-0 '>    __pyx_t_5 = (__pyx_v_tok.type == __pyx_e_6epedit_5lexer_TOKEN_EOF);
     if (__pyx_t_5) {
 /* … */
     }
