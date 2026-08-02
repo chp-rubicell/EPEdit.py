@@ -1,5 +1,6 @@
 # distutils: language = c++
 
+from cython.operator cimport dereference as deref
 # from libc.stdlib cimport atof, atoi  # replaced with stof, stoi
 from libcpp.string cimport string
 from libcpp.vector cimport vector
@@ -83,10 +84,8 @@ cdef int parse_idf(Lexer lexer, vector[c_IDFObject]& c_idf_objects) except -1 no
             object_started = False
 
             # Leave checking and saving to IDFObject generation phase.
-            c_idf_objects.push_back(current_obj)
+            c_idf_objects.push_back(move(current_obj))
 
-            current_obj.class_name.clear()
-            current_obj.values.clear()
             last_text.clear()
 
     return 0
@@ -142,14 +141,15 @@ cdef class IDFObject:
         cdef int idx = -1
         if isinstance(key, int):
             idx = key
+            if idx < 0:
+                raise KeyError("Field index should be >= 0.")
         elif isinstance(key, str):
             idx = find_field_index(cls, key.encode("utf-8"))
+            if idx < 0:
+                raise KeyError(f"Field '{key}' not found in class '{self.class_name}'.")
 
-        if idx < 0 or idx >= <int>self.values.size() or self.values[idx].empty():
-            raise KeyError(f"Field '{key}' not found in class '{self.class_name}'.")
-
-        cdef const ExtensibleDef* ext = &cls.extensible
         cdef int base_idx = idx
+        cdef const ExtensibleDef* ext = &cls.extensible
         if (
             ext.is_extensible
             and ext.begin_index >= 0
@@ -160,16 +160,27 @@ cdef class IDFObject:
 
         cdef const FieldDef* field = &cls.fields[base_idx]
 
-        if field.autosizable and to_lower(self.values[idx]) == <const char*>b"autosize":
+        cdef const string* val_ptr = NULL
+        if idx < <int>self.values.size():
+            val_ptr = &self.values[idx]
+
+        # If field has not been entered or is an empty value ""
+        if val_ptr == NULL or val_ptr.empty():
+            # If int or float type return None
+            if field.field_type == FIELDTYPE_INTEGER or field.field_type == FIELDTYPE_REAL:
+                return None
+            return ""
+
+        if field.autosizable and to_lower(deref(val_ptr)) == <const char*>b"autosize":
             return "Autosize"
-        elif field.autocalculatable and to_lower(self.values[idx]) == <const char*>b"autocalculate":
+        elif field.autocalculatable and to_lower(deref(val_ptr)) == <const char*>b"autocalculate":
             return "Autocalculate"
         elif field.field_type == FIELDTYPE_INTEGER:
-            return stoi(self.values[idx])
+            return stoi(deref(val_ptr))
         elif field.field_type == FIELDTYPE_REAL:
-            return stod(self.values[idx])
+            return stod(deref(val_ptr))
 
-        return self.values[idx].decode("utf-8")
+        return deref(val_ptr).decode("utf-8")
 
     def __setitem__(self, key, value):
         cdef const ClassDef* cls = self.get_class_def()
@@ -251,6 +262,7 @@ cdef class IDF:
         cdef str py_search_key  # Python str version of search_key
         cdef size_t class_idx
 
+        cdef IDFObject obj
         cdef size_t idx
 
         for idx in range(c_idf_objects.size()):
@@ -269,7 +281,7 @@ cdef class IDF:
             obj.c_init(self.idd, class_idx, c_object.values)
             obj.obj_idx = idx  # add order index
 
-            py_search_key = search_key.decode("utf-8")
+            py_search_key = self.idd.py_class_names_upper[class_idx]
             if py_search_key in self.objects:
                 self.objects[py_search_key].append(obj)
             else:
