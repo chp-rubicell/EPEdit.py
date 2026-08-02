@@ -10,8 +10,15 @@ from libc.stdio cimport printf  #? For debugging
 cdef extern from "<string>" namespace "std" nogil:
     string to_string(int val)
 
-from lexer cimport Lexer, Token, TokenType, TOKEN_TEXT, TOKEN_COMMA, TOKEN_SEMICOLON, TOKEN_EOF, TOKEN_ERROR
-from utils cimport to_lower, to_upper, trim_string, has_prefix, has_suffix, cut_prefix, cut_suffix, get_continuous_digits_indices
+from lexer cimport (
+    Lexer, Token, TokenType,
+    TOKEN_TEXT, TOKEN_COMMA, TOKEN_SEMICOLON, TOKEN_EOF, TOKEN_ERROR,
+)
+from utils cimport (
+    to_lower, to_upper, trim_string,
+    has_prefix, has_suffix, cut_prefix, cut_suffix,
+    get_continuous_digits_indices,
+)
 
 
 # * Helper functions for parsing class and field property
@@ -402,7 +409,7 @@ cdef class IDD:
         self.initialized = True
 
     @classmethod
-    def from_file(cls, str filepath):
+    def from_file(cls, str filepath) -> IDD:
         """Parse IDD file"""
         cdef bytes raw_bytes
 
@@ -412,7 +419,7 @@ cdef class IDD:
         return cls(raw_bytes)
 
     @property
-    def num_classes(self):
+    def num_classes(self) -> int:
         """Returns the total number of classes parsed."""
         return self.c_idd.ordered_classes.size()
 
