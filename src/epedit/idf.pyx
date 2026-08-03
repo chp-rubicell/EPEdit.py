@@ -126,11 +126,12 @@ cdef class IDFObject:
             raise ValueError(f"Unknown class: {class_name}")
 
         cdef size_t class_idx = c_idd_ptr.class_map[search_key]
-        cdef ClassDef* class_def = &c_idd_ptr.ordered_classes[class_idx]
+        cdef ClassDef* cls = &c_idd_ptr.ordered_classes[class_idx]
 
         cdef vector[string] empty_values
-        if class_def.min_fields > 0:
-            empty_values.resize(class_def.min_fields, <const char*>b"")
+        if cls.min_fields > 0:
+            empty_values.resize(cls.min_fields, <const char*>b"")
+            # empty_values.reserve(cls.min_fields)  # maybe?
 
         self.c_init(idd, class_idx, empty_values)
 
@@ -182,7 +183,9 @@ cdef class IDFObject:
             self.values.resize(field_idx+1, <const char*>b"")
 
         cdef const ClassDef* cls = self.get_class_def()
-        cdef const FieldDef* field = &cls.fields[field_idx]
+
+        # TODO value validity check
+        # cdef const FieldDef* field = get_field_def(cls, field_idx)
 
         self.values[field_idx] = value
         return 0
@@ -349,10 +352,6 @@ cdef class IDF:
         """
         cdef IDFObject new_obj = IDFObject(self.idd, class_name)
         cdef const ClassDef* cls = new_obj.get_class_def()
-
-        # Reserve self.values if min_fields is defined
-        if cls.min_fields > 0:
-            new_obj.values.reserve(<size_t>cls.min_fields)
 
         # Apply default values
         cdef size_t i
