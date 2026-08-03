@@ -138,7 +138,15 @@ def measure_idf_format_size():
     print(len(s) / total_obj_count)
     print("====")
 
+def test_save():
+    idd = IDD.from_file("./idds/V24-2-0-Energy+.idd")
+    idf = IDF.from_file(idd, "./files/RefBldgMediumOfficeNew2004_Chicago.idf")
+
+    # idf.save("./files/RefBldgMediumOfficeNew2004_Chicago_edited.idf")
+    idf.save("./files/ExportTest.idf")
+
 if __name__ == "__main__":
     # test_idf()
     # test_idf_format()
-    measure_idf_format_size()
+    # measure_idf_format_size()
+    test_save()

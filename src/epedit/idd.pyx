@@ -56,7 +56,7 @@ cdef void parse_field_property(ClassDef& cls, FieldDef& field, const string& val
     cdef string after
     cdef cbool found
 
-    after, found = cut_prefix(val, <const char*>b"\\field")
+    after, found = cut_prefix(val, <const char*>b"\\field ")
     if found:
         # replace temporary names (ex. A1, N1)
         field.name = trim_string(after)
@@ -72,12 +72,12 @@ cdef void parse_field_property(ClassDef& cls, FieldDef& field, const string& val
             cls.extensible.begin_index = <int>(cls.fields.size() - 1)
         return
 
-    after, found = cut_prefix(val, <const char*>b"\\units")
+    after, found = cut_prefix(val, <const char*>b"\\units ")
     if found:
         field.units = trim_string(after)
         return
 
-    after, found = cut_prefix(val, <const char*>b"\\default")
+    after, found = cut_prefix(val, <const char*>b"\\default ")
     if found:
         field.default_val = trim_string(after)
         # if field has default value, add index to cache
@@ -93,7 +93,7 @@ cdef void parse_field_property(ClassDef& cls, FieldDef& field, const string& val
         field.autocalculatable = True
         return
 
-    after, found = cut_prefix(val, <const char*>b"\\type")
+    after, found = cut_prefix(val, <const char*>b"\\type ")
     if found:
         after = to_lower(trim_string(after))
         if after == <const char*>b"integer":
@@ -108,7 +108,7 @@ cdef void parse_field_property(ClassDef& cls, FieldDef& field, const string& val
             field.field_type = FIELDTYPE_DEFAULT
         return
 
-    after, found = cut_prefix(val, <const char*>b"\\key")
+    after, found = cut_prefix(val, <const char*>b"\\key ")
     if found:
         field.choices.push_back(trim_string(after))
         return

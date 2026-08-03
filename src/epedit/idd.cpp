@@ -2924,15 +2924,15 @@ static const char __pyx_k_[] = " \t\r\n";
 static const char __pyx_k__2[] = "";
 static const char __pyx_k__5[] = " {";
 static const char __pyx_k__6[] = "}";
-static const char __pyx_k_key[] = "\\key";
+static const char __pyx_k_key[] = "\\key ";
 static const char __pyx_k_real[] = "real";
-static const char __pyx_k_type[] = "\\type";
+static const char __pyx_k_type[] = "\\type ";
 static const char __pyx_k_alpha[] = "alpha";
-static const char __pyx_k_field[] = "\\field";
+static const char __pyx_k_field[] = "\\field ";
 static const char __pyx_k_group[] = "\\group";
-static const char __pyx_k_units[] = "\\units";
+static const char __pyx_k_units[] = "\\units ";
 static const char __pyx_k_choice[] = "choice";
-static const char __pyx_k_default[] = "\\default";
+static const char __pyx_k_default[] = "\\default ";
 static const char __pyx_k_integer[] = "integer";
 static const char __pyx_k_extensible[] = "\\extensible";
 static const char __pyx_k_min_fields[] = "\\min-fields";
@@ -4693,7 +4693,7 @@ static void __pyx_f_6epedit_3idd_parse_field_property(struct __pyx_t_6epedit_3id
   /* "epedit/idd.pyx":59
  *     cdef cbool found
  * 
- *     after, found = cut_prefix(val, <const char*>b"\\field")             # <<<<<<<<<<<<<<
+ *     after, found = cut_prefix(val, <const char*>b"\\field ")             # <<<<<<<<<<<<<<
  *     if found:
  *         # replace temporary names (ex. A1, N1)
 */
@@ -4705,7 +4705,7 @@ static void __pyx_f_6epedit_3idd_parse_field_property(struct __pyx_t_6epedit_3id
 
   /* "epedit/idd.pyx":60
  * 
- *     after, found = cut_prefix(val, <const char*>b"\\field")
+ *     after, found = cut_prefix(val, <const char*>b"\\field ")
  *     if found:             # <<<<<<<<<<<<<<
  *         # replace temporary names (ex. A1, N1)
  *         field.name = trim_string(after)
@@ -4733,7 +4733,7 @@ static void __pyx_f_6epedit_3idd_parse_field_property(struct __pyx_t_6epedit_3id
 
     /* "epedit/idd.pyx":60
  * 
- *     after, found = cut_prefix(val, <const char*>b"\\field")
+ *     after, found = cut_prefix(val, <const char*>b"\\field ")
  *     if found:             # <<<<<<<<<<<<<<
  *         # replace temporary names (ex. A1, N1)
  *         field.name = trim_string(after)
@@ -4820,7 +4820,7 @@ static void __pyx_f_6epedit_3idd_parse_field_property(struct __pyx_t_6epedit_3id
  *             cls.extensible.begin_index = <int>(cls.fields.size() - 1)
  *         return             # <<<<<<<<<<<<<<
  * 
- *     after, found = cut_prefix(val, <const char*>b"\\units")
+ *     after, found = cut_prefix(val, <const char*>b"\\units ")
 */
     goto __pyx_L0;
 
@@ -4836,7 +4836,7 @@ static void __pyx_f_6epedit_3idd_parse_field_property(struct __pyx_t_6epedit_3id
   /* "epedit/idd.pyx":75
  *         return
  * 
- *     after, found = cut_prefix(val, <const char*>b"\\units")             # <<<<<<<<<<<<<<
+ *     after, found = cut_prefix(val, <const char*>b"\\units ")             # <<<<<<<<<<<<<<
  *     if found:
  *         field.units = trim_string(after)
 */
@@ -4848,7 +4848,7 @@ static void __pyx_f_6epedit_3idd_parse_field_property(struct __pyx_t_6epedit_3id
 
   /* "epedit/idd.pyx":76
  * 
- *     after, found = cut_prefix(val, <const char*>b"\\units")
+ *     after, found = cut_prefix(val, <const char*>b"\\units ")
  *     if found:             # <<<<<<<<<<<<<<
  *         field.units = trim_string(after)
  *         return
@@ -4857,7 +4857,7 @@ static void __pyx_f_6epedit_3idd_parse_field_property(struct __pyx_t_6epedit_3id
   if (__pyx_t_4) {
 
     /* "epedit/idd.pyx":77
- *     after, found = cut_prefix(val, <const char*>b"\\units")
+ *     after, found = cut_prefix(val, <const char*>b"\\units ")
  *     if found:
  *         field.units = trim_string(after)             # <<<<<<<<<<<<<<
  *         return
@@ -4870,13 +4870,13 @@ static void __pyx_f_6epedit_3idd_parse_field_property(struct __pyx_t_6epedit_3id
  *         field.units = trim_string(after)
  *         return             # <<<<<<<<<<<<<<
  * 
- *     after, found = cut_prefix(val, <const char*>b"\\default")
+ *     after, found = cut_prefix(val, <const char*>b"\\default ")
 */
     goto __pyx_L0;
 
     /* "epedit/idd.pyx":76
  * 
- *     after, found = cut_prefix(val, <const char*>b"\\units")
+ *     after, found = cut_prefix(val, <const char*>b"\\units ")
  *     if found:             # <<<<<<<<<<<<<<
  *         field.units = trim_string(after)
  *         return
@@ -4886,7 +4886,7 @@ static void __pyx_f_6epedit_3idd_parse_field_property(struct __pyx_t_6epedit_3id
   /* "epedit/idd.pyx":80
  *         return
  * 
- *     after, found = cut_prefix(val, <const char*>b"\\default")             # <<<<<<<<<<<<<<
+ *     after, found = cut_prefix(val, <const char*>b"\\default ")             # <<<<<<<<<<<<<<
  *     if found:
  *         field.default_val = trim_string(after)
 */
@@ -4898,7 +4898,7 @@ static void __pyx_f_6epedit_3idd_parse_field_property(struct __pyx_t_6epedit_3id
 
   /* "epedit/idd.pyx":81
  * 
- *     after, found = cut_prefix(val, <const char*>b"\\default")
+ *     after, found = cut_prefix(val, <const char*>b"\\default ")
  *     if found:             # <<<<<<<<<<<<<<
  *         field.default_val = trim_string(after)
  *         # if field has default value, add index to cache
@@ -4907,7 +4907,7 @@ static void __pyx_f_6epedit_3idd_parse_field_property(struct __pyx_t_6epedit_3id
   if (__pyx_t_4) {
 
     /* "epedit/idd.pyx":82
- *     after, found = cut_prefix(val, <const char*>b"\\default")
+ *     after, found = cut_prefix(val, <const char*>b"\\default ")
  *     if found:
  *         field.default_val = trim_string(after)             # <<<<<<<<<<<<<<
  *         # if field has default value, add index to cache
@@ -4961,7 +4961,7 @@ static void __pyx_f_6epedit_3idd_parse_field_property(struct __pyx_t_6epedit_3id
 
     /* "epedit/idd.pyx":81
  * 
- *     after, found = cut_prefix(val, <const char*>b"\\default")
+ *     after, found = cut_prefix(val, <const char*>b"\\default ")
  *     if found:             # <<<<<<<<<<<<<<
  *         field.default_val = trim_string(after)
  *         # if field has default value, add index to cache
@@ -5029,7 +5029,7 @@ static void __pyx_f_6epedit_3idd_parse_field_property(struct __pyx_t_6epedit_3id
  *         field.autocalculatable = True
  *         return             # <<<<<<<<<<<<<<
  * 
- *     after, found = cut_prefix(val, <const char*>b"\\type")
+ *     after, found = cut_prefix(val, <const char*>b"\\type ")
 */
     goto __pyx_L0;
 
@@ -5045,7 +5045,7 @@ static void __pyx_f_6epedit_3idd_parse_field_property(struct __pyx_t_6epedit_3id
   /* "epedit/idd.pyx":96
  *         return
  * 
- *     after, found = cut_prefix(val, <const char*>b"\\type")             # <<<<<<<<<<<<<<
+ *     after, found = cut_prefix(val, <const char*>b"\\type ")             # <<<<<<<<<<<<<<
  *     if found:
  *         after = to_lower(trim_string(after))
 */
@@ -5057,7 +5057,7 @@ static void __pyx_f_6epedit_3idd_parse_field_property(struct __pyx_t_6epedit_3id
 
   /* "epedit/idd.pyx":97
  * 
- *     after, found = cut_prefix(val, <const char*>b"\\type")
+ *     after, found = cut_prefix(val, <const char*>b"\\type ")
  *     if found:             # <<<<<<<<<<<<<<
  *         after = to_lower(trim_string(after))
  *         if after == <const char*>b"integer":
@@ -5066,7 +5066,7 @@ static void __pyx_f_6epedit_3idd_parse_field_property(struct __pyx_t_6epedit_3id
   if (__pyx_t_4) {
 
     /* "epedit/idd.pyx":98
- *     after, found = cut_prefix(val, <const char*>b"\\type")
+ *     after, found = cut_prefix(val, <const char*>b"\\type ")
  *     if found:
  *         after = to_lower(trim_string(after))             # <<<<<<<<<<<<<<
  *         if after == <const char*>b"integer":
@@ -5207,13 +5207,13 @@ static void __pyx_f_6epedit_3idd_parse_field_property(struct __pyx_t_6epedit_3id
  *             field.field_type = FIELDTYPE_DEFAULT
  *         return             # <<<<<<<<<<<<<<
  * 
- *     after, found = cut_prefix(val, <const char*>b"\\key")
+ *     after, found = cut_prefix(val, <const char*>b"\\key ")
 */
     goto __pyx_L0;
 
     /* "epedit/idd.pyx":97
  * 
- *     after, found = cut_prefix(val, <const char*>b"\\type")
+ *     after, found = cut_prefix(val, <const char*>b"\\type ")
  *     if found:             # <<<<<<<<<<<<<<
  *         after = to_lower(trim_string(after))
  *         if after == <const char*>b"integer":
@@ -5223,7 +5223,7 @@ static void __pyx_f_6epedit_3idd_parse_field_property(struct __pyx_t_6epedit_3id
   /* "epedit/idd.pyx":111
  *         return
  * 
- *     after, found = cut_prefix(val, <const char*>b"\\key")             # <<<<<<<<<<<<<<
+ *     after, found = cut_prefix(val, <const char*>b"\\key ")             # <<<<<<<<<<<<<<
  *     if found:
  *         field.choices.push_back(trim_string(after))
 */
@@ -5235,7 +5235,7 @@ static void __pyx_f_6epedit_3idd_parse_field_property(struct __pyx_t_6epedit_3id
 
   /* "epedit/idd.pyx":112
  * 
- *     after, found = cut_prefix(val, <const char*>b"\\key")
+ *     after, found = cut_prefix(val, <const char*>b"\\key ")
  *     if found:             # <<<<<<<<<<<<<<
  *         field.choices.push_back(trim_string(after))
  *         return
@@ -5244,7 +5244,7 @@ static void __pyx_f_6epedit_3idd_parse_field_property(struct __pyx_t_6epedit_3id
   if (__pyx_t_4) {
 
     /* "epedit/idd.pyx":113
- *     after, found = cut_prefix(val, <const char*>b"\\key")
+ *     after, found = cut_prefix(val, <const char*>b"\\key ")
  *     if found:
  *         field.choices.push_back(trim_string(after))             # <<<<<<<<<<<<<<
  *         return
@@ -5270,7 +5270,7 @@ static void __pyx_f_6epedit_3idd_parse_field_property(struct __pyx_t_6epedit_3id
 
     /* "epedit/idd.pyx":112
  * 
- *     after, found = cut_prefix(val, <const char*>b"\\key")
+ *     after, found = cut_prefix(val, <const char*>b"\\key ")
  *     if found:             # <<<<<<<<<<<<<<
  *         field.choices.push_back(trim_string(after))
  *         return

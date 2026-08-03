@@ -288,7 +288,7 @@ cdef class IDFObject:
 
         cdef const ClassDef* cls = self.get_class_def()
         cdef int i
-        cdef const string* val_ptr
+        cdef size_t val_size
 
         # 1. Print class name
         out_buffer.append(config.class_indent)
@@ -296,10 +296,12 @@ cdef class IDFObject:
 
         # 2. Find last field with non-empty value
         cdef int last_idx = -1
-        for i in range(self.values.size()-1, -1, -1):
+        for i in range(<int>self.values.size()-1, -1, -1):
             if not self.values[i].empty():
                 last_idx = i
                 break
+        if cls.min_fields > 0 and last_idx < cls.min_fields-1:
+            last_idx = cls.min_fields-1
 
         # 3. If all fields are empty, print ';' and return
         if last_idx < 0:
@@ -315,13 +317,15 @@ cdef class IDFObject:
 
         # 5. Print until last_idx
         for i in range(last_idx + 1):
-            val_ptr = &self.values[i]
-
             # Add field indent
             out_buffer.append(config.field_indent)
 
             # Add field value
-            out_buffer.append(deref(val_ptr))
+            if i < <int>self.values.size():
+                out_buffer.append(self.values[i])
+                val_size = self.values[i].size()
+            else:
+                val_size = 0
 
             if i == last_idx:
                 # If last field, add semicolon
@@ -331,9 +335,9 @@ cdef class IDFObject:
 
             # Add padding
             if not config.compact and config.field_size > 0:
-                if val_ptr.size() <= config.field_size:  # TODO maybe inequal?
+                if val_size <= config.field_size:  # TODO maybe inequal?
                     # add spaces to fit config.field_size
-                    out_buffer.append(config.field_size - val_ptr.size(), <char>b' ')
+                    out_buffer.append(config.field_size - val_size, <char>b' ')
                 else:
                     # add two spaces
                     out_buffer.append(2, <char>b' ')
