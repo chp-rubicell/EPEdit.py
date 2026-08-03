@@ -2549,8 +2549,8 @@ static struct __pyx_obj_6epedit_3idf_IDFObject *__pyx_pf_6epedit_3idf_3IDF_6get_
   __pyx_r = ((struct __pyx_obj_6epedit_3idf_IDFObject *)Py_None); <span class='pyx_macro_api'>__Pyx_INCREF</span>(Py_None);
   goto __pyx_L0;
 </pre><pre class="cython line score-0">&#xA0;<span class="">310</span>: </pre>
-<pre class="cython line score-80" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">311</span>:     <span class="k">def</span> <span class="nf">add_object</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">str</span> <span class="n">class_name</span><span class="p">,</span> <span class="nb">dict</span> <span class="n">initial_values</span><span class="o">=</span><span class="p">{},</span> <span class="nb">bint</span> <span class="n">default_values</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IDFObject</span><span class="p">:</span></pre>
-<pre class='cython code score-80 '>/* Python wrapper */
+<pre class="cython line score-85" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">311</span>:     <span class="k">def</span> <span class="nf">add_object</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">str</span> <span class="n">class_name</span><span class="p">,</span> <span class="nb">dict</span> <span class="n">initial_values</span><span class="o">=</span><span class="p">{},</span> <span class="nb">bint</span> <span class="n">default_values</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IDFObject</span><span class="p">:</span></pre>
+<pre class='cython code score-85 '>/* Python wrapper */
 static struct __pyx_obj_6epedit_3idf_IDFObject *__pyx_pw_6epedit_3idf_3IDF_9add_object(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
@@ -2558,7 +2558,7 @@ PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-<span class='py_macro_api'>PyDoc_STRVAR</span>(__pyx_doc_6epedit_3idf_3IDF_8add_object, "Add object to IDF");
+<span class='py_macro_api'>PyDoc_STRVAR</span>(__pyx_doc_6epedit_3idf_3IDF_8add_object, "\n        Add object to IDF\n\n        Returns:\n            IDFObject: Generated IDFObject.\n        ");
 static PyMethodDef __pyx_mdef_6epedit_3idf_3IDF_9add_object = {"add_object", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6epedit_3idf_3IDF_9add_object, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_6epedit_3idf_3IDF_8add_object};
 static struct __pyx_obj_6epedit_3idf_IDFObject *__pyx_pw_6epedit_3idf_3IDF_9add_object(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
@@ -2567,7 +2567,7 @@ PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ) {
-  CYTHON_UNUSED PyObject *__pyx_v_class_name = 0;
+  PyObject *__pyx_v_class_name = 0;
   CYTHON_UNUSED PyObject *__pyx_v_initial_values = 0;
   CYTHON_UNUSED int __pyx_v_default_values;
   #if !CYTHON_METH_FASTCALL
@@ -2673,11 +2673,20 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static struct __pyx_obj_6epedit_3idf_IDFObject *__pyx_pf_6epedit_3idf_3IDF_8add_object(CYTHON_UNUSED struct __pyx_obj_6epedit_3idf_IDF *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v_class_name, CYTHON_UNUSED PyObject *__pyx_v_initial_values, CYTHON_UNUSED int __pyx_v_default_values) {
+static struct __pyx_obj_6epedit_3idf_IDFObject *__pyx_pf_6epedit_3idf_3IDF_8add_object(struct __pyx_obj_6epedit_3idf_IDF *__pyx_v_self, PyObject *__pyx_v_class_name, CYTHON_UNUSED PyObject *__pyx_v_initial_values, CYTHON_UNUSED int __pyx_v_default_values) {
+  struct __pyx_obj_6epedit_3idf_IDFObject *__pyx_v_new_obj = 0;
+  PyObject *__pyx_v_py_search_key = 0;
   struct __pyx_obj_6epedit_3idf_IDFObject *__pyx_r = NULL;
-
+/* … */
   /* function exit code */
-  __pyx_r = ((struct __pyx_obj_6epedit_3idf_IDFObject *)Py_None); <span class='pyx_macro_api'>__Pyx_INCREF</span>(Py_None);
+  __pyx_L1_error:;
+  <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_t_1);
+  <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_t_2);
+  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("epedit.idf.IDF.add_object", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  <span class='pyx_macro_api'>__Pyx_XDECREF</span>((PyObject *)__pyx_v_new_obj);
+  <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_v_py_search_key);
   <span class='refnanny'>__Pyx_XGIVEREF</span>((PyObject *)__pyx_r);
   <span class='refnanny'>__Pyx_RefNannyFinishContext</span>();
   return __pyx_r;
@@ -2707,11 +2716,81 @@ static struct __pyx_obj_6epedit_3idf_IDFObject *__pyx_pf_6epedit_3idf_3IDF_8add_
   <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_2); __pyx_t_2 = 0;
   if (<span class='pyx_c_api'>__Pyx_SetItemOnTypeDict</span>(__pyx_mstate_global-&gt;__pyx_ptype_6epedit_3idf_IDF, __pyx_mstate_global-&gt;__pyx_n_u_add_object, __pyx_t_4) &lt; (0)) <span class='error_goto'>__PYX_ERR(0, 311, __pyx_L1_error)</span>
   <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_4); __pyx_t_4 = 0;
-</pre><pre class="cython line score-0">&#xA0;<span class="">312</span>: <span class="w">        </span><span class="sd">&quot;&quot;&quot;Add object to IDF&quot;&quot;&quot;</span></pre>
-<pre class="cython line score-0">&#xA0;<span class="">313</span>:         <span class="k">pass</span></pre>
+</pre><pre class="cython line score-0">&#xA0;<span class="">312</span>: <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span></pre>
+<pre class="cython line score-0">&#xA0;<span class="">313</span>: <span class="sd">        Add object to IDF</span></pre>
 <pre class="cython line score-0">&#xA0;<span class="">314</span>: </pre>
-<pre class="cython line score-46" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">315</span>:     <span class="k">def</span> <span class="nf">remove_object</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">IDFObject</span> <span class="n">obj</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span></pre>
-<pre class='cython code score-46 '>/* Python wrapper */
+<pre class="cython line score-0">&#xA0;<span class="">315</span>: <span class="sd">        Returns:</span></pre>
+<pre class="cython line score-0">&#xA0;<span class="">316</span>: <span class="sd">            IDFObject: Generated IDFObject.</span></pre>
+<pre class="cython line score-0">&#xA0;<span class="">317</span>: <span class="sd">        &quot;&quot;&quot;</span></pre>
+<pre class="cython line score-3" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">318</span>:         <span class="k">cdef</span> <span class="kt">IDFObject</span> <span class="nf">new_obj</span> <span class="o">=</span> <span class="n">IDFObject</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">idd</span><span class="p">,</span> <span class="n">class_name</span><span class="p">)</span></pre>
+<pre class='cython code score-3 '>  __pyx_t_2 = NULL;
+  __pyx_t_3 = 1;
+  {
+    PyObject *__pyx_callargs[3] = {__pyx_t_2, ((PyObject *)__pyx_v_self-&gt;idd), __pyx_v_class_name};
+    __pyx_t_1 = <span class='pyx_c_api'>__Pyx_PyObject_FastCall</span>((PyObject*)__pyx_mstate_global-&gt;__pyx_ptype_6epedit_3idf_IDFObject, __pyx_callargs+__pyx_t_3, (3-__pyx_t_3) | (__pyx_t_3*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
+    <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_t_2); __pyx_t_2 = 0;
+    if (unlikely(!__pyx_t_1)) <span class='error_goto'>__PYX_ERR(0, 318, __pyx_L1_error)</span>
+    <span class='refnanny'>__Pyx_GOTREF</span>((PyObject *)__pyx_t_1);
+  }
+  __pyx_v_new_obj = ((struct __pyx_obj_6epedit_3idf_IDFObject *)__pyx_t_1);
+  __pyx_t_1 = 0;
+</pre><pre class="cython line score-0">&#xA0;<span class="">319</span>: </pre>
+<pre class="cython line score-0">&#xA0;<span class="">320</span>:         <span class="c"># Apply obj_idx</span></pre>
+<pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">321</span>:         <span class="n">new_obj</span><span class="o">.</span><span class="n">obj_idx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">next_obj_idx</span></pre>
+<pre class='cython code score-0 '>  __pyx_t_3 = __pyx_v_self-&gt;next_obj_idx;
+  __pyx_v_new_obj-&gt;obj_idx = __pyx_t_3;
+</pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">322</span>:         <span class="bp">self</span><span class="o">.</span><span class="n">next_obj_idx</span> <span class="o">+=</span> <span class="mf">1</span></pre>
+<pre class='cython code score-0 '>  __pyx_v_self-&gt;next_obj_idx = (__pyx_v_self-&gt;next_obj_idx + 1);
+</pre><pre class="cython line score-0">&#xA0;<span class="">323</span>: </pre>
+<pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">324</span>:         <span class="k">cdef</span> <span class="kt">str</span> <span class="nf">py_search_key</span> <span class="o">=</span> <span class="n">class_name</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span></pre>
+<pre class='cython code score-0 '>  __pyx_t_1 = __Pyx_CallUnboundCMethod0(&amp;__pyx_mstate_global-&gt;__pyx_umethod_PyUnicode_Type__upper, __pyx_v_class_name);<span class='error_goto'> if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 324, __pyx_L1_error)</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_1);
+  __pyx_v_py_search_key = ((PyObject*)__pyx_t_1);
+  __pyx_t_1 = 0;
+</pre><pre class="cython line score-7" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">325</span>:         <span class="k">if</span> <span class="n">py_search_key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">objects</span><span class="p">:</span></pre>
+<pre class='cython code score-7 '>  if (unlikely(__pyx_v_self-&gt;objects == Py_None)) {
+    <span class='py_c_api'>PyErr_SetString</span>(PyExc_TypeError, "'NoneType' object is not iterable");
+    <span class='error_goto'>__PYX_ERR(0, 325, __pyx_L1_error)</span>
+  }
+  __pyx_t_4 = (<span class='pyx_c_api'>__Pyx_PyDict_ContainsTF</span>(__pyx_v_py_search_key, __pyx_v_self-&gt;objects, Py_EQ)); if (unlikely((__pyx_t_4 &lt; 0))) <span class='error_goto'>__PYX_ERR(0, 325, __pyx_L1_error)</span>
+  if (__pyx_t_4) {
+/* … */
+    goto __pyx_L3;
+  }
+</pre><pre class="cython line score-10" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">326</span>:             <span class="bp">self</span><span class="o">.</span><span class="n">objects</span><span class="p">[</span><span class="n">py_search_key</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_obj</span><span class="p">)</span></pre>
+<pre class='cython code score-10 '>    if (unlikely(__pyx_v_self-&gt;objects == Py_None)) {
+      <span class='py_c_api'>PyErr_SetString</span>(PyExc_TypeError, "'NoneType' object is not subscriptable");
+      <span class='error_goto'>__PYX_ERR(0, 326, __pyx_L1_error)</span>
+    }
+    __pyx_t_1 = <span class='pyx_c_api'>__Pyx_PyDict_GetItem</span>(__pyx_v_self-&gt;objects, __pyx_v_py_search_key);<span class='error_goto'> if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 326, __pyx_L1_error)</span>
+    <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_1);
+    __pyx_t_5 = <span class='pyx_c_api'>__Pyx_PyObject_Append</span>(__pyx_t_1, ((PyObject *)__pyx_v_new_obj));<span class='error_goto'> if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(0, 326, __pyx_L1_error)</span>
+    <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_1); __pyx_t_1 = 0;
+</pre><pre class="cython line score-0">&#xA0;<span class="">327</span>:         <span class="k">else</span><span class="p">:</span></pre>
+<pre class="cython line score-19" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">328</span>:             <span class="bp">self</span><span class="o">.</span><span class="n">objects</span><span class="p">[</span><span class="n">py_search_key</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">new_obj</span><span class="p">]</span></pre>
+<pre class='cython code score-19 '>  /*else*/ {
+    __pyx_t_1 = <span class='py_c_api'>PyList_New</span>(1);<span class='error_goto'> if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 328, __pyx_L1_error)</span>
+    <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_1);
+    <span class='pyx_macro_api'>__Pyx_INCREF</span>((PyObject *)__pyx_v_new_obj);
+    <span class='refnanny'>__Pyx_GIVEREF</span>((PyObject *)__pyx_v_new_obj);
+    if (<span class='pyx_c_api'>__Pyx_PyList_SET_ITEM</span>(__pyx_t_1, 0, ((PyObject *)__pyx_v_new_obj)) != (0)) <span class='error_goto'>__PYX_ERR(0, 328, __pyx_L1_error)</span>;
+    if (unlikely(__pyx_v_self-&gt;objects == Py_None)) {
+      <span class='py_c_api'>PyErr_SetString</span>(PyExc_TypeError, "'NoneType' object is not subscriptable");
+      <span class='error_goto'>__PYX_ERR(0, 328, __pyx_L1_error)</span>
+    }
+    if (unlikely((<span class='py_c_api'>PyDict_SetItem</span>(__pyx_v_self-&gt;objects, __pyx_v_py_search_key, __pyx_t_1) &lt; 0))) <span class='error_goto'>__PYX_ERR(0, 328, __pyx_L1_error)</span>
+    <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_1); __pyx_t_1 = 0;
+  }
+  __pyx_L3:;
+</pre><pre class="cython line score-0">&#xA0;<span class="">329</span>: </pre>
+<pre class="cython line score-2" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">330</span>:         <span class="k">return</span> <span class="n">new_obj</span></pre>
+<pre class='cython code score-2 '>  <span class='pyx_macro_api'>__Pyx_XDECREF</span>((PyObject *)__pyx_r);
+  <span class='pyx_macro_api'>__Pyx_INCREF</span>((PyObject *)__pyx_v_new_obj);
+  __pyx_r = __pyx_v_new_obj;
+  goto __pyx_L0;
+</pre><pre class="cython line score-0">&#xA0;<span class="">331</span>: </pre>
+<pre class="cython line score-52" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">332</span>:     <span class="k">def</span> <span class="nf">remove_object</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">IDFObject</span> <span class="n">obj</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span></pre>
+<pre class='cython code score-52 '>/* Python wrapper */
 static PyObject *__pyx_pw_6epedit_3idf_3IDF_11remove_object(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
@@ -2719,7 +2798,7 @@ PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-<span class='py_macro_api'>PyDoc_STRVAR</span>(__pyx_doc_6epedit_3idf_3IDF_10remove_object, "Remove object from IDF");
+<span class='py_macro_api'>PyDoc_STRVAR</span>(__pyx_doc_6epedit_3idf_3IDF_10remove_object, "\n        Remove object from IDF\n\n        Returns:\n            bool: True if successfully removed, False if object was not found.\n        ");
 static PyMethodDef __pyx_mdef_6epedit_3idf_3IDF_11remove_object = {"remove_object", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6epedit_3idf_3IDF_11remove_object, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_6epedit_3idf_3IDF_10remove_object};
 static PyObject *__pyx_pw_6epedit_3idf_3IDF_11remove_object(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
@@ -2728,7 +2807,7 @@ PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ) {
-  CYTHON_UNUSED struct __pyx_obj_6epedit_3idf_IDFObject *__pyx_v_obj = 0;
+  struct __pyx_obj_6epedit_3idf_IDFObject *__pyx_v_obj = 0;
   #if !CYTHON_METH_FASTCALL
   CYTHON_UNUSED Py_ssize_t __pyx_nargs;
   #endif
@@ -2748,32 +2827,32 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
     PyObject ** const __pyx_pyargnames[] = {&amp;__pyx_mstate_global-&gt;__pyx_n_u_obj,0};
   PyObject* values[1] = {0};
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? <span class='pyx_c_api'>__Pyx_NumKwargs_FASTCALL</span>(__pyx_kwds) : 0;
-    if (unlikely(__pyx_kwds_len) &lt; 0) <span class='error_goto'>__PYX_ERR(0, 315, __pyx_L3_error)</span>
+    if (unlikely(__pyx_kwds_len) &lt; 0) <span class='error_goto'>__PYX_ERR(0, 332, __pyx_L3_error)</span>
     if (__pyx_kwds_len &gt; 0) {
       switch (__pyx_nargs) {
         case  1:
         values[0] = <span class='pyx_c_api'>__Pyx_ArgRef_FASTCALL</span>(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS &amp;&amp; unlikely(!values[0])) <span class='error_goto'>__PYX_ERR(0, 315, __pyx_L3_error)</span>
+        if (!CYTHON_ASSUME_SAFE_MACROS &amp;&amp; unlikely(!values[0])) <span class='error_goto'>__PYX_ERR(0, 332, __pyx_L3_error)</span>
         CYTHON_FALLTHROUGH;
         case  0: break;
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (<span class='pyx_c_api'>__Pyx_ParseKeywords</span>(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "remove_object", 0) &lt; (0)) <span class='error_goto'>__PYX_ERR(0, 315, __pyx_L3_error)</span>
+      if (<span class='pyx_c_api'>__Pyx_ParseKeywords</span>(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "remove_object", 0) &lt; (0)) <span class='error_goto'>__PYX_ERR(0, 332, __pyx_L3_error)</span>
       for (Py_ssize_t i = __pyx_nargs; i &lt; 1; i++) {
-        if (unlikely(!values[i])) { <span class='pyx_c_api'>__Pyx_RaiseArgtupleInvalid</span>("remove_object", 1, 1, 1, i); <span class='error_goto'>__PYX_ERR(0, 315, __pyx_L3_error)</span> }
+        if (unlikely(!values[i])) { <span class='pyx_c_api'>__Pyx_RaiseArgtupleInvalid</span>("remove_object", 1, 1, 1, i); <span class='error_goto'>__PYX_ERR(0, 332, __pyx_L3_error)</span> }
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = <span class='pyx_c_api'>__Pyx_ArgRef_FASTCALL</span>(__pyx_args, 0);
-      if (!CYTHON_ASSUME_SAFE_MACROS &amp;&amp; unlikely(!values[0])) <span class='error_goto'>__PYX_ERR(0, 315, __pyx_L3_error)</span>
+      if (!CYTHON_ASSUME_SAFE_MACROS &amp;&amp; unlikely(!values[0])) <span class='error_goto'>__PYX_ERR(0, 332, __pyx_L3_error)</span>
     }
     __pyx_v_obj = ((struct __pyx_obj_6epedit_3idf_IDFObject *)values[0]);
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  <span class='pyx_c_api'>__Pyx_RaiseArgtupleInvalid</span>("remove_object", 1, 1, 1, __pyx_nargs); <span class='error_goto'>__PYX_ERR(0, 315, __pyx_L3_error)</span>
+  <span class='pyx_c_api'>__Pyx_RaiseArgtupleInvalid</span>("remove_object", 1, 1, 1, __pyx_nargs); <span class='error_goto'>__PYX_ERR(0, 332, __pyx_L3_error)</span>
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -2784,7 +2863,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   <span class='refnanny'>__Pyx_RefNannyFinishContext</span>();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!<span class='pyx_c_api'>__Pyx_ArgTypeTest</span>(((PyObject *)__pyx_v_obj), __pyx_mstate_global-&gt;__pyx_ptype_6epedit_3idf_IDFObject, 1, "obj", 0))) <span class='error_goto'>__PYX_ERR(0, 315, __pyx_L1_error)</span>
+  if (unlikely(!<span class='pyx_c_api'>__Pyx_ArgTypeTest</span>(((PyObject *)__pyx_v_obj), __pyx_mstate_global-&gt;__pyx_ptype_6epedit_3idf_IDFObject, 1, "obj", 0))) <span class='error_goto'>__PYX_ERR(0, 332, __pyx_L1_error)</span>
   __pyx_r = __pyx_pf_6epedit_3idf_3IDF_10remove_object(((struct __pyx_obj_6epedit_3idf_IDF *)__pyx_v_self), __pyx_v_obj);
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
@@ -2807,57 +2886,185 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_6epedit_3idf_3IDF_10remove_object(CYTHON_UNUSED struct __pyx_obj_6epedit_3idf_IDF *__pyx_v_self, CYTHON_UNUSED struct __pyx_obj_6epedit_3idf_IDFObject *__pyx_v_obj) {
+static PyObject *__pyx_pf_6epedit_3idf_3IDF_10remove_object(struct __pyx_obj_6epedit_3idf_IDF *__pyx_v_self, struct __pyx_obj_6epedit_3idf_IDFObject *__pyx_v_obj) {
+  PyObject *__pyx_v_py_search_key = 0;
+  PyObject *__pyx_v_objs = 0;
   PyObject *__pyx_r = NULL;
-
+/* … */
   /* function exit code */
-  __pyx_r = Py_None; <span class='pyx_macro_api'>__Pyx_INCREF</span>(Py_None);
+  __pyx_L1_error:;
+  <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_t_1);
+  <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_t_2);
+  <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_t_3);
+  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("epedit.idf.IDF.remove_object", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_v_py_search_key);
+  <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_v_objs);
   <span class='refnanny'>__Pyx_XGIVEREF</span>(__pyx_r);
   <span class='refnanny'>__Pyx_RefNannyFinishContext</span>();
   return __pyx_r;
 }
 /* … */
-  __pyx_t_4 = <span class='pyx_c_api'>__Pyx_PyDict_NewPresized</span>(1);<span class='error_goto'> if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 315, __pyx_L1_error)</span>
+  __pyx_t_4 = <span class='pyx_c_api'>__Pyx_PyDict_NewPresized</span>(1);<span class='error_goto'> if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 332, __pyx_L1_error)</span>
   <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_4);
-  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_4, __pyx_mstate_global-&gt;__pyx_n_u_return, __pyx_mstate_global-&gt;__pyx_n_u_None) &lt; (0)) <span class='error_goto'>__PYX_ERR(0, 315, __pyx_L1_error)</span>
-  __pyx_t_2 = <span class='pyx_c_api'>__Pyx_CyFunction_New</span>(&amp;__pyx_mdef_6epedit_3idf_3IDF_11remove_object, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global-&gt;__pyx_n_u_IDF_remove_object, NULL, __pyx_mstate_global-&gt;__pyx_n_u_epedit_idf, __pyx_mstate_global-&gt;__pyx_d, ((PyObject *)__pyx_mstate_global-&gt;__pyx_codeobj_tab[6]));<span class='error_goto'> if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 315, __pyx_L1_error)</span>
+  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_4, __pyx_mstate_global-&gt;__pyx_n_u_return, __pyx_mstate_global-&gt;__pyx_n_u_bool) &lt; (0)) <span class='error_goto'>__PYX_ERR(0, 332, __pyx_L1_error)</span>
+  __pyx_t_2 = <span class='pyx_c_api'>__Pyx_CyFunction_New</span>(&amp;__pyx_mdef_6epedit_3idf_3IDF_11remove_object, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global-&gt;__pyx_n_u_IDF_remove_object, NULL, __pyx_mstate_global-&gt;__pyx_n_u_epedit_idf, __pyx_mstate_global-&gt;__pyx_d, ((PyObject *)__pyx_mstate_global-&gt;__pyx_codeobj_tab[6]));<span class='error_goto'> if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 332, __pyx_L1_error)</span>
   <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON &amp;&amp; PY_VERSION_HEX &gt;= 0x030E0000
   <span class='py_c_api'>PyUnstable_Object_EnableDeferredRefcount</span>(__pyx_t_2);
   #endif
   <span class='pyx_c_api'>__Pyx_CyFunction_SetAnnotationsDict</span>(__pyx_t_2, __pyx_t_4);
   <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_4); __pyx_t_4 = 0;
-  if (<span class='pyx_c_api'>__Pyx_SetItemOnTypeDict</span>(__pyx_mstate_global-&gt;__pyx_ptype_6epedit_3idf_IDF, __pyx_mstate_global-&gt;__pyx_n_u_remove_object, __pyx_t_2) &lt; (0)) <span class='error_goto'>__PYX_ERR(0, 315, __pyx_L1_error)</span>
+  if (<span class='pyx_c_api'>__Pyx_SetItemOnTypeDict</span>(__pyx_mstate_global-&gt;__pyx_ptype_6epedit_3idf_IDF, __pyx_mstate_global-&gt;__pyx_n_u_remove_object, __pyx_t_2) &lt; (0)) <span class='error_goto'>__PYX_ERR(0, 332, __pyx_L1_error)</span>
   <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_2); __pyx_t_2 = 0;
-</pre><pre class="cython line score-0">&#xA0;<span class="">316</span>: <span class="w">        </span><span class="sd">&quot;&quot;&quot;Remove object from IDF&quot;&quot;&quot;</span></pre>
-<pre class="cython line score-0">&#xA0;<span class="">317</span>:         <span class="k">pass</span></pre>
-<pre class="cython line score-0">&#xA0;<span class="">318</span>: </pre>
-<pre class="cython line score-46" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">319</span>:     <span class="k">def</span> <span class="nf">remove_objects</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">str</span> <span class="n">class_name</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span></pre>
-<pre class='cython code score-46 '>/* Python wrapper */
-static PyObject *__pyx_pw_6epedit_3idf_3IDF_13remove_objects(PyObject *__pyx_v_self, 
+</pre><pre class="cython line score-0">&#xA0;<span class="">333</span>: <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span></pre>
+<pre class="cython line score-0">&#xA0;<span class="">334</span>: <span class="sd">        Remove object from IDF</span></pre>
+<pre class="cython line score-0">&#xA0;<span class="">335</span>: </pre>
+<pre class="cython line score-0">&#xA0;<span class="">336</span>: <span class="sd">        Returns:</span></pre>
+<pre class="cython line score-0">&#xA0;<span class="">337</span>: <span class="sd">            bool: True if successfully removed, False if object was not found.</span></pre>
+<pre class="cython line score-0">&#xA0;<span class="">338</span>: <span class="sd">        &quot;&quot;&quot;</span></pre>
+<pre class="cython line score-14" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">339</span>:         <span class="k">cdef</span> <span class="kt">str</span> <span class="nf">py_search_key</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">class_name</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span></pre>
+<pre class='cython code score-14 '>  __pyx_t_3 = <span class='pyx_c_api'>__Pyx_PyObject_GetAttrStr</span>(((PyObject *)__pyx_v_obj), __pyx_mstate_global-&gt;__pyx_n_u_class_name);<span class='error_goto'> if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 339, __pyx_L1_error)</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_3);
+  __pyx_t_2 = __pyx_t_3;
+  <span class='pyx_macro_api'>__Pyx_INCREF</span>(__pyx_t_2);
+  __pyx_t_4 = 0;
+  {
+    PyObject *__pyx_callargs[2] = {__pyx_t_2, NULL};
+    __pyx_t_1 = <span class='pyx_c_api'>__Pyx_PyObject_FastCallMethod</span>((PyObject*)__pyx_mstate_global-&gt;__pyx_n_u_upper, __pyx_callargs+__pyx_t_4, (1-__pyx_t_4) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
+    <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_t_2); __pyx_t_2 = 0;
+    <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_3); __pyx_t_3 = 0;
+    if (unlikely(!__pyx_t_1)) <span class='error_goto'>__PYX_ERR(0, 339, __pyx_L1_error)</span>
+    <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_1);
+  }
+  if (!(likely(<span class='py_c_api'>PyUnicode_CheckExact</span>(__pyx_t_1))||((__pyx_t_1) == Py_None) || <span class='pyx_c_api'>__Pyx_RaiseUnexpectedTypeError</span>("str", __pyx_t_1))) <span class='error_goto'>__PYX_ERR(0, 339, __pyx_L1_error)</span>
+  __pyx_v_py_search_key = ((PyObject*)__pyx_t_1);
+  __pyx_t_1 = 0;
+</pre><pre class="cython line score-0">&#xA0;<span class="">340</span>: </pre>
+<pre class="cython line score-7" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">341</span>:         <span class="k">if</span> <span class="n">py_search_key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">objects</span><span class="p">:</span></pre>
+<pre class='cython code score-7 '>  if (unlikely(__pyx_v_self-&gt;objects == Py_None)) {
+    <span class='py_c_api'>PyErr_SetString</span>(PyExc_TypeError, "'NoneType' object is not iterable");
+    <span class='error_goto'>__PYX_ERR(0, 341, __pyx_L1_error)</span>
+  }
+  __pyx_t_5 = (<span class='pyx_c_api'>__Pyx_PyDict_ContainsTF</span>(__pyx_v_py_search_key, __pyx_v_self-&gt;objects, Py_NE)); if (unlikely((__pyx_t_5 &lt; 0))) <span class='error_goto'>__PYX_ERR(0, 341, __pyx_L1_error)</span>
+  if (__pyx_t_5) {
+/* … */
+  }
+</pre><pre class="cython line score-2" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">342</span>:             <span class="k">return</span> <span class="bp">False</span></pre>
+<pre class='cython code score-2 '>    <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_r);
+    <span class='pyx_macro_api'>__Pyx_INCREF</span>(Py_False);
+    __pyx_r = Py_False;
+    goto __pyx_L0;
+</pre><pre class="cython line score-0">&#xA0;<span class="">343</span>: </pre>
+<pre class="cython line score-14" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">344</span>:         <span class="k">cdef</span> <span class="kt">list</span> <span class="nf">objs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">objects</span><span class="p">[</span><span class="n">py_search_key</span><span class="p">]</span></pre>
+<pre class='cython code score-14 '>  if (unlikely(__pyx_v_self-&gt;objects == Py_None)) {
+    <span class='py_c_api'>PyErr_SetString</span>(PyExc_TypeError, "'NoneType' object is not subscriptable");
+    <span class='error_goto'>__PYX_ERR(0, 344, __pyx_L1_error)</span>
+  }
+  __pyx_t_1 = <span class='pyx_c_api'>__Pyx_PyDict_GetItem</span>(__pyx_v_self-&gt;objects, __pyx_v_py_search_key);<span class='error_goto'> if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 344, __pyx_L1_error)</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_1);
+  if (!(likely(<span class='py_c_api'>PyList_CheckExact</span>(__pyx_t_1))||((__pyx_t_1) == Py_None) || <span class='pyx_c_api'>__Pyx_RaiseUnexpectedTypeError</span>("list", __pyx_t_1))) <span class='error_goto'>__PYX_ERR(0, 344, __pyx_L1_error)</span>
+  __pyx_v_objs = ((PyObject*)__pyx_t_1);
+  __pyx_t_1 = 0;
+</pre><pre class="cython line score-0">&#xA0;<span class="">345</span>: </pre>
+<pre class="cython line score-9" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">346</span>:         <span class="k">try</span><span class="p">:</span></pre>
+<pre class='cython code score-9 '>  {
+    /*try:*/ {
+/* … */
+    }
+    __pyx_L4_error:;
+    <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_t_1); __pyx_t_1 = 0;
+    <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_t_2); __pyx_t_2 = 0;
+    <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_t_3); __pyx_t_3 = 0;
+/* … */
+    __pyx_L6_except_error:;
+    <span class='refnanny'>__Pyx_XGIVEREF</span>(__pyx_t_6);
+    <span class='refnanny'>__Pyx_XGIVEREF</span>(__pyx_t_7);
+    <span class='refnanny'>__Pyx_XGIVEREF</span>(__pyx_t_8);
+    <span class='pyx_c_api'>__Pyx_ExceptionReset</span>(__pyx_t_6, __pyx_t_7, __pyx_t_8);
+    goto __pyx_L1_error;
+    __pyx_L8_try_return:;
+    <span class='refnanny'>__Pyx_XGIVEREF</span>(__pyx_t_6);
+    <span class='refnanny'>__Pyx_XGIVEREF</span>(__pyx_t_7);
+    <span class='refnanny'>__Pyx_XGIVEREF</span>(__pyx_t_8);
+    <span class='pyx_c_api'>__Pyx_ExceptionReset</span>(__pyx_t_6, __pyx_t_7, __pyx_t_8);
+    goto __pyx_L0;
+    __pyx_L7_except_return:;
+    <span class='refnanny'>__Pyx_XGIVEREF</span>(__pyx_t_6);
+    <span class='refnanny'>__Pyx_XGIVEREF</span>(__pyx_t_7);
+    <span class='refnanny'>__Pyx_XGIVEREF</span>(__pyx_t_8);
+    <span class='pyx_c_api'>__Pyx_ExceptionReset</span>(__pyx_t_6, __pyx_t_7, __pyx_t_8);
+    goto __pyx_L0;
+  }
+</pre><pre class="cython line score-1" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">347</span>:             <span class="n">objs</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span></pre>
+<pre class='cython code score-1 '>      __pyx_t_1 = __Pyx_CallUnboundCMethod1(&amp;__pyx_mstate_global-&gt;__pyx_umethod_PyList_Type__remove, __pyx_v_objs, ((PyObject *)__pyx_v_obj));<span class='error_goto'> if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 347, __pyx_L4_error)</span>
+      <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_1);
+      <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_1); __pyx_t_1 = 0;
+</pre><pre class="cython line score-0">&#xA0;<span class="">348</span>:             <span class="c"># If no obj left in class, remove key:</span></pre>
+<pre class="cython line score-2" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">349</span>:             <span class="k">if</span> <span class="ow">not</span> <span class="n">objs</span><span class="p">:</span></pre>
+<pre class='cython code score-2 '>      if (__pyx_v_objs == Py_None) __pyx_t_5 = 0;
+      else
+      {
+        Py_ssize_t __pyx_temp = <span class='pyx_c_api'>__Pyx_PyList_GET_SIZE</span>(__pyx_v_objs);
+        if (unlikely(((!CYTHON_ASSUME_SAFE_SIZE) &amp;&amp; __pyx_temp &lt; 0))) <span class='error_goto'>__PYX_ERR(0, 349, __pyx_L4_error)</span>
+        __pyx_t_5 = (__pyx_temp != 0);
+      }
+
+      __pyx_t_9 = (!__pyx_t_5);
+      if (__pyx_t_9) {
+/* … */
+      }
+</pre><pre class="cython line score-10" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">350</span>:                 <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">objects</span><span class="p">[</span><span class="n">py_search_key</span><span class="p">]</span></pre>
+<pre class='cython code score-10 '>        if (unlikely(__pyx_v_self-&gt;objects == Py_None)) {
+          <span class='py_c_api'>PyErr_SetString</span>(PyExc_TypeError, "'NoneType' object is not subscriptable");
+          <span class='error_goto'>__PYX_ERR(0, 350, __pyx_L4_error)</span>
+        }
+        if (unlikely((<span class='py_c_api'>PyDict_DelItem</span>(__pyx_v_self-&gt;objects, __pyx_v_py_search_key) &lt; 0))) <span class='error_goto'>__PYX_ERR(0, 350, __pyx_L4_error)</span>
+</pre><pre class="cython line score-2" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">351</span>:             <span class="k">return</span> <span class="bp">True</span></pre>
+<pre class='cython code score-2 '>      <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_r);
+      <span class='pyx_macro_api'>__Pyx_INCREF</span>(Py_True);
+      __pyx_r = Py_True;
+      goto __pyx_L8_try_return;
+</pre><pre class="cython line score-0">&#xA0;<span class="">352</span>: </pre>
+<pre class="cython line score-4" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">353</span>:         <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span></pre>
+<pre class='cython code score-4 '>    __pyx_t_10 = <span class='pyx_c_api'>__Pyx_PyErr_ExceptionMatches</span>(((PyObject *)(((PyTypeObject*)PyExc_ValueError))));
+    if (__pyx_t_10) {
+      <span class='pyx_c_api'>__Pyx_ErrRestore</span>(0,0,0);
+</pre><pre class="cython line score-2" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">354</span>:             <span class="k">return</span> <span class="bp">False</span></pre>
+<pre class='cython code score-2 '>      <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_r);
+      <span class='pyx_macro_api'>__Pyx_INCREF</span>(Py_False);
+      __pyx_r = Py_False;
+      goto __pyx_L7_except_return;
+    }
+    goto __pyx_L6_except_error;
+</pre><pre class="cython line score-0">&#xA0;<span class="">355</span>: </pre>
+<pre class="cython line score-50" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">356</span>:     <span class="k">def</span> <span class="nf">remove_all_objects</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">str</span> <span class="n">class_name</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span></pre>
+<pre class='cython code score-50 '>/* Python wrapper */
+static PyObject *__pyx_pw_6epedit_3idf_3IDF_13remove_all_objects(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-<span class='py_macro_api'>PyDoc_STRVAR</span>(__pyx_doc_6epedit_3idf_3IDF_12remove_objects, "Remove all objects of a certain class from IDF");
-static PyMethodDef __pyx_mdef_6epedit_3idf_3IDF_13remove_objects = {"remove_objects", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6epedit_3idf_3IDF_13remove_objects, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_6epedit_3idf_3IDF_12remove_objects};
-static PyObject *__pyx_pw_6epedit_3idf_3IDF_13remove_objects(PyObject *__pyx_v_self, 
+<span class='py_macro_api'>PyDoc_STRVAR</span>(__pyx_doc_6epedit_3idf_3IDF_12remove_all_objects, "\n        Remove all objects of a certain class from ID\n\n        Returns:\n            int: Number of objects removed. 0 if class was not found.\n        ");
+static PyMethodDef __pyx_mdef_6epedit_3idf_3IDF_13remove_all_objects = {"remove_all_objects", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6epedit_3idf_3IDF_13remove_all_objects, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_6epedit_3idf_3IDF_12remove_all_objects};
+static PyObject *__pyx_pw_6epedit_3idf_3IDF_13remove_all_objects(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ) {
-  CYTHON_UNUSED PyObject *__pyx_v_class_name = 0;
+  PyObject *__pyx_v_class_name = 0;
   #if !CYTHON_METH_FASTCALL
   CYTHON_UNUSED Py_ssize_t __pyx_nargs;
   #endif
   CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
   PyObject *__pyx_r = 0;
   <span class='refnanny'>__Pyx_RefNannyDeclarations</span>
-  <span class='refnanny'>__Pyx_RefNannySetupContext</span>("remove_objects (wrapper)", 0);
+  <span class='refnanny'>__Pyx_RefNannySetupContext</span>("remove_all_objects (wrapper)", 0);
   #if !CYTHON_METH_FASTCALL
   #if CYTHON_ASSUME_SAFE_SIZE
   __pyx_nargs = <span class='py_macro_api'>PyTuple_GET_SIZE</span>(__pyx_args);
@@ -2870,44 +3077,44 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
     PyObject ** const __pyx_pyargnames[] = {&amp;__pyx_mstate_global-&gt;__pyx_n_u_class_name,0};
   PyObject* values[1] = {0};
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? <span class='pyx_c_api'>__Pyx_NumKwargs_FASTCALL</span>(__pyx_kwds) : 0;
-    if (unlikely(__pyx_kwds_len) &lt; 0) <span class='error_goto'>__PYX_ERR(0, 319, __pyx_L3_error)</span>
+    if (unlikely(__pyx_kwds_len) &lt; 0) <span class='error_goto'>__PYX_ERR(0, 356, __pyx_L3_error)</span>
     if (__pyx_kwds_len &gt; 0) {
       switch (__pyx_nargs) {
         case  1:
         values[0] = <span class='pyx_c_api'>__Pyx_ArgRef_FASTCALL</span>(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS &amp;&amp; unlikely(!values[0])) <span class='error_goto'>__PYX_ERR(0, 319, __pyx_L3_error)</span>
+        if (!CYTHON_ASSUME_SAFE_MACROS &amp;&amp; unlikely(!values[0])) <span class='error_goto'>__PYX_ERR(0, 356, __pyx_L3_error)</span>
         CYTHON_FALLTHROUGH;
         case  0: break;
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (<span class='pyx_c_api'>__Pyx_ParseKeywords</span>(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "remove_objects", 0) &lt; (0)) <span class='error_goto'>__PYX_ERR(0, 319, __pyx_L3_error)</span>
+      if (<span class='pyx_c_api'>__Pyx_ParseKeywords</span>(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "remove_all_objects", 0) &lt; (0)) <span class='error_goto'>__PYX_ERR(0, 356, __pyx_L3_error)</span>
       for (Py_ssize_t i = __pyx_nargs; i &lt; 1; i++) {
-        if (unlikely(!values[i])) { <span class='pyx_c_api'>__Pyx_RaiseArgtupleInvalid</span>("remove_objects", 1, 1, 1, i); <span class='error_goto'>__PYX_ERR(0, 319, __pyx_L3_error)</span> }
+        if (unlikely(!values[i])) { <span class='pyx_c_api'>__Pyx_RaiseArgtupleInvalid</span>("remove_all_objects", 1, 1, 1, i); <span class='error_goto'>__PYX_ERR(0, 356, __pyx_L3_error)</span> }
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = <span class='pyx_c_api'>__Pyx_ArgRef_FASTCALL</span>(__pyx_args, 0);
-      if (!CYTHON_ASSUME_SAFE_MACROS &amp;&amp; unlikely(!values[0])) <span class='error_goto'>__PYX_ERR(0, 319, __pyx_L3_error)</span>
+      if (!CYTHON_ASSUME_SAFE_MACROS &amp;&amp; unlikely(!values[0])) <span class='error_goto'>__PYX_ERR(0, 356, __pyx_L3_error)</span>
     }
     __pyx_v_class_name = ((PyObject*)values[0]);
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  <span class='pyx_c_api'>__Pyx_RaiseArgtupleInvalid</span>("remove_objects", 1, 1, 1, __pyx_nargs); <span class='error_goto'>__PYX_ERR(0, 319, __pyx_L3_error)</span>
+  <span class='pyx_c_api'>__Pyx_RaiseArgtupleInvalid</span>("remove_all_objects", 1, 1, 1, __pyx_nargs); <span class='error_goto'>__PYX_ERR(0, 356, __pyx_L3_error)</span>
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
   for (Py_ssize_t __pyx_temp=0; __pyx_temp &lt; (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
     Py_XDECREF(values[__pyx_temp]);
   }
-  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("epedit.idf.IDF.remove_objects", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("epedit.idf.IDF.remove_all_objects", __pyx_clineno, __pyx_lineno, __pyx_filename);
   <span class='refnanny'>__Pyx_RefNannyFinishContext</span>();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!<span class='pyx_c_api'>__Pyx_ArgTypeTest</span>(((PyObject *)__pyx_v_class_name), (&amp;PyUnicode_Type), 1, "class_name", 1))) <span class='error_goto'>__PYX_ERR(0, 319, __pyx_L1_error)</span>
-  __pyx_r = __pyx_pf_6epedit_3idf_3IDF_12remove_objects(((struct __pyx_obj_6epedit_3idf_IDF *)__pyx_v_self), __pyx_v_class_name);
+  if (unlikely(!<span class='pyx_c_api'>__Pyx_ArgTypeTest</span>(((PyObject *)__pyx_v_class_name), (&amp;PyUnicode_Type), 1, "class_name", 1))) <span class='error_goto'>__PYX_ERR(0, 356, __pyx_L1_error)</span>
+  __pyx_r = __pyx_pf_6epedit_3idf_3IDF_12remove_all_objects(((struct __pyx_obj_6epedit_3idf_IDF *)__pyx_v_self), __pyx_v_class_name);
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -2929,28 +3136,81 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_6epedit_3idf_3IDF_12remove_objects(CYTHON_UNUSED struct __pyx_obj_6epedit_3idf_IDF *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v_class_name) {
+static PyObject *__pyx_pf_6epedit_3idf_3IDF_12remove_all_objects(struct __pyx_obj_6epedit_3idf_IDF *__pyx_v_self, PyObject *__pyx_v_class_name) {
+  PyObject *__pyx_v_py_search_key = 0;
+  PyObject *__pyx_v_removed = 0;
   PyObject *__pyx_r = NULL;
-
+/* … */
   /* function exit code */
-  __pyx_r = Py_None; <span class='pyx_macro_api'>__Pyx_INCREF</span>(Py_None);
+  __pyx_L1_error:;
+  <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_t_1);
+  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("epedit.idf.IDF.remove_all_objects", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_v_py_search_key);
+  <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_v_removed);
   <span class='refnanny'>__Pyx_XGIVEREF</span>(__pyx_r);
   <span class='refnanny'>__Pyx_RefNannyFinishContext</span>();
   return __pyx_r;
 }
 /* … */
-  __pyx_t_2 = <span class='pyx_c_api'>__Pyx_PyDict_NewPresized</span>(1);<span class='error_goto'> if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 319, __pyx_L1_error)</span>
+  __pyx_t_2 = <span class='pyx_c_api'>__Pyx_PyDict_NewPresized</span>(1);<span class='error_goto'> if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 356, __pyx_L1_error)</span>
   <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_2);
-  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_mstate_global-&gt;__pyx_n_u_return, __pyx_mstate_global-&gt;__pyx_n_u_None) &lt; (0)) <span class='error_goto'>__PYX_ERR(0, 319, __pyx_L1_error)</span>
-  __pyx_t_4 = <span class='pyx_c_api'>__Pyx_CyFunction_New</span>(&amp;__pyx_mdef_6epedit_3idf_3IDF_13remove_objects, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global-&gt;__pyx_n_u_IDF_remove_objects, NULL, __pyx_mstate_global-&gt;__pyx_n_u_epedit_idf, __pyx_mstate_global-&gt;__pyx_d, ((PyObject *)__pyx_mstate_global-&gt;__pyx_codeobj_tab[7]));<span class='error_goto'> if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 319, __pyx_L1_error)</span>
+  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_t_2, __pyx_mstate_global-&gt;__pyx_n_u_return, __pyx_mstate_global-&gt;__pyx_n_u_int) &lt; (0)) <span class='error_goto'>__PYX_ERR(0, 356, __pyx_L1_error)</span>
+  __pyx_t_4 = <span class='pyx_c_api'>__Pyx_CyFunction_New</span>(&amp;__pyx_mdef_6epedit_3idf_3IDF_13remove_all_objects, __Pyx_CYFUNCTION_CCLASS, __pyx_mstate_global-&gt;__pyx_n_u_IDF_remove_all_objects, NULL, __pyx_mstate_global-&gt;__pyx_n_u_epedit_idf, __pyx_mstate_global-&gt;__pyx_d, ((PyObject *)__pyx_mstate_global-&gt;__pyx_codeobj_tab[7]));<span class='error_goto'> if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 356, __pyx_L1_error)</span>
   <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_4);
   #if CYTHON_COMPILING_IN_CPYTHON &amp;&amp; PY_VERSION_HEX &gt;= 0x030E0000
   <span class='py_c_api'>PyUnstable_Object_EnableDeferredRefcount</span>(__pyx_t_4);
   #endif
   <span class='pyx_c_api'>__Pyx_CyFunction_SetAnnotationsDict</span>(__pyx_t_4, __pyx_t_2);
   <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_2); __pyx_t_2 = 0;
-  if (<span class='pyx_c_api'>__Pyx_SetItemOnTypeDict</span>(__pyx_mstate_global-&gt;__pyx_ptype_6epedit_3idf_IDF, __pyx_mstate_global-&gt;__pyx_n_u_remove_objects, __pyx_t_4) &lt; (0)) <span class='error_goto'>__PYX_ERR(0, 319, __pyx_L1_error)</span>
+  if (<span class='pyx_c_api'>__Pyx_SetItemOnTypeDict</span>(__pyx_mstate_global-&gt;__pyx_ptype_6epedit_3idf_IDF, __pyx_mstate_global-&gt;__pyx_n_u_remove_all_objects, __pyx_t_4) &lt; (0)) <span class='error_goto'>__PYX_ERR(0, 356, __pyx_L1_error)</span>
   <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_4); __pyx_t_4 = 0;
-</pre><pre class="cython line score-0">&#xA0;<span class="">320</span>: <span class="w">        </span><span class="sd">&quot;&quot;&quot;Remove all objects of a certain class from IDF&quot;&quot;&quot;</span></pre>
-<pre class="cython line score-0">&#xA0;<span class="">321</span>:         <span class="k">pass</span></pre>
-</div></body></html>
+</pre><pre class="cython line score-0">&#xA0;<span class="">357</span>: <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span></pre>
+<pre class="cython line score-0">&#xA0;<span class="">358</span>: <span class="sd">        Remove all objects of a certain class from ID</span></pre>
+<pre class="cython line score-0">&#xA0;<span class="">359</span>: </pre>
+<pre class="cython line score-0">&#xA0;<span class="">360</span>: <span class="sd">        Returns:</span></pre>
+<pre class="cython line score-0">&#xA0;<span class="">361</span>: <span class="sd">            int: Number of objects removed. 0 if class was not found.</span></pre>
+<pre class="cython line score-0">&#xA0;<span class="">362</span>: <span class="sd">        &quot;&quot;&quot;</span></pre>
+<pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">363</span>:         <span class="k">cdef</span> <span class="kt">str</span> <span class="nf">py_search_key</span> <span class="o">=</span> <span class="n">class_name</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span></pre>
+<pre class='cython code score-0 '>  __pyx_t_1 = __Pyx_CallUnboundCMethod0(&amp;__pyx_mstate_global-&gt;__pyx_umethod_PyUnicode_Type__upper, __pyx_v_class_name);<span class='error_goto'> if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 363, __pyx_L1_error)</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_1);
+  __pyx_v_py_search_key = ((PyObject*)__pyx_t_1);
+  __pyx_t_1 = 0;
+</pre><pre class="cython line score-0">&#xA0;<span class="">364</span>: </pre>
+<pre class="cython line score-14" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">365</span>:         <span class="k">cdef</span> <span class="kt">list</span> <span class="nf">removed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">py_search_key</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span></pre>
+<pre class='cython code score-14 '>  if (unlikely(__pyx_v_self-&gt;objects == Py_None)) {
+    <span class='py_c_api'>PyErr_Format</span>(PyExc_AttributeError, "'NoneType' object has no attribute '%.30s'", "pop");
+    <span class='error_goto'>__PYX_ERR(0, 365, __pyx_L1_error)</span>
+  }
+  __pyx_t_1 = <span class='pyx_c_api'>__Pyx_PyDict_Pop</span>(__pyx_v_self-&gt;objects, __pyx_v_py_search_key, Py_None);<span class='error_goto'> if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 365, __pyx_L1_error)</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_1);
+  if (!(likely(<span class='py_c_api'>PyList_CheckExact</span>(__pyx_t_1))||((__pyx_t_1) == Py_None) || <span class='pyx_c_api'>__Pyx_RaiseUnexpectedTypeError</span>("list", __pyx_t_1))) <span class='error_goto'>__PYX_ERR(0, 365, __pyx_L1_error)</span>
+  __pyx_v_removed = ((PyObject*)__pyx_t_1);
+  __pyx_t_1 = 0;
+</pre><pre class="cython line score-0">&#xA0;<span class="">366</span>: </pre>
+<pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">367</span>:         <span class="k">if</span> <span class="n">removed</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span></pre>
+<pre class='cython code score-0 '>  __pyx_t_2 = (__pyx_v_removed == ((PyObject*)Py_None));
+  if (__pyx_t_2) {
+/* … */
+  }
+</pre><pre class="cython line score-2" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">368</span>:             <span class="k">return</span> <span class="mf">0</span>  <span class="c"># None were found</span></pre>
+<pre class='cython code score-2 '>    <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_r);
+    <span class='pyx_macro_api'>__Pyx_INCREF</span>(__pyx_mstate_global-&gt;__pyx_int_0);
+    __pyx_r = __pyx_mstate_global-&gt;__pyx_int_0;
+    goto __pyx_L0;
+</pre><pre class="cython line score-0">&#xA0;<span class="">369</span>: </pre>
+<pre class="cython line score-15" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">370</span>:         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">removed</span><span class="p">)</span></pre>
+<pre class='cython code score-15 '>  <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_r);
+  if (unlikely(__pyx_v_removed == Py_None)) {
+    <span class='py_c_api'>PyErr_SetString</span>(PyExc_TypeError, "object of type 'NoneType' has no len()");
+    <span class='error_goto'>__PYX_ERR(0, 370, __pyx_L1_error)</span>
+  }
+  __pyx_t_3 = <span class='pyx_c_api'>__Pyx_PyList_GET_SIZE</span>(__pyx_v_removed);<span class='error_goto'> if (unlikely(__pyx_t_3 == ((Py_ssize_t)-1))) __PYX_ERR(0, 370, __pyx_L1_error)</span>
+  __pyx_t_1 = <span class='py_c_api'>PyLong_FromSsize_t</span>(__pyx_t_3);<span class='error_goto'> if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 370, __pyx_L1_error)</span>
+  <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_1);
+  if (<span class='pyx_c_api'>__Pyx_PyInt_FromNumber</span>(&amp;__pyx_t_1, NULL, 0) &lt; (0)) <span class='error_goto'>__PYX_ERR(0, 370, __pyx_L1_error)</span>
+  __pyx_r = ((PyObject*)__pyx_t_1);
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+</pre></div></body></html>

@@ -29,10 +29,27 @@ def test_idf():
     print()
     print("== Get object test ====")
     for obj in idf.get_objects("BuildingSurface:Detailed".lower()):
-        print(obj["Name"])
+        print(obj["name"])
     print()
     print(idf.get_object_by_name("BuildingSurface:Detailed", "Core_bot_ZN_5_Wall_East"))
     print(idf.get_object_by_name("BuildingSurface:Detailed", "asdf"))
+
+    print()
+    print("== Add object test ====")
+    new_objs = []
+    for i in range(3):
+        obj = idf.add_object("BuildingSurface:Detailed")
+        new_objs.append(obj)
+        print(obj.obj_idx, ":", obj)
+
+    print()
+    print("== Remove object test ====")
+    print(len(idf.get_objects("BuildingSurface:Detailed")))
+    for obj in new_objs:
+        print(["Failed","Removed"][idf.remove_object(obj)])
+    print(len(idf.get_objects("BuildingSurface:Detailed")))
+    print(f"{idf.remove_all_objects('BuildingSurface:Detailed')} objects removed.")
+    print(idf.get_objects("BuildingSurface:Detailed"))
 
     print()
 

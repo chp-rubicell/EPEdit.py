@@ -309,13 +309,62 @@ cdef class IDF:
         return None
 
     def add_object(self, str class_name, dict initial_values={}, bint default_values=True) -> IDFObject:
-        """Add object to IDF"""
-        pass
+        """
+        Add object to IDF
 
-    def remove_object(self, IDFObject obj) -> None:
-        """Remove object from IDF"""
-        pass
+        Returns:
+            IDFObject: Generated IDFObject.
+        """
+        cdef IDFObject new_obj = IDFObject(self.idd, class_name)
 
-    def remove_objects(self, str class_name) -> None:
-        """Remove all objects of a certain class from IDF"""
-        pass
+        # Apply obj_idx
+        new_obj.obj_idx = self.next_obj_idx
+        self.next_obj_idx += 1
+
+        cdef str py_search_key = class_name.upper()
+        if py_search_key in self.objects:
+            self.objects[py_search_key].append(new_obj)
+        else:
+            self.objects[py_search_key] = [new_obj]
+
+        return new_obj
+
+    def remove_object(self, IDFObject obj) -> bool:
+        """
+        Remove object from IDF
+
+        Returns:
+            bool: True if successfully removed, False if object was not found.
+        """
+        cdef str py_search_key = obj.class_name.upper()
+
+        if py_search_key not in self.objects:
+            return False
+
+        cdef list objs = self.objects[py_search_key]
+
+        try:
+            objs.remove(obj)
+            # If no obj left in class, remove key:
+            if not objs:
+                del self.objects[py_search_key]
+            return True
+
+        except ValueError:
+            return False
+
+    def remove_all_objects(self, str class_name) -> int:
+        """
+        Remove all objects of a certain class from ID
+
+        Returns:
+            int: Number of objects removed. 0 if class was not found.
+        """
+        cdef str py_search_key = class_name.upper()
+
+        cdef list removed = self.objects.pop(py_search_key, None)
+
+        if removed is None:
+            return 0  # None were found
+
+        return len(removed)
