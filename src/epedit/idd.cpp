@@ -1671,8 +1671,8 @@ struct __pyx_t_6epedit_3idd_ExtPattern {
  * 
  * # IDD extensible field properties (used in ClassDef)
  * cdef struct ExtensibleDef:             # <<<<<<<<<<<<<<
- *     cbool is_extensible
- *     int begin_index  # start index of the extensible fields
+ *     cbool              is_extensible
+ *     int                begin_index  # start index of the extensible fields
 */
 struct __pyx_t_6epedit_3idd_ExtensibleDef {
   bool is_extensible;
@@ -1685,8 +1685,8 @@ struct __pyx_t_6epedit_3idd_ExtensibleDef {
  * 
  * # IDD field definition (ex. Outside_Boundary_Condition)
  * cdef struct FieldDef:             # <<<<<<<<<<<<<<
- *     string name
- *     cbool required
+ *     string         name
+ *     cbool          required
 */
 struct __pyx_t_6epedit_3idd_FieldDef {
   std::string name;
@@ -1703,8 +1703,8 @@ struct __pyx_t_6epedit_3idd_FieldDef {
  * 
  * # IDD class definition (ex. Building, Zone)
  * cdef struct ClassDef:             # <<<<<<<<<<<<<<
- *     string name  # original name with capitalization
- *     string group  # \group
+ *     string                     name  # original name with capitalization
+ *     string                     group  # \group
 */
 struct __pyx_t_6epedit_3idd_ClassDef {
   std::string name;
@@ -1720,7 +1720,7 @@ struct __pyx_t_6epedit_3idd_ClassDef {
  * 
  * # IDD object (C++ side) that contains all of the definitions
  * cdef struct c_IDD:             # <<<<<<<<<<<<<<
- *     string version
+ *     string                        version
  *     unordered_map[string, size_t] class_map  # map for fast search (uppercase class name -> ordered_classes idx)
 */
 struct __pyx_t_6epedit_3idd_c_IDD {

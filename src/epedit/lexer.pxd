@@ -11,13 +11,13 @@ cdef enum TokenType:
 
 cdef struct Token:
     TokenType type
-    string value
+    string    value
 
 cdef class Lexer:
     cdef vector[Token] buffer  # temporary storage for tokens
-    cdef size_t buffer_idx  # current index within the token buffer
+    cdef size_t        buffer_idx  # current index within the token buffer
 
-    cdef int line_num  # current line number (for debugging)
+    cdef int   line_num  # current line number (for debugging)
     cdef cbool is_idd  # for IDD parsing
 
     cdef string content  # the entire file
