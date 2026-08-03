@@ -82,7 +82,7 @@ cdef void parse_field_property(ClassDef& cls, FieldDef& field, const string& val
         field.default_val = trim_string(after)
         # if field has default value, add index to cache
         if not field.default_val.empty():
-            cls.field_idx_with_default.push_back(<int>(cls.fields.size() - 1))
+            cls.field_idx_with_default.push_back(cls.fields.size() - 1)
         return
 
     if trimmed_val == <const char*>b"\\autosizable":

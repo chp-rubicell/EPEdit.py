@@ -183,36 +183,38 @@ cdef class IDFObject:
 
         return deref(val_ptr).decode("utf-8")
 
-    # Set value of field using field index
+    # Set field by field index using raw string value
+    cdef int set_string_by_index(self, int field_idx, const string& value) except -1 nogil:
+        if field_idx >= <int>self.values.size():
+            if value.empty():
+                # If value is an empty string, don't resize self.values and ignore
+                return 0
+            # Resize self.values
+            self.values.resize(field_idx+1, <const char*>b"")
+
+        self.values[field_idx] = value
+        return 0
+
+    # Set field by field index using Python value
     cdef int set_by_index(self, int field_idx, object value) except -1:
         # If value is None or empty string, don't resize self.values
         if value is None or value == "":
-            # adding empty value
-            if field_idx >= <int>self.values.size():
-                return 0
-            elif field_idx == <int>self.values.size() - 1:
-                self.values.pop_back()
-                # TODO: consider shrinking self.values array size
-                # while not self.values.empty() and self.values.back().empty():
-                #     self.values.pop_back()
-            else:
-                self.values[field_idx] = <const char*>b""
-            return 0
+            return self.set_string_by_index(field_idx, <const char*>b"")
+        return self.set_string_by_index(field_idx, any_to_string(value))
 
-        # Resize self.values
-        if field_idx >= <int>self.values.size():
-            self.values.resize(field_idx+1, <const char*>b"")
-
-        self.values[field_idx] = any_to_string(value)
-        return 0
+    # Shrink self.values and remove trailing empty values
+    cdef void trim_trailing_empty_fields(self) nogil:
+        while not self.values.empty() and self.values.back().empty():
+            self.values.pop_back()
 
     def __setitem__(self, key, value):
         cdef const ClassDef* cls = self.get_class_def()
         cdef int idx = resolve_key_to_field_index(cls, key)
 
         self.set_by_index(idx, value)
+        self.trim_trailing_empty_fields()
 
-    def update(self, values):
+    def update(self, object values, bint trim_empty_trails=True):
         """
         Update multiple field values
 
@@ -230,7 +232,7 @@ cdef class IDFObject:
         if isinstance(values, list):
             for i, value in enumerate(values):
                 pending_updates.append((i, value))
-            max_idx = len(values)
+            max_idx = len(values) - 1
         elif isinstance(values, dict):
             for key, value in values.items():
                 idx = resolve_key_to_field_index(cls, key)
@@ -246,6 +248,9 @@ cdef class IDFObject:
 
         for idx, value in pending_updates:
             self.set_by_index(idx, value)
+
+        if trim_empty_trails:
+            self.trim_trailing_empty_fields()
 
     # ——— File write ——————
     # TODO
@@ -351,6 +356,25 @@ cdef class IDF:
             IDFObject: Generated IDFObject.
         """
         cdef IDFObject new_obj = IDFObject(self.idd, class_name)
+        cdef ClassDef* cls = new_obj.get_class_def()
+
+        # Reserve self.values if min_fields is defined
+        if cls.min_fields > 0:
+            new_obj.values.reserve(<size_t>cls.min_fields)
+
+        # Apply default values
+        cdef size_t i
+        cdef size_t default_idx
+        if default_values:
+            for i in range(cls.field_idx_with_default.size()):
+                default_idx = cls.field_idx_with_default.at(i)
+                new_obj.set_string_by_index(
+                    default_idx,
+                    cls.fields[default_idx].default_val,
+                )
+
+        # Apply initial values
+        new_obj.update(initial_values, trim_empty_trails=True)
 
         # Apply obj_idx
         new_obj.obj_idx = self.next_obj_idx

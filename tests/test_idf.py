@@ -55,6 +55,15 @@ def test_idf():
         print(obj.obj_idx, ":", obj)
 
     print()
+    print("== Default values test ====")
+    obj = idf.add_object("OutputControl:Files", default_values=False)
+    print(repr(obj["Output CSV"]))
+    obj = idf.add_object("OutputControl:Files", default_values=True)
+    print(repr(obj["Output CSV"]))
+    obj = idf.add_object("OutputControl:Files", initial_values={"Output CSV": True})
+    print(repr(obj["Output CSV"]))
+
+    print()
     print("== Remove object test ====")
     print(len(idf.get_objects("BuildingSurface:Detailed")))
     for obj in new_objs:

@@ -1713,7 +1713,7 @@ struct __pyx_t_6epedit_3idd_ClassDef {
   int min_fields;
   std::unordered_map<std::string,int>  base_field_index_map;
   struct __pyx_t_6epedit_3idd_ExtensibleDef extensible;
-  std::vector<int>  field_idx_with_default;
+  std::vector<size_t>  field_idx_with_default;
 };
 
 /* "epedit/idd.pxd":55
@@ -4919,7 +4919,7 @@ static void __pyx_f_6epedit_3idd_parse_field_property(struct __pyx_t_6epedit_3id
  *         field.default_val = trim_string(after)
  *         # if field has default value, add index to cache
  *         if not field.default_val.empty():             # <<<<<<<<<<<<<<
- *             cls.field_idx_with_default.push_back(<int>(cls.fields.size() - 1))
+ *             cls.field_idx_with_default.push_back(cls.fields.size() - 1)
  *         return
 */
     __pyx_t_4 = (!__pyx_v_field.default_val.empty());
@@ -4928,12 +4928,12 @@ static void __pyx_f_6epedit_3idd_parse_field_property(struct __pyx_t_6epedit_3id
       /* "epedit/idd.pyx":85
  *         # if field has default value, add index to cache
  *         if not field.default_val.empty():
- *             cls.field_idx_with_default.push_back(<int>(cls.fields.size() - 1))             # <<<<<<<<<<<<<<
+ *             cls.field_idx_with_default.push_back(cls.fields.size() - 1)             # <<<<<<<<<<<<<<
  *         return
  * 
 */
       try {
-        __pyx_v_cls.field_idx_with_default.push_back(((int)(__pyx_v_cls.fields.size() - 1)));
+        __pyx_v_cls.field_idx_with_default.push_back((__pyx_v_cls.fields.size() - 1));
       } catch(...) {
         PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
         __Pyx_CppExn2PyErr();
@@ -4945,14 +4945,14 @@ static void __pyx_f_6epedit_3idd_parse_field_property(struct __pyx_t_6epedit_3id
  *         field.default_val = trim_string(after)
  *         # if field has default value, add index to cache
  *         if not field.default_val.empty():             # <<<<<<<<<<<<<<
- *             cls.field_idx_with_default.push_back(<int>(cls.fields.size() - 1))
+ *             cls.field_idx_with_default.push_back(cls.fields.size() - 1)
  *         return
 */
     }
 
     /* "epedit/idd.pyx":86
  *         if not field.default_val.empty():
- *             cls.field_idx_with_default.push_back(<int>(cls.fields.size() - 1))
+ *             cls.field_idx_with_default.push_back(cls.fields.size() - 1)
  *         return             # <<<<<<<<<<<<<<
  * 
  *     if trimmed_val == <const char*>b"\\autosizable":

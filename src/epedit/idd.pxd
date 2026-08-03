@@ -49,7 +49,7 @@ cdef struct ClassDef:
     int min_fields
     unordered_map[string, int] base_field_index_map  # for fast indexing of fields (lowercase)
     ExtensibleDef extensible
-    vector[int] field_idx_with_default  # field indices with default value
+    vector[size_t] field_idx_with_default  # field indices with default value
 
 # IDD object (C++ side) that contains all of the definitions
 cdef struct c_IDD:
