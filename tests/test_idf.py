@@ -74,18 +74,39 @@ def test_idf():
 
     print()
 
-def test_idf_write():
+def test_idf_format():
     idd = IDD.from_file("./idds/V24-2-0-Energy+.idd")
-    idf = IDF.from_file(idd, "./files/RefBldgMediumOfficeNew2004_Chicago.idf")
+    # idf = IDF.from_file(idd, "./files/RefBldgMediumOfficeNew2004_Chicago.idf")
+    idf = IDF.from_file(idd, "./files/test.idf")
 
-    obj = idf.get_objects("BuildingSurface:Detailed".lower())[0]
-    obj["Vertex 4 X-coordinate"] = 0.0
-    obj["Vertex 4 Y-coordinate"] = 0.0
-    print(obj)
+    # obj = idf.get_objects("BuildingSurface:Detailed".lower())[0]
+    # obj["Vertex 4 X-coordinate"] = 0.0
+    # obj["Vertex 4 Y-coordinate"] = 0.0
+    # print(obj)
 
-    new_obj = idf.add_object("BuildingSurface:Detailed", default_values=False)
-    print(new_obj)
+    # new_obj = idf.add_object("BuildingSurface:Detailed", default_values=False)
+    # print(new_obj)
+
+    print()
+    print("== Default format ====")
+    print(idf.format())
+    print("====")
+
+    print()
+    print("== Default format (preserve order) ====")
+    print(idf.format(preserve_order=True))
+    print("====")
+
+    print()
+    print("== No indents ====")
+    print(idf.format(0, 0, 0))
+    print("====")
+
+    print()
+    print("== Compact mode ====")
+    print(idf.format(compact=True))
+    print("====")
 
 if __name__ == "__main__":
     # test_idf()
-    test_idf_write()
+    test_idf_format()

@@ -1,0 +1,28 @@
+! test.idf
+
+  RunPeriodControl:SpecialDays,
+    New Years Day,           !- Name
+    January 1,               !- Start Date
+    1,                       !- Duration {days}
+    Holiday;                 !- Special Day Type
+
+
+  Version,24.2;
+
+  SimulationControl,
+    YES,                     !- Do Zone Sizing Calculation
+    YES,                     !- Do System Sizing Calculation
+    YES,                     !- Do Plant Sizing Calculation
+    YES,                     !- Run Simulation for Sizing Periods
+    NO,                      !- Run Simulation for Weather File Run Periods
+    No,                      !- Do HVAC Sizing Simulation for Sizing Periods
+    1;                       !- Maximum Number of HVAC Sizing Simulation Passes
+
+
+
+
+  RunPeriodControl:SpecialDays,
+    Veterans Day,            !- Name
+    November 11,             !- Start Date
+    1,                       !- Duration {days}
+    Holiday;                 !- Special Day Type
