@@ -107,6 +107,38 @@ def test_idf_format():
     print(idf.format(compact=True))
     print("====")
 
+def measure_idf_format_size():
+    idd = IDD.from_file("./idds/V24-2-0-Energy+.idd")
+    # idf = IDF.from_file(idd, "./files/RefBldgMediumOfficeNew2004_Chicago.idf")
+    idf = IDF.from_file(idd, "/Applications/EnergyPlus-24-2-0/ExampleFiles/RefBldgOutPatientNew2004_Chicago.idf")
+
+    total_obj_count = sum([len(objs) for objs in idf.objects.values()])
+
+    print()
+    print("== Default format ====")
+    s = idf.format()
+    print(len(s) / total_obj_count)
+    print("====")
+
+    print()
+    print("== Default format (preserve order) ====")
+    s = idf.format(preserve_order=True)
+    print(len(s) / total_obj_count)
+    print("====")
+
+    print()
+    print("== No indents ====")
+    s = idf.format(0, 0, 0)
+    print(len(s) / total_obj_count)
+    print("====")
+
+    print()
+    print("== Compact mode ====")
+    s = idf.format(compact=True)
+    print(len(s) / total_obj_count)
+    print("====")
+
 if __name__ == "__main__":
     # test_idf()
-    test_idf_format()
+    # test_idf_format()
+    measure_idf_format_size()

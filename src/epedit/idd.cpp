@@ -1613,7 +1613,7 @@ typedef struct __pyx_ctuple_6libcpp_6string_std__in_string__and_6libcpp_bool __p
  * 
  * cdef string any_to_string(object value) except *  #TODO
  * cdef (int, int) get_continuous_digits_indices(const string& name) noexcept nogil             # <<<<<<<<<<<<<<
- * 
+ * cdef string get_current_time() noexcept nogil
  * 
 */
 struct __pyx_ctuple_int__and_int {
@@ -1621,7 +1621,7 @@ struct __pyx_ctuple_int__and_int {
   int f1;
 };
 
-/* "utils.pxd":67
+/* "utils.pxd":68
  * 
  * # Similar to Go's strings.CutPrefix()
  * cdef inline (string, cbool) cut_prefix(const string& s, const string& prefix) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -3563,7 +3563,7 @@ static std::string __pyx_convert_string_from_py_6libcpp_6string_std__in_string(P
   return __pyx_r;
 }
 
-/* "utils.pxd":14
+/* "utils.pxd":15
  * 
  * # Convert string to lowercase.
  * cdef inline string to_lower(string s) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -3580,7 +3580,7 @@ static CYTHON_INLINE std::string __pyx_f_6epedit_5utils_to_lower(std::string __p
   char __pyx_t_4;
   int __pyx_t_5;
 
-  /* "utils.pxd":16
+  /* "utils.pxd":17
  * cdef inline string to_lower(string s) noexcept nogil:
  *     cdef size_t i
  *     for i in range(s.length()):             # <<<<<<<<<<<<<<
@@ -3592,7 +3592,7 @@ static CYTHON_INLINE std::string __pyx_f_6epedit_5utils_to_lower(std::string __p
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_i = __pyx_t_3;
 
-    /* "utils.pxd":17
+    /* "utils.pxd":18
  *     cdef size_t i
  *     for i in range(s.length()):
  *         if b'A' <= s[i] <= b'Z':             # <<<<<<<<<<<<<<
@@ -3606,7 +3606,7 @@ static CYTHON_INLINE std::string __pyx_f_6epedit_5utils_to_lower(std::string __p
     }
     if (__pyx_t_5) {
 
-      /* "utils.pxd":18
+      /* "utils.pxd":19
  *     for i in range(s.length()):
  *         if b'A' <= s[i] <= b'Z':
  *             s[i] = s[i] + 32             # <<<<<<<<<<<<<<
@@ -3615,7 +3615,7 @@ static CYTHON_INLINE std::string __pyx_f_6epedit_5utils_to_lower(std::string __p
 */
       (__pyx_v_s[__pyx_v_i]) = ((__pyx_v_s[__pyx_v_i]) + 32);
 
-      /* "utils.pxd":17
+      /* "utils.pxd":18
  *     cdef size_t i
  *     for i in range(s.length()):
  *         if b'A' <= s[i] <= b'Z':             # <<<<<<<<<<<<<<
@@ -3625,7 +3625,7 @@ static CYTHON_INLINE std::string __pyx_f_6epedit_5utils_to_lower(std::string __p
     }
   }
 
-  /* "utils.pxd":19
+  /* "utils.pxd":20
  *         if b'A' <= s[i] <= b'Z':
  *             s[i] = s[i] + 32
  *     return s             # <<<<<<<<<<<<<<
@@ -3635,7 +3635,7 @@ static CYTHON_INLINE std::string __pyx_f_6epedit_5utils_to_lower(std::string __p
   __pyx_r = __pyx_v_s;
   goto __pyx_L0;
 
-  /* "utils.pxd":14
+  /* "utils.pxd":15
  * 
  * # Convert string to lowercase.
  * cdef inline string to_lower(string s) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -3648,7 +3648,7 @@ static CYTHON_INLINE std::string __pyx_f_6epedit_5utils_to_lower(std::string __p
   return __pyx_r;
 }
 
-/* "utils.pxd":22
+/* "utils.pxd":23
  * 
  * # Convert string to uppercase.
  * cdef inline string to_upper(string s) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -3665,7 +3665,7 @@ static CYTHON_INLINE std::string __pyx_f_6epedit_5utils_to_upper(std::string __p
   char __pyx_t_4;
   int __pyx_t_5;
 
-  /* "utils.pxd":24
+  /* "utils.pxd":25
  * cdef inline string to_upper(string s) noexcept nogil:
  *     cdef size_t i
  *     for i in range(s.length()):             # <<<<<<<<<<<<<<
@@ -3677,7 +3677,7 @@ static CYTHON_INLINE std::string __pyx_f_6epedit_5utils_to_upper(std::string __p
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_i = __pyx_t_3;
 
-    /* "utils.pxd":25
+    /* "utils.pxd":26
  *     cdef size_t i
  *     for i in range(s.length()):
  *         if b'a' <= s[i] <= b'z':             # <<<<<<<<<<<<<<
@@ -3691,7 +3691,7 @@ static CYTHON_INLINE std::string __pyx_f_6epedit_5utils_to_upper(std::string __p
     }
     if (__pyx_t_5) {
 
-      /* "utils.pxd":26
+      /* "utils.pxd":27
  *     for i in range(s.length()):
  *         if b'a' <= s[i] <= b'z':
  *             s[i] = s[i] - 32             # <<<<<<<<<<<<<<
@@ -3700,7 +3700,7 @@ static CYTHON_INLINE std::string __pyx_f_6epedit_5utils_to_upper(std::string __p
 */
       (__pyx_v_s[__pyx_v_i]) = ((__pyx_v_s[__pyx_v_i]) - 32);
 
-      /* "utils.pxd":25
+      /* "utils.pxd":26
  *     cdef size_t i
  *     for i in range(s.length()):
  *         if b'a' <= s[i] <= b'z':             # <<<<<<<<<<<<<<
@@ -3710,7 +3710,7 @@ static CYTHON_INLINE std::string __pyx_f_6epedit_5utils_to_upper(std::string __p
     }
   }
 
-  /* "utils.pxd":27
+  /* "utils.pxd":28
  *         if b'a' <= s[i] <= b'z':
  *             s[i] = s[i] - 32
  *     return s             # <<<<<<<<<<<<<<
@@ -3720,7 +3720,7 @@ static CYTHON_INLINE std::string __pyx_f_6epedit_5utils_to_upper(std::string __p
   __pyx_r = __pyx_v_s;
   goto __pyx_L0;
 
-  /* "utils.pxd":22
+  /* "utils.pxd":23
  * 
  * # Convert string to uppercase.
  * cdef inline string to_upper(string s) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -3733,7 +3733,7 @@ static CYTHON_INLINE std::string __pyx_f_6epedit_5utils_to_upper(std::string __p
   return __pyx_r;
 }
 
-/* "utils.pxd":30
+/* "utils.pxd":31
  * 
  * # Similar to Go's strings.EqualFold() (only for case insensitive comparison, ignores locale)
  * cdef inline cbool equal_fold(const string& a, const string& b) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -3751,7 +3751,7 @@ static CYTHON_INLINE bool __pyx_f_6epedit_5utils_equal_fold(std::string const &_
   size_t __pyx_t_3;
   size_t __pyx_t_4;
 
-  /* "utils.pxd":31
+  /* "utils.pxd":32
  * # Similar to Go's strings.EqualFold() (only for case insensitive comparison, ignores locale)
  * cdef inline cbool equal_fold(const string& a, const string& b) noexcept nogil:
  *     if a.size() != b.size():             # <<<<<<<<<<<<<<
@@ -3761,7 +3761,7 @@ static CYTHON_INLINE bool __pyx_f_6epedit_5utils_equal_fold(std::string const &_
   __pyx_t_1 = (__pyx_v_a.size() != __pyx_v_b.size());
   if (__pyx_t_1) {
 
-    /* "utils.pxd":32
+    /* "utils.pxd":33
  * cdef inline cbool equal_fold(const string& a, const string& b) noexcept nogil:
  *     if a.size() != b.size():
  *         return False             # <<<<<<<<<<<<<<
@@ -3771,7 +3771,7 @@ static CYTHON_INLINE bool __pyx_f_6epedit_5utils_equal_fold(std::string const &_
     __pyx_r = 0;
     goto __pyx_L0;
 
-    /* "utils.pxd":31
+    /* "utils.pxd":32
  * # Similar to Go's strings.EqualFold() (only for case insensitive comparison, ignores locale)
  * cdef inline cbool equal_fold(const string& a, const string& b) noexcept nogil:
  *     if a.size() != b.size():             # <<<<<<<<<<<<<<
@@ -3780,7 +3780,7 @@ static CYTHON_INLINE bool __pyx_f_6epedit_5utils_equal_fold(std::string const &_
 */
   }
 
-  /* "utils.pxd":36
+  /* "utils.pxd":37
  *     cdef size_t i
  *     cdef char ca, cb
  *     for i in range(a.size()):             # <<<<<<<<<<<<<<
@@ -3792,7 +3792,7 @@ static CYTHON_INLINE bool __pyx_f_6epedit_5utils_equal_fold(std::string const &_
   for (__pyx_t_4 = 0; __pyx_t_4 < __pyx_t_3; __pyx_t_4+=1) {
     __pyx_v_i = __pyx_t_4;
 
-    /* "utils.pxd":37
+    /* "utils.pxd":38
  *     cdef char ca, cb
  *     for i in range(a.size()):
  *         ca = a[i]             # <<<<<<<<<<<<<<
@@ -3801,7 +3801,7 @@ static CYTHON_INLINE bool __pyx_f_6epedit_5utils_equal_fold(std::string const &_
 */
     __pyx_v_ca = (__pyx_v_a[__pyx_v_i]);
 
-    /* "utils.pxd":38
+    /* "utils.pxd":39
  *     for i in range(a.size()):
  *         ca = a[i]
  *         cb = b[i]             # <<<<<<<<<<<<<<
@@ -3810,7 +3810,7 @@ static CYTHON_INLINE bool __pyx_f_6epedit_5utils_equal_fold(std::string const &_
 */
     __pyx_v_cb = (__pyx_v_b[__pyx_v_i]);
 
-    /* "utils.pxd":39
+    /* "utils.pxd":40
  *         ca = a[i]
  *         cb = b[i]
  *         if b'A' <= ca <= b'Z':             # <<<<<<<<<<<<<<
@@ -3823,7 +3823,7 @@ static CYTHON_INLINE bool __pyx_f_6epedit_5utils_equal_fold(std::string const &_
     }
     if (__pyx_t_1) {
 
-      /* "utils.pxd":40
+      /* "utils.pxd":41
  *         cb = b[i]
  *         if b'A' <= ca <= b'Z':
  *             ca += 32             # <<<<<<<<<<<<<<
@@ -3832,7 +3832,7 @@ static CYTHON_INLINE bool __pyx_f_6epedit_5utils_equal_fold(std::string const &_
 */
       __pyx_v_ca = (__pyx_v_ca + 32);
 
-      /* "utils.pxd":39
+      /* "utils.pxd":40
  *         ca = a[i]
  *         cb = b[i]
  *         if b'A' <= ca <= b'Z':             # <<<<<<<<<<<<<<
@@ -3841,7 +3841,7 @@ static CYTHON_INLINE bool __pyx_f_6epedit_5utils_equal_fold(std::string const &_
 */
     }
 
-    /* "utils.pxd":41
+    /* "utils.pxd":42
  *         if b'A' <= ca <= b'Z':
  *             ca += 32
  *         if b'A' <= cb <= b'Z':             # <<<<<<<<<<<<<<
@@ -3854,7 +3854,7 @@ static CYTHON_INLINE bool __pyx_f_6epedit_5utils_equal_fold(std::string const &_
     }
     if (__pyx_t_1) {
 
-      /* "utils.pxd":42
+      /* "utils.pxd":43
  *             ca += 32
  *         if b'A' <= cb <= b'Z':
  *             cb += 32             # <<<<<<<<<<<<<<
@@ -3863,7 +3863,7 @@ static CYTHON_INLINE bool __pyx_f_6epedit_5utils_equal_fold(std::string const &_
 */
       __pyx_v_cb = (__pyx_v_cb + 32);
 
-      /* "utils.pxd":41
+      /* "utils.pxd":42
  *         if b'A' <= ca <= b'Z':
  *             ca += 32
  *         if b'A' <= cb <= b'Z':             # <<<<<<<<<<<<<<
@@ -3872,7 +3872,7 @@ static CYTHON_INLINE bool __pyx_f_6epedit_5utils_equal_fold(std::string const &_
 */
     }
 
-    /* "utils.pxd":43
+    /* "utils.pxd":44
  *         if b'A' <= cb <= b'Z':
  *             cb += 32
  *         if ca != cb:             # <<<<<<<<<<<<<<
@@ -3882,7 +3882,7 @@ static CYTHON_INLINE bool __pyx_f_6epedit_5utils_equal_fold(std::string const &_
     __pyx_t_1 = (__pyx_v_ca != __pyx_v_cb);
     if (__pyx_t_1) {
 
-      /* "utils.pxd":44
+      /* "utils.pxd":45
  *             cb += 32
  *         if ca != cb:
  *             return False             # <<<<<<<<<<<<<<
@@ -3892,7 +3892,7 @@ static CYTHON_INLINE bool __pyx_f_6epedit_5utils_equal_fold(std::string const &_
       __pyx_r = 0;
       goto __pyx_L0;
 
-      /* "utils.pxd":43
+      /* "utils.pxd":44
  *         if b'A' <= cb <= b'Z':
  *             cb += 32
  *         if ca != cb:             # <<<<<<<<<<<<<<
@@ -3902,7 +3902,7 @@ static CYTHON_INLINE bool __pyx_f_6epedit_5utils_equal_fold(std::string const &_
     }
   }
 
-  /* "utils.pxd":46
+  /* "utils.pxd":47
  *             return False
  * 
  *     return True             # <<<<<<<<<<<<<<
@@ -3912,7 +3912,7 @@ static CYTHON_INLINE bool __pyx_f_6epedit_5utils_equal_fold(std::string const &_
   __pyx_r = 1;
   goto __pyx_L0;
 
-  /* "utils.pxd":30
+  /* "utils.pxd":31
  * 
  * # Similar to Go's strings.EqualFold() (only for case insensitive comparison, ignores locale)
  * cdef inline cbool equal_fold(const string& a, const string& b) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -3925,7 +3925,7 @@ static CYTHON_INLINE bool __pyx_f_6epedit_5utils_equal_fold(std::string const &_
   return __pyx_r;
 }
 
-/* "utils.pxd":49
+/* "utils.pxd":50
  * 
  * # Remove leading and trailing whitespace from a C++ string.
  * cdef inline string trim_string(const string& s) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -3944,7 +3944,7 @@ static CYTHON_INLINE std::string __pyx_f_6epedit_5utils_trim_string(std::string 
   int __pyx_clineno = 0;
   PyGILState_STATE __pyx_gilstate_save;
 
-  /* "utils.pxd":50
+  /* "utils.pxd":51
  * # Remove leading and trailing whitespace from a C++ string.
  * cdef inline string trim_string(const string& s) noexcept nogil:
  *     cdef size_t first = s.find_first_not_of(b" \t\r\n")             # <<<<<<<<<<<<<<
@@ -3953,7 +3953,7 @@ static CYTHON_INLINE std::string __pyx_f_6epedit_5utils_trim_string(std::string 
 */
   __pyx_v_first = __pyx_v_s.find_first_not_of(__pyx_k_);
 
-  /* "utils.pxd":51
+  /* "utils.pxd":52
  * cdef inline string trim_string(const string& s) noexcept nogil:
  *     cdef size_t first = s.find_first_not_of(b" \t\r\n")
  *     if first == npos:             # <<<<<<<<<<<<<<
@@ -3963,7 +3963,7 @@ static CYTHON_INLINE std::string __pyx_f_6epedit_5utils_trim_string(std::string 
   __pyx_t_1 = (__pyx_v_first == std::string::npos);
   if (__pyx_t_1) {
 
-    /* "utils.pxd":52
+    /* "utils.pxd":53
  *     cdef size_t first = s.find_first_not_of(b" \t\r\n")
  *     if first == npos:
  *         return <const char*>b""             # <<<<<<<<<<<<<<
@@ -3973,7 +3973,7 @@ static CYTHON_INLINE std::string __pyx_f_6epedit_5utils_trim_string(std::string 
     __pyx_r = ((char const *)__pyx_k__2);
     goto __pyx_L0;
 
-    /* "utils.pxd":51
+    /* "utils.pxd":52
  * cdef inline string trim_string(const string& s) noexcept nogil:
  *     cdef size_t first = s.find_first_not_of(b" \t\r\n")
  *     if first == npos:             # <<<<<<<<<<<<<<
@@ -3982,7 +3982,7 @@ static CYTHON_INLINE std::string __pyx_f_6epedit_5utils_trim_string(std::string 
 */
   }
 
-  /* "utils.pxd":53
+  /* "utils.pxd":54
  *     if first == npos:
  *         return <const char*>b""
  *     cdef size_t last = s.find_last_not_of(b" \t\r\n")             # <<<<<<<<<<<<<<
@@ -3991,7 +3991,7 @@ static CYTHON_INLINE std::string __pyx_f_6epedit_5utils_trim_string(std::string 
 */
   __pyx_v_last = __pyx_v_s.find_last_not_of(__pyx_k_);
 
-  /* "utils.pxd":54
+  /* "utils.pxd":55
  *         return <const char*>b""
  *     cdef size_t last = s.find_last_not_of(b" \t\r\n")
  *     return s.substr(first, (last - first + 1))             # <<<<<<<<<<<<<<
@@ -4004,12 +4004,12 @@ static CYTHON_INLINE std::string __pyx_f_6epedit_5utils_trim_string(std::string 
     PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
     __Pyx_CppExn2PyErr();
     __Pyx_PyGILState_Release(__pyx_gilstate_save);
-    __PYX_ERR(2, 54, __pyx_L1_error)
+    __PYX_ERR(2, 55, __pyx_L1_error)
   }
   __pyx_r = __pyx_t_2;
   goto __pyx_L0;
 
-  /* "utils.pxd":49
+  /* "utils.pxd":50
  * 
  * # Remove leading and trailing whitespace from a C++ string.
  * cdef inline string trim_string(const string& s) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -4027,7 +4027,7 @@ static CYTHON_INLINE std::string __pyx_f_6epedit_5utils_trim_string(std::string 
   return __pyx_r;
 }
 
-/* "utils.pxd":57
+/* "utils.pxd":58
  * 
  * # Similar to Go's strings.HasPrefix()
  * cdef inline cbool has_prefix(const string&s, const string& prefix) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -4046,7 +4046,7 @@ static CYTHON_INLINE bool __pyx_f_6epedit_5utils_has_prefix(std::string const &_
   int __pyx_clineno = 0;
   PyGILState_STATE __pyx_gilstate_save;
 
-  /* "utils.pxd":58
+  /* "utils.pxd":59
  * # Similar to Go's strings.HasPrefix()
  * cdef inline cbool has_prefix(const string&s, const string& prefix) noexcept nogil:
  *     cdef size_t p_len = prefix.length()             # <<<<<<<<<<<<<<
@@ -4055,7 +4055,7 @@ static CYTHON_INLINE bool __pyx_f_6epedit_5utils_has_prefix(std::string const &_
 */
   __pyx_v_p_len = __pyx_v_prefix.length();
 
-  /* "utils.pxd":59
+  /* "utils.pxd":60
  * cdef inline cbool has_prefix(const string&s, const string& prefix) noexcept nogil:
  *     cdef size_t p_len = prefix.length()
  *     return s.length() >= p_len and s.compare(0, p_len, prefix) == 0             # <<<<<<<<<<<<<<
@@ -4074,7 +4074,7 @@ static CYTHON_INLINE bool __pyx_f_6epedit_5utils_has_prefix(std::string const &_
     PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
     __Pyx_CppExn2PyErr();
     __Pyx_PyGILState_Release(__pyx_gilstate_save);
-    __PYX_ERR(2, 59, __pyx_L1_error)
+    __PYX_ERR(2, 60, __pyx_L1_error)
   }
   __pyx_t_2 = (__pyx_t_3 == 0);
   __pyx_t_1 = __pyx_t_2;
@@ -4082,7 +4082,7 @@ static CYTHON_INLINE bool __pyx_f_6epedit_5utils_has_prefix(std::string const &_
   __pyx_r = __pyx_t_1;
   goto __pyx_L0;
 
-  /* "utils.pxd":57
+  /* "utils.pxd":58
  * 
  * # Similar to Go's strings.HasPrefix()
  * cdef inline cbool has_prefix(const string&s, const string& prefix) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -4100,7 +4100,7 @@ static CYTHON_INLINE bool __pyx_f_6epedit_5utils_has_prefix(std::string const &_
   return __pyx_r;
 }
 
-/* "utils.pxd":62
+/* "utils.pxd":63
  * 
  * # Similar to Go's strings.HasSuffix()
  * cdef inline cbool has_suffix(const string&s, const string& suffix) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -4119,7 +4119,7 @@ static CYTHON_INLINE bool __pyx_f_6epedit_5utils_has_suffix(std::string const &_
   int __pyx_clineno = 0;
   PyGILState_STATE __pyx_gilstate_save;
 
-  /* "utils.pxd":63
+  /* "utils.pxd":64
  * # Similar to Go's strings.HasSuffix()
  * cdef inline cbool has_suffix(const string&s, const string& suffix) noexcept nogil:
  *     cdef size_t s_len = suffix.length()             # <<<<<<<<<<<<<<
@@ -4128,7 +4128,7 @@ static CYTHON_INLINE bool __pyx_f_6epedit_5utils_has_suffix(std::string const &_
 */
   __pyx_v_s_len = __pyx_v_suffix.length();
 
-  /* "utils.pxd":64
+  /* "utils.pxd":65
  * cdef inline cbool has_suffix(const string&s, const string& suffix) noexcept nogil:
  *     cdef size_t s_len = suffix.length()
  *     return s.length() >= s_len and s.compare(s.length() - s_len, s_len, suffix) == 0             # <<<<<<<<<<<<<<
@@ -4147,7 +4147,7 @@ static CYTHON_INLINE bool __pyx_f_6epedit_5utils_has_suffix(std::string const &_
     PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
     __Pyx_CppExn2PyErr();
     __Pyx_PyGILState_Release(__pyx_gilstate_save);
-    __PYX_ERR(2, 64, __pyx_L1_error)
+    __PYX_ERR(2, 65, __pyx_L1_error)
   }
   __pyx_t_2 = (__pyx_t_3 == 0);
   __pyx_t_1 = __pyx_t_2;
@@ -4155,7 +4155,7 @@ static CYTHON_INLINE bool __pyx_f_6epedit_5utils_has_suffix(std::string const &_
   __pyx_r = __pyx_t_1;
   goto __pyx_L0;
 
-  /* "utils.pxd":62
+  /* "utils.pxd":63
  * 
  * # Similar to Go's strings.HasSuffix()
  * cdef inline cbool has_suffix(const string&s, const string& suffix) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -4173,7 +4173,7 @@ static CYTHON_INLINE bool __pyx_f_6epedit_5utils_has_suffix(std::string const &_
   return __pyx_r;
 }
 
-/* "utils.pxd":67
+/* "utils.pxd":68
  * 
  * # Similar to Go's strings.CutPrefix()
  * cdef inline (string, cbool) cut_prefix(const string& s, const string& prefix) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -4194,7 +4194,7 @@ static CYTHON_INLINE __pyx_ctuple_6libcpp_6string_std__in_string__and_6libcpp_bo
   int __pyx_clineno = 0;
   PyGILState_STATE __pyx_gilstate_save;
 
-  /* "utils.pxd":68
+  /* "utils.pxd":69
  * # Similar to Go's strings.CutPrefix()
  * cdef inline (string, cbool) cut_prefix(const string& s, const string& prefix) noexcept nogil:
  *     cdef size_t p_len = prefix.length()             # <<<<<<<<<<<<<<
@@ -4203,7 +4203,7 @@ static CYTHON_INLINE __pyx_ctuple_6libcpp_6string_std__in_string__and_6libcpp_bo
 */
   __pyx_v_p_len = __pyx_v_prefix.length();
 
-  /* "utils.pxd":70
+  /* "utils.pxd":71
  *     cdef size_t p_len = prefix.length()
  * 
  *     if s.length() >= p_len and s.compare(0, p_len, prefix) == 0:             # <<<<<<<<<<<<<<
@@ -4222,14 +4222,14 @@ static CYTHON_INLINE __pyx_ctuple_6libcpp_6string_std__in_string__and_6libcpp_bo
     PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
     __Pyx_CppExn2PyErr();
     __Pyx_PyGILState_Release(__pyx_gilstate_save);
-    __PYX_ERR(2, 70, __pyx_L1_error)
+    __PYX_ERR(2, 71, __pyx_L1_error)
   }
   __pyx_t_2 = (__pyx_t_3 == 0);
   __pyx_t_1 = __pyx_t_2;
   __pyx_L4_bool_binop_done:;
   if (__pyx_t_1) {
 
-    /* "utils.pxd":71
+    /* "utils.pxd":72
  * 
  *     if s.length() >= p_len and s.compare(0, p_len, prefix) == 0:
  *         return (s.substr(p_len), True)             # <<<<<<<<<<<<<<
@@ -4242,14 +4242,14 @@ static CYTHON_INLINE __pyx_ctuple_6libcpp_6string_std__in_string__and_6libcpp_bo
       PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
       __Pyx_CppExn2PyErr();
       __Pyx_PyGILState_Release(__pyx_gilstate_save);
-      __PYX_ERR(2, 71, __pyx_L1_error)
+      __PYX_ERR(2, 72, __pyx_L1_error)
     }
     __pyx_t_5.f0 = __pyx_t_4;
     __pyx_t_5.f1 = 1;
     __pyx_r = __pyx_t_5;
     goto __pyx_L0;
 
-    /* "utils.pxd":70
+    /* "utils.pxd":71
  *     cdef size_t p_len = prefix.length()
  * 
  *     if s.length() >= p_len and s.compare(0, p_len, prefix) == 0:             # <<<<<<<<<<<<<<
@@ -4258,7 +4258,7 @@ static CYTHON_INLINE __pyx_ctuple_6libcpp_6string_std__in_string__and_6libcpp_bo
 */
   }
 
-  /* "utils.pxd":73
+  /* "utils.pxd":74
  *         return (s.substr(p_len), True)
  * 
  *     return (s, False)             # <<<<<<<<<<<<<<
@@ -4270,7 +4270,7 @@ static CYTHON_INLINE __pyx_ctuple_6libcpp_6string_std__in_string__and_6libcpp_bo
   __pyx_r = __pyx_t_5;
   goto __pyx_L0;
 
-  /* "utils.pxd":67
+  /* "utils.pxd":68
  * 
  * # Similar to Go's strings.CutPrefix()
  * cdef inline (string, cbool) cut_prefix(const string& s, const string& prefix) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -4288,7 +4288,7 @@ static CYTHON_INLINE __pyx_ctuple_6libcpp_6string_std__in_string__and_6libcpp_bo
   return __pyx_r;
 }
 
-/* "utils.pxd":76
+/* "utils.pxd":77
  * 
  * # Similar to Go's strings.CutSuffix()
  * cdef inline (string, cbool) cut_suffix(const string& s, const string& suffix) noexcept nogil:             # <<<<<<<<<<<<<<
@@ -4310,7 +4310,7 @@ static CYTHON_INLINE __pyx_ctuple_6libcpp_6string_std__in_string__and_6libcpp_bo
   int __pyx_clineno = 0;
   PyGILState_STATE __pyx_gilstate_save;
 
-  /* "utils.pxd":77
+  /* "utils.pxd":78
  * # Similar to Go's strings.CutSuffix()
  * cdef inline (string, cbool) cut_suffix(const string& s, const string& suffix) noexcept nogil:
  *     cdef size_t str_len = s.length()             # <<<<<<<<<<<<<<
@@ -4319,7 +4319,7 @@ static CYTHON_INLINE __pyx_ctuple_6libcpp_6string_std__in_string__and_6libcpp_bo
 */
   __pyx_v_str_len = __pyx_v_s.length();
 
-  /* "utils.pxd":78
+  /* "utils.pxd":79
  * cdef inline (string, cbool) cut_suffix(const string& s, const string& suffix) noexcept nogil:
  *     cdef size_t str_len = s.length()
  *     cdef size_t s_len = suffix.length()             # <<<<<<<<<<<<<<
@@ -4328,7 +4328,7 @@ static CYTHON_INLINE __pyx_ctuple_6libcpp_6string_std__in_string__and_6libcpp_bo
 */
   __pyx_v_s_len = __pyx_v_suffix.length();
 
-  /* "utils.pxd":80
+  /* "utils.pxd":81
  *     cdef size_t s_len = suffix.length()
  * 
  *     if str_len >= s_len and s.compare(str_len-s_len, str_len, suffix) == 0:             # <<<<<<<<<<<<<<
@@ -4347,14 +4347,14 @@ static CYTHON_INLINE __pyx_ctuple_6libcpp_6string_std__in_string__and_6libcpp_bo
     PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
     __Pyx_CppExn2PyErr();
     __Pyx_PyGILState_Release(__pyx_gilstate_save);
-    __PYX_ERR(2, 80, __pyx_L1_error)
+    __PYX_ERR(2, 81, __pyx_L1_error)
   }
   __pyx_t_2 = (__pyx_t_3 == 0);
   __pyx_t_1 = __pyx_t_2;
   __pyx_L4_bool_binop_done:;
   if (__pyx_t_1) {
 
-    /* "utils.pxd":81
+    /* "utils.pxd":82
  * 
  *     if str_len >= s_len and s.compare(str_len-s_len, str_len, suffix) == 0:
  *         return (s.substr(0, str_len-s_len), True)             # <<<<<<<<<<<<<<
@@ -4367,14 +4367,14 @@ static CYTHON_INLINE __pyx_ctuple_6libcpp_6string_std__in_string__and_6libcpp_bo
       PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
       __Pyx_CppExn2PyErr();
       __Pyx_PyGILState_Release(__pyx_gilstate_save);
-      __PYX_ERR(2, 81, __pyx_L1_error)
+      __PYX_ERR(2, 82, __pyx_L1_error)
     }
     __pyx_t_5.f0 = __pyx_t_4;
     __pyx_t_5.f1 = 1;
     __pyx_r = __pyx_t_5;
     goto __pyx_L0;
 
-    /* "utils.pxd":80
+    /* "utils.pxd":81
  *     cdef size_t s_len = suffix.length()
  * 
  *     if str_len >= s_len and s.compare(str_len-s_len, str_len, suffix) == 0:             # <<<<<<<<<<<<<<
@@ -4383,7 +4383,7 @@ static CYTHON_INLINE __pyx_ctuple_6libcpp_6string_std__in_string__and_6libcpp_bo
 */
   }
 
-  /* "utils.pxd":83
+  /* "utils.pxd":84
  *         return (s.substr(0, str_len-s_len), True)
  * 
  *     return (s, False)             # <<<<<<<<<<<<<<
@@ -4393,7 +4393,7 @@ static CYTHON_INLINE __pyx_ctuple_6libcpp_6string_std__in_string__and_6libcpp_bo
   __pyx_r = __pyx_t_5;
   goto __pyx_L0;
 
-  /* "utils.pxd":76
+  /* "utils.pxd":77
  * 
  * # Similar to Go's strings.CutSuffix()
  * cdef inline (string, cbool) cut_suffix(const string& s, const string& suffix) noexcept nogil:             # <<<<<<<<<<<<<<

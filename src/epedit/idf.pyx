@@ -16,7 +16,7 @@ from .idd cimport (
     c_IDD, IDD,
     find_field_index, resolve_key_to_field_index, get_field_name, get_field_def,
 )
-from .utils cimport to_lower, to_upper, equal_fold, any_to_string
+from .utils cimport to_lower, to_upper, equal_fold, any_to_string, get_current_time
 
 cdef extern from "<string>" namespace "std" nogil:
     double stod(const string& str) except +
@@ -424,108 +424,6 @@ cdef class IDF:
 
         self.next_obj_idx = c_idf_objects.size()  # update index for next object
 
-    # ——— Export ——————
-
-    cdef void write_to_buffer(
-        self,
-        string& out_buffer,
-        const FormatConfig* config,
-        cbool preserve_order=False,
-    ) noexcept:
-
-        cdef list all_objs  # for preserve_order option
-        cdef list objs = []
-        cdef IDFObject obj
-
-        cdef size_t i
-        cdef const ClassDef* cls
-        cdef str py_search_key
-        cdef string current_group
-
-        if preserve_order:
-            all_objs = []
-            for objs in self.objects.values():
-                all_objs.extend(objs)
-
-            # Sort based on object indices
-            all_objs.sort(key=lambda x: x.obj_idx)
-
-            for obj in all_objs:
-                out_buffer.push_back(<char>b'\n')
-                obj.write_to_buffer(out_buffer, config)
-
-        else:
-            for i in range(self.idd.c_idd.ordered_classes.size()):
-                cls = &self.idd.c_idd.ordered_classes[i]
-                py_search_key = to_upper(cls.name).decode("utf-8")
-
-                if py_search_key not in self.objects:
-                    continue
-
-                # Add group separator if changed
-                if not config.compact and current_group != cls.group:
-                    current_group = cls.group
-                    if not current_group.empty():
-                        out_buffer.append(<const char*>b"\n! ***")
-                        out_buffer.append(to_upper(current_group))
-                        out_buffer.append(<const char*>b"***\n")
-
-                # Write objects
-                for obj in self.objects[py_search_key]:
-                    # Add newline
-                    out_buffer.push_back(<char>b'\n')
-                    # Write IDFObject
-                    obj.write_to_buffer(out_buffer, config)
-
-                # If compact mode, add linebreak between classes
-                if config.compact:
-                    out_buffer.push_back(<char>b'\n')
-
-    def __repr__(self):
-        cdef string out_buffer
-        self.write_to_buffer(out_buffer, &DEFAULT_FORMAT_CONFIG)
-        return out_buffer.decode("utf-8")
-
-    def format(
-        self,
-        int class_indent_size = 0,
-        int field_indent_size = 4,
-        int field_size        = 24,
-        *,
-        bint compact          = False,
-        bint preserve_order   = False,
-    ) -> str:
-        """
-        Convert IDF to str with format config
-
-        Args:
-            class_indent_size (int): Indent for class names
-            field_indent_size (int): Indent for fields
-            field_size (int): Minimum size for field values
-            compact (bint, optional): Whether to enable compact output. Overrides other style settings
-            preserve_order (bint, optional): Whether to preserve object order.
-
-        Returns:
-            str: IDF str
-        """
-        cdef const FormatConfig* config
-        cdef FormatConfig temp_config
-
-        if compact:
-            config = &MINIMAL_FORMAT_CONFIG
-        else:
-            temp_config = generate_format_config(
-                class_indent_size,
-                field_indent_size,
-                field_size,
-            )
-            config = &temp_config
-
-        cdef string out_buffer
-        # TODO out_buffer.reserve()
-        self.write_to_buffer(out_buffer, config, preserve_order)
-        return out_buffer.decode("utf-8")
-
     # ——— IDF manipulation API (Create, Update, Delete) ——————
 
     def get_objects(self, str class_name) -> list:
@@ -619,3 +517,171 @@ cdef class IDF:
             return 0  # None were found
 
         return len(removed)
+
+    # ——— Export ——————
+
+    cdef void write_to_buffer(
+        self,
+        string& out_buffer,
+        const FormatConfig* config,
+        cbool preserve_order=False,
+    ) noexcept:
+
+        cdef list all_objs  # for preserve_order option
+        cdef list objs = []
+        cdef IDFObject obj
+
+        cdef size_t i
+        cdef const ClassDef* cls
+        cdef str py_search_key
+        cdef string current_group
+
+        # Estimate buffer size
+        cdef size_t total_objects = 0
+        for objs in self.objects.values():
+            total_objects += len(objs)
+
+        cdef size_t size_per_obj = 800
+        if config.compact:
+            size_per_obj = 160
+
+        cdef size_t estimated_size = out_buffer.size() + (total_objects*size_per_obj) + 4096  # 4KB padding
+
+        if out_buffer.capacity() < estimated_size:
+            out_buffer.reserve(estimated_size)
+
+        # Write to buffer
+        if preserve_order:
+            # Preserve original object order
+            all_objs = []
+            for objs in self.objects.values():
+                all_objs.extend(objs)
+
+            # Sort based on object indices
+            all_objs.sort(key=lambda x: x.obj_idx)
+
+            for obj in all_objs:
+                out_buffer.push_back(<char>b'\n')
+                obj.write_to_buffer(out_buffer, config)
+
+        else:
+            # Group by class
+            for i in range(self.idd.c_idd.ordered_classes.size()):
+                cls = &self.idd.c_idd.ordered_classes[i]
+                py_search_key = to_upper(cls.name).decode("utf-8")
+
+                if py_search_key not in self.objects:
+                    continue
+
+                # Add group separator if changed
+                if not config.compact and current_group != cls.group:
+                    current_group = cls.group
+                    if not current_group.empty():
+                        out_buffer.append(<const char*>b"\n! ***")
+                        out_buffer.append(to_upper(current_group))
+                        out_buffer.append(<const char*>b"***\n")
+
+                # Write objects
+                for obj in self.objects[py_search_key]:
+                    # Add newline
+                    out_buffer.push_back(<char>b'\n')
+                    # Write IDFObject
+                    obj.write_to_buffer(out_buffer, config)
+
+                # If compact mode, add linebreak between classes
+                if config.compact:
+                    out_buffer.push_back(<char>b'\n')
+
+    def __repr__(self):
+        cdef string out_buffer
+        self.write_to_buffer(out_buffer, &DEFAULT_FORMAT_CONFIG)
+        return out_buffer.decode("utf-8")
+
+    def format(
+        self,
+        int class_indent_size = 0,
+        int field_indent_size = 4,
+        int field_size        = 24,
+        *,
+        bint compact          = False,
+        bint preserve_order   = False,
+    ) -> str:
+        """
+        Convert IDF to str with format config
+
+        Args:
+            class_indent_size (int): Indent for class names
+            field_indent_size (int): Indent for fields
+            field_size (int): Minimum size for field values
+            compact (bint, optional): Whether to enable compact output. Overrides other style settings
+            preserve_order (bint, optional): Whether to preserve object order.
+
+        Returns:
+            str: IDF str
+        """
+        cdef const FormatConfig* config
+        cdef FormatConfig temp_config
+
+        if compact:
+            config = &MINIMAL_FORMAT_CONFIG
+        else:
+            temp_config = generate_format_config(
+                class_indent_size,
+                field_indent_size,
+                field_size,
+            )
+            config = &temp_config
+
+        cdef string out_buffer
+        self.write_to_buffer(out_buffer, config, preserve_order)
+        return out_buffer.decode("utf-8")
+
+    def save(
+        self,
+        str output_path,
+        int class_indent_size = 0,
+        int field_indent_size = 4,
+        int field_size        = 24,
+        *,
+        bint compact          = False,
+        bint preserve_order   = False,
+    ):
+        """
+        Convert IDF to str with format config
+
+        Args:
+            class_indent_size (int): Indent for class names
+            field_indent_size (int): Indent for fields
+            field_size (int): Minimum size for field values
+            compact (bint, optional): Whether to enable compact output. Overrides other style settings
+            preserve_order (bint, optional): Whether to preserve object order.
+
+        Returns:
+            str: IDF str
+        """
+        cdef const FormatConfig* config
+        cdef FormatConfig temp_config
+
+        if compact:
+            config = &MINIMAL_FORMAT_CONFIG
+        else:
+            temp_config = generate_format_config(
+                class_indent_size,
+                field_indent_size,
+                field_size,
+            )
+            config = &temp_config
+
+        cdef string out_buffer
+
+        # Add header
+        out_buffer.append(<const char*>b"! Generated using EPEdit.py\n! Saved at: ")
+        out_buffer.append(get_current_time())
+        out_buffer.push_back(<char>b'\n')
+
+        # Write IDF to buffer
+        self.write_to_buffer(out_buffer, config, preserve_order)
+
+        # Write string buffer to file
+        with open(output_path, 'wb') as f:
+            f.write(out_buffer)
