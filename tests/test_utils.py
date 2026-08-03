@@ -8,6 +8,7 @@ import utils
 def run_test():
     print(repr(utils.test_to_lower("ssd!@SFD")))
     print(repr(utils.test_to_upper("ssd!@SFD")))
+    print(repr(utils.test_equal_fold("ssd!@SFD가", "SsD!@sfD가")))
     print(repr(utils.test_trim_string("  A$ test\n\t")))
     print()
     print(repr(utils.test_has_prefix("test", "te")))

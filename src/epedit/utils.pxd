@@ -26,6 +26,25 @@ cdef inline string to_upper(string s) noexcept nogil:
             s[i] = s[i] - 32
     return s
 
+# Similar to Go's strings.EqualFold() (only for case insensitive comparison, ignores locale)
+cdef inline cbool equal_fold(const string& a, const string& b) noexcept nogil:
+    if a.size() != b.size():
+        return False
+
+    cdef size_t i
+    cdef char ca, cb
+    for i in range(a.size()):
+        ca = a[i]
+        cb = b[i]
+        if b'A' <= ca <= b'Z':
+            ca += 32
+        if b'A' <= cb <= b'Z':
+            cb += 32
+        if ca != cb:
+            return False
+
+    return True
+
 # Remove leading and trailing whitespace from a C++ string.
 cdef inline string trim_string(const string& s) noexcept nogil:
     cdef size_t first = s.find_first_not_of(b" \t\r\n")

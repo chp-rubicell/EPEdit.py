@@ -54,6 +54,8 @@ def test_to_lower(str s):
     return to_lower((<str>s).encode("utf-8")).decode("utf-8")
 def test_to_upper(str s):
     return to_upper((<str>s).encode("utf-8")).decode("utf-8")
+def test_equal_fold(str a, str b):
+    return equal_fold(a.encode("utf-8"), b.encode("utf-8"))
 def test_trim_string(str s):
     return trim_string((<str>s).encode("utf-8")).decode("utf-8")
 def test_has_prefix(str s, str prefix):
