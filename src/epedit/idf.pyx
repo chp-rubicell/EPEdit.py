@@ -16,7 +16,7 @@ from .idd cimport (
     c_IDD, IDD,
     find_field_index, get_field_name,
 )
-from .utils cimport to_lower, to_upper, any_to_string
+from .utils cimport to_lower, to_upper, equal_fold, any_to_string
 
 cdef extern from "<string>" namespace "std" nogil:
     double stod(const string& str) except +
@@ -171,9 +171,9 @@ cdef class IDFObject:
                 return None
             return ""
 
-        if field.autosizable and to_lower(deref(val_ptr)) == <const char*>b"autosize":
+        if field.autosizable and equal_fold(deref(val_ptr), <const char*>b"autosize"):
             return "Autosize"
-        elif field.autocalculatable and to_lower(deref(val_ptr)) == <const char*>b"autocalculate":
+        elif field.autocalculatable and equal_fold(deref(val_ptr), <const char*>b"autocalculate"):
             return "Autocalculate"
         elif field.field_type == FIELDTYPE_INTEGER:
             return stoi(deref(val_ptr))
@@ -221,8 +221,6 @@ cdef class IDFObject:
 cdef class IDF:
     cdef IDD idd
     cdef public dict objects  # {CLASSNAME: [IDFObject,...],...}
-    # cdef list _idf_classes  # list of IDFClasses
-    # cdef list _ordered_idf_objects  # for preserving original orders
     cdef size_t next_obj_idx
 
     # ——— Initializations ——————
@@ -298,9 +296,17 @@ cdef class IDF:
         """Get object by class name"""
         return self.objects.get(class_name.upper(), [])
 
-    def get_object_by_name(self, str class_name, str obj_name) -> IDFObject:
+    def get_object_by_name(self, str class_name, str obj_name) -> IDFObject|None:
         """Get object by first field (likely name)"""
-        pass
+        cdef string c_obj_name = obj_name.encode("utf-8")
+        cdef list candidates = self.get_objects(class_name)
+        cdef IDFObject obj
+        cdef size_t i
+        for i in range(<size_t>len(candidates)):
+            obj = candidates[i]
+            if equal_fold(obj.values[0], c_obj_name):
+                return obj
+        return None
 
     def add_object(self, str class_name, dict initial_values={}, bint default_values=True) -> IDFObject:
         """Add object to IDF"""

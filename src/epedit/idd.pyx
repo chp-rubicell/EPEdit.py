@@ -499,15 +499,6 @@ cdef int find_field_index(const ClassDef* cls, const string& field_name) noexcep
 
     return -1
 
-def test_find_field_index(IDD idd, str class_name, str field_name):
-    cdef const ClassDef* cls = &idd.c_idd.ordered_classes.at(
-        idd.c_idd.class_map[class_name.upper().encode("utf-8")]
-    )
-    cdef int field_idx = find_field_index(cls, field_name.encode("utf-8"))
-    if field_idx < 0:
-        raise ValueError
-    return field_idx
-
 
 # Get field name from index
 cdef string get_field_name(const ClassDef* cls, int field_idx, cbool add_units) noexcept nogil:
@@ -549,6 +540,18 @@ cdef string get_field_name(const ClassDef* cls, int field_idx, cbool add_units) 
         field_name += field.units
         field_name += <const char*>b"}"
     return field_name
+
+
+# * Test functions
+
+def test_find_field_index(IDD idd, str class_name, str field_name):
+    cdef const ClassDef* cls = &idd.c_idd.ordered_classes.at(
+        idd.c_idd.class_map[class_name.upper().encode("utf-8")]
+    )
+    cdef int field_idx = find_field_index(cls, field_name.encode("utf-8"))
+    if field_idx < 0:
+        raise ValueError
+    return field_idx
 
 def test_get_field_name(IDD idd, str class_name, int field_idx, bool add_units):
     cdef const ClassDef* cls = &idd.c_idd.ordered_classes.at(

@@ -27,6 +27,14 @@ def test_idf():
     print(type(obj["Vertex 10 X-coordinate"]), repr(obj["Vertex 10 X-coordinate"]))
 
     print()
+    print("== Get object test ====")
+    for obj in idf.get_objects("BuildingSurface:Detailed".lower()):
+        print(obj["Name"])
+    print()
+    print(idf.get_object_by_name("BuildingSurface:Detailed", "Core_bot_ZN_5_Wall_East"))
+    print(idf.get_object_by_name("BuildingSurface:Detailed", "asdf"))
+
+    print()
 
 if __name__ == "__main__":
     test_idf()
