@@ -1609,7 +1609,7 @@ enum __pyx_t_6epedit_5lexer_TokenType {
  * 
  * cdef struct Token:             # <<<<<<<<<<<<<<
  *     TokenType type
- *     string value
+ *     string    value
 */
 struct __pyx_t_6epedit_5lexer_Token {
   enum __pyx_t_6epedit_5lexer_TokenType type;
@@ -1617,11 +1617,11 @@ struct __pyx_t_6epedit_5lexer_Token {
 };
 
 /* "epedit/lexer.pxd":16
- *     string value
+ *     string    value
  * 
  * cdef class Lexer:             # <<<<<<<<<<<<<<
  *     cdef vector[Token] buffer  # temporary storage for tokens
- *     cdef size_t buffer_idx  # current index within the token buffer
+ *     cdef size_t        buffer_idx  # current index within the token buffer
 */
 struct __pyx_obj_6epedit_5lexer_Lexer {
   PyObject_HEAD

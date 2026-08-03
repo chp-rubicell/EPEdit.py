@@ -23,11 +23,44 @@ cdef extern from "<string>" namespace "std" nogil:
     int stoi(const string& str) except +
 
 
+# * Export config definition
+
+# Export format setting
+cdef struct FormatConfig:
+    string class_indent  # indent for class names
+    string field_indent  # indent for fields
+    size_t field_size    # minimum size for field values
+    cbool  compact       # compact mode
+
+cdef inline FormatConfig generate_format_config(
+    size_t class_indent_size = 0,
+    size_t field_indent_size = 4,
+    size_t field_size        = 24,
+) noexcept nogil:
+    cdef FormatConfig config
+
+    config.class_indent = string(class_indent_size, <char>b' ')
+    config.field_indent = string(field_indent_size, <char>b' ')
+    config.field_size   = field_size
+    config.compact      = False
+
+    return config
+
+cdef FormatConfig DEFAULT_FORMAT_CONFIG = generate_format_config()
+
+cdef FormatConfig MINIMAL_FORMAT_CONFIG = FormatConfig(
+    class_indent = b'',
+    field_indent = b'',
+    field_size   = 0,
+    compact      = True,
+)
+
+
 # * C-level IDFObject definition
 
 # C level temporary object for fast processing
 cdef struct c_IDFObject:
-    string class_name
+    string         class_name
     vector[string] values
 
 
@@ -94,20 +127,16 @@ cdef int parse_idf(Lexer lexer, vector[c_IDFObject]& c_idf_objects) except -1 no
 # * Python-level IDFObject definition
 
 cdef class IDFObject:
-    cdef IDD idd
-    cdef size_t class_idx
-    cdef vector[string] values
+    cdef IDD             idd
+    cdef size_t          class_idx
+    cdef string          c_class_name
+    cdef readonly str    class_name
+    cdef vector[string]  values
     cdef readonly size_t obj_idx  # for preserve_order option (readonly for Python sort() function)
 
     # Inline function for getting ClassDef pointer
     cdef inline const ClassDef* get_class_def(self) noexcept nogil:
         return &self.idd.c_idd.ordered_classes[self.class_idx]
-
-    # ——— Properties ——————
-
-    @property
-    def class_name(self) -> str:
-        return self.get_class_def().name.decode("utf-8")
 
     # ——— Initializations ——————
 
@@ -115,6 +144,8 @@ cdef class IDFObject:
     cdef void c_init(self, IDD idd, size_t class_idx, vector[string]& values) noexcept:
         self.idd = idd
         self.class_idx = class_idx
+        self.c_class_name = self.get_class_def().name
+        self.class_name = self.c_class_name.decode("utf-8")
         self.values = move(values)
 
     def __init__(self, IDD idd, str class_name):
@@ -247,16 +278,86 @@ cdef class IDFObject:
         if trim_empty_trails:
             self.trim_trailing_empty_fields()
 
-    # ——— File write ——————
-    # TODO
+    # ——— Export ——————
+
+    cdef void write_to_buffer(
+        self,
+        string& out_buffer,
+        const FormatConfig* config
+    ):
+        cdef const ClassDef* cls = self.get_class_def()
+        cdef size_t i
+        cdef const string* val_ptr
+
+        cdef string linebreak = <const char*>b"\n"
+        if config.compact:
+            linebreak = <const char*>b""
+
+        # 1. Print class name
+        out_buffer.append(config.class_indent)
+        out_buffer.append(self.c_class_name)
+
+        # 2. Find last field with non-empty value
+        cdef int last_idx = -1
+        for i in range(self.values.size()-1, -1, -1):
+            if not self.values[i].empty():
+                last_idx = <int>i
+                break
+
+        # 3. If all fields are empty, print ';' and return
+        if last_idx < 0:
+            out_buffer.append(<const char*>b";")
+            out_buffer.append(linebreak)
+            return
+
+        # 4. If not, print ','
+        out_buffer.append(<const char*>b",")
+
+        # 5. Print until last_idx
+        for i in range(<size_t>last_idx):
+            val_ptr = &self.values[i]
+
+            # Add field indent
+            out_buffer.append(config.field_indent)
+
+            # Add field value
+            out_buffer.append(deref(val_ptr))
+
+            if i == <size_t>last_idx:
+                # If last field, add semicolon
+                out_buffer.append(<const char*>b";")
+            else:
+                out_buffer.append(<const char*>b",")
+
+            # Add padding
+            if not config.compact and config.field_size > 0:
+                if val_ptr.size() <= config.field_size:
+                    # add spaces to fit config.field_size
+                    out_buffer.append(config.field_size - val_ptr.size(), <char>b' ')
+                else:
+                    # add two spaces
+                    out_buffer.append(<const char*>b"  ")
+
+            # Comment string
+            if not config.compact:
+                out_buffer.append(<const char*>b"!- ")
+                out_buffer.append(get_field_name(cls, i, True))
+
+            # Linebreak
+            out_buffer.append(linebreak)
+
+    def __repr__(self):
+        cdef string out_buffer
+        self.write_to_buffer(out_buffer, &DEFAULT_FORMAT_CONFIG)
+        return out_buffer.decode("utf-8")
 
 
 # * Python-level IDF definition
 
 cdef class IDF:
-    cdef IDD idd
+    cdef IDD         idd
     cdef public dict objects  # {CLASSNAME: [IDFObject,...],...}
-    cdef size_t next_obj_idx
+    cdef size_t      next_obj_idx
 
     # ——— Initializations ——————
 

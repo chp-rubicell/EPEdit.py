@@ -1598,7 +1598,7 @@ enum __pyx_t_6epedit_5lexer_TokenType {
  * 
  * cdef struct Token:             # <<<<<<<<<<<<<<
  *     TokenType type
- *     string value
+ *     string    value
 */
 struct __pyx_t_6epedit_5lexer_Token {
   enum __pyx_t_6epedit_5lexer_TokenType type;
@@ -1742,11 +1742,11 @@ enum __pyx_t_6epedit_3idd_ParseState {
 };
 
 /* "lexer.pxd":16
- *     string value
+ *     string    value
  * 
  * cdef class Lexer:             # <<<<<<<<<<<<<<
  *     cdef vector[Token] buffer  # temporary storage for tokens
- *     cdef size_t buffer_idx  # current index within the token buffer
+ *     cdef size_t        buffer_idx  # current index within the token buffer
 */
 struct __pyx_obj_6epedit_5lexer_Lexer {
   PyObject_HEAD
@@ -1777,11 +1777,11 @@ struct __pyx_obj_6epedit_3idd_IDD {
 
 
 /* "lexer.pxd":16
- *     string value
+ *     string    value
  * 
  * cdef class Lexer:             # <<<<<<<<<<<<<<
  *     cdef vector[Token] buffer  # temporary storage for tokens
- *     cdef size_t buffer_idx  # current index within the token buffer
+ *     cdef size_t        buffer_idx  # current index within the token buffer
 */
 
 struct __pyx_vtabstruct_6epedit_5lexer_Lexer {
@@ -5359,14 +5359,14 @@ static CYTHON_INLINE void __pyx_f_6epedit_3idd_add_new_class(struct __pyx_t_6epe
  *     new_class.extensible.begin_index   = -1
  *     new_class.extensible.size          = -1             # <<<<<<<<<<<<<<
  * 
- *     c_idd.ordered_classes.push_back(new_class)
+ *     c_idd.ordered_classes.push_back(new_class)  # TODO use move()
 */
   __pyx_v_new_class.extensible.size = -1;
 
   /* "epedit/idd.pyx":138
  *     new_class.extensible.size          = -1
  * 
- *     c_idd.ordered_classes.push_back(new_class)             # <<<<<<<<<<<<<<
+ *     c_idd.ordered_classes.push_back(new_class)  # TODO use move()             # <<<<<<<<<<<<<<
  *     current_class_idx = <int>(c_idd.ordered_classes.size() - 1)
  *     # add to class_map (for fast searching)
 */
@@ -5381,7 +5381,7 @@ static CYTHON_INLINE void __pyx_f_6epedit_3idd_add_new_class(struct __pyx_t_6epe
 
   /* "epedit/idd.pyx":139
  * 
- *     c_idd.ordered_classes.push_back(new_class)
+ *     c_idd.ordered_classes.push_back(new_class)  # TODO use move()
  *     current_class_idx = <int>(c_idd.ordered_classes.size() - 1)             # <<<<<<<<<<<<<<
  *     # add to class_map (for fast searching)
  *     c_idd.class_map[to_upper(new_class.name)] = current_class_idx

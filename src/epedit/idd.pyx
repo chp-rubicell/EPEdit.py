@@ -135,7 +135,7 @@ cdef inline void add_new_class(
     new_class.extensible.begin_index   = -1
     new_class.extensible.size          = -1
 
-    c_idd.ordered_classes.push_back(new_class)
+    c_idd.ordered_classes.push_back(new_class)  # TODO use move()
     current_class_idx = <int>(c_idd.ordered_classes.size() - 1)
     # add to class_map (for fast searching)
     c_idd.class_map[to_upper(new_class.name)] = current_class_idx
