@@ -217,9 +217,12 @@ cdef class IDFObject:
         Update multiple field values
 
         Args:
-            values (list | dict): [value] or {field_idx: value} or {field_name: value}
+            values (None | list | dict): [value] or {field_idx: value} or {field_name: value}
         """
-        cdef const ClassDef* cls  = self.get_class_def()
+        if values is None:
+            return
+
+        cdef const ClassDef* cls = self.get_class_def()
         cdef int idx
         cdef int max_idx = -1
         cdef list pending_updates = []  # precompute field_idx and validity check
@@ -340,7 +343,7 @@ cdef class IDF:
                 return obj
         return None
 
-    def add_object(self, str class_name, dict initial_values={}, bint default_values=True) -> IDFObject:
+    def add_object(self, str class_name, dict initial_values=None, bint default_values=True) -> IDFObject:
         """
         Add object to IDF
 
