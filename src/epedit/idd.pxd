@@ -75,3 +75,5 @@ cdef int resolve_key_to_field_index(const ClassDef* cls, object key) except -1
 
 # Get field name from index
 cdef string get_field_name(const ClassDef* cls, int field_idx, cbool add_units) noexcept nogil
+
+cdef const FieldDef* get_field_def(const ClassDef* cls, size_t field_idx) noexcept nogil

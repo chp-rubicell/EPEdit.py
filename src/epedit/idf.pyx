@@ -14,7 +14,7 @@ from .lexer cimport (
 from .idd cimport (
     ExtensibleDef, FIELDTYPE_INTEGER, FIELDTYPE_REAL, FieldDef, ClassDef,
     c_IDD, IDD,
-    find_field_index, resolve_key_to_field_index, get_field_name,
+    find_field_index, resolve_key_to_field_index, get_field_name, get_field_def,
 )
 from .utils cimport to_lower, to_upper, equal_fold, any_to_string
 
@@ -100,7 +100,7 @@ cdef class IDFObject:
     cdef readonly size_t obj_idx  # for preserve_order option (readonly for Python sort() function)
 
     # Inline function for getting ClassDef pointer
-    cdef inline ClassDef* get_class_def(self) noexcept nogil:
+    cdef inline const ClassDef* get_class_def(self) noexcept nogil:
         return &self.idd.c_idd.ordered_classes[self.class_idx]
 
     # ——— Properties ——————
@@ -148,18 +148,7 @@ cdef class IDFObject:
         """
         cdef const ClassDef* cls = self.get_class_def()
         cdef int idx = resolve_key_to_field_index(cls, key)
-
-        cdef int base_idx = idx
-        cdef const ExtensibleDef* ext = &cls.extensible
-        if (
-            ext.is_extensible
-            and ext.begin_index >= 0
-            and ext.size > 0
-            and idx > ext.begin_index + ext.size
-        ):
-            base_idx = ext.begin_index + (idx - ext.begin_index) % ext.size
-
-        cdef const FieldDef* field = &cls.fields[base_idx]
+        cdef const FieldDef* field = get_field_def(cls, <size_t>idx)
 
         cdef const string* val_ptr = NULL
         if idx < <int>self.values.size():
@@ -191,6 +180,9 @@ cdef class IDFObject:
                 return 0
             # Resize self.values
             self.values.resize(field_idx+1, <const char*>b"")
+
+        cdef const ClassDef* cls = self.get_class_def()
+        cdef const FieldDef* field = &cls.fields[field_idx]
 
         self.values[field_idx] = value
         return 0
@@ -356,7 +348,7 @@ cdef class IDF:
             IDFObject: Generated IDFObject.
         """
         cdef IDFObject new_obj = IDFObject(self.idd, class_name)
-        cdef ClassDef* cls = new_obj.get_class_def()
+        cdef const ClassDef* cls = new_obj.get_class_def()
 
         # Reserve self.values if min_fields is defined
         if cls.min_fields > 0:

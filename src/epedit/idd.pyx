@@ -564,6 +564,24 @@ cdef string get_field_name(const ClassDef* cls, int field_idx, cbool add_units) 
     return field_name
 
 
+# Get FieldDef from field index
+cdef const FieldDef* get_field_def(const ClassDef* cls, size_t field_idx) noexcept nogil:
+    cdef size_t base_idx = field_idx
+    cdef const ExtensibleDef* ext = &cls.extensible
+    if (
+        ext.is_extensible
+        and ext.begin_index >= 0
+        and ext.size > 0
+        and field_idx >= <size_t>(ext.begin_index + ext.size)
+    ):
+        base_idx = <size_t>ext.begin_index + (field_idx - <size_t>ext.begin_index) % <size_t>ext.size
+
+    if base_idx >= cls.fields.size():
+        return NULL
+
+    return &cls.fields[base_idx]
+
+
 # * Test functions
 
 def test_find_field_index(IDD idd, str class_name, str field_name):
