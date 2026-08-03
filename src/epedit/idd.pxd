@@ -70,5 +70,8 @@ cdef class IDD:
 # Get index from field name (case-insensitive)
 cdef int find_field_index(const ClassDef* cls, const string& field_name) noexcept nogil
 
+# Get index from key(int or str) with error handling
+cdef int resolve_key_to_field_index(const ClassDef* cls, object key) except -1
+
 # Get field name from index
 cdef string get_field_name(const ClassDef* cls, int field_idx, cbool add_units) noexcept nogil

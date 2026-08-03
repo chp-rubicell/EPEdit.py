@@ -27,9 +27,21 @@ def test_idf():
     print(type(obj["Vertex 10 X-coordinate"]), repr(obj["Vertex 10 X-coordinate"]))
 
     print()
+    print("== Set multiple values test ====")
+    obj.update({
+        98: 12.3,  # Vertex 30 X-coordinate
+        "Vertex 30 Y-coordinate": 12.4,
+        99: 12.45,  # Vertex 30 Y-coordinate
+        "Vertex 30 Z-coordinate": 12.5,
+        101: "",
+    })
+    print(obj["Vertex 30 X-coordinate"], obj["Vertex 30 Y-coordinate"], obj["Vertex 30 Z-coordinate"], obj["Vertex 31 X-coordinate"])
+
+    print()
     print("== Get object test ====")
-    for obj in idf.get_objects("BuildingSurface:Detailed".lower()):
-        print(obj["name"])
+    objs = idf.get_objects("BuildingSurface:Detailed".lower())
+    print(len(objs))
+    print([obj['name'] for obj in objs[:10]] + ["..."])
     print()
     print(idf.get_object_by_name("BuildingSurface:Detailed", "Core_bot_ZN_5_Wall_East"))
     print(idf.get_object_by_name("BuildingSurface:Detailed", "asdf"))

@@ -500,6 +500,28 @@ cdef int find_field_index(const ClassDef* cls, const string& field_name) noexcep
     return -1
 
 
+# Get index from key(int or str) with error handling
+cdef int resolve_key_to_field_index(const ClassDef* cls, object key) except -1:
+    cdef int idx = -1
+
+    if isinstance(key, int):
+        idx = key
+        if idx < 0:
+            raise KeyError("Field index should be >= 0.")
+        if not cls.extensible.is_extensible and idx >= <int>cls.fields.size():
+            raise IndexError(f"Index {idx} out of range. '{cls.name.decode('utf-8')}' has max {cls.fields.size()} fields.")
+
+    elif isinstance(key, str):
+        idx = find_field_index(cls, key.encode("utf-8"))
+        if idx < 0:
+            raise KeyError(f"Field '{key}' not found in class '{cls.name.decode('utf-8')}'.")
+
+    else:
+        raise TypeError(f"Invalid key type: {type(key).__name__}. Expected int or str")
+
+    return idx
+
+
 # Get field name from index
 cdef string get_field_name(const ClassDef* cls, int field_idx, cbool add_units) noexcept nogil:
     if cls == NULL or field_idx < 0:

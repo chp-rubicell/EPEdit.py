@@ -14,7 +14,7 @@ from .lexer cimport (
 from .idd cimport (
     ExtensibleDef, FIELDTYPE_INTEGER, FIELDTYPE_REAL, FieldDef, ClassDef,
     c_IDD, IDD,
-    find_field_index, get_field_name,
+    find_field_index, resolve_key_to_field_index, get_field_name,
 )
 from .utils cimport to_lower, to_upper, equal_fold, any_to_string
 
@@ -134,19 +134,20 @@ cdef class IDFObject:
 
         self.c_init(idd, class_idx, empty_values)
 
-    # ——— Magic methods ——————
+    # ——— Retrieve or update field values ——————
 
     def __getitem__(self, key):
+        """
+        Get item from key
+
+        Args:
+            key (int | str): field index or field name.
+
+        Returns:
+            str | int | float: field value based on field_type.
+        """
         cdef const ClassDef* cls = self.get_class_def()
-        cdef int idx = -1
-        if isinstance(key, int):
-            idx = key
-            if idx < 0:
-                raise KeyError("Field index should be >= 0.")
-        elif isinstance(key, str):
-            idx = find_field_index(cls, key.encode("utf-8"))
-            if idx < 0:
-                raise KeyError(f"Field '{key}' not found in class '{self.class_name}'.")
+        cdef int idx = resolve_key_to_field_index(cls, key)
 
         cdef int base_idx = idx
         cdef const ExtensibleDef* ext = &cls.extensible
@@ -182,35 +183,66 @@ cdef class IDFObject:
 
         return deref(val_ptr).decode("utf-8")
 
-    def __setitem__(self, key, value):
-        cdef const ClassDef* cls = self.get_class_def()
-        cdef int idx = -1
-        if isinstance(key, int):
-            idx = key
-        elif isinstance(key, str):
-            idx = find_field_index(cls, key.encode("utf-8"))
-
-        if idx < 0:
-            raise KeyError(f"Field '{key}' not found in class '{self.class_name}'.")
-
+    # Set value of field using field index
+    cdef int set_by_index(self, int field_idx, object value) except -1:
         # If value is None or empty string, don't resize self.values
         if value is None or value == "":
             # adding empty value
-            if idx >= <int>self.values.size():
-                return
-            elif idx == <int>self.values.size() - 1:
+            if field_idx >= <int>self.values.size():
+                return 0
+            elif field_idx == <int>self.values.size() - 1:
                 self.values.pop_back()
                 # TODO: consider shrinking self.values array size
                 # while not self.values.empty() and self.values.back().empty():
                 #     self.values.pop_back()
             else:
-                self.values[idx] = <const char*>b""
+                self.values[field_idx] = <const char*>b""
+            return 0
 
         # Resize self.values
-        if idx >= <int>self.values.size():
-            self.values.resize(idx+1, <const char*>b"")
+        if field_idx >= <int>self.values.size():
+            self.values.resize(field_idx+1, <const char*>b"")
 
-        self.values[idx] = any_to_string(value)
+        self.values[field_idx] = any_to_string(value)
+        return 0
+
+    def __setitem__(self, key, value):
+        cdef const ClassDef* cls = self.get_class_def()
+        cdef int idx = resolve_key_to_field_index(cls, key)
+
+        self.set_by_index(idx, value)
+
+    def update(self, values):
+        """
+        Update multiple field values
+
+        Args:
+            values (list | dict): [value] or {field_idx: value} or {field_name: value}
+        """
+        cdef const ClassDef* cls  = self.get_class_def()
+        cdef int idx
+        cdef int max_idx = -1
+        cdef list pending_updates = []  # precompute field_idx and validity check
+
+        if isinstance(values, list):
+            for i, value in enumerate(values):
+                pending_updates.append((i, value))
+            max_idx = len(values)
+        elif isinstance(values, dict):
+            for key, value in values.items():
+                idx = resolve_key_to_field_index(cls, key)
+                pending_updates.append((idx, value))
+                if idx > max_idx:
+                    max_idx = idx
+        else:
+            raise TypeError(f"Invalid values type: {type(values).__name__}. Expected list or dict")
+
+        # Memory pre-allocation
+        if max_idx >= <int>self.values.size():
+            self.values.reserve(max_idx + 1)
+
+        for idx, value in pending_updates:
+            self.set_by_index(idx, value)
 
     # ——— File write ——————
     # TODO
