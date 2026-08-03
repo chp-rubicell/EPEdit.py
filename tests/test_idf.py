@@ -74,5 +74,18 @@ def test_idf():
 
     print()
 
+def test_idf_write():
+    idd = IDD.from_file("./idds/V24-2-0-Energy+.idd")
+    idf = IDF.from_file(idd, "./files/RefBldgMediumOfficeNew2004_Chicago.idf")
+
+    obj = idf.get_objects("BuildingSurface:Detailed".lower())[0]
+    obj["Vertex 4 X-coordinate"] = 0.0
+    obj["Vertex 4 Y-coordinate"] = 0.0
+    print(obj)
+
+    new_obj = idf.add_object("BuildingSurface:Detailed", default_values=False)
+    print(new_obj)
+
 if __name__ == "__main__":
-    test_idf()
+    # test_idf()
+    test_idf_write()
