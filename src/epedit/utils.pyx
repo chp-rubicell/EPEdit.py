@@ -1,5 +1,6 @@
 # distutils: language = c++
 
+from libc.time cimport time, time_t, tm, localtime, strftime
 from libcpp.string cimport string
 from libcpp cimport bool as cbool
 
@@ -50,6 +51,22 @@ cdef (int, int) get_continuous_digits_indices(const string& name) noexcept nogil
 
     return start_idx, end_idx
 
+# Get current time as string
+cdef string get_current_time() noexcept nogil:
+    # Get current time as seconds
+    cdef time_t rawtime
+    time(&rawtime)
+    # Convert to local time structure (struct tm)
+    cdef tm* timeinfo = localtime(&rawtime)
+    # Prepare a C char array ("YYYY-MM-DD HH:MM:SS" + null terminator \0)
+    cdef char buffer[25]
+    # Format time
+    cdef size_t written_len
+    written_len = strftime(buffer, 25, b"%Y-%m-%d %H:%M:%S", timeinfo)
+    if written_len <= 0:
+        return string(b"")
+    return string(<const char*>buffer, written_len)
+
 def test_to_lower(str s):
     return to_lower((<str>s).encode("utf-8")).decode("utf-8")
 def test_to_upper(str s):
@@ -84,3 +101,5 @@ def test_cut_suffix(str s, str suffix):
         (<str>suffix).encode("utf-8"),
     )
     return (after.decode("utf-8"), found)
+def test_get_current_time():
+    return get_current_time().decode("utf-8")

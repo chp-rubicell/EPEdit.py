@@ -6,6 +6,7 @@ from libcpp cimport bool as cbool
 
 cdef string any_to_string(object value) except *  #TODO
 cdef (int, int) get_continuous_digits_indices(const string& name) noexcept nogil
+cdef string get_current_time() noexcept nogil
 
 
 # * Inline function declarations
