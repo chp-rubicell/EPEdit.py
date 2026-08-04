@@ -16,7 +16,10 @@ from .idd cimport (
     c_IDD, IDD,
     find_field_index, resolve_key_to_field_index, get_field_name, get_field_def,
 )
-from .utils cimport to_lower, to_upper, equal_fold, any_to_string, get_current_time, read_utf8_bytes
+from .utils cimport (
+    to_lower, to_upper, equal_fold, trim_string,
+    any_to_string, get_current_time, read_utf8_bytes
+)
 
 cdef extern from "<string>" namespace "std" nogil:
     double stod(const string& str) except +
@@ -682,7 +685,7 @@ cdef class IDF:
 
         cdef string out_buffer
         self.write_to_buffer(out_buffer, config, preserve_order)
-        return out_buffer.decode("utf-8")
+        return trim_string(out_buffer).decode("utf-8")
 
     def save(
         self,
