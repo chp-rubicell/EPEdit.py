@@ -4,6 +4,7 @@ from libc.stdlib cimport atoi
 from libcpp.string cimport string, npos
 from libcpp.vector cimport vector
 from libcpp.unordered_map cimport unordered_map
+from libcpp.utility cimport move
 from libcpp cimport bool as cbool
 
 cdef extern from "<string>" namespace "std" nogil:
@@ -135,10 +136,10 @@ cdef inline void add_new_class(
     new_class.extensible.begin_index   = -1
     new_class.extensible.size          = -1
 
-    c_idd.ordered_classes.push_back(new_class)  # TODO use move()
+    c_idd.ordered_classes.push_back(move(new_class))
     current_class_idx = <int>(c_idd.ordered_classes.size() - 1)
     # add to class_map (for fast searching)
-    c_idd.class_map[to_upper(new_class.name)] = current_class_idx
+    c_idd.class_map[to_upper(class_name)] = current_class_idx
 
     current_field_idx = -1
 
@@ -173,6 +174,7 @@ cdef inline void add_new_field(
         new_field.required         = False
         new_field.autosizable      = False
         new_field.autocalculatable = False
+        new_field.field_type       = FIELDTYPE_DEFAULT
 
         current_class.fields.push_back(new_field)
         current_field_idx = <int>(current_class.fields.size() - 1)
@@ -382,6 +384,9 @@ cdef int parse_idd(Lexer lexer, c_IDD& c_idd) except -1 nogil:
         fix_missing_begin_index(c_idd.ordered_classes[i])
         build_indices(c_idd.ordered_classes[i])
 
+    # Add version info (default value of the first field in Version class)
+    c_idd.version = c_idd.ordered_classes[c_idd.class_map[<const char*>b"VERSION"]].fields[0].default_val
+
     return 0
 
 
@@ -420,6 +425,9 @@ cdef class IDD:
         for i in range(num_classes):
             cls = &self.c_idd.ordered_classes[i]
             self.py_class_names_upper[i] = to_upper(cls.name).decode("utf-8")
+
+        # Update version info
+        self.version = self.c_idd.version.decode("utf-8")
 
         # Flag as initialized
         self.initialized = True

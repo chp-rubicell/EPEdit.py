@@ -66,6 +66,7 @@ cdef class IDD:
     cdef c_IDD c_idd
     cdef cbool initialized  # to check if already initialized
     cdef list  py_class_names_upper  # precache Python str of uppercase class names
+    cdef readonly str version
 
 # Get index from field name (case-insensitive)
 cdef int find_field_index(const ClassDef* cls, const string& field_name) noexcept nogil

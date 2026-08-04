@@ -181,8 +181,8 @@ def test_save():
     idf.save("./files/ExportTest.idf")
 
 if __name__ == "__main__":
-    # test_idf()
+    test_idf()
     # test_idf_format()
-    test_idf_tuple()
+    # test_idf_tuple()
     # measure_idf_format_size()
     # test_save()

@@ -367,6 +367,7 @@ class IDFObjectTuple(tuple):
             raise AttributeError("This is a read-only tuple. To add new objects, use the idf.add_object() method.")
         elif name in {"remove", "pop", "clear"}:
             raise AttributeError("This is a read-only tuple. To remove objects, use the idf.remove_objects() or idf.remove_all_objects() methods.")
+        raise AttributeError(f"'{type(self).__name__}' object has no attribute '{name}'")
 
 
 # * Python-level IDF definition
@@ -383,7 +384,7 @@ cdef class IDF:
         self.objects = {}
 
         # Initialize lexer
-        cdef Lexer lexer = Lexer(idf_content, True)
+        cdef Lexer lexer = Lexer(idf_content, False)  # turn off IDD mode
 
         cdef vector[c_IDFObject] c_objects
 
@@ -456,7 +457,8 @@ cdef class IDF:
 
     def get_objects(self, str class_name) -> IDFObjectTuple:
         """
-        Get tuple of IDFObjects from class name
+        Get tuple of IDFObjects from class name.
+        Alias of IDF[class_name]
 
         Args:
             class_name (str): class name.
@@ -464,12 +466,16 @@ cdef class IDF:
         Returns:
             IDFObjectTuple[IDFObject, ...]: tuple of IDFObjects.
         """
-        return IDFObjectTuple(self.objects.get(class_name.upper(), []))
+        return IDFObjectTuple(self.get_objects_raw(class_name))
+
+    # For internal use, invisible to user
+    cdef list get_objects_raw(self, str class_name):
+        return self.objects.get(class_name.upper(), [])
 
     def get_object_by_name(self, str class_name, str obj_name) -> IDFObject|None:
         """Get object by first field (likely name)"""
         cdef string c_obj_name = obj_name.encode("utf-8")
-        cdef list candidates = self.get_objects(class_name)
+        cdef list candidates = self.get_objects_raw(class_name)
         cdef IDFObject obj
         cdef size_t i
         for i in range(<size_t>len(candidates)):
@@ -635,12 +641,12 @@ cdef class IDF:
 
     def format(
         self,
-        int class_indent_size = 0,
-        int field_indent_size = 4,
-        int field_size        = 24,
+        int  class_indent_size = 0,
+        int  field_indent_size = 4,
+        int  field_size        = 24,
         *,
-        bint compact          = False,
-        bint preserve_order   = False,
+        bint compact           = False,
+        bint preserve_order    = False,
     ) -> str:
         """
         Convert IDF to str with format config
@@ -674,13 +680,14 @@ cdef class IDF:
 
     def save(
         self,
-        str output_path,
-        int class_indent_size = 0,
-        int field_indent_size = 4,
-        int field_size        = 24,
+        str  output_path,
+        int  class_indent_size = 0,
+        int  field_indent_size = 4,
+        int  field_size        = 24,
         *,
-        bint compact          = False,
-        bint preserve_order   = False,
+        bint compact           = False,
+        bint preserve_order    = False,
+        bint include_timestamp = True,
     ):
         """
         Convert IDF to str with format config
@@ -711,9 +718,11 @@ cdef class IDF:
         cdef string out_buffer
 
         # Add header
-        out_buffer.append(<const char*>b"! Generated using EPEdit.py\n! Saved at: ")
-        out_buffer.append(get_current_time())
-        out_buffer.push_back(<char>b'\n')
+        out_buffer.append(<const char*>b"! Generated using EPEdit.py\n")
+        if include_timestamp:
+            out_buffer.append(<const char*>b"! Saved at: ")
+            out_buffer.append(get_current_time())
+            out_buffer.push_back(<char>b'\n')
 
         # Write IDF to buffer
         self.write_to_buffer(out_buffer, config, preserve_order)
