@@ -173,13 +173,13 @@ cdef class IDFObject:
 
     def __getitem__(self, key):
         """
-        Get item from key
+        Get field value by key
 
         Args:
-            key (int | str): field index or field name.
+            key (int | str): field index or field name (case-insensitive)
 
         Returns:
-            str | int | float: field value based on field_type.
+            str | int | float: field value based on field_type
         """
         cdef const ClassDef* cls = self.get_class_def()
         cdef int idx = resolve_key_to_field_index(cls, key)
@@ -237,6 +237,13 @@ cdef class IDFObject:
             self.values.pop_back()
 
     def __setitem__(self, key, value):
+        """
+        Set field value by key
+
+        Args:
+            key (int | str): field index or field name (case-insensitive)
+            value (bool | int | float | str | None)
+        """
         cdef const ClassDef* cls = self.get_class_def()
         cdef int idx = resolve_key_to_field_index(cls, key)
 
@@ -249,6 +256,7 @@ cdef class IDFObject:
 
         Args:
             values (None | list | dict): [value] or {field_idx: value} or {field_name: value}
+            trim_empty_trails (bool, optional): Whether to trim trailing empty fields
         """
         if values is None:
             return
@@ -457,10 +465,10 @@ cdef class IDF:
         Get tuple of IDFObjects from class name
 
         Args:
-            class_name (str): class name.
+            class_name (str): class name (case-insensitive)
 
         Returns:
-            IDFObjectTuple[IDFObject, ...]: tuple of IDFObjects.
+            IDFObjectTuple[IDFObject, ...]: tuple of IDFObjects
         """
         return self.get_objects(class_name)
 
@@ -470,10 +478,10 @@ cdef class IDF:
         Alias of IDF[class_name]
 
         Args:
-            class_name (str): class name.
+            class_name (str): class name (case-insensitive)
 
         Returns:
-            IDFObjectTuple[IDFObject, ...]: tuple of IDFObjects.
+            IDFObjectTuple[IDFObject, ...]: tuple of IDFObjects
         """
         return IDFObjectTuple(self.get_objects_raw(class_name))
 
@@ -498,7 +506,7 @@ cdef class IDF:
         Add object to IDF
 
         Returns:
-            IDFObject: Generated IDFObject.
+            IDFObject: Generated IDFObject
         """
         cdef IDFObject new_obj = IDFObject(self.idd, class_name)
         cdef const ClassDef* cls = new_obj.get_class_def()
@@ -665,7 +673,7 @@ cdef class IDF:
             field_indent_size (int): Indent for fields
             field_size (int): Minimum size for field values
             compact (bint, optional): Whether to enable compact output. Overrides other style settings
-            preserve_order (bint, optional): Whether to preserve object order.
+            preserve_order (bint, optional): Whether to preserve object order
 
         Returns:
             str: IDF str
@@ -706,7 +714,7 @@ cdef class IDF:
             field_indent_size (int): Indent for fields
             field_size (int): Minimum size for field values
             compact (bint, optional): Whether to enable compact output. Overrides other style settings
-            preserve_order (bint, optional): Whether to preserve object order.
+            preserve_order (bint, optional): Whether to preserve object order
 
         Returns:
             str: IDF str

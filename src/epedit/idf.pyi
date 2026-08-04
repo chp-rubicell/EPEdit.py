@@ -14,17 +14,24 @@ class IDFObject:
 
     def __getitem__(self, key: int|str):
         """
-        Get item from key
+        Get field value by key
 
         Args:
-            key (int | str): field index or field name.
+            key (int | str): field index or field name (case-insensitive)
 
         Returns:
-            str | int | float: field value based on field_type.
+            str | int | float: field value based on field_type
         """
         ...
 
-    def __setitem__(self, key: int|str, value: None|bool|int|float|str):
+    def __setitem__(self, key: int|str, value: bool|int|float|str|None):
+        """
+        Set field value by key
+
+        Args:
+            key (int | str): field index or field name (case-insensitive)
+            value (bool | int | float | str | None)
+        """
         ...
 
     def update(self, values: None|list|dict, trim_empty_trails: bool = True):
@@ -33,6 +40,7 @@ class IDFObject:
 
         Args:
             values (None | list | dict): [value] or {field_idx: value} or {field_name: value}
+            trim_empty_trails (bool, optional): Whether to trim trailing empty fields
         """
         ...
 
@@ -80,10 +88,10 @@ class IDF:
         Get tuple of IDFObjects from class name
 
         Args:
-            class_name (str): class name.
+            class_name (str): class name (case-insensitive)
 
         Returns:
-            IDFObjectTuple[IDFObject, ...]: tuple of IDFObjects.
+            IDFObjectTuple[IDFObject, ...]: tuple of IDFObjects
         """
         return self.get_objects(class_name)
 
@@ -92,10 +100,10 @@ class IDF:
         Get tuple of IDFObjects from class name
 
         Args:
-            class_name (str): class name.
+            class_name (str): class name (case-insensitive)
 
         Returns:
-            IDFObjectTuple[IDFObject, ...]: tuple of IDFObjects.
+            IDFObjectTuple[IDFObject, ...]: tuple of IDFObjects
         """
         return IDFObjectTuple(self.objects.get(class_name.upper(), []))
 
@@ -108,7 +116,7 @@ class IDF:
         Add object to IDF
 
         Returns:
-            IDFObject: Generated IDFObject.
+            IDFObject: Generated IDFObject
         """
         ...
 
@@ -152,7 +160,7 @@ class IDF:
             field_indent_size (int): Indent for fields
             field_size (int): Minimum size for field values
             compact (bint, optional): Whether to enable compact output. Overrides other style settings
-            preserve_order (bint, optional): Whether to preserve object order.
+            preserve_order (bint, optional): Whether to preserve object order
 
         Returns:
             str: IDF str
@@ -177,7 +185,7 @@ class IDF:
             field_indent_size (int): Indent for fields
             field_size (int): Minimum size for field values
             compact (bint, optional): Whether to enable compact output. Overrides other style settings
-            preserve_order (bint, optional): Whether to preserve object order.
+            preserve_order (bint, optional): Whether to preserve object order
 
         Returns:
             str: IDF str
