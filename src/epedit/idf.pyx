@@ -357,12 +357,24 @@ cdef class IDFObject:
         return out_buffer.decode("utf-8")
 
 
+# * Tuple of IDFObjects for usability (error handling)
+
+class IDFObjectTuple(tuple):
+    """tuple of IDFObjects with custom error messages"""
+    def __getattr__(self, name):
+        # Add-type
+        if name in {"append", "extend", "insert"}:
+            raise AttributeError("This is a read-only tuple. To add new objects, use the idf.add_object() method.")
+        elif name in {"remove", "pop", "clear"}:
+            raise AttributeError("This is a read-only tuple. To remove objects, use the idf.remove_objects() or idf.remove_all_objects() methods.")
+
+
 # * Python-level IDF definition
 
 cdef class IDF:
-    cdef IDD         idd
-    cdef public dict objects  # {CLASSNAME: [IDFObject,...],...}
-    cdef size_t      next_obj_idx
+    cdef IDD    idd
+    cdef dict   objects  # {CLASSNAME: [IDFObject,...],...}
+    cdef size_t next_obj_idx
 
     # ——— Initializations ——————
 
@@ -430,9 +442,29 @@ cdef class IDF:
 
     # ——— IDF manipulation API (Create, Update, Delete) ——————
 
-    def get_objects(self, str class_name) -> list:
-        """Get object by class name"""
-        return self.objects.get(class_name.upper(), [])
+    def __getitem__(self, str class_name) -> IDFObjectTuple:
+        """
+        Get tuple of IDFObjects from class name
+
+        Args:
+            class_name (str): class name.
+
+        Returns:
+            IDFObjectTuple[IDFObject, ...]: tuple of IDFObjects.
+        """
+        return self.get_objects(class_name)
+
+    def get_objects(self, str class_name) -> IDFObjectTuple:
+        """
+        Get tuple of IDFObjects from class name
+
+        Args:
+            class_name (str): class name.
+
+        Returns:
+            IDFObjectTuple[IDFObject, ...]: tuple of IDFObjects.
+        """
+        return IDFObjectTuple(self.objects.get(class_name.upper(), []))
 
     def get_object_by_name(self, str class_name, str obj_name) -> IDFObject|None:
         """Get object by first field (likely name)"""

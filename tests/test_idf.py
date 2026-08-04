@@ -107,10 +107,45 @@ def test_idf_format():
     print(idf.format(compact=True))
     print("====")
 
+def test_idf_tuple():
+    idd = IDD.from_file("./idds/V24-2-0-Energy+.idd")
+    idf = IDF.from_file(idd, "./files/RefBldgMediumOfficeNew2004_Chicago.idf")
+
+    zones = idf["Zone"]
+
+    print(type(zones), len(zones))
+
+    try:
+        zones.append(None)
+    except Exception as e:
+        print(e)
+
+    try:
+        zones.remove(None)
+    except Exception as e:
+        print(e)
+
+    try:
+        zones.pop(0)
+    except Exception as e:
+        print(e)
+
+    try:
+        zones[0] = None
+    except Exception as e:
+        print(e)
+
+    try:
+        zones.sort()
+    except Exception as e:
+        print(e)
+
+    print(zones[0])
+
 def measure_idf_format_size():
     idd = IDD.from_file("./idds/V24-2-0-Energy+.idd")
-    # idf = IDF.from_file(idd, "./files/RefBldgMediumOfficeNew2004_Chicago.idf")
-    idf = IDF.from_file(idd, "/Applications/EnergyPlus-24-2-0/ExampleFiles/RefBldgOutPatientNew2004_Chicago.idf")
+    idf = IDF.from_file(idd, "./files/RefBldgMediumOfficeNew2004_Chicago.idf")
+    # idf = IDF.from_file(idd, "/Applications/EnergyPlus-24-2-0/ExampleFiles/RefBldgOutPatientNew2004_Chicago.idf")
 
     total_obj_count = sum([len(objs) for objs in idf.objects.values()])
 
@@ -148,5 +183,6 @@ def test_save():
 if __name__ == "__main__":
     # test_idf()
     # test_idf_format()
+    test_idf_tuple()
     # measure_idf_format_size()
-    test_save()
+    # test_save()

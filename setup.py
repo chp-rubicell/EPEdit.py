@@ -16,7 +16,11 @@ ext_modules = [
 
 setup(
     name="epedit",
-    package_dir={"": "src"},  # declare package starting point as src
     packages=["epedit"],
+    # version="0.0.1",
+    package_dir={"": "src"},  # declare package starting point as src
+    package_data={
+        "epedit": ["*.pyi", "py.typed"],
+    },
     ext_modules=cythonize(ext_modules, language_level=3, annotate=True),
 )
