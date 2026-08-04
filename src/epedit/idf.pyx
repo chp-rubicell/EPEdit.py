@@ -397,7 +397,17 @@ cdef class IDF:
 
     @classmethod
     def from_file(cls, IDD idd, str filepath, str encoding=None) -> IDF:
-        """Parse IDF file"""
+        """
+        Parse IDF file
+
+        Args:
+            idd (IDD): IDD data structure
+            filepath (str): IDF file path
+            encoding (str, optional): IDF file encoding
+
+        Returns:
+            IDD: parsed IDF file
+        """
         cdef bytes raw_bytes = read_utf8_bytes(filepath, encoding)
         return cls(idd, raw_bytes)
 

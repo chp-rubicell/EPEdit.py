@@ -5,7 +5,7 @@ sys.path.append(str(Path("../src").resolve()))
 
 from epedit import IDD, IDF
 
-def test_idf():
+def example_idf():
     idd = IDD.from_file("./idds/V24-2-0-Energy+.idd")
     idf = IDF.from_file(idd, "./files/RefBldgMediumOfficeNew2004_Chicago.idf")
 
@@ -74,7 +74,7 @@ def test_idf():
 
     print()
 
-def test_idf_format():
+def example_idf_format():
     idd = IDD.from_file("./idds/V24-2-0-Energy+.idd")
     # idf = IDF.from_file(idd, "./files/RefBldgMediumOfficeNew2004_Chicago.idf")
     idf = IDF.from_file(idd, "./files/test.idf")
@@ -107,7 +107,7 @@ def test_idf_format():
     print(idf.format(compact=True))
     print("====")
 
-def test_idf_tuple():
+def example_idf_tuple():
     idd = IDD.from_file("./idds/V24-2-0-Energy+.idd")
     idf = IDF.from_file(idd, "./files/RefBldgMediumOfficeNew2004_Chicago.idf")
 
@@ -173,7 +173,7 @@ def measure_idf_format_size():
     print(len(s) / total_obj_count)
     print("====")
 
-def test_save():
+def example_save():
     idd = IDD.from_file("./idds/V24-2-0-Energy+.idd")
     idf = IDF.from_file(idd, "./files/RefBldgMediumOfficeNew2004_Chicago.idf")
 
@@ -181,8 +181,8 @@ def test_save():
     idf.save("./files/ExportTest.idf")
 
 if __name__ == "__main__":
-    test_idf()
-    # test_idf_format()
-    # test_idf_tuple()
+    example_idf()
+    # example_idf_format()
+    # example_idf_tuple()
     # measure_idf_format_size()
-    # test_save()
+    # example_save()

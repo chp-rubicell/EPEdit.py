@@ -19,12 +19,13 @@ class IDD:
         ...
 
     @classmethod
-    def from_file(cls, filepath: str) -> IDD:
+    def from_file(cls, filepath: str, encoding: str|None = None) -> IDD:
         """
         Parse IDD file
 
         Args:
             filepath (str): IDD file path
+            encoding (str, optional): IDD file encoding
 
         Returns:
             IDD: parsed IDD data structure

@@ -586,9 +586,9 @@ cdef const FieldDef* get_field_def(const ClassDef* cls, size_t field_idx) noexce
     return &cls.fields[base_idx]
 
 
-# * Test functions
+# * Debug functions
 
-def test_find_field_index(IDD idd, str class_name, str field_name):
+def debug_find_field_index(IDD idd, str class_name, str field_name):
     cdef const ClassDef* cls = &idd.c_idd.ordered_classes.at(
         idd.c_idd.class_map[class_name.upper().encode("utf-8")]
     )
@@ -597,7 +597,7 @@ def test_find_field_index(IDD idd, str class_name, str field_name):
         raise ValueError
     return field_idx
 
-def test_get_field_name(IDD idd, str class_name, int field_idx, bool add_units):
+def debug_get_field_name(IDD idd, str class_name, int field_idx, bool add_units):
     cdef const ClassDef* cls = &idd.c_idd.ordered_classes.at(
         idd.c_idd.class_map[class_name.upper().encode("utf-8")]
     )

@@ -59,8 +59,18 @@ class IDF:
         ...
 
     @classmethod
-    def from_file(cls, idd: IDD, filepath: str) -> IDF:
-        """Parse IDF file"""
+    def from_file(cls, idd: IDD, filepath: str, encoding: str|None = None) -> IDF:
+        """
+        Parse IDF file
+
+        Args:
+            idd (IDD): IDD data structure
+            filepath (str): IDF file path
+            encoding (str, optional): IDF file encoding
+
+        Returns:
+            IDD: parsed IDF file
+        """
         ...
 
     # ——— IDF manipulation API (Create, Update, Delete) ——————

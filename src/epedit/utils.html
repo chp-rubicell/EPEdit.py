@@ -972,17 +972,17 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
   __pyx_r = __pyx_v_raw_bytes;
   goto __pyx_L0;
 </pre><pre class="cython line score-0">&#xA0;<span class="">097</span>: </pre>
-<pre class="cython line score-40" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">098</span>: <span class="k">def</span> <span class="nf">test_to_lower</span><span class="p">(</span><span class="nb">str</span> <span class="n">s</span><span class="p">):</span></pre>
+<pre class="cython line score-40" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">098</span>: <span class="k">def</span> <span class="nf">debug_to_lower</span><span class="p">(</span><span class="nb">str</span> <span class="n">s</span><span class="p">):</span></pre>
 <pre class='cython code score-40 '>/* Python wrapper */
-static PyObject *__pyx_pw_6epedit_5utils_1test_to_lower(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_6epedit_5utils_1debug_to_lower(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_6epedit_5utils_1test_to_lower = {"test_to_lower", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6epedit_5utils_1test_to_lower, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_6epedit_5utils_1test_to_lower(PyObject *__pyx_self, 
+static PyMethodDef __pyx_mdef_6epedit_5utils_1debug_to_lower = {"debug_to_lower", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6epedit_5utils_1debug_to_lower, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_6epedit_5utils_1debug_to_lower(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -996,7 +996,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
   PyObject *__pyx_r = 0;
   <span class='refnanny'>__Pyx_RefNannyDeclarations</span>
-  <span class='refnanny'>__Pyx_RefNannySetupContext</span>("test_to_lower (wrapper)", 0);
+  <span class='refnanny'>__Pyx_RefNannySetupContext</span>("debug_to_lower (wrapper)", 0);
   #if !CYTHON_METH_FASTCALL
   #if CYTHON_ASSUME_SAFE_SIZE
   __pyx_nargs = <span class='py_macro_api'>PyTuple_GET_SIZE</span>(__pyx_args);
@@ -1020,9 +1020,9 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (<span class='pyx_c_api'>__Pyx_ParseKeywords</span>(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "test_to_lower", 0) &lt; (0)) <span class='error_goto'>__PYX_ERR(0, 98, __pyx_L3_error)</span>
+      if (<span class='pyx_c_api'>__Pyx_ParseKeywords</span>(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "debug_to_lower", 0) &lt; (0)) <span class='error_goto'>__PYX_ERR(0, 98, __pyx_L3_error)</span>
       for (Py_ssize_t i = __pyx_nargs; i &lt; 1; i++) {
-        if (unlikely(!values[i])) { <span class='pyx_c_api'>__Pyx_RaiseArgtupleInvalid</span>("test_to_lower", 1, 1, 1, i); <span class='error_goto'>__PYX_ERR(0, 98, __pyx_L3_error)</span> }
+        if (unlikely(!values[i])) { <span class='pyx_c_api'>__Pyx_RaiseArgtupleInvalid</span>("debug_to_lower", 1, 1, 1, i); <span class='error_goto'>__PYX_ERR(0, 98, __pyx_L3_error)</span> }
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
@@ -1034,19 +1034,19 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  <span class='pyx_c_api'>__Pyx_RaiseArgtupleInvalid</span>("test_to_lower", 1, 1, 1, __pyx_nargs); <span class='error_goto'>__PYX_ERR(0, 98, __pyx_L3_error)</span>
+  <span class='pyx_c_api'>__Pyx_RaiseArgtupleInvalid</span>("debug_to_lower", 1, 1, 1, __pyx_nargs); <span class='error_goto'>__PYX_ERR(0, 98, __pyx_L3_error)</span>
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
   for (Py_ssize_t __pyx_temp=0; __pyx_temp &lt; (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
     Py_XDECREF(values[__pyx_temp]);
   }
-  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("epedit.utils.test_to_lower", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("epedit.utils.debug_to_lower", __pyx_clineno, __pyx_lineno, __pyx_filename);
   <span class='refnanny'>__Pyx_RefNannyFinishContext</span>();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
   if (unlikely(!<span class='pyx_c_api'>__Pyx_ArgTypeTest</span>(((PyObject *)__pyx_v_s), (&amp;PyUnicode_Type), 1, "s", 1))) <span class='error_goto'>__PYX_ERR(0, 98, __pyx_L1_error)</span>
-  __pyx_r = __pyx_pf_6epedit_5utils_test_to_lower(__pyx_self, __pyx_v_s);
+  __pyx_r = __pyx_pf_6epedit_5utils_debug_to_lower(__pyx_self, __pyx_v_s);
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -1068,13 +1068,13 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_6epedit_5utils_test_to_lower(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_s) {
+static PyObject *__pyx_pf_6epedit_5utils_debug_to_lower(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_s) {
   PyObject *__pyx_r = NULL;
 /* … */
   /* function exit code */
   __pyx_L1_error:;
   <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_t_1);
-  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("epedit.utils.test_to_lower", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("epedit.utils.debug_to_lower", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   <span class='refnanny'>__Pyx_XGIVEREF</span>(__pyx_r);
@@ -1082,12 +1082,12 @@ static PyObject *__pyx_pf_6epedit_5utils_test_to_lower(CYTHON_UNUSED PyObject *_
   return __pyx_r;
 }
 /* … */
-  __pyx_t_2 = <span class='pyx_c_api'>__Pyx_CyFunction_New</span>(&amp;__pyx_mdef_6epedit_5utils_1test_to_lower, 0, __pyx_mstate_global-&gt;__pyx_n_u_test_to_lower, NULL, __pyx_mstate_global-&gt;__pyx_n_u_epedit_utils, __pyx_mstate_global-&gt;__pyx_d, ((PyObject *)__pyx_mstate_global-&gt;__pyx_codeobj_tab[0]));<span class='error_goto'> if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 98, __pyx_L1_error)</span>
+  __pyx_t_2 = <span class='pyx_c_api'>__Pyx_CyFunction_New</span>(&amp;__pyx_mdef_6epedit_5utils_1debug_to_lower, 0, __pyx_mstate_global-&gt;__pyx_n_u_debug_to_lower, NULL, __pyx_mstate_global-&gt;__pyx_n_u_epedit_utils, __pyx_mstate_global-&gt;__pyx_d, ((PyObject *)__pyx_mstate_global-&gt;__pyx_codeobj_tab[0]));<span class='error_goto'> if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 98, __pyx_L1_error)</span>
   <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON &amp;&amp; PY_VERSION_HEX &gt;= 0x030E0000
   <span class='py_c_api'>PyUnstable_Object_EnableDeferredRefcount</span>(__pyx_t_2);
   #endif
-  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_mstate_global-&gt;__pyx_d, __pyx_mstate_global-&gt;__pyx_n_u_test_to_lower, __pyx_t_2) &lt; (0)) <span class='error_goto'>__PYX_ERR(0, 98, __pyx_L1_error)</span>
+  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_mstate_global-&gt;__pyx_d, __pyx_mstate_global-&gt;__pyx_n_u_debug_to_lower, __pyx_t_2) &lt; (0)) <span class='error_goto'>__PYX_ERR(0, 98, __pyx_L1_error)</span>
   <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_2); __pyx_t_2 = 0;
 </pre><pre class="cython line score-7" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">099</span>:     <span class="k">return</span> <span class="n">to_lower</span><span class="p">((&lt;</span><span class="kt">str</span><span class="p">&gt;</span><span class="n">s</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">&quot;utf-8&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">&quot;utf-8&quot;</span><span class="p">)</span></pre>
 <pre class='cython code score-7 '>  <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_r);
@@ -1104,17 +1104,17 @@ static PyObject *__pyx_pf_6epedit_5utils_test_to_lower(CYTHON_UNUSED PyObject *_
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
-</pre><pre class="cython line score-40" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">100</span>: <span class="k">def</span> <span class="nf">test_to_upper</span><span class="p">(</span><span class="nb">str</span> <span class="n">s</span><span class="p">):</span></pre>
+</pre><pre class="cython line score-40" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">100</span>: <span class="k">def</span> <span class="nf">debug_to_upper</span><span class="p">(</span><span class="nb">str</span> <span class="n">s</span><span class="p">):</span></pre>
 <pre class='cython code score-40 '>/* Python wrapper */
-static PyObject *__pyx_pw_6epedit_5utils_3test_to_upper(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_6epedit_5utils_3debug_to_upper(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_6epedit_5utils_3test_to_upper = {"test_to_upper", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6epedit_5utils_3test_to_upper, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_6epedit_5utils_3test_to_upper(PyObject *__pyx_self, 
+static PyMethodDef __pyx_mdef_6epedit_5utils_3debug_to_upper = {"debug_to_upper", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6epedit_5utils_3debug_to_upper, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_6epedit_5utils_3debug_to_upper(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -1128,7 +1128,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
   PyObject *__pyx_r = 0;
   <span class='refnanny'>__Pyx_RefNannyDeclarations</span>
-  <span class='refnanny'>__Pyx_RefNannySetupContext</span>("test_to_upper (wrapper)", 0);
+  <span class='refnanny'>__Pyx_RefNannySetupContext</span>("debug_to_upper (wrapper)", 0);
   #if !CYTHON_METH_FASTCALL
   #if CYTHON_ASSUME_SAFE_SIZE
   __pyx_nargs = <span class='py_macro_api'>PyTuple_GET_SIZE</span>(__pyx_args);
@@ -1152,9 +1152,9 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (<span class='pyx_c_api'>__Pyx_ParseKeywords</span>(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "test_to_upper", 0) &lt; (0)) <span class='error_goto'>__PYX_ERR(0, 100, __pyx_L3_error)</span>
+      if (<span class='pyx_c_api'>__Pyx_ParseKeywords</span>(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "debug_to_upper", 0) &lt; (0)) <span class='error_goto'>__PYX_ERR(0, 100, __pyx_L3_error)</span>
       for (Py_ssize_t i = __pyx_nargs; i &lt; 1; i++) {
-        if (unlikely(!values[i])) { <span class='pyx_c_api'>__Pyx_RaiseArgtupleInvalid</span>("test_to_upper", 1, 1, 1, i); <span class='error_goto'>__PYX_ERR(0, 100, __pyx_L3_error)</span> }
+        if (unlikely(!values[i])) { <span class='pyx_c_api'>__Pyx_RaiseArgtupleInvalid</span>("debug_to_upper", 1, 1, 1, i); <span class='error_goto'>__PYX_ERR(0, 100, __pyx_L3_error)</span> }
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
@@ -1166,19 +1166,19 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  <span class='pyx_c_api'>__Pyx_RaiseArgtupleInvalid</span>("test_to_upper", 1, 1, 1, __pyx_nargs); <span class='error_goto'>__PYX_ERR(0, 100, __pyx_L3_error)</span>
+  <span class='pyx_c_api'>__Pyx_RaiseArgtupleInvalid</span>("debug_to_upper", 1, 1, 1, __pyx_nargs); <span class='error_goto'>__PYX_ERR(0, 100, __pyx_L3_error)</span>
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
   for (Py_ssize_t __pyx_temp=0; __pyx_temp &lt; (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
     Py_XDECREF(values[__pyx_temp]);
   }
-  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("epedit.utils.test_to_upper", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("epedit.utils.debug_to_upper", __pyx_clineno, __pyx_lineno, __pyx_filename);
   <span class='refnanny'>__Pyx_RefNannyFinishContext</span>();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
   if (unlikely(!<span class='pyx_c_api'>__Pyx_ArgTypeTest</span>(((PyObject *)__pyx_v_s), (&amp;PyUnicode_Type), 1, "s", 1))) <span class='error_goto'>__PYX_ERR(0, 100, __pyx_L1_error)</span>
-  __pyx_r = __pyx_pf_6epedit_5utils_2test_to_upper(__pyx_self, __pyx_v_s);
+  __pyx_r = __pyx_pf_6epedit_5utils_2debug_to_upper(__pyx_self, __pyx_v_s);
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -1200,13 +1200,13 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_6epedit_5utils_2test_to_upper(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_s) {
+static PyObject *__pyx_pf_6epedit_5utils_2debug_to_upper(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_s) {
   PyObject *__pyx_r = NULL;
 /* … */
   /* function exit code */
   __pyx_L1_error:;
   <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_t_1);
-  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("epedit.utils.test_to_upper", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("epedit.utils.debug_to_upper", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   <span class='refnanny'>__Pyx_XGIVEREF</span>(__pyx_r);
@@ -1214,12 +1214,12 @@ static PyObject *__pyx_pf_6epedit_5utils_2test_to_upper(CYTHON_UNUSED PyObject *
   return __pyx_r;
 }
 /* … */
-  __pyx_t_2 = <span class='pyx_c_api'>__Pyx_CyFunction_New</span>(&amp;__pyx_mdef_6epedit_5utils_3test_to_upper, 0, __pyx_mstate_global-&gt;__pyx_n_u_test_to_upper, NULL, __pyx_mstate_global-&gt;__pyx_n_u_epedit_utils, __pyx_mstate_global-&gt;__pyx_d, ((PyObject *)__pyx_mstate_global-&gt;__pyx_codeobj_tab[1]));<span class='error_goto'> if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 100, __pyx_L1_error)</span>
+  __pyx_t_2 = <span class='pyx_c_api'>__Pyx_CyFunction_New</span>(&amp;__pyx_mdef_6epedit_5utils_3debug_to_upper, 0, __pyx_mstate_global-&gt;__pyx_n_u_debug_to_upper, NULL, __pyx_mstate_global-&gt;__pyx_n_u_epedit_utils, __pyx_mstate_global-&gt;__pyx_d, ((PyObject *)__pyx_mstate_global-&gt;__pyx_codeobj_tab[1]));<span class='error_goto'> if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 100, __pyx_L1_error)</span>
   <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON &amp;&amp; PY_VERSION_HEX &gt;= 0x030E0000
   <span class='py_c_api'>PyUnstable_Object_EnableDeferredRefcount</span>(__pyx_t_2);
   #endif
-  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_mstate_global-&gt;__pyx_d, __pyx_mstate_global-&gt;__pyx_n_u_test_to_upper, __pyx_t_2) &lt; (0)) <span class='error_goto'>__PYX_ERR(0, 100, __pyx_L1_error)</span>
+  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_mstate_global-&gt;__pyx_d, __pyx_mstate_global-&gt;__pyx_n_u_debug_to_upper, __pyx_t_2) &lt; (0)) <span class='error_goto'>__PYX_ERR(0, 100, __pyx_L1_error)</span>
   <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_2); __pyx_t_2 = 0;
 </pre><pre class="cython line score-7" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">101</span>:     <span class="k">return</span> <span class="n">to_upper</span><span class="p">((&lt;</span><span class="kt">str</span><span class="p">&gt;</span><span class="n">s</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">&quot;utf-8&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">&quot;utf-8&quot;</span><span class="p">)</span></pre>
 <pre class='cython code score-7 '>  <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_r);
@@ -1236,17 +1236,17 @@ static PyObject *__pyx_pf_6epedit_5utils_2test_to_upper(CYTHON_UNUSED PyObject *
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
-</pre><pre class="cython line score-46" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">102</span>: <span class="k">def</span> <span class="nf">test_equal_fold</span><span class="p">(</span><span class="nb">str</span> <span class="n">a</span><span class="p">,</span> <span class="nb">str</span> <span class="n">b</span><span class="p">):</span></pre>
+</pre><pre class="cython line score-46" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">102</span>: <span class="k">def</span> <span class="nf">debug_equal_fold</span><span class="p">(</span><span class="nb">str</span> <span class="n">a</span><span class="p">,</span> <span class="nb">str</span> <span class="n">b</span><span class="p">):</span></pre>
 <pre class='cython code score-46 '>/* Python wrapper */
-static PyObject *__pyx_pw_6epedit_5utils_5test_equal_fold(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_6epedit_5utils_5debug_equal_fold(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_6epedit_5utils_5test_equal_fold = {"test_equal_fold", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6epedit_5utils_5test_equal_fold, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_6epedit_5utils_5test_equal_fold(PyObject *__pyx_self, 
+static PyMethodDef __pyx_mdef_6epedit_5utils_5debug_equal_fold = {"debug_equal_fold", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6epedit_5utils_5debug_equal_fold, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_6epedit_5utils_5debug_equal_fold(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -1261,7 +1261,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
   PyObject *__pyx_r = 0;
   <span class='refnanny'>__Pyx_RefNannyDeclarations</span>
-  <span class='refnanny'>__Pyx_RefNannySetupContext</span>("test_equal_fold (wrapper)", 0);
+  <span class='refnanny'>__Pyx_RefNannySetupContext</span>("debug_equal_fold (wrapper)", 0);
   #if !CYTHON_METH_FASTCALL
   #if CYTHON_ASSUME_SAFE_SIZE
   __pyx_nargs = <span class='py_macro_api'>PyTuple_GET_SIZE</span>(__pyx_args);
@@ -1289,9 +1289,9 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (<span class='pyx_c_api'>__Pyx_ParseKeywords</span>(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "test_equal_fold", 0) &lt; (0)) <span class='error_goto'>__PYX_ERR(0, 102, __pyx_L3_error)</span>
+      if (<span class='pyx_c_api'>__Pyx_ParseKeywords</span>(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "debug_equal_fold", 0) &lt; (0)) <span class='error_goto'>__PYX_ERR(0, 102, __pyx_L3_error)</span>
       for (Py_ssize_t i = __pyx_nargs; i &lt; 2; i++) {
-        if (unlikely(!values[i])) { <span class='pyx_c_api'>__Pyx_RaiseArgtupleInvalid</span>("test_equal_fold", 1, 2, 2, i); <span class='error_goto'>__PYX_ERR(0, 102, __pyx_L3_error)</span> }
+        if (unlikely(!values[i])) { <span class='pyx_c_api'>__Pyx_RaiseArgtupleInvalid</span>("debug_equal_fold", 1, 2, 2, i); <span class='error_goto'>__PYX_ERR(0, 102, __pyx_L3_error)</span> }
       }
     } else if (unlikely(__pyx_nargs != 2)) {
       goto __pyx_L5_argtuple_error;
@@ -1306,20 +1306,20 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  <span class='pyx_c_api'>__Pyx_RaiseArgtupleInvalid</span>("test_equal_fold", 1, 2, 2, __pyx_nargs); <span class='error_goto'>__PYX_ERR(0, 102, __pyx_L3_error)</span>
+  <span class='pyx_c_api'>__Pyx_RaiseArgtupleInvalid</span>("debug_equal_fold", 1, 2, 2, __pyx_nargs); <span class='error_goto'>__PYX_ERR(0, 102, __pyx_L3_error)</span>
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
   for (Py_ssize_t __pyx_temp=0; __pyx_temp &lt; (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
     Py_XDECREF(values[__pyx_temp]);
   }
-  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("epedit.utils.test_equal_fold", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("epedit.utils.debug_equal_fold", __pyx_clineno, __pyx_lineno, __pyx_filename);
   <span class='refnanny'>__Pyx_RefNannyFinishContext</span>();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
   if (unlikely(!<span class='pyx_c_api'>__Pyx_ArgTypeTest</span>(((PyObject *)__pyx_v_a), (&amp;PyUnicode_Type), 1, "a", 1))) <span class='error_goto'>__PYX_ERR(0, 102, __pyx_L1_error)</span>
   if (unlikely(!<span class='pyx_c_api'>__Pyx_ArgTypeTest</span>(((PyObject *)__pyx_v_b), (&amp;PyUnicode_Type), 1, "b", 1))) <span class='error_goto'>__PYX_ERR(0, 102, __pyx_L1_error)</span>
-  __pyx_r = __pyx_pf_6epedit_5utils_4test_equal_fold(__pyx_self, __pyx_v_a, __pyx_v_b);
+  __pyx_r = __pyx_pf_6epedit_5utils_4debug_equal_fold(__pyx_self, __pyx_v_a, __pyx_v_b);
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -1341,13 +1341,13 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_6epedit_5utils_4test_equal_fold(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_a, PyObject *__pyx_v_b) {
+static PyObject *__pyx_pf_6epedit_5utils_4debug_equal_fold(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_a, PyObject *__pyx_v_b) {
   PyObject *__pyx_r = NULL;
 /* … */
   /* function exit code */
   __pyx_L1_error:;
   <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_t_1);
-  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("epedit.utils.test_equal_fold", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("epedit.utils.debug_equal_fold", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   <span class='refnanny'>__Pyx_XGIVEREF</span>(__pyx_r);
@@ -1355,12 +1355,12 @@ static PyObject *__pyx_pf_6epedit_5utils_4test_equal_fold(CYTHON_UNUSED PyObject
   return __pyx_r;
 }
 /* … */
-  __pyx_t_2 = <span class='pyx_c_api'>__Pyx_CyFunction_New</span>(&amp;__pyx_mdef_6epedit_5utils_5test_equal_fold, 0, __pyx_mstate_global-&gt;__pyx_n_u_test_equal_fold, NULL, __pyx_mstate_global-&gt;__pyx_n_u_epedit_utils, __pyx_mstate_global-&gt;__pyx_d, ((PyObject *)__pyx_mstate_global-&gt;__pyx_codeobj_tab[2]));<span class='error_goto'> if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 102, __pyx_L1_error)</span>
+  __pyx_t_2 = <span class='pyx_c_api'>__Pyx_CyFunction_New</span>(&amp;__pyx_mdef_6epedit_5utils_5debug_equal_fold, 0, __pyx_mstate_global-&gt;__pyx_n_u_debug_equal_fold, NULL, __pyx_mstate_global-&gt;__pyx_n_u_epedit_utils, __pyx_mstate_global-&gt;__pyx_d, ((PyObject *)__pyx_mstate_global-&gt;__pyx_codeobj_tab[2]));<span class='error_goto'> if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 102, __pyx_L1_error)</span>
   <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON &amp;&amp; PY_VERSION_HEX &gt;= 0x030E0000
   <span class='py_c_api'>PyUnstable_Object_EnableDeferredRefcount</span>(__pyx_t_2);
   #endif
-  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_mstate_global-&gt;__pyx_d, __pyx_mstate_global-&gt;__pyx_n_u_test_equal_fold, __pyx_t_2) &lt; (0)) <span class='error_goto'>__PYX_ERR(0, 102, __pyx_L1_error)</span>
+  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_mstate_global-&gt;__pyx_d, __pyx_mstate_global-&gt;__pyx_n_u_debug_equal_fold, __pyx_t_2) &lt; (0)) <span class='error_goto'>__PYX_ERR(0, 102, __pyx_L1_error)</span>
   <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_2); __pyx_t_2 = 0;
 </pre><pre class="cython line score-15" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">103</span>:     <span class="k">return</span> <span class="n">equal_fold</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">&quot;utf-8&quot;</span><span class="p">),</span> <span class="n">b</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">&quot;utf-8&quot;</span><span class="p">))</span></pre>
 <pre class='cython code score-15 '>  <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_r);
@@ -1385,17 +1385,17 @@ static PyObject *__pyx_pf_6epedit_5utils_4test_equal_fold(CYTHON_UNUSED PyObject
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
-</pre><pre class="cython line score-40" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">104</span>: <span class="k">def</span> <span class="nf">test_trim_string</span><span class="p">(</span><span class="nb">str</span> <span class="n">s</span><span class="p">):</span></pre>
+</pre><pre class="cython line score-40" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">104</span>: <span class="k">def</span> <span class="nf">debug_trim_string</span><span class="p">(</span><span class="nb">str</span> <span class="n">s</span><span class="p">):</span></pre>
 <pre class='cython code score-40 '>/* Python wrapper */
-static PyObject *__pyx_pw_6epedit_5utils_7test_trim_string(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_6epedit_5utils_7debug_trim_string(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_6epedit_5utils_7test_trim_string = {"test_trim_string", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6epedit_5utils_7test_trim_string, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_6epedit_5utils_7test_trim_string(PyObject *__pyx_self, 
+static PyMethodDef __pyx_mdef_6epedit_5utils_7debug_trim_string = {"debug_trim_string", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6epedit_5utils_7debug_trim_string, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_6epedit_5utils_7debug_trim_string(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -1409,7 +1409,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
   PyObject *__pyx_r = 0;
   <span class='refnanny'>__Pyx_RefNannyDeclarations</span>
-  <span class='refnanny'>__Pyx_RefNannySetupContext</span>("test_trim_string (wrapper)", 0);
+  <span class='refnanny'>__Pyx_RefNannySetupContext</span>("debug_trim_string (wrapper)", 0);
   #if !CYTHON_METH_FASTCALL
   #if CYTHON_ASSUME_SAFE_SIZE
   __pyx_nargs = <span class='py_macro_api'>PyTuple_GET_SIZE</span>(__pyx_args);
@@ -1433,9 +1433,9 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (<span class='pyx_c_api'>__Pyx_ParseKeywords</span>(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "test_trim_string", 0) &lt; (0)) <span class='error_goto'>__PYX_ERR(0, 104, __pyx_L3_error)</span>
+      if (<span class='pyx_c_api'>__Pyx_ParseKeywords</span>(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "debug_trim_string", 0) &lt; (0)) <span class='error_goto'>__PYX_ERR(0, 104, __pyx_L3_error)</span>
       for (Py_ssize_t i = __pyx_nargs; i &lt; 1; i++) {
-        if (unlikely(!values[i])) { <span class='pyx_c_api'>__Pyx_RaiseArgtupleInvalid</span>("test_trim_string", 1, 1, 1, i); <span class='error_goto'>__PYX_ERR(0, 104, __pyx_L3_error)</span> }
+        if (unlikely(!values[i])) { <span class='pyx_c_api'>__Pyx_RaiseArgtupleInvalid</span>("debug_trim_string", 1, 1, 1, i); <span class='error_goto'>__PYX_ERR(0, 104, __pyx_L3_error)</span> }
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
@@ -1447,19 +1447,19 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  <span class='pyx_c_api'>__Pyx_RaiseArgtupleInvalid</span>("test_trim_string", 1, 1, 1, __pyx_nargs); <span class='error_goto'>__PYX_ERR(0, 104, __pyx_L3_error)</span>
+  <span class='pyx_c_api'>__Pyx_RaiseArgtupleInvalid</span>("debug_trim_string", 1, 1, 1, __pyx_nargs); <span class='error_goto'>__PYX_ERR(0, 104, __pyx_L3_error)</span>
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
   for (Py_ssize_t __pyx_temp=0; __pyx_temp &lt; (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
     Py_XDECREF(values[__pyx_temp]);
   }
-  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("epedit.utils.test_trim_string", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("epedit.utils.debug_trim_string", __pyx_clineno, __pyx_lineno, __pyx_filename);
   <span class='refnanny'>__Pyx_RefNannyFinishContext</span>();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
   if (unlikely(!<span class='pyx_c_api'>__Pyx_ArgTypeTest</span>(((PyObject *)__pyx_v_s), (&amp;PyUnicode_Type), 1, "s", 1))) <span class='error_goto'>__PYX_ERR(0, 104, __pyx_L1_error)</span>
-  __pyx_r = __pyx_pf_6epedit_5utils_6test_trim_string(__pyx_self, __pyx_v_s);
+  __pyx_r = __pyx_pf_6epedit_5utils_6debug_trim_string(__pyx_self, __pyx_v_s);
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -1481,13 +1481,13 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_6epedit_5utils_6test_trim_string(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_s) {
+static PyObject *__pyx_pf_6epedit_5utils_6debug_trim_string(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_s) {
   PyObject *__pyx_r = NULL;
 /* … */
   /* function exit code */
   __pyx_L1_error:;
   <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_t_1);
-  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("epedit.utils.test_trim_string", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("epedit.utils.debug_trim_string", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   <span class='refnanny'>__Pyx_XGIVEREF</span>(__pyx_r);
@@ -1495,12 +1495,12 @@ static PyObject *__pyx_pf_6epedit_5utils_6test_trim_string(CYTHON_UNUSED PyObjec
   return __pyx_r;
 }
 /* … */
-  __pyx_t_2 = <span class='pyx_c_api'>__Pyx_CyFunction_New</span>(&amp;__pyx_mdef_6epedit_5utils_7test_trim_string, 0, __pyx_mstate_global-&gt;__pyx_n_u_test_trim_string, NULL, __pyx_mstate_global-&gt;__pyx_n_u_epedit_utils, __pyx_mstate_global-&gt;__pyx_d, ((PyObject *)__pyx_mstate_global-&gt;__pyx_codeobj_tab[3]));<span class='error_goto'> if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 104, __pyx_L1_error)</span>
+  __pyx_t_2 = <span class='pyx_c_api'>__Pyx_CyFunction_New</span>(&amp;__pyx_mdef_6epedit_5utils_7debug_trim_string, 0, __pyx_mstate_global-&gt;__pyx_n_u_debug_trim_string, NULL, __pyx_mstate_global-&gt;__pyx_n_u_epedit_utils, __pyx_mstate_global-&gt;__pyx_d, ((PyObject *)__pyx_mstate_global-&gt;__pyx_codeobj_tab[3]));<span class='error_goto'> if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 104, __pyx_L1_error)</span>
   <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON &amp;&amp; PY_VERSION_HEX &gt;= 0x030E0000
   <span class='py_c_api'>PyUnstable_Object_EnableDeferredRefcount</span>(__pyx_t_2);
   #endif
-  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_mstate_global-&gt;__pyx_d, __pyx_mstate_global-&gt;__pyx_n_u_test_trim_string, __pyx_t_2) &lt; (0)) <span class='error_goto'>__PYX_ERR(0, 104, __pyx_L1_error)</span>
+  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_mstate_global-&gt;__pyx_d, __pyx_mstate_global-&gt;__pyx_n_u_debug_trim_string, __pyx_t_2) &lt; (0)) <span class='error_goto'>__PYX_ERR(0, 104, __pyx_L1_error)</span>
   <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_2); __pyx_t_2 = 0;
 </pre><pre class="cython line score-7" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">105</span>:     <span class="k">return</span> <span class="n">trim_string</span><span class="p">((&lt;</span><span class="kt">str</span><span class="p">&gt;</span><span class="n">s</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">&quot;utf-8&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">&quot;utf-8&quot;</span><span class="p">)</span></pre>
 <pre class='cython code score-7 '>  <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_r);
@@ -1517,17 +1517,17 @@ static PyObject *__pyx_pf_6epedit_5utils_6test_trim_string(CYTHON_UNUSED PyObjec
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
-</pre><pre class="cython line score-46" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">106</span>: <span class="k">def</span> <span class="nf">test_has_prefix</span><span class="p">(</span><span class="nb">str</span> <span class="n">s</span><span class="p">,</span> <span class="nb">str</span> <span class="n">prefix</span><span class="p">):</span></pre>
+</pre><pre class="cython line score-46" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">106</span>: <span class="k">def</span> <span class="nf">debug_has_prefix</span><span class="p">(</span><span class="nb">str</span> <span class="n">s</span><span class="p">,</span> <span class="nb">str</span> <span class="n">prefix</span><span class="p">):</span></pre>
 <pre class='cython code score-46 '>/* Python wrapper */
-static PyObject *__pyx_pw_6epedit_5utils_9test_has_prefix(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_6epedit_5utils_9debug_has_prefix(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_6epedit_5utils_9test_has_prefix = {"test_has_prefix", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6epedit_5utils_9test_has_prefix, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_6epedit_5utils_9test_has_prefix(PyObject *__pyx_self, 
+static PyMethodDef __pyx_mdef_6epedit_5utils_9debug_has_prefix = {"debug_has_prefix", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6epedit_5utils_9debug_has_prefix, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_6epedit_5utils_9debug_has_prefix(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -1542,7 +1542,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
   PyObject *__pyx_r = 0;
   <span class='refnanny'>__Pyx_RefNannyDeclarations</span>
-  <span class='refnanny'>__Pyx_RefNannySetupContext</span>("test_has_prefix (wrapper)", 0);
+  <span class='refnanny'>__Pyx_RefNannySetupContext</span>("debug_has_prefix (wrapper)", 0);
   #if !CYTHON_METH_FASTCALL
   #if CYTHON_ASSUME_SAFE_SIZE
   __pyx_nargs = <span class='py_macro_api'>PyTuple_GET_SIZE</span>(__pyx_args);
@@ -1570,9 +1570,9 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (<span class='pyx_c_api'>__Pyx_ParseKeywords</span>(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "test_has_prefix", 0) &lt; (0)) <span class='error_goto'>__PYX_ERR(0, 106, __pyx_L3_error)</span>
+      if (<span class='pyx_c_api'>__Pyx_ParseKeywords</span>(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "debug_has_prefix", 0) &lt; (0)) <span class='error_goto'>__PYX_ERR(0, 106, __pyx_L3_error)</span>
       for (Py_ssize_t i = __pyx_nargs; i &lt; 2; i++) {
-        if (unlikely(!values[i])) { <span class='pyx_c_api'>__Pyx_RaiseArgtupleInvalid</span>("test_has_prefix", 1, 2, 2, i); <span class='error_goto'>__PYX_ERR(0, 106, __pyx_L3_error)</span> }
+        if (unlikely(!values[i])) { <span class='pyx_c_api'>__Pyx_RaiseArgtupleInvalid</span>("debug_has_prefix", 1, 2, 2, i); <span class='error_goto'>__PYX_ERR(0, 106, __pyx_L3_error)</span> }
       }
     } else if (unlikely(__pyx_nargs != 2)) {
       goto __pyx_L5_argtuple_error;
@@ -1587,20 +1587,20 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  <span class='pyx_c_api'>__Pyx_RaiseArgtupleInvalid</span>("test_has_prefix", 1, 2, 2, __pyx_nargs); <span class='error_goto'>__PYX_ERR(0, 106, __pyx_L3_error)</span>
+  <span class='pyx_c_api'>__Pyx_RaiseArgtupleInvalid</span>("debug_has_prefix", 1, 2, 2, __pyx_nargs); <span class='error_goto'>__PYX_ERR(0, 106, __pyx_L3_error)</span>
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
   for (Py_ssize_t __pyx_temp=0; __pyx_temp &lt; (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
     Py_XDECREF(values[__pyx_temp]);
   }
-  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("epedit.utils.test_has_prefix", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("epedit.utils.debug_has_prefix", __pyx_clineno, __pyx_lineno, __pyx_filename);
   <span class='refnanny'>__Pyx_RefNannyFinishContext</span>();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
   if (unlikely(!<span class='pyx_c_api'>__Pyx_ArgTypeTest</span>(((PyObject *)__pyx_v_s), (&amp;PyUnicode_Type), 1, "s", 1))) <span class='error_goto'>__PYX_ERR(0, 106, __pyx_L1_error)</span>
   if (unlikely(!<span class='pyx_c_api'>__Pyx_ArgTypeTest</span>(((PyObject *)__pyx_v_prefix), (&amp;PyUnicode_Type), 1, "prefix", 1))) <span class='error_goto'>__PYX_ERR(0, 106, __pyx_L1_error)</span>
-  __pyx_r = __pyx_pf_6epedit_5utils_8test_has_prefix(__pyx_self, __pyx_v_s, __pyx_v_prefix);
+  __pyx_r = __pyx_pf_6epedit_5utils_8debug_has_prefix(__pyx_self, __pyx_v_s, __pyx_v_prefix);
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -1622,13 +1622,13 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_6epedit_5utils_8test_has_prefix(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_s, PyObject *__pyx_v_prefix) {
+static PyObject *__pyx_pf_6epedit_5utils_8debug_has_prefix(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_s, PyObject *__pyx_v_prefix) {
   PyObject *__pyx_r = NULL;
 /* … */
   /* function exit code */
   __pyx_L1_error:;
   <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_t_1);
-  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("epedit.utils.test_has_prefix", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("epedit.utils.debug_has_prefix", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   <span class='refnanny'>__Pyx_XGIVEREF</span>(__pyx_r);
@@ -1636,12 +1636,12 @@ static PyObject *__pyx_pf_6epedit_5utils_8test_has_prefix(CYTHON_UNUSED PyObject
   return __pyx_r;
 }
 /* … */
-  __pyx_t_2 = <span class='pyx_c_api'>__Pyx_CyFunction_New</span>(&amp;__pyx_mdef_6epedit_5utils_9test_has_prefix, 0, __pyx_mstate_global-&gt;__pyx_n_u_test_has_prefix, NULL, __pyx_mstate_global-&gt;__pyx_n_u_epedit_utils, __pyx_mstate_global-&gt;__pyx_d, ((PyObject *)__pyx_mstate_global-&gt;__pyx_codeobj_tab[4]));<span class='error_goto'> if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 106, __pyx_L1_error)</span>
+  __pyx_t_2 = <span class='pyx_c_api'>__Pyx_CyFunction_New</span>(&amp;__pyx_mdef_6epedit_5utils_9debug_has_prefix, 0, __pyx_mstate_global-&gt;__pyx_n_u_debug_has_prefix, NULL, __pyx_mstate_global-&gt;__pyx_n_u_epedit_utils, __pyx_mstate_global-&gt;__pyx_d, ((PyObject *)__pyx_mstate_global-&gt;__pyx_codeobj_tab[4]));<span class='error_goto'> if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 106, __pyx_L1_error)</span>
   <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON &amp;&amp; PY_VERSION_HEX &gt;= 0x030E0000
   <span class='py_c_api'>PyUnstable_Object_EnableDeferredRefcount</span>(__pyx_t_2);
   #endif
-  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_mstate_global-&gt;__pyx_d, __pyx_mstate_global-&gt;__pyx_n_u_test_has_prefix, __pyx_t_2) &lt; (0)) <span class='error_goto'>__PYX_ERR(0, 106, __pyx_L1_error)</span>
+  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_mstate_global-&gt;__pyx_d, __pyx_mstate_global-&gt;__pyx_n_u_debug_has_prefix, __pyx_t_2) &lt; (0)) <span class='error_goto'>__PYX_ERR(0, 106, __pyx_L1_error)</span>
   <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_2); __pyx_t_2 = 0;
 </pre><pre class="cython line score-3" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">107</span>:     <span class="k">return</span> <span class="n">has_prefix</span><span class="p">(</span></pre>
 <pre class='cython code score-3 '>  <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_r);
@@ -1670,17 +1670,17 @@ static PyObject *__pyx_pf_6epedit_5utils_8test_has_prefix(CYTHON_UNUSED PyObject
   __pyx_t_3 = __pyx_convert_string_from_py_6libcpp_6string_std__in_string(__pyx_t_1);<span class='error_goto'> if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 109, __pyx_L1_error)</span>
   <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_1); __pyx_t_1 = 0;
 </pre><pre class="cython line score-0">&#xA0;<span class="">110</span>:     <span class="p">)</span></pre>
-<pre class="cython line score-46" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">111</span>: <span class="k">def</span> <span class="nf">test_has_suffix</span><span class="p">(</span><span class="nb">str</span> <span class="n">s</span><span class="p">,</span> <span class="nb">str</span> <span class="n">suffix</span><span class="p">):</span></pre>
+<pre class="cython line score-46" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">111</span>: <span class="k">def</span> <span class="nf">debug_has_suffix</span><span class="p">(</span><span class="nb">str</span> <span class="n">s</span><span class="p">,</span> <span class="nb">str</span> <span class="n">suffix</span><span class="p">):</span></pre>
 <pre class='cython code score-46 '>/* Python wrapper */
-static PyObject *__pyx_pw_6epedit_5utils_11test_has_suffix(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_6epedit_5utils_11debug_has_suffix(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_6epedit_5utils_11test_has_suffix = {"test_has_suffix", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6epedit_5utils_11test_has_suffix, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_6epedit_5utils_11test_has_suffix(PyObject *__pyx_self, 
+static PyMethodDef __pyx_mdef_6epedit_5utils_11debug_has_suffix = {"debug_has_suffix", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6epedit_5utils_11debug_has_suffix, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_6epedit_5utils_11debug_has_suffix(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -1695,7 +1695,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
   PyObject *__pyx_r = 0;
   <span class='refnanny'>__Pyx_RefNannyDeclarations</span>
-  <span class='refnanny'>__Pyx_RefNannySetupContext</span>("test_has_suffix (wrapper)", 0);
+  <span class='refnanny'>__Pyx_RefNannySetupContext</span>("debug_has_suffix (wrapper)", 0);
   #if !CYTHON_METH_FASTCALL
   #if CYTHON_ASSUME_SAFE_SIZE
   __pyx_nargs = <span class='py_macro_api'>PyTuple_GET_SIZE</span>(__pyx_args);
@@ -1723,9 +1723,9 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (<span class='pyx_c_api'>__Pyx_ParseKeywords</span>(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "test_has_suffix", 0) &lt; (0)) <span class='error_goto'>__PYX_ERR(0, 111, __pyx_L3_error)</span>
+      if (<span class='pyx_c_api'>__Pyx_ParseKeywords</span>(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "debug_has_suffix", 0) &lt; (0)) <span class='error_goto'>__PYX_ERR(0, 111, __pyx_L3_error)</span>
       for (Py_ssize_t i = __pyx_nargs; i &lt; 2; i++) {
-        if (unlikely(!values[i])) { <span class='pyx_c_api'>__Pyx_RaiseArgtupleInvalid</span>("test_has_suffix", 1, 2, 2, i); <span class='error_goto'>__PYX_ERR(0, 111, __pyx_L3_error)</span> }
+        if (unlikely(!values[i])) { <span class='pyx_c_api'>__Pyx_RaiseArgtupleInvalid</span>("debug_has_suffix", 1, 2, 2, i); <span class='error_goto'>__PYX_ERR(0, 111, __pyx_L3_error)</span> }
       }
     } else if (unlikely(__pyx_nargs != 2)) {
       goto __pyx_L5_argtuple_error;
@@ -1740,20 +1740,20 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  <span class='pyx_c_api'>__Pyx_RaiseArgtupleInvalid</span>("test_has_suffix", 1, 2, 2, __pyx_nargs); <span class='error_goto'>__PYX_ERR(0, 111, __pyx_L3_error)</span>
+  <span class='pyx_c_api'>__Pyx_RaiseArgtupleInvalid</span>("debug_has_suffix", 1, 2, 2, __pyx_nargs); <span class='error_goto'>__PYX_ERR(0, 111, __pyx_L3_error)</span>
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
   for (Py_ssize_t __pyx_temp=0; __pyx_temp &lt; (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
     Py_XDECREF(values[__pyx_temp]);
   }
-  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("epedit.utils.test_has_suffix", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("epedit.utils.debug_has_suffix", __pyx_clineno, __pyx_lineno, __pyx_filename);
   <span class='refnanny'>__Pyx_RefNannyFinishContext</span>();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
   if (unlikely(!<span class='pyx_c_api'>__Pyx_ArgTypeTest</span>(((PyObject *)__pyx_v_s), (&amp;PyUnicode_Type), 1, "s", 1))) <span class='error_goto'>__PYX_ERR(0, 111, __pyx_L1_error)</span>
   if (unlikely(!<span class='pyx_c_api'>__Pyx_ArgTypeTest</span>(((PyObject *)__pyx_v_suffix), (&amp;PyUnicode_Type), 1, "suffix", 1))) <span class='error_goto'>__PYX_ERR(0, 111, __pyx_L1_error)</span>
-  __pyx_r = __pyx_pf_6epedit_5utils_10test_has_suffix(__pyx_self, __pyx_v_s, __pyx_v_suffix);
+  __pyx_r = __pyx_pf_6epedit_5utils_10debug_has_suffix(__pyx_self, __pyx_v_s, __pyx_v_suffix);
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -1775,13 +1775,13 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_6epedit_5utils_10test_has_suffix(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_s, PyObject *__pyx_v_suffix) {
+static PyObject *__pyx_pf_6epedit_5utils_10debug_has_suffix(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_s, PyObject *__pyx_v_suffix) {
   PyObject *__pyx_r = NULL;
 /* … */
   /* function exit code */
   __pyx_L1_error:;
   <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_t_1);
-  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("epedit.utils.test_has_suffix", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("epedit.utils.debug_has_suffix", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   <span class='refnanny'>__Pyx_XGIVEREF</span>(__pyx_r);
@@ -1789,12 +1789,12 @@ static PyObject *__pyx_pf_6epedit_5utils_10test_has_suffix(CYTHON_UNUSED PyObjec
   return __pyx_r;
 }
 /* … */
-  __pyx_t_2 = <span class='pyx_c_api'>__Pyx_CyFunction_New</span>(&amp;__pyx_mdef_6epedit_5utils_11test_has_suffix, 0, __pyx_mstate_global-&gt;__pyx_n_u_test_has_suffix, NULL, __pyx_mstate_global-&gt;__pyx_n_u_epedit_utils, __pyx_mstate_global-&gt;__pyx_d, ((PyObject *)__pyx_mstate_global-&gt;__pyx_codeobj_tab[5]));<span class='error_goto'> if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 111, __pyx_L1_error)</span>
+  __pyx_t_2 = <span class='pyx_c_api'>__Pyx_CyFunction_New</span>(&amp;__pyx_mdef_6epedit_5utils_11debug_has_suffix, 0, __pyx_mstate_global-&gt;__pyx_n_u_debug_has_suffix, NULL, __pyx_mstate_global-&gt;__pyx_n_u_epedit_utils, __pyx_mstate_global-&gt;__pyx_d, ((PyObject *)__pyx_mstate_global-&gt;__pyx_codeobj_tab[5]));<span class='error_goto'> if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 111, __pyx_L1_error)</span>
   <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON &amp;&amp; PY_VERSION_HEX &gt;= 0x030E0000
   <span class='py_c_api'>PyUnstable_Object_EnableDeferredRefcount</span>(__pyx_t_2);
   #endif
-  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_mstate_global-&gt;__pyx_d, __pyx_mstate_global-&gt;__pyx_n_u_test_has_suffix, __pyx_t_2) &lt; (0)) <span class='error_goto'>__PYX_ERR(0, 111, __pyx_L1_error)</span>
+  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_mstate_global-&gt;__pyx_d, __pyx_mstate_global-&gt;__pyx_n_u_debug_has_suffix, __pyx_t_2) &lt; (0)) <span class='error_goto'>__PYX_ERR(0, 111, __pyx_L1_error)</span>
   <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_2); __pyx_t_2 = 0;
 </pre><pre class="cython line score-3" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">112</span>:     <span class="k">return</span> <span class="n">has_suffix</span><span class="p">(</span></pre>
 <pre class='cython code score-3 '>  <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_r);
@@ -1823,17 +1823,17 @@ static PyObject *__pyx_pf_6epedit_5utils_10test_has_suffix(CYTHON_UNUSED PyObjec
   __pyx_t_3 = __pyx_convert_string_from_py_6libcpp_6string_std__in_string(__pyx_t_1);<span class='error_goto'> if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 114, __pyx_L1_error)</span>
   <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_1); __pyx_t_1 = 0;
 </pre><pre class="cython line score-0">&#xA0;<span class="">115</span>:     <span class="p">)</span></pre>
-<pre class="cython line score-48" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">116</span>: <span class="k">def</span> <span class="nf">test_cut_prefix</span><span class="p">(</span><span class="nb">str</span> <span class="n">s</span><span class="p">,</span> <span class="nb">str</span> <span class="n">prefix</span><span class="p">):</span></pre>
+<pre class="cython line score-48" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">116</span>: <span class="k">def</span> <span class="nf">debug_cut_prefix</span><span class="p">(</span><span class="nb">str</span> <span class="n">s</span><span class="p">,</span> <span class="nb">str</span> <span class="n">prefix</span><span class="p">):</span></pre>
 <pre class='cython code score-48 '>/* Python wrapper */
-static PyObject *__pyx_pw_6epedit_5utils_13test_cut_prefix(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_6epedit_5utils_13debug_cut_prefix(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_6epedit_5utils_13test_cut_prefix = {"test_cut_prefix", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6epedit_5utils_13test_cut_prefix, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_6epedit_5utils_13test_cut_prefix(PyObject *__pyx_self, 
+static PyMethodDef __pyx_mdef_6epedit_5utils_13debug_cut_prefix = {"debug_cut_prefix", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6epedit_5utils_13debug_cut_prefix, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_6epedit_5utils_13debug_cut_prefix(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -1848,7 +1848,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
   PyObject *__pyx_r = 0;
   <span class='refnanny'>__Pyx_RefNannyDeclarations</span>
-  <span class='refnanny'>__Pyx_RefNannySetupContext</span>("test_cut_prefix (wrapper)", 0);
+  <span class='refnanny'>__Pyx_RefNannySetupContext</span>("debug_cut_prefix (wrapper)", 0);
   #if !CYTHON_METH_FASTCALL
   #if CYTHON_ASSUME_SAFE_SIZE
   __pyx_nargs = <span class='py_macro_api'>PyTuple_GET_SIZE</span>(__pyx_args);
@@ -1876,9 +1876,9 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (<span class='pyx_c_api'>__Pyx_ParseKeywords</span>(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "test_cut_prefix", 0) &lt; (0)) <span class='error_goto'>__PYX_ERR(0, 116, __pyx_L3_error)</span>
+      if (<span class='pyx_c_api'>__Pyx_ParseKeywords</span>(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "debug_cut_prefix", 0) &lt; (0)) <span class='error_goto'>__PYX_ERR(0, 116, __pyx_L3_error)</span>
       for (Py_ssize_t i = __pyx_nargs; i &lt; 2; i++) {
-        if (unlikely(!values[i])) { <span class='pyx_c_api'>__Pyx_RaiseArgtupleInvalid</span>("test_cut_prefix", 1, 2, 2, i); <span class='error_goto'>__PYX_ERR(0, 116, __pyx_L3_error)</span> }
+        if (unlikely(!values[i])) { <span class='pyx_c_api'>__Pyx_RaiseArgtupleInvalid</span>("debug_cut_prefix", 1, 2, 2, i); <span class='error_goto'>__PYX_ERR(0, 116, __pyx_L3_error)</span> }
       }
     } else if (unlikely(__pyx_nargs != 2)) {
       goto __pyx_L5_argtuple_error;
@@ -1893,20 +1893,20 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  <span class='pyx_c_api'>__Pyx_RaiseArgtupleInvalid</span>("test_cut_prefix", 1, 2, 2, __pyx_nargs); <span class='error_goto'>__PYX_ERR(0, 116, __pyx_L3_error)</span>
+  <span class='pyx_c_api'>__Pyx_RaiseArgtupleInvalid</span>("debug_cut_prefix", 1, 2, 2, __pyx_nargs); <span class='error_goto'>__PYX_ERR(0, 116, __pyx_L3_error)</span>
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
   for (Py_ssize_t __pyx_temp=0; __pyx_temp &lt; (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
     Py_XDECREF(values[__pyx_temp]);
   }
-  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("epedit.utils.test_cut_prefix", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("epedit.utils.debug_cut_prefix", __pyx_clineno, __pyx_lineno, __pyx_filename);
   <span class='refnanny'>__Pyx_RefNannyFinishContext</span>();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
   if (unlikely(!<span class='pyx_c_api'>__Pyx_ArgTypeTest</span>(((PyObject *)__pyx_v_s), (&amp;PyUnicode_Type), 1, "s", 1))) <span class='error_goto'>__PYX_ERR(0, 116, __pyx_L1_error)</span>
   if (unlikely(!<span class='pyx_c_api'>__Pyx_ArgTypeTest</span>(((PyObject *)__pyx_v_prefix), (&amp;PyUnicode_Type), 1, "prefix", 1))) <span class='error_goto'>__PYX_ERR(0, 116, __pyx_L1_error)</span>
-  __pyx_r = __pyx_pf_6epedit_5utils_12test_cut_prefix(__pyx_self, __pyx_v_s, __pyx_v_prefix);
+  __pyx_r = __pyx_pf_6epedit_5utils_12debug_cut_prefix(__pyx_self, __pyx_v_s, __pyx_v_prefix);
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -1928,7 +1928,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_6epedit_5utils_12test_cut_prefix(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_s, PyObject *__pyx_v_prefix) {
+static PyObject *__pyx_pf_6epedit_5utils_12debug_cut_prefix(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_s, PyObject *__pyx_v_prefix) {
   std::string __pyx_v_after;
   bool __pyx_v_found;
   PyObject *__pyx_r = NULL;
@@ -1938,7 +1938,7 @@ static PyObject *__pyx_pf_6epedit_5utils_12test_cut_prefix(CYTHON_UNUSED PyObjec
   <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_t_1);
   <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_t_6);
   <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_t_7);
-  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("epedit.utils.test_cut_prefix", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("epedit.utils.debug_cut_prefix", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   <span class='refnanny'>__Pyx_XGIVEREF</span>(__pyx_r);
@@ -1946,12 +1946,12 @@ static PyObject *__pyx_pf_6epedit_5utils_12test_cut_prefix(CYTHON_UNUSED PyObjec
   return __pyx_r;
 }
 /* … */
-  __pyx_t_2 = <span class='pyx_c_api'>__Pyx_CyFunction_New</span>(&amp;__pyx_mdef_6epedit_5utils_13test_cut_prefix, 0, __pyx_mstate_global-&gt;__pyx_n_u_test_cut_prefix, NULL, __pyx_mstate_global-&gt;__pyx_n_u_epedit_utils, __pyx_mstate_global-&gt;__pyx_d, ((PyObject *)__pyx_mstate_global-&gt;__pyx_codeobj_tab[6]));<span class='error_goto'> if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 116, __pyx_L1_error)</span>
+  __pyx_t_2 = <span class='pyx_c_api'>__Pyx_CyFunction_New</span>(&amp;__pyx_mdef_6epedit_5utils_13debug_cut_prefix, 0, __pyx_mstate_global-&gt;__pyx_n_u_debug_cut_prefix, NULL, __pyx_mstate_global-&gt;__pyx_n_u_epedit_utils, __pyx_mstate_global-&gt;__pyx_d, ((PyObject *)__pyx_mstate_global-&gt;__pyx_codeobj_tab[6]));<span class='error_goto'> if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 116, __pyx_L1_error)</span>
   <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON &amp;&amp; PY_VERSION_HEX &gt;= 0x030E0000
   <span class='py_c_api'>PyUnstable_Object_EnableDeferredRefcount</span>(__pyx_t_2);
   #endif
-  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_mstate_global-&gt;__pyx_d, __pyx_mstate_global-&gt;__pyx_n_u_test_cut_prefix, __pyx_t_2) &lt; (0)) <span class='error_goto'>__PYX_ERR(0, 116, __pyx_L1_error)</span>
+  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_mstate_global-&gt;__pyx_d, __pyx_mstate_global-&gt;__pyx_n_u_debug_cut_prefix, __pyx_t_2) &lt; (0)) <span class='error_goto'>__PYX_ERR(0, 116, __pyx_L1_error)</span>
   <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_2); __pyx_t_2 = 0;
 </pre><pre class="cython line score-0">&#xA0;<span class="">117</span>:     <span class="k">cdef</span> <span class="kt">string</span> <span class="nf">after</span></pre>
 <pre class="cython line score-0">&#xA0;<span class="">118</span>:     <span class="k">cdef</span> <span class="kt">cbool</span> <span class="nf">found</span></pre>
@@ -1997,17 +1997,17 @@ static PyObject *__pyx_pf_6epedit_5utils_12test_cut_prefix(CYTHON_UNUSED PyObjec
   __pyx_r = __pyx_t_7;
   __pyx_t_7 = 0;
   goto __pyx_L0;
-</pre><pre class="cython line score-48" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">124</span>: <span class="k">def</span> <span class="nf">test_cut_suffix</span><span class="p">(</span><span class="nb">str</span> <span class="n">s</span><span class="p">,</span> <span class="nb">str</span> <span class="n">suffix</span><span class="p">):</span></pre>
+</pre><pre class="cython line score-48" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">124</span>: <span class="k">def</span> <span class="nf">debug_cut_suffix</span><span class="p">(</span><span class="nb">str</span> <span class="n">s</span><span class="p">,</span> <span class="nb">str</span> <span class="n">suffix</span><span class="p">):</span></pre>
 <pre class='cython code score-48 '>/* Python wrapper */
-static PyObject *__pyx_pw_6epedit_5utils_15test_cut_suffix(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_6epedit_5utils_15debug_cut_suffix(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_6epedit_5utils_15test_cut_suffix = {"test_cut_suffix", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6epedit_5utils_15test_cut_suffix, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_6epedit_5utils_15test_cut_suffix(PyObject *__pyx_self, 
+static PyMethodDef __pyx_mdef_6epedit_5utils_15debug_cut_suffix = {"debug_cut_suffix", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6epedit_5utils_15debug_cut_suffix, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_6epedit_5utils_15debug_cut_suffix(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -2022,7 +2022,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
   PyObject *__pyx_r = 0;
   <span class='refnanny'>__Pyx_RefNannyDeclarations</span>
-  <span class='refnanny'>__Pyx_RefNannySetupContext</span>("test_cut_suffix (wrapper)", 0);
+  <span class='refnanny'>__Pyx_RefNannySetupContext</span>("debug_cut_suffix (wrapper)", 0);
   #if !CYTHON_METH_FASTCALL
   #if CYTHON_ASSUME_SAFE_SIZE
   __pyx_nargs = <span class='py_macro_api'>PyTuple_GET_SIZE</span>(__pyx_args);
@@ -2050,9 +2050,9 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (<span class='pyx_c_api'>__Pyx_ParseKeywords</span>(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "test_cut_suffix", 0) &lt; (0)) <span class='error_goto'>__PYX_ERR(0, 124, __pyx_L3_error)</span>
+      if (<span class='pyx_c_api'>__Pyx_ParseKeywords</span>(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "debug_cut_suffix", 0) &lt; (0)) <span class='error_goto'>__PYX_ERR(0, 124, __pyx_L3_error)</span>
       for (Py_ssize_t i = __pyx_nargs; i &lt; 2; i++) {
-        if (unlikely(!values[i])) { <span class='pyx_c_api'>__Pyx_RaiseArgtupleInvalid</span>("test_cut_suffix", 1, 2, 2, i); <span class='error_goto'>__PYX_ERR(0, 124, __pyx_L3_error)</span> }
+        if (unlikely(!values[i])) { <span class='pyx_c_api'>__Pyx_RaiseArgtupleInvalid</span>("debug_cut_suffix", 1, 2, 2, i); <span class='error_goto'>__PYX_ERR(0, 124, __pyx_L3_error)</span> }
       }
     } else if (unlikely(__pyx_nargs != 2)) {
       goto __pyx_L5_argtuple_error;
@@ -2067,20 +2067,20 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  <span class='pyx_c_api'>__Pyx_RaiseArgtupleInvalid</span>("test_cut_suffix", 1, 2, 2, __pyx_nargs); <span class='error_goto'>__PYX_ERR(0, 124, __pyx_L3_error)</span>
+  <span class='pyx_c_api'>__Pyx_RaiseArgtupleInvalid</span>("debug_cut_suffix", 1, 2, 2, __pyx_nargs); <span class='error_goto'>__PYX_ERR(0, 124, __pyx_L3_error)</span>
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
   for (Py_ssize_t __pyx_temp=0; __pyx_temp &lt; (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
     Py_XDECREF(values[__pyx_temp]);
   }
-  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("epedit.utils.test_cut_suffix", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("epedit.utils.debug_cut_suffix", __pyx_clineno, __pyx_lineno, __pyx_filename);
   <span class='refnanny'>__Pyx_RefNannyFinishContext</span>();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
   if (unlikely(!<span class='pyx_c_api'>__Pyx_ArgTypeTest</span>(((PyObject *)__pyx_v_s), (&amp;PyUnicode_Type), 1, "s", 1))) <span class='error_goto'>__PYX_ERR(0, 124, __pyx_L1_error)</span>
   if (unlikely(!<span class='pyx_c_api'>__Pyx_ArgTypeTest</span>(((PyObject *)__pyx_v_suffix), (&amp;PyUnicode_Type), 1, "suffix", 1))) <span class='error_goto'>__PYX_ERR(0, 124, __pyx_L1_error)</span>
-  __pyx_r = __pyx_pf_6epedit_5utils_14test_cut_suffix(__pyx_self, __pyx_v_s, __pyx_v_suffix);
+  __pyx_r = __pyx_pf_6epedit_5utils_14debug_cut_suffix(__pyx_self, __pyx_v_s, __pyx_v_suffix);
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -2102,7 +2102,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_6epedit_5utils_14test_cut_suffix(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_s, PyObject *__pyx_v_suffix) {
+static PyObject *__pyx_pf_6epedit_5utils_14debug_cut_suffix(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_s, PyObject *__pyx_v_suffix) {
   std::string __pyx_v_after;
   bool __pyx_v_found;
   PyObject *__pyx_r = NULL;
@@ -2112,7 +2112,7 @@ static PyObject *__pyx_pf_6epedit_5utils_14test_cut_suffix(CYTHON_UNUSED PyObjec
   <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_t_1);
   <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_t_6);
   <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_t_7);
-  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("epedit.utils.test_cut_suffix", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("epedit.utils.debug_cut_suffix", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   <span class='refnanny'>__Pyx_XGIVEREF</span>(__pyx_r);
@@ -2120,12 +2120,12 @@ static PyObject *__pyx_pf_6epedit_5utils_14test_cut_suffix(CYTHON_UNUSED PyObjec
   return __pyx_r;
 }
 /* … */
-  __pyx_t_2 = <span class='pyx_c_api'>__Pyx_CyFunction_New</span>(&amp;__pyx_mdef_6epedit_5utils_15test_cut_suffix, 0, __pyx_mstate_global-&gt;__pyx_n_u_test_cut_suffix, NULL, __pyx_mstate_global-&gt;__pyx_n_u_epedit_utils, __pyx_mstate_global-&gt;__pyx_d, ((PyObject *)__pyx_mstate_global-&gt;__pyx_codeobj_tab[7]));<span class='error_goto'> if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 124, __pyx_L1_error)</span>
+  __pyx_t_2 = <span class='pyx_c_api'>__Pyx_CyFunction_New</span>(&amp;__pyx_mdef_6epedit_5utils_15debug_cut_suffix, 0, __pyx_mstate_global-&gt;__pyx_n_u_debug_cut_suffix, NULL, __pyx_mstate_global-&gt;__pyx_n_u_epedit_utils, __pyx_mstate_global-&gt;__pyx_d, ((PyObject *)__pyx_mstate_global-&gt;__pyx_codeobj_tab[7]));<span class='error_goto'> if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 124, __pyx_L1_error)</span>
   <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON &amp;&amp; PY_VERSION_HEX &gt;= 0x030E0000
   <span class='py_c_api'>PyUnstable_Object_EnableDeferredRefcount</span>(__pyx_t_2);
   #endif
-  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_mstate_global-&gt;__pyx_d, __pyx_mstate_global-&gt;__pyx_n_u_test_cut_suffix, __pyx_t_2) &lt; (0)) <span class='error_goto'>__PYX_ERR(0, 124, __pyx_L1_error)</span>
+  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_mstate_global-&gt;__pyx_d, __pyx_mstate_global-&gt;__pyx_n_u_debug_cut_suffix, __pyx_t_2) &lt; (0)) <span class='error_goto'>__PYX_ERR(0, 124, __pyx_L1_error)</span>
   <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_2); __pyx_t_2 = 0;
 </pre><pre class="cython line score-0">&#xA0;<span class="">125</span>:     <span class="k">cdef</span> <span class="kt">string</span> <span class="nf">after</span></pre>
 <pre class="cython line score-0">&#xA0;<span class="">126</span>:     <span class="k">cdef</span> <span class="kt">cbool</span> <span class="nf">found</span></pre>
@@ -2171,32 +2171,32 @@ static PyObject *__pyx_pf_6epedit_5utils_14test_cut_suffix(CYTHON_UNUSED PyObjec
   __pyx_r = __pyx_t_7;
   __pyx_t_7 = 0;
   goto __pyx_L0;
-</pre><pre class="cython line score-15" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">132</span>: <span class="k">def</span> <span class="nf">test_get_current_time</span><span class="p">():</span></pre>
+</pre><pre class="cython line score-15" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">132</span>: <span class="k">def</span> <span class="nf">debug_get_current_time</span><span class="p">():</span></pre>
 <pre class='cython code score-15 '>/* Python wrapper */
-static PyObject *__pyx_pw_6epedit_5utils_17test_get_current_time(PyObject *__pyx_self, CYTHON_UNUSED PyObject *unused); /*proto*/
-static PyMethodDef __pyx_mdef_6epedit_5utils_17test_get_current_time = {"test_get_current_time", (PyCFunction)__pyx_pw_6epedit_5utils_17test_get_current_time, METH_NOARGS, 0};
-static PyObject *__pyx_pw_6epedit_5utils_17test_get_current_time(PyObject *__pyx_self, CYTHON_UNUSED PyObject *unused) {
+static PyObject *__pyx_pw_6epedit_5utils_17debug_get_current_time(PyObject *__pyx_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyMethodDef __pyx_mdef_6epedit_5utils_17debug_get_current_time = {"debug_get_current_time", (PyCFunction)__pyx_pw_6epedit_5utils_17debug_get_current_time, METH_NOARGS, 0};
+static PyObject *__pyx_pw_6epedit_5utils_17debug_get_current_time(PyObject *__pyx_self, CYTHON_UNUSED PyObject *unused) {
   CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
   PyObject *__pyx_r = 0;
   <span class='refnanny'>__Pyx_RefNannyDeclarations</span>
-  <span class='refnanny'>__Pyx_RefNannySetupContext</span>("test_get_current_time (wrapper)", 0);
+  <span class='refnanny'>__Pyx_RefNannySetupContext</span>("debug_get_current_time (wrapper)", 0);
   __pyx_kwvalues = <span class='pyx_c_api'>__Pyx_KwValues_VARARGS</span>(__pyx_args, __pyx_nargs);
-  __pyx_r = __pyx_pf_6epedit_5utils_16test_get_current_time(__pyx_self);
+  __pyx_r = __pyx_pf_6epedit_5utils_16debug_get_current_time(__pyx_self);
 
   /* function exit code */
   <span class='refnanny'>__Pyx_RefNannyFinishContext</span>();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_6epedit_5utils_16test_get_current_time(CYTHON_UNUSED PyObject *__pyx_self) {
+static PyObject *__pyx_pf_6epedit_5utils_16debug_get_current_time(CYTHON_UNUSED PyObject *__pyx_self) {
   PyObject *__pyx_r = NULL;
 /* … */
-  __pyx_t_2 = <span class='pyx_c_api'>__Pyx_CyFunction_New</span>(&amp;__pyx_mdef_6epedit_5utils_17test_get_current_time, 0, __pyx_mstate_global-&gt;__pyx_n_u_test_get_current_time, NULL, __pyx_mstate_global-&gt;__pyx_n_u_epedit_utils, __pyx_mstate_global-&gt;__pyx_d, ((PyObject *)__pyx_mstate_global-&gt;__pyx_codeobj_tab[8]));<span class='error_goto'> if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 132, __pyx_L1_error)</span>
+  __pyx_t_2 = <span class='pyx_c_api'>__Pyx_CyFunction_New</span>(&amp;__pyx_mdef_6epedit_5utils_17debug_get_current_time, 0, __pyx_mstate_global-&gt;__pyx_n_u_debug_get_current_time, NULL, __pyx_mstate_global-&gt;__pyx_n_u_epedit_utils, __pyx_mstate_global-&gt;__pyx_d, ((PyObject *)__pyx_mstate_global-&gt;__pyx_codeobj_tab[8]));<span class='error_goto'> if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 132, __pyx_L1_error)</span>
   <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON &amp;&amp; PY_VERSION_HEX &gt;= 0x030E0000
   <span class='py_c_api'>PyUnstable_Object_EnableDeferredRefcount</span>(__pyx_t_2);
   #endif
-  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_mstate_global-&gt;__pyx_d, __pyx_mstate_global-&gt;__pyx_n_u_test_get_current_time, __pyx_t_2) &lt; (0)) <span class='error_goto'>__PYX_ERR(0, 132, __pyx_L1_error)</span>
+  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_mstate_global-&gt;__pyx_d, __pyx_mstate_global-&gt;__pyx_n_u_debug_get_current_time, __pyx_t_2) &lt; (0)) <span class='error_goto'>__PYX_ERR(0, 132, __pyx_L1_error)</span>
   <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_2); __pyx_t_2 = 0;
 </pre><pre class="cython line score-1" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">133</span>:     <span class="k">return</span> <span class="n">get_current_time</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">&quot;utf-8&quot;</span><span class="p">)</span></pre>
 <pre class='cython code score-1 '>  <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_r);

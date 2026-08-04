@@ -95,25 +95,25 @@ cdef bytes read_utf8_bytes(str filepath, str encoding=None):
 
     return raw_bytes
 
-def test_to_lower(str s):
+def debug_to_lower(str s):
     return to_lower((<str>s).encode("utf-8")).decode("utf-8")
-def test_to_upper(str s):
+def debug_to_upper(str s):
     return to_upper((<str>s).encode("utf-8")).decode("utf-8")
-def test_equal_fold(str a, str b):
+def debug_equal_fold(str a, str b):
     return equal_fold(a.encode("utf-8"), b.encode("utf-8"))
-def test_trim_string(str s):
+def debug_trim_string(str s):
     return trim_string((<str>s).encode("utf-8")).decode("utf-8")
-def test_has_prefix(str s, str prefix):
+def debug_has_prefix(str s, str prefix):
     return has_prefix(
         (<str>s).encode("utf-8"),
         (<str>prefix).encode("utf-8"),
     )
-def test_has_suffix(str s, str suffix):
+def debug_has_suffix(str s, str suffix):
     return has_suffix(
         (<str>s).encode("utf-8"),
         (<str>suffix).encode("utf-8"),
     )
-def test_cut_prefix(str s, str prefix):
+def debug_cut_prefix(str s, str prefix):
     cdef string after
     cdef cbool found
     after, found = cut_prefix(
@@ -121,7 +121,7 @@ def test_cut_prefix(str s, str prefix):
         (<str>prefix).encode("utf-8"),
     )
     return (after.decode("utf-8"), found)
-def test_cut_suffix(str s, str suffix):
+def debug_cut_suffix(str s, str suffix):
     cdef string after
     cdef cbool found
     after, found = cut_suffix(
@@ -129,5 +129,5 @@ def test_cut_suffix(str s, str suffix):
         (<str>suffix).encode("utf-8"),
     )
     return (after.decode("utf-8"), found)
-def test_get_current_time():
+def debug_get_current_time():
     return get_current_time().decode("utf-8")

@@ -2873,19 +2873,19 @@ static PyObject *__pyx_pf_6epedit_3idd_3IDD_6_get_field_names(struct __pyx_obj_6
   goto __pyx_L0;
 </pre><pre class="cython line score-0">&#xA0;<span class="">587</span>: </pre>
 <pre class="cython line score-0">&#xA0;<span class="">588</span>: </pre>
-<pre class="cython line score-0">&#xA0;<span class="">589</span>: <span class="c"># * Test functions</span></pre>
+<pre class="cython line score-0">&#xA0;<span class="">589</span>: <span class="c"># * Debug functions</span></pre>
 <pre class="cython line score-0">&#xA0;<span class="">590</span>: </pre>
-<pre class="cython line score-53" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">591</span>: <span class="k">def</span> <span class="nf">test_find_field_index</span><span class="p">(</span><span class="n">IDD</span> <span class="n">idd</span><span class="p">,</span> <span class="nb">str</span> <span class="n">class_name</span><span class="p">,</span> <span class="nb">str</span> <span class="n">field_name</span><span class="p">):</span></pre>
+<pre class="cython line score-53" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">591</span>: <span class="k">def</span> <span class="nf">debug_find_field_index</span><span class="p">(</span><span class="n">IDD</span> <span class="n">idd</span><span class="p">,</span> <span class="nb">str</span> <span class="n">class_name</span><span class="p">,</span> <span class="nb">str</span> <span class="n">field_name</span><span class="p">):</span></pre>
 <pre class='cython code score-53 '>/* Python wrapper */
-static PyObject *__pyx_pw_6epedit_3idd_1test_find_field_index(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_6epedit_3idd_1debug_find_field_index(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_6epedit_3idd_1test_find_field_index = {"test_find_field_index", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6epedit_3idd_1test_find_field_index, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_6epedit_3idd_1test_find_field_index(PyObject *__pyx_self, 
+static PyMethodDef __pyx_mdef_6epedit_3idd_1debug_find_field_index = {"debug_find_field_index", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6epedit_3idd_1debug_find_field_index, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_6epedit_3idd_1debug_find_field_index(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -2901,7 +2901,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
   PyObject *__pyx_r = 0;
   <span class='refnanny'>__Pyx_RefNannyDeclarations</span>
-  <span class='refnanny'>__Pyx_RefNannySetupContext</span>("test_find_field_index (wrapper)", 0);
+  <span class='refnanny'>__Pyx_RefNannySetupContext</span>("debug_find_field_index (wrapper)", 0);
   #if !CYTHON_METH_FASTCALL
   #if CYTHON_ASSUME_SAFE_SIZE
   __pyx_nargs = <span class='py_macro_api'>PyTuple_GET_SIZE</span>(__pyx_args);
@@ -2933,9 +2933,9 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (<span class='pyx_c_api'>__Pyx_ParseKeywords</span>(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "test_find_field_index", 0) &lt; (0)) <span class='error_goto'>__PYX_ERR(0, 591, __pyx_L3_error)</span>
+      if (<span class='pyx_c_api'>__Pyx_ParseKeywords</span>(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "debug_find_field_index", 0) &lt; (0)) <span class='error_goto'>__PYX_ERR(0, 591, __pyx_L3_error)</span>
       for (Py_ssize_t i = __pyx_nargs; i &lt; 3; i++) {
-        if (unlikely(!values[i])) { <span class='pyx_c_api'>__Pyx_RaiseArgtupleInvalid</span>("test_find_field_index", 1, 3, 3, i); <span class='error_goto'>__PYX_ERR(0, 591, __pyx_L3_error)</span> }
+        if (unlikely(!values[i])) { <span class='pyx_c_api'>__Pyx_RaiseArgtupleInvalid</span>("debug_find_field_index", 1, 3, 3, i); <span class='error_goto'>__PYX_ERR(0, 591, __pyx_L3_error)</span> }
       }
     } else if (unlikely(__pyx_nargs != 3)) {
       goto __pyx_L5_argtuple_error;
@@ -2953,21 +2953,21 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  <span class='pyx_c_api'>__Pyx_RaiseArgtupleInvalid</span>("test_find_field_index", 1, 3, 3, __pyx_nargs); <span class='error_goto'>__PYX_ERR(0, 591, __pyx_L3_error)</span>
+  <span class='pyx_c_api'>__Pyx_RaiseArgtupleInvalid</span>("debug_find_field_index", 1, 3, 3, __pyx_nargs); <span class='error_goto'>__PYX_ERR(0, 591, __pyx_L3_error)</span>
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
   for (Py_ssize_t __pyx_temp=0; __pyx_temp &lt; (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
     Py_XDECREF(values[__pyx_temp]);
   }
-  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("epedit.idd.test_find_field_index", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("epedit.idd.debug_find_field_index", __pyx_clineno, __pyx_lineno, __pyx_filename);
   <span class='refnanny'>__Pyx_RefNannyFinishContext</span>();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
   if (unlikely(!<span class='pyx_c_api'>__Pyx_ArgTypeTest</span>(((PyObject *)__pyx_v_idd), __pyx_mstate_global-&gt;__pyx_ptype_6epedit_3idd_IDD, 1, "idd", 0))) <span class='error_goto'>__PYX_ERR(0, 591, __pyx_L1_error)</span>
   if (unlikely(!<span class='pyx_c_api'>__Pyx_ArgTypeTest</span>(((PyObject *)__pyx_v_class_name), (&amp;PyUnicode_Type), 1, "class_name", 1))) <span class='error_goto'>__PYX_ERR(0, 591, __pyx_L1_error)</span>
   if (unlikely(!<span class='pyx_c_api'>__Pyx_ArgTypeTest</span>(((PyObject *)__pyx_v_field_name), (&amp;PyUnicode_Type), 1, "field_name", 1))) <span class='error_goto'>__PYX_ERR(0, 591, __pyx_L1_error)</span>
-  __pyx_r = __pyx_pf_6epedit_3idd_test_find_field_index(__pyx_self, __pyx_v_idd, __pyx_v_class_name, __pyx_v_field_name);
+  __pyx_r = __pyx_pf_6epedit_3idd_debug_find_field_index(__pyx_self, __pyx_v_idd, __pyx_v_class_name, __pyx_v_field_name);
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -2989,7 +2989,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_6epedit_3idd_test_find_field_index(CYTHON_UNUSED PyObject *__pyx_self, struct __pyx_obj_6epedit_3idd_IDD *__pyx_v_idd, PyObject *__pyx_v_class_name, PyObject *__pyx_v_field_name) {
+static PyObject *__pyx_pf_6epedit_3idd_debug_find_field_index(CYTHON_UNUSED PyObject *__pyx_self, struct __pyx_obj_6epedit_3idd_IDD *__pyx_v_idd, PyObject *__pyx_v_class_name, PyObject *__pyx_v_field_name) {
   struct __pyx_t_6epedit_3idd_ClassDef const *__pyx_v_cls;
   int __pyx_v_field_idx;
   PyObject *__pyx_r = NULL;
@@ -2998,7 +2998,7 @@ static PyObject *__pyx_pf_6epedit_3idd_test_find_field_index(CYTHON_UNUSED PyObj
   __pyx_L1_error:;
   <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_t_1);
   <span class='pyx_macro_api'>__Pyx_XDECREF</span>(__pyx_t_2);
-  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("epedit.idd.test_find_field_index", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("epedit.idd.debug_find_field_index", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   <span class='refnanny'>__Pyx_XGIVEREF</span>(__pyx_r);
@@ -3006,12 +3006,12 @@ static PyObject *__pyx_pf_6epedit_3idd_test_find_field_index(CYTHON_UNUSED PyObj
   return __pyx_r;
 }
 /* … */
-  __pyx_t_3 = <span class='pyx_c_api'>__Pyx_CyFunction_New</span>(&amp;__pyx_mdef_6epedit_3idd_1test_find_field_index, 0, __pyx_mstate_global-&gt;__pyx_n_u_test_find_field_index, NULL, __pyx_mstate_global-&gt;__pyx_n_u_epedit_idd, __pyx_mstate_global-&gt;__pyx_d, ((PyObject *)__pyx_mstate_global-&gt;__pyx_codeobj_tab[5]));<span class='error_goto'> if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 591, __pyx_L1_error)</span>
+  __pyx_t_3 = <span class='pyx_c_api'>__Pyx_CyFunction_New</span>(&amp;__pyx_mdef_6epedit_3idd_1debug_find_field_index, 0, __pyx_mstate_global-&gt;__pyx_n_u_debug_find_field_index, NULL, __pyx_mstate_global-&gt;__pyx_n_u_epedit_idd, __pyx_mstate_global-&gt;__pyx_d, ((PyObject *)__pyx_mstate_global-&gt;__pyx_codeobj_tab[5]));<span class='error_goto'> if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 591, __pyx_L1_error)</span>
   <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_3);
   #if CYTHON_COMPILING_IN_CPYTHON &amp;&amp; PY_VERSION_HEX &gt;= 0x030E0000
   <span class='py_c_api'>PyUnstable_Object_EnableDeferredRefcount</span>(__pyx_t_3);
   #endif
-  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_mstate_global-&gt;__pyx_d, __pyx_mstate_global-&gt;__pyx_n_u_test_find_field_index, __pyx_t_3) &lt; (0)) <span class='error_goto'>__PYX_ERR(0, 591, __pyx_L1_error)</span>
+  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_mstate_global-&gt;__pyx_d, __pyx_mstate_global-&gt;__pyx_n_u_debug_find_field_index, __pyx_t_3) &lt; (0)) <span class='error_goto'>__PYX_ERR(0, 591, __pyx_L1_error)</span>
   <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_3); __pyx_t_3 = 0;
 </pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">592</span>:     <span class="k">cdef</span> <span class="kt">const</span> <span class="kt">ClassDef</span>* <span class="nf">cls</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">idd</span><span class="o">.</span><span class="n">c_idd</span><span class="o">.</span><span class="n">ordered_classes</span><span class="o">.</span><span class="n">at</span><span class="p">(</span></pre>
 <pre class='cython code score-0 '>  try {
@@ -3056,17 +3056,17 @@ static PyObject *__pyx_pf_6epedit_3idd_test_find_field_index(CYTHON_UNUSED PyObj
   __pyx_t_2 = 0;
   goto __pyx_L0;
 </pre><pre class="cython line score-0">&#xA0;<span class="">599</span>: </pre>
-<pre class="cython line score-60" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">600</span>: <span class="k">def</span> <span class="nf">test_get_field_name</span><span class="p">(</span><span class="n">IDD</span> <span class="n">idd</span><span class="p">,</span> <span class="nb">str</span> <span class="n">class_name</span><span class="p">,</span> <span class="nb">int</span> <span class="n">field_idx</span><span class="p">,</span> <span class="nb">bool</span> <span class="n">add_units</span><span class="p">):</span></pre>
+<pre class="cython line score-60" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">600</span>: <span class="k">def</span> <span class="nf">debug_get_field_name</span><span class="p">(</span><span class="n">IDD</span> <span class="n">idd</span><span class="p">,</span> <span class="nb">str</span> <span class="n">class_name</span><span class="p">,</span> <span class="nb">int</span> <span class="n">field_idx</span><span class="p">,</span> <span class="nb">bool</span> <span class="n">add_units</span><span class="p">):</span></pre>
 <pre class='cython code score-60 '>/* Python wrapper */
-static PyObject *__pyx_pw_6epedit_3idd_3test_get_field_name(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_6epedit_3idd_3debug_get_field_name(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_6epedit_3idd_3test_get_field_name = {"test_get_field_name", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6epedit_3idd_3test_get_field_name, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_6epedit_3idd_3test_get_field_name(PyObject *__pyx_self, 
+static PyMethodDef __pyx_mdef_6epedit_3idd_3debug_get_field_name = {"debug_get_field_name", (PyCFunction)(void(*)(void))(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_6epedit_3idd_3debug_get_field_name, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_6epedit_3idd_3debug_get_field_name(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -3083,7 +3083,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
   PyObject *__pyx_r = 0;
   <span class='refnanny'>__Pyx_RefNannyDeclarations</span>
-  <span class='refnanny'>__Pyx_RefNannySetupContext</span>("test_get_field_name (wrapper)", 0);
+  <span class='refnanny'>__Pyx_RefNannySetupContext</span>("debug_get_field_name (wrapper)", 0);
   #if !CYTHON_METH_FASTCALL
   #if CYTHON_ASSUME_SAFE_SIZE
   __pyx_nargs = <span class='py_macro_api'>PyTuple_GET_SIZE</span>(__pyx_args);
@@ -3119,9 +3119,9 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (<span class='pyx_c_api'>__Pyx_ParseKeywords</span>(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "test_get_field_name", 0) &lt; (0)) <span class='error_goto'>__PYX_ERR(0, 600, __pyx_L3_error)</span>
+      if (<span class='pyx_c_api'>__Pyx_ParseKeywords</span>(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "debug_get_field_name", 0) &lt; (0)) <span class='error_goto'>__PYX_ERR(0, 600, __pyx_L3_error)</span>
       for (Py_ssize_t i = __pyx_nargs; i &lt; 4; i++) {
-        if (unlikely(!values[i])) { <span class='pyx_c_api'>__Pyx_RaiseArgtupleInvalid</span>("test_get_field_name", 1, 4, 4, i); <span class='error_goto'>__PYX_ERR(0, 600, __pyx_L3_error)</span> }
+        if (unlikely(!values[i])) { <span class='pyx_c_api'>__Pyx_RaiseArgtupleInvalid</span>("debug_get_field_name", 1, 4, 4, i); <span class='error_goto'>__PYX_ERR(0, 600, __pyx_L3_error)</span> }
       }
     } else if (unlikely(__pyx_nargs != 4)) {
       goto __pyx_L5_argtuple_error;
@@ -3142,21 +3142,21 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  <span class='pyx_c_api'>__Pyx_RaiseArgtupleInvalid</span>("test_get_field_name", 1, 4, 4, __pyx_nargs); <span class='error_goto'>__PYX_ERR(0, 600, __pyx_L3_error)</span>
+  <span class='pyx_c_api'>__Pyx_RaiseArgtupleInvalid</span>("debug_get_field_name", 1, 4, 4, __pyx_nargs); <span class='error_goto'>__PYX_ERR(0, 600, __pyx_L3_error)</span>
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
   for (Py_ssize_t __pyx_temp=0; __pyx_temp &lt; (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
     Py_XDECREF(values[__pyx_temp]);
   }
-  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("epedit.idd.test_get_field_name", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  <span class='pyx_c_api'>__Pyx_AddTraceback</span>("epedit.idd.debug_get_field_name", __pyx_clineno, __pyx_lineno, __pyx_filename);
   <span class='refnanny'>__Pyx_RefNannyFinishContext</span>();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
   if (unlikely(!<span class='pyx_c_api'>__Pyx_ArgTypeTest</span>(((PyObject *)__pyx_v_idd), __pyx_mstate_global-&gt;__pyx_ptype_6epedit_3idd_IDD, 1, "idd", 0))) <span class='error_goto'>__PYX_ERR(0, 600, __pyx_L1_error)</span>
   if (unlikely(!<span class='pyx_c_api'>__Pyx_ArgTypeTest</span>(((PyObject *)__pyx_v_class_name), (&amp;PyUnicode_Type), 1, "class_name", 1))) <span class='error_goto'>__PYX_ERR(0, 600, __pyx_L1_error)</span>
   if (unlikely(!<span class='pyx_c_api'>__Pyx_ArgTypeTest</span>(((PyObject *)__pyx_v_add_units), (&amp;PyBool_Type), 1, "add_units", 1))) <span class='error_goto'>__PYX_ERR(0, 600, __pyx_L1_error)</span>
-  __pyx_r = __pyx_pf_6epedit_3idd_2test_get_field_name(__pyx_self, __pyx_v_idd, __pyx_v_class_name, __pyx_v_field_idx, __pyx_v_add_units);
+  __pyx_r = __pyx_pf_6epedit_3idd_2debug_get_field_name(__pyx_self, __pyx_v_idd, __pyx_v_class_name, __pyx_v_field_idx, __pyx_v_add_units);
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -3178,16 +3178,16 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_6epedit_3idd_2test_get_field_name(CYTHON_UNUSED PyObject *__pyx_self, struct __pyx_obj_6epedit_3idd_IDD *__pyx_v_idd, PyObject *__pyx_v_class_name, int __pyx_v_field_idx, PyObject *__pyx_v_add_units) {
+static PyObject *__pyx_pf_6epedit_3idd_2debug_get_field_name(CYTHON_UNUSED PyObject *__pyx_self, struct __pyx_obj_6epedit_3idd_IDD *__pyx_v_idd, PyObject *__pyx_v_class_name, int __pyx_v_field_idx, PyObject *__pyx_v_add_units) {
   struct __pyx_t_6epedit_3idd_ClassDef const *__pyx_v_cls;
   PyObject *__pyx_r = NULL;
 /* … */
-  __pyx_t_3 = <span class='pyx_c_api'>__Pyx_CyFunction_New</span>(&amp;__pyx_mdef_6epedit_3idd_3test_get_field_name, 0, __pyx_mstate_global-&gt;__pyx_n_u_test_get_field_name, NULL, __pyx_mstate_global-&gt;__pyx_n_u_epedit_idd, __pyx_mstate_global-&gt;__pyx_d, ((PyObject *)__pyx_mstate_global-&gt;__pyx_codeobj_tab[6]));<span class='error_goto'> if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 600, __pyx_L1_error)</span>
+  __pyx_t_3 = <span class='pyx_c_api'>__Pyx_CyFunction_New</span>(&amp;__pyx_mdef_6epedit_3idd_3debug_get_field_name, 0, __pyx_mstate_global-&gt;__pyx_n_u_debug_get_field_name, NULL, __pyx_mstate_global-&gt;__pyx_n_u_epedit_idd, __pyx_mstate_global-&gt;__pyx_d, ((PyObject *)__pyx_mstate_global-&gt;__pyx_codeobj_tab[6]));<span class='error_goto'> if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 600, __pyx_L1_error)</span>
   <span class='refnanny'>__Pyx_GOTREF</span>(__pyx_t_3);
   #if CYTHON_COMPILING_IN_CPYTHON &amp;&amp; PY_VERSION_HEX &gt;= 0x030E0000
   <span class='py_c_api'>PyUnstable_Object_EnableDeferredRefcount</span>(__pyx_t_3);
   #endif
-  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_mstate_global-&gt;__pyx_d, __pyx_mstate_global-&gt;__pyx_n_u_test_get_field_name, __pyx_t_3) &lt; (0)) <span class='error_goto'>__PYX_ERR(0, 600, __pyx_L1_error)</span>
+  if (<span class='py_c_api'>PyDict_SetItem</span>(__pyx_mstate_global-&gt;__pyx_d, __pyx_mstate_global-&gt;__pyx_n_u_debug_get_field_name, __pyx_t_3) &lt; (0)) <span class='error_goto'>__PYX_ERR(0, 600, __pyx_L1_error)</span>
   <span class='pyx_macro_api'>__Pyx_DECREF</span>(__pyx_t_3); __pyx_t_3 = 0;
 </pre><pre class="cython line score-0" onclick="(function(f,s,c){c=f.nodeValue=='+';s.display=c?'block':'none';f.nodeValue=c?'−':'+'})(this.firstChild,this.nextElementSibling.style)">+<span class="">601</span>:     <span class="k">cdef</span> <span class="kt">const</span> <span class="kt">ClassDef</span>* <span class="nf">cls</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">idd</span><span class="o">.</span><span class="n">c_idd</span><span class="o">.</span><span class="n">ordered_classes</span><span class="o">.</span><span class="n">at</span><span class="p">(</span></pre>
 <pre class='cython code score-0 '>  try {
