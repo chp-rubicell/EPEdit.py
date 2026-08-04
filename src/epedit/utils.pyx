@@ -68,6 +68,33 @@ cdef string get_current_time() noexcept nogil:
         return string(b"")
     return string(<const char*>buffer, written_len)
 
+# Read file as UTF-8 bytes
+cdef bytes read_utf8_bytes(str filepath, str encoding=None):
+    """Parse IDD file"""
+    cdef bytes raw_bytes
+
+    with open(filepath, "rb") as file:
+        raw_bytes = file.read()
+
+    # Remove UTF-8 BOM
+    if raw_bytes.startswith(b'\xef\xbb\xbf'):
+        raw_bytes = raw_bytes[3:]
+
+    # Normalized encoding
+    if encoding is not None:
+        if encoding.lower() not in ("utf-8", "utf8"):
+            raw_bytes = raw_bytes.decode(encoding).encode("utf-8")
+    else:
+        # Check if UTF-8
+        try:
+            raw_bytes.decode("utf-8")
+        except UnicodeDecodeError as e:
+            raise UnicodeError(
+                f"'{filepath}' cannot be read in UTF-8. Encoding needs to be specified."
+            ) from e
+
+    return raw_bytes
+
 def test_to_lower(str s):
     return to_lower((<str>s).encode("utf-8")).decode("utf-8")
 def test_to_upper(str s):

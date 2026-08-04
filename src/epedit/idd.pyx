@@ -17,7 +17,7 @@ from .lexer cimport (
 from .utils cimport (
     to_lower, to_upper, trim_string,
     has_prefix, has_suffix, cut_prefix, cut_suffix,
-    get_continuous_digits_indices,
+    get_continuous_digits_indices, read_utf8_bytes,
 )
 
 
@@ -433,13 +433,9 @@ cdef class IDD:
         self.initialized = True
 
     @classmethod
-    def from_file(cls, str filepath) -> IDD:
+    def from_file(cls, str filepath, str encoding=None) -> IDD:
         """Parse IDD file"""
-        cdef bytes raw_bytes
-
-        with open(filepath, "rb") as file:
-            raw_bytes = file.read()
-
+        cdef bytes raw_bytes = read_utf8_bytes(filepath, encoding)
         return cls(raw_bytes)
 
     # ——— Helper functions ——————

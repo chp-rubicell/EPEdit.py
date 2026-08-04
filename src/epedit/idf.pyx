@@ -16,7 +16,7 @@ from .idd cimport (
     c_IDD, IDD,
     find_field_index, resolve_key_to_field_index, get_field_name, get_field_def,
 )
-from .utils cimport to_lower, to_upper, equal_fold, any_to_string, get_current_time
+from .utils cimport to_lower, to_upper, equal_fold, any_to_string, get_current_time, read_utf8_bytes
 
 cdef extern from "<string>" namespace "std" nogil:
     double stod(const string& str) except +
@@ -396,13 +396,9 @@ cdef class IDF:
         self.build_objects(c_objects)
 
     @classmethod
-    def from_file(cls, IDD idd, str filepath) -> IDF:
+    def from_file(cls, IDD idd, str filepath, str encoding=None) -> IDF:
         """Parse IDF file"""
-        cdef bytes raw_bytes
-
-        with open(filepath, "rb") as file:
-            raw_bytes = file.read()
-
+        cdef bytes raw_bytes = read_utf8_bytes(filepath, encoding)
         return cls(idd, raw_bytes)
 
     # ——— Build IDF from c_idf_objects ——————
