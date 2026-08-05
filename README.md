@@ -116,9 +116,8 @@ idf.save("output.idf")
 ## Related projects
 
 <p align="center">
-    <a href="https://github.com/chp-rubicell/EPEdit.go"><img src="https://github.com/chp-rubicell/EPEdit.go/raw/main/_assets/epeditgo.svg" width="200" alt="EPEdit.go" /></a>
-    &nbsp;&nbsp;&nbsp;&nbsp;
-    <a href="https://github.com/chp-rubicell/EPEdit.js"><img src="https://github.com/chp-rubicell/EPEdit.js/raw/main/doc/epedit.svg" width="200" alt="EPEdit.js" /></a>
+    &nbsp;&nbsp;&nbsp;&nbsp;<a href="https://github.com/chp-rubicell/EPEdit.go"><img src="https://github.com/chp-rubicell/EPEdit.go/raw/main/_assets/epeditgo.svg" width="200" alt="EPEdit.go" /></a>&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;<a href="https://github.com/chp-rubicell/EPEdit.js"><img src="https://github.com/chp-rubicell/EPEdit.js/raw/main/doc/epedit.svg" width="200" alt="EPEdit.js" /></a>&nbsp;&nbsp;&nbsp;&nbsp;
 </p>
 
 
