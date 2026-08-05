@@ -1,40 +1,46 @@
 import os
-from setuptools import setup, Extension
+from setuptools import setup, Extension, find_packages
+from setuptools.command.build_ext import build_ext
 from Cython.Build import cythonize
 
-# import sys
-# if len(sys.argv) == 1:
-#     sys.argv.extend(["build_ext", "--inplace"])
+import sys
+if len(sys.argv) == 1:
+    sys.argv.extend(["build_ext", "--inplace"])
 # same as executing `python setup.py build_ext --inplace`
 
-# OS specific options
-if os.name == "nt":
-    # Windows
-    extra_compile_args = [
-        "/O2",        # optimization level
-        "/std:c++14"  # force C++14 (MSVC)
-    ]
-else:
-    # Linux & macOS
-    extra_compile_args = [
-        "-O3",        # optimization level
-        "-std=c++14"  # force C++14 (GCC)
-    ]
+
+# Compiler specific options
+class CustomBuildExt(build_ext):
+    def build_extensions(self):
+        # Get current compiler type ('msvc', 'mingw32', 'unix', ...)
+        compiler_type = self.compiler.compiler_type
+
+        if compiler_type == 'msvc':
+            # MSVC
+            cxx_flags = ["/O2", "/std:c++14"]
+        else:
+            # GCC, Clang, ...
+            cxx_flags = ["-O3", "-std=c++14"]
+
+        for ext in self.extensions:
+            ext.extra_compile_args = cxx_flags
+
+        super().build_extensions()
+
 
 # Define extensions separately to give the C++ file special instructions
 extensions = [
     Extension(
-        name               =  "epedit.*",
-        sources            = ["src/epedit/*.pyx"],
-        extra_compile_args = extra_compile_args,
-        language           = "c++",
+        name     =  "epedit.*",
+        sources  = ["src/epedit/*.pyx"],
+        language = "c++",
     ),
 ]
 
+
 setup(
     name="epedit",
-    packages=["epedit"],
-    # version="0.0.1",
+    packages=find_packages(where="src"),
     package_dir={"": "src"},  # declare package starting point as src
     package_data={
         "epedit": ["*.pyi", "py.typed"],
@@ -43,10 +49,11 @@ setup(
         extensions,
         compiler_directives = {
             'language_level': "3",  # force Python 3
-            'boundscheck': False,   #
-            'wraparound': False,
+            'boundscheck': False,
+            'wraparound': False,  # minujs indexing
         },
         annotate=False,
     ),
+    cmdclass={"build_ext": CustomBuildExt},  # connected compiler detection class
     zip_safe=False,
 )
