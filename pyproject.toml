@@ -12,6 +12,3 @@ authors = [
 requires-python = ">=3.8"
 
 [tool.setuptools_scm]
-
-[tool.pytest.ini_options]
-pythonpath = "src"
