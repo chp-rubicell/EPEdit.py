@@ -122,6 +122,8 @@ cdef int parse_idf(Lexer lexer, vector[c_IDFObject]& c_idf_objects) except -1 no
             # Leave checking and saving to IDFObject generation phase.
             c_idf_objects.push_back(move(current_obj))
 
+            current_obj.class_name.clear()
+            current_obj.values.clear()
             last_text.clear()
 
     return 0
@@ -268,8 +270,10 @@ cdef class IDFObject:
 
         if isinstance(values, list):
             for i, value in enumerate(values):
-                pending_updates.append((i, value))
-            max_idx = len(values) - 1
+                idx = resolve_key_to_field_index(cls, i)
+                pending_updates.append((idx, value))
+                if idx > max_idx:
+                    max_idx = idx
         elif isinstance(values, dict):
             for key, value in values.items():
                 idx = resolve_key_to_field_index(cls, key)
@@ -497,7 +501,7 @@ cdef class IDF:
         cdef size_t i
         for i in range(<size_t>len(candidates)):
             obj = candidates[i]
-            if equal_fold(obj.values[0], c_obj_name):
+            if obj.values.size() > 0 and equal_fold(obj.values[0], c_obj_name):
                 return obj
         return None
 
