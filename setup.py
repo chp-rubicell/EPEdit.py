@@ -3,9 +3,9 @@ from setuptools import setup, Extension, find_packages
 from setuptools.command.build_ext import build_ext
 from Cython.Build import cythonize
 
-import sys
-if len(sys.argv) == 1:
-    sys.argv.extend(["build_ext", "--inplace"])
+# import sys
+# if len(sys.argv) == 1:
+#     sys.argv.extend(["build_ext", "--inplace"])
 # same as executing `python setup.py build_ext --inplace`
 
 

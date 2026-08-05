@@ -3,9 +3,9 @@ name: Build Cython Wheels
 # 코드가 메인 브랜치에 푸시되거나 PR이 생성될 때 자동으로 실행됩니다.
 on:
   # 'v1.0.0' 같은 Git 태그가 생성되어 푸시될 때 자동 실행 (릴리즈용)
-  push:
-    tags:
-      - 'v*'
+  # push:
+  #   tags:
+  #     - 'v*'
 
   # 수동 버튼 활성화
   workflow_dispatch:
