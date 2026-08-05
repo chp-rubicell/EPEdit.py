@@ -1,9 +1,8 @@
 <p align="center">
-    <a href="https://pypi.org/project/epedit/">
-        <img src="./docs/assets/epeditpy.svg" width="256" alt="EPEdit.go"><br/>
-    </a>
+    <a href="https://pypi.org/project/epedit/"><img src="https://github.com/chp-rubicell/EPEdit.py/raw/main/docs/assets/epeditpy.svg" width="256" alt="EPEdit.py" /></a>
+    <br/>
     <!-- <img src="doc/epedit.svg" width="256" alt="EPEdit.go"><br/> -->
-    <a href="https://pypi.org/project/epedit/"><img src="https://img.shields.io/pypi/v/epedit.svg?style=flat-square&maxAge=600" alt="Downloads"></a>
+    <a href="https://pypi.org/project/epedit/"><img src="https://img.shields.io/pypi/v/epedit.svg?style=flat-square&maxAge=600" alt="pypi" /></a>
 </p>
 
 **EPEdit.py** is a high-performance, *Cython-based* Python library for parsing, editing, and formatting EnergyPlus Input Data Files (`.idf`).
@@ -109,14 +108,11 @@ idf.save("files/output.idf")
 ## Related projects
 
 <p align="center">
-    <a href="https://github.com/chp-rubicell/EPEdit.go">
-        <img src="https://github.com/chp-rubicell/EPEdit.go/blob/main/_assets/epeditgo.svg" width="200" />
-    </a>
-    &nbsp;&nbsp;
-    <a href="https://github.com/chp-rubicell/EPEdit.js">
-        <img src="https://github.com/chp-rubicell/EPEdit.js/blob/main/doc/epedit.svg" width="200" />
-    </a>
+    <a href="https://github.com/chp-rubicell/EPEdit.go"><img src="https://github.com/chp-rubicell/EPEdit.go/raw/main/_assets/epeditgo.svg" width="200" alt="EPEdit.go" /></a>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="https://github.com/chp-rubicell/EPEdit.js"><img src="https://github.com/chp-rubicell/EPEdit.js/raw/main/doc/epedit.svg" width="200" alt="EPEdit.js" /></a>
 </p>
+
 
 ## License
 
