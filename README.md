@@ -1,5 +1,5 @@
 <p align="center">
-    <a href="https://pypi.org/project/epedit/"><img src="https://github.com/chp-rubicell/EPEdit.py/raw/main/docs/assets/epeditpy.svg" width="256" alt="EPEdit.py" /></a>
+    <a href="https://pypi.org/project/epedit/"><img src="https://github.com/chp-rubicell/EPEdit.py/raw/main/docs/assets/epeditpy.svg" width="300" alt="EPEdit.py" /></a>
     <br/>
     <a href="https://pypi.org/project/epedit/"><img src="https://img.shields.io/pypi/v/epedit.svg?style=flat-square&maxAge=600" alt="pypi" /></a>
 </p>
@@ -109,7 +109,7 @@ success = idf.remove_object(obj)
 ### Save IDF files
 ```python
 # Save the modified IDF file.
-idf.save("files/output.idf")
+idf.save("output.idf")
 ```
 
 
