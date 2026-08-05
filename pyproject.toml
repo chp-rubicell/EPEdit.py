@@ -1,6 +1,17 @@
 [build-system]
-requires = ["setuptools>=42", "Cython>=3.0.0"]
+requires = ["setuptools>=61.0", "setuptools_scm[toml]>=8.0", "Cython>=3.0.0"]
 build-backend = "setuptools.build_meta"
+
+[project]
+name = "epedit"
+dynamic = ["version"]
+description = "EPEdit.py is a high-performance, Cython-based Python library for parsing, editing, and formatting EnergyPlus IDF models."
+authors = [
+    { name = "chp-rubicell" }
+]
+requires-python = ">=3.8"
+
+[tool.setuptools_scm]
 
 [tool.pytest.ini_options]
 pythonpath = "src"
