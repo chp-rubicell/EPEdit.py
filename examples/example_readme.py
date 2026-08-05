@@ -62,7 +62,6 @@ obj = idf.add_object(
 
 # Remove an object
 obj = idf.get_object_by_name("RunPeriod", "annual")
-
 success = idf.remove_object(obj)
 
 # * Save IDF files
