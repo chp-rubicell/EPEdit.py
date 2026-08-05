@@ -1,7 +1,6 @@
 <p align="center">
     <a href="https://pypi.org/project/epedit/"><img src="https://github.com/chp-rubicell/EPEdit.py/raw/main/docs/assets/epeditpy.svg" width="256" alt="EPEdit.py" /></a>
     <br/>
-    <!-- <img src="doc/epedit.svg" width="256" alt="EPEdit.go"><br/> -->
     <a href="https://pypi.org/project/epedit/"><img src="https://img.shields.io/pypi/v/epedit.svg?style=flat-square&maxAge=600" alt="pypi" /></a>
 </p>
 
@@ -16,6 +15,13 @@
 - **Export to IDF**: Serialize the modified model back into a valid `.idf` file string.
 
 
+## Installation
+
+```bash
+pip install epedit
+```
+
+
 ## Usage
 
 ### Open IDD and IDF files
@@ -27,7 +33,7 @@ from epedit import IDD, IDF
 idd = IDD.from_file("Energy+.idd")
 
 # Load an existing IDF file using the parsed IDD.
-idf = IDF.from_file("input.idf")
+idf = IDF.from_file(idd, "input.idf")
 ```
 
 ### Find and update objects
@@ -80,11 +86,11 @@ obj = idf.add_object(
 obj = idf.add_object(
     "Material",
     {
-    "Name":          "New Insulation",
-    "Thickness":     0.05,
-    "Conductivity":  0.0314,
-    "Density":       265,
-    "Specific Heat": 836.8,
+        "Name":          "New Insulation",
+        "Thickness":     0.05,
+        "Conductivity":  0.0314,
+        "Density":       265,
+        "Specific Heat": 836.8,
     },
     False,
 )
