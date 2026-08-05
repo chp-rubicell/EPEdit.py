@@ -24,6 +24,8 @@ pip install epedit
 
 ## Usage
 
+See `examples/example_readme.py`.
+
 ### Open IDD and IDF files
 
 ```python
