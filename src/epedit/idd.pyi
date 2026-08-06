@@ -1,3 +1,5 @@
+from os import PathLike
+
 class IDD:
     """
     IDD data structure.
@@ -13,12 +15,12 @@ class IDD:
     # ——— Initializations ——————
 
     @classmethod
-    def from_file(cls, filepath: str, encoding: str|None = None) -> IDD:
+    def from_file(cls, filepath: str|PathLike, encoding: str|None = None) -> IDD:
         """
         Parse IDD file
 
         Args:
-            filepath (str): IDD file path
+            filepath (str | PathLike): IDD file path
             encoding (str, optional): IDD file encoding
 
         Returns:

@@ -69,7 +69,7 @@ cdef string get_current_time() noexcept nogil:
     return string(<const char*>buffer, written_len)
 
 # Read file as UTF-8 bytes
-cdef bytes read_utf8_bytes(str filepath, str encoding=None):
+cdef bytes read_utf8_bytes(object filepath, str encoding=None):
     """Parse IDD file"""
     cdef bytes raw_bytes
 

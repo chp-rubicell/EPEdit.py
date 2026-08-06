@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 import sys
 from pathlib import Path
-sys.path.append(str(Path("../src").resolve()))
+sys.path.insert(0, str(Path("../src").resolve()))
 
 from epedit import IDD, IDF
 
 def example_idf():
-    idd = IDD.from_file("./idds/V24-2-0-Energy+.idd")
-    idf = IDF.from_file(idd, "./files/RefBldgMediumOfficeNew2004_Chicago.idf")
+    idd = IDD.from_file(Path("./idds/V24-2-0-Energy+.idd"))
+    idf = IDF.from_file(idd, Path("./files/RefBldgMediumOfficeNew2004_Chicago.idf"))
 
     print()
     print("== Parse test ====")

@@ -1,4 +1,5 @@
 from .idd import IDD
+from os import PathLike
 
 class IDFObject:
 
@@ -64,13 +65,13 @@ class IDF:
     # ——— Initializations ——————
 
     @classmethod
-    def from_file(cls, idd: IDD, filepath: str, encoding: str|None = None) -> IDF:
+    def from_file(cls, idd: IDD, filepath: str|PathLike, encoding: str|None = None) -> IDF:
         """
         Parse IDF file
 
         Args:
             idd (IDD): IDD data structure
-            filepath (str): IDF file path
+            filepath (str | PathLike): IDF file path
             encoding (str, optional): IDF file encoding
 
         Returns:
@@ -102,7 +103,7 @@ class IDF:
             class_name (str): class name (case-insensitive)
 
         Returns:
-            IDFObjectTuple[IDFObject, ...]: tuple of IDFObjects
+            IDFObjectTuple[IDFObject, ...]: tuple of IDFObjects (references)
         """
         return self.get_objects(class_name)
 
@@ -114,7 +115,7 @@ class IDF:
             class_name (str): class name (case-insensitive)
 
         Returns:
-            IDFObjectTuple[IDFObject, ...]: tuple of IDFObjects
+            IDFObjectTuple[IDFObject, ...]: tuple of IDFObjects (references)
         """
         return IDFObjectTuple(self.objects.get(class_name.upper(), []))
 
@@ -142,7 +143,7 @@ class IDF:
 
     def remove_all_objects(self, class_name: str) -> int:
         """
-        Remove all objects of a certain class from ID
+        Remove all objects of a certain class from IDF
 
         Returns:
             int: Number of objects removed. 0 if class was not found.

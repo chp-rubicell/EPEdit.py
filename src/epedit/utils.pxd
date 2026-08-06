@@ -7,7 +7,7 @@ from libcpp cimport bool as cbool
 cdef string any_to_string(object value) except *  #TODO
 cdef (int, int) get_continuous_digits_indices(const string& name) noexcept nogil
 cdef string get_current_time() noexcept nogil
-cdef bytes read_utf8_bytes(str filepath, str encoding=*)
+cdef bytes read_utf8_bytes(object filepath, str encoding=*)
 
 
 # * Inline function declarations

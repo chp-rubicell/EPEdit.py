@@ -419,13 +419,13 @@ cdef class IDF:
         return 0
 
     @classmethod
-    def from_file(cls, IDD idd, str filepath, str encoding=None) -> IDF:
+    def from_file(cls, IDD idd, object filepath, str encoding=None) -> IDF:
         """
         Parse IDF file
 
         Args:
             idd (IDD): IDD data structure
-            filepath (str): IDF file path
+            filepath (str | PathLike): IDF file path
             encoding (str, optional): IDF file encoding
 
         Returns:
@@ -593,7 +593,7 @@ cdef class IDF:
 
     def remove_all_objects(self, str class_name) -> int:
         """
-        Remove all objects of a certain class from ID
+        Remove all objects of a certain class from IDF
 
         Returns:
             int: Number of objects removed. 0 if class was not found.

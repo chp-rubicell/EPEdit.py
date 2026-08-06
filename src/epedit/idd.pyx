@@ -441,12 +441,12 @@ cdef class IDD:
         return 0
 
     @classmethod
-    def from_file(cls, str filepath, str encoding=None) -> IDD:
+    def from_file(cls, object filepath, str encoding=None) -> IDD:
         """
         Parse IDD file
 
         Args:
-            filepath (str): IDD file path
+            filepath (str | PathLike): IDD file path
             encoding (str, optional): IDD file encoding
 
         Returns:
