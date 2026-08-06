@@ -23,6 +23,7 @@ cdef class Lexer:
     cdef string content  # the entire file
     cdef size_t pos  # current position in content
 
+    cdef void c_init(self, bytes file_content, bint is_idd) noexcept
     cdef cbool scan_next_line(self, string& line) noexcept nogil
     cdef Token next_token(self) noexcept nogil
     cdef void tokenize_line(self, const string& line) noexcept nogil

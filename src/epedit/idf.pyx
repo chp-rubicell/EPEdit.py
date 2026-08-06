@@ -394,12 +394,18 @@ cdef class IDF:
 
     # ——— Initializations ——————
 
-    def __init__(self, IDD idd, bytes idf_content):
+    def __init__(self):
+        # Prevent user from directly instantiating using IDF()
+        raise TypeError("IDF cannot be instantiated directly. Use IDF.from_file() or IDF.from_string().")
+
+    # C-level initialization
+    cdef int c_init(self, IDD idd, bytes idf_content) except -1:
         self.idd = idd
         self.objects = {}
 
         # Initialize lexer
-        cdef Lexer lexer = Lexer(idf_content, False)  # turn off IDD mode
+        cdef Lexer lexer = Lexer.__new__(Lexer)
+        lexer.c_init(idf_content, False)  # turn off IDD mode
 
         cdef vector[c_IDFObject] c_objects
 
@@ -409,6 +415,8 @@ cdef class IDF:
 
         # Build Python-level objects
         self.build_objects(c_objects)
+
+        return 0
 
     @classmethod
     def from_file(cls, IDD idd, str filepath, str encoding=None) -> IDF:
@@ -421,10 +429,28 @@ cdef class IDF:
             encoding (str, optional): IDF file encoding
 
         Returns:
-            IDD: parsed IDF file
+            IDF: parsed IDF data
         """
         cdef bytes raw_bytes = read_utf8_bytes(filepath, encoding)
-        return cls(idd, raw_bytes)
+        cdef IDF idf = cls.__new__(cls)
+        idf.c_init(idd, raw_bytes)
+        return idf
+
+    @classmethod
+    def from_string(cls, IDD idd, str content) -> IDF:
+        """
+        Parse IDF from string
+
+        Args:
+            idd (IDD): IDD data structure
+            content (str): IDF string
+
+        Returns:
+            IDF: parsed IDF data
+        """
+        cdef IDF idf = cls.__new__(cls)
+        idf.c_init(idd, content.encode("utf-8"))
+        return idf
 
     # ——— Build IDF from c_idf_objects ——————
 

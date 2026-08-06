@@ -8,8 +8,11 @@ from .utils cimport trim_string
 
 cdef class Lexer:
 
+    def __init__(self):
+        raise TypeError("Lexer is an internal component and cannot be instantiated directly.")
+
     # Accepts raw bytes of the entire file.
-    def __init__(self, bytes file_content, bint is_idd):
+    cdef void c_init(self, bytes file_content, bint is_idd) noexcept:
         # Python 'bytes' is automatically converted to C++ std::string
         self.content = file_content
         self.pos = 0

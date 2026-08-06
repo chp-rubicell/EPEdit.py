@@ -68,6 +68,8 @@ cdef class IDD:
     cdef list  py_class_names_upper  # precache Python str of uppercase class names
     cdef readonly str version
 
+    cdef int c_init(self, bytes idd_content) except -1
+
 # Get index from field name (case-insensitive)
 cdef int find_field_index(const ClassDef* cls, const string& field_name) noexcept nogil
 

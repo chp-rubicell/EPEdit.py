@@ -63,9 +63,6 @@ class IDF:
 
     # ——— Initializations ——————
 
-    def __init__(self, idd: IDD, idf_content: bytes):
-        ...
-
     @classmethod
     def from_file(cls, idd: IDD, filepath: str, encoding: str|None = None) -> IDF:
         """
@@ -77,7 +74,21 @@ class IDF:
             encoding (str, optional): IDF file encoding
 
         Returns:
-            IDD: parsed IDF file
+            IDF: parsed IDF data
+        """
+        ...
+
+    @classmethod
+    def from_string(cls, idd: IDD, content: str) -> IDF:
+        """
+        Parse IDF from string
+
+        Args:
+            idd (IDD): IDD data structure
+            content (str): IDF string
+
+        Returns:
+            IDF: parsed IDF data
         """
         ...
 

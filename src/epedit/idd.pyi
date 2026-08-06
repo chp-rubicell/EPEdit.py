@@ -12,12 +12,6 @@ class IDD:
 
     # ——— Initializations ——————
 
-    def __init__(self, idd_content: bytes):
-        """
-        Initialize IDD from bytes
-        """
-        ...
-
     @classmethod
     def from_file(cls, filepath: str, encoding: str|None = None) -> IDD:
         """
@@ -26,6 +20,19 @@ class IDD:
         Args:
             filepath (str): IDD file path
             encoding (str, optional): IDD file encoding
+
+        Returns:
+            IDD: parsed IDD data structure
+        """
+        ...
+
+    @classmethod
+    def from_string(cls, content: str) -> IDD:
+        """
+        Parse IDD file
+
+        Args:
+            content (str): IDF string
 
         Returns:
             IDD: parsed IDD data structure

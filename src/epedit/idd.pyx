@@ -406,12 +406,18 @@ cdef class IDD:
 
     # ——— Initializations ——————
 
-    def __init__(self, bytes idd_content):
+    def __init__(self):
+        # Prevent user from directly instantiating using IDD()
+        raise TypeError("IDD cannot be instantiated directly. Use IDD.from_file().")
+
+    # C-level initialization
+    cdef int c_init(self, bytes idd_content) except -1:
         if self.initialized:
             raise RuntimeError(f"{type(self).__name__} is already initialized.")
 
         # Initialize lexer
-        cdef Lexer lexer = Lexer(idd_content, True)
+        cdef Lexer lexer = Lexer.__new__(Lexer)
+        lexer.c_init(idd_content, True)
 
         # Parse IDD
         with nogil:
@@ -432,11 +438,39 @@ cdef class IDD:
         # Flag as initialized
         self.initialized = True
 
+        return 0
+
     @classmethod
     def from_file(cls, str filepath, str encoding=None) -> IDD:
-        """Parse IDD file"""
+        """
+        Parse IDD file
+
+        Args:
+            filepath (str): IDD file path
+            encoding (str, optional): IDD file encoding
+
+        Returns:
+            IDD: parsed IDD data structure
+        """
         cdef bytes raw_bytes = read_utf8_bytes(filepath, encoding)
-        return cls(raw_bytes)
+        cdef IDD idd = cls.__new__(cls)
+        idd.c_init(raw_bytes)
+        return idd
+
+    @classmethod
+    def from_string(cls, str content) -> IDD:
+        """
+        Parse IDD file
+
+        Args:
+            content (str): IDF string
+
+        Returns:
+            IDD: parsed IDD data structure
+        """
+        cdef IDD idd = cls.__new__(cls)
+        idd.c_init(content.encode("utf-8"))
+        return idd
 
     # ——— Helper functions ——————
 
