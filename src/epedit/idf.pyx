@@ -29,11 +29,7 @@ cdef extern from "<string>" namespace "std" nogil:
 # * Export config definition
 
 # Export format setting
-cdef struct FormatConfig:
-    string class_indent  # indent for class names
-    string field_indent  # indent for fields
-    size_t field_size    # minimum size for field values
-    cbool  compact       # compact mode
+# cdef struct FormatConfig (in .pxd)
 
 cdef inline FormatConfig generate_format_config(
     size_t class_indent_size = 0,
@@ -62,9 +58,7 @@ cdef FormatConfig MINIMAL_FORMAT_CONFIG = FormatConfig(
 # * C-level IDFObject definition
 
 # C level temporary object for fast processing
-cdef struct c_IDFObject:
-    string         class_name
-    vector[string] values
+# cdef struct c_IDFObject (in .pxd)
 
 
 # Add parsed data in Lexer to given vector.
@@ -132,12 +126,6 @@ cdef int parse_idf(Lexer lexer, vector[c_IDFObject]& c_idf_objects) except -1 no
 # * Python-level IDFObject definition
 
 cdef class IDFObject:
-    cdef IDD             idd
-    cdef size_t          class_idx
-    cdef string          c_class_name
-    cdef readonly str    class_name
-    cdef vector[string]  values
-    cdef readonly size_t obj_idx  # for preserve_order option (readonly for Python sort() function)
 
     # Inline function for getting ClassDef pointer
     cdef inline const ClassDef* get_class_def(self) noexcept nogil:
@@ -381,16 +369,13 @@ class IDFObjectTuple(tuple):
         if name in {"append", "extend", "insert"}:
             raise AttributeError("This is a read-only tuple. To add new objects, use the idf.add_object() method.")
         elif name in {"remove", "pop", "clear"}:
-            raise AttributeError("This is a read-only tuple. To remove objects, use the idf.remove_objects() or idf.remove_all_objects() methods.")
+            raise AttributeError("This is a read-only tuple. To remove objects, use the idf.remove_object() or idf.remove_all_objects() methods.")
         raise AttributeError(f"'{type(self).__name__}' object has no attribute '{name}'")
 
 
 # * Python-level IDF definition
 
 cdef class IDF:
-    cdef IDD    idd
-    cdef dict   objects  # {CLASSNAME: [IDFObject,...],...}
-    cdef size_t next_obj_idx
 
     # ——— Initializations ——————
 
@@ -727,14 +712,14 @@ cdef class IDF:
 
     def save(
         self,
-        str  output_path,
-        int  class_indent_size = 0,
-        int  field_indent_size = 4,
-        int  field_size        = 24,
+        object output_path,
+        int    class_indent_size = 0,
+        int    field_indent_size = 4,
+        int    field_size        = 24,
         *,
-        bint compact           = False,
-        bint preserve_order    = False,
-        bint include_timestamp = True,
+        bint   compact           = False,
+        bint   preserve_order    = False,
+        bint   include_timestamp = True,
     ):
         """
         Convert IDF to str with format config

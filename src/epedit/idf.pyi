@@ -181,7 +181,7 @@ class IDF:
 
     def save(
         self,
-        output_path      : str,
+        output_path      : str|PathLike,
         class_indent_size: int = 0,
         field_indent_size: int = 4,
         field_size       : int = 24,
@@ -193,6 +193,7 @@ class IDF:
         Convert IDF to str with format config
 
         Args:
+            output_path (str | PathLike): Target IDF file path
             class_indent_size (int): Indent for class names
             field_indent_size (int): Indent for fields
             field_size (int): Minimum size for field values
