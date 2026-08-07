@@ -24,7 +24,10 @@ pip install epedit
 
 ## Usage
 
-See `examples/example_readme.py`.
+See [`examples/example_readme.py`](examples/example_readme.py) for a complete example.
+
+> [!NOTE]
+> To use EPEdit.py with an existing [`eppy`](https://github.com/santoshphilip/eppy) codebase, see [eppy compatibility mode](#eppy-compatibility-mode).
 
 ### Open IDD and IDF files
 
@@ -134,6 +137,25 @@ success = idf.remove_object(obj)
 # Save the modified IDF file.
 idf.save("output.idf")
 ```
+
+
+## `eppy` compatibility mode
+
+If you have an exiting codebase that uses [`eppy`](https://github.com/santoshphilip/eppy), you can use EPEdit.py with only minimal change.
+
+Simply replace:
+
+```python
+from eppy.modeleditor import IDF
+```
+
+with:
+
+```python
+from epedit.eppy import IDF
+```
+
+See [`examples/example_eppy.py`](examples/example_eppy.py) for a complete example.
 
 
 ## Related projects
