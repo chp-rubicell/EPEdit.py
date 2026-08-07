@@ -27,7 +27,7 @@ pip install epedit
 See [`examples/example_readme.py`](examples/example_readme.py) for a complete example.
 
 > [!NOTE]
-> To use `EPEdit.py` with an existing [`eppy`](https://github.com/santoshphilip/eppy) codebase, see [eppy compatibility mode](#eppy-compatibility-mode).
+> To use `EPEdit.py` with minimal changes to an existing [`eppy`](https://github.com/santoshphilip/eppy) codebase, see [eppy compatibility mode](#eppy-compatibility-mode).
 
 ### Open IDD and IDF files
 
@@ -141,7 +141,7 @@ idf.save("output.idf")
 
 ## `eppy` compatibility mode
 
-If you have an existing codebase that uses [`eppy`](https://github.com/santoshphilip/eppy), you can use `EPEdit.py` in compatibility mode with minimal changes to your code.
+If you have an existing codebase that uses [`eppy`](https://github.com/santoshphilip/eppy), you can use `EPEdit.py` in compatibility mode with minimal changes to your code while benefiting from significant performance gains.
 
 **Simply replace:**
 
