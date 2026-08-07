@@ -8,6 +8,7 @@
 
 ## Features
 
+- **High Performance**: Core functionalities are implemented in *Cython* for fast and efficient parsing, editing, and serialization.
 - **Parse IDF Files**: Load `.idf` file content into a structured object model.
 - **Modify IDF**: Create, update, or delete any object within the IDF model.
 - **Find IDF Objects**: Easily find and retrieve objects by their type (e.g., `Building`, `Material`) and name.
@@ -24,10 +25,10 @@ pip install epedit
 
 ## Usage
 
-See [`examples/example_readme.py`](examples/example_readme.py) for a complete example.
+See [`examples/example_readme.py`](https://github.com/chp-rubicell/EPEdit.py/blob/main/examples/example_readme.py) for a complete example.
 
 > [!NOTE]
-> To use `EPEdit.py` with minimal changes to an existing [`eppy`](https://github.com/santoshphilip/eppy) codebase, see [eppy compatibility mode](#eppy-compatibility-mode).
+> To use *EPEdit.py* with minimal changes to an existing [*eppy*](https://github.com/santoshphilip/eppy) codebase, see [eppy compatibility mode](#eppy-compatibility-mode).
 
 ### Open IDD and IDF files
 
@@ -139,9 +140,9 @@ idf.save("output.idf")
 ```
 
 
-## `eppy` compatibility mode
+## *eppy* compatibility mode
 
-If you have an existing codebase that uses [`eppy`](https://github.com/santoshphilip/eppy), you can use `EPEdit.py` in compatibility mode with minimal changes to your code while benefiting from significant performance gains.
+If you have an existing codebase that uses [*eppy*](https://github.com/santoshphilip/eppy), you can use *EPEdit.py* in compatibility mode with minimal changes to your code while benefiting from significant performance improvements.
 
 **Simply replace:**
 
@@ -155,7 +156,10 @@ from eppy.modeleditor import IDF
 from epedit.eppy import IDF
 ```
 
-See [`examples/example_eppy.py`](examples/example_eppy.py) for a complete example.
+See [`examples/example_eppy.py`](https://github.com/chp-rubicell/EPEdit.py/blob/main/examples/example_eppy.py) for a complete example.
+
+> [!NOTE]
+> Compatibility mode has not been tested with every *eppy* feature.
 
 
 ## Related projects
