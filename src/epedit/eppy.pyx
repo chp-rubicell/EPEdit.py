@@ -56,7 +56,7 @@ cdef str resolve_field_key_to_field_name(str class_name, str field_key):
 cdef class IDFObject:
     cdef CoreIDFObject core_obj
 
-    def __init__(self, CoreIDFObject core_obj):
+    cdef void c_init(self, CoreIDFObject core_obj) noexcept:
         self.core_obj = core_obj
 
     def __getattr__(self, str name):
@@ -73,13 +73,19 @@ cdef class IDFObject:
 
 cdef class IDFObjectsProxy:
     cdef IDF parent
-    def __init__(self, IDF parent):
+
+    cdef void c_init(self, IDF parent) noexcept:
         self.parent = parent
+
     def __getitem__(self, str class_name):
-        return [
-            IDFObject(core_obj)
-            for core_obj in self.parent.core_idf.get_objects(class_name)
-        ]
+        cdef int i
+        cdef list output = list(self.parent.core_idf.get_objects_raw(class_name))
+        cdef IDFObject obj
+        for i in range(len(output)):
+            obj = IDFObject.__new__(IDFObject)
+            obj.c_init(output[i])
+            output[i] = obj
+        return output
 
 
 cdef class IDF:
@@ -96,11 +102,12 @@ cdef class IDF:
 
     @classmethod
     def getiddname(cls) -> str:
-        return cls.iddname
+        return shared_iddname
 
     def __init__(self, object idfname, *args, **kwargs):
         self.core_idf = CoreIDF.from_file(shared_idd, idfname)
-        self.idfobjsproxy = IDFObjectsProxy(self)
+        self.idfobjsproxy = IDFObjectsProxy.__new__(IDFObjectsProxy)
+        self.idfobjsproxy.c_init(self)
 
     # ——— IDF manipulation API (Create, Update, Delete) ——————
 
@@ -110,15 +117,26 @@ cdef class IDF:
 
     def newidfobject(self, str class_name, bint defaultvalues=True, **kwargs) -> IDFObject:
         """Add a new idfobject to the model."""
-        return IDFObject(self.core_idf.add_object(
-            class_name,
-            initial_values = kwargs,
-            default_values = defaultvalues,
-        ))
+        print(class_name)
+        print(kwargs)
+        print()
+        cdef IDFObject obj
+        obj = IDFObject.__new__(IDFObject)
+        obj.c_init(
+            self.core_idf.add_object(
+                class_name,
+                initial_values = {
+                    resolve_field_key_to_field_name(class_name, key): val
+                    for key, val in kwargs.items()
+                },
+                default_values = defaultvalues,
+            )
+        )
+        return obj
 
-    def removeidfobject(self, CoreIDFObject idfobject):
+    def removeidfobject(self, IDFObject idfobject):
         """Remove an IDF object from the IDF."""
-        self.core_idf.remove_object(idfobject)
+        self.core_idf.remove_object(idfobject.core_obj)
 
     def removeallidfobjects(self, str class_name):
         """Remove all IDF object of a certain type from the IDF."""
@@ -126,10 +144,13 @@ cdef class IDF:
 
     def getobject(self, str key, str name) -> IDFObject|None:
         """Fetch an IDF object given key and name."""
+        cdef IDFObject obj
         cdef object core_obj = self.core_idf.get_object_by_name(key, name)
         if core_obj is None:
             return None
-        return IDFObject(core_obj)
+        obj = IDFObject.__new__(IDFObject)
+        obj.c_init(core_obj)
+        return obj
 
     # ——— Export ——————
 
@@ -147,5 +168,5 @@ cdef class IDF:
     def save(self, object idfname, *args, **kwargs):
         self.core_idf.save(idfname)
 
-    def save(self, object idfname, *args, **kwargs):
+    def saveas(self, object idfname, *args, **kwargs):
         self.core_idf.save(idfname)
