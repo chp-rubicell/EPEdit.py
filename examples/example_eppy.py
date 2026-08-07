@@ -3,8 +3,8 @@ import sys
 from pathlib import Path
 sys.path.append(str(Path("../src").resolve()))
 
-# from epedit.eppy import IDF
-from eppy.modeleditor import IDF
+# from eppy.modeleditor import IDF  # <- replace this!
+from epedit.eppy import IDF
 
 
 # * Open IDF files

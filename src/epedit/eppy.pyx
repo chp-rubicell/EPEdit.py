@@ -166,7 +166,7 @@ cdef class IDF:
         return str(self.core_idf)
 
     def save(self, object idfname, *args, **kwargs):
-        self.core_idf.save(idfname)
+        self.core_idf.save(idfname, field_size=25)
 
     def saveas(self, object idfname, *args, **kwargs):
-        self.core_idf.save(idfname)
+        self.save(idfname)
