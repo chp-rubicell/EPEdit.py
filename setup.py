@@ -50,7 +50,7 @@ setup(
         compiler_directives = {
             'language_level': "3",  # force Python 3
             'boundscheck': False,
-            'wraparound': False,  # minujs indexing
+            'wraparound': False,  # minus indexing
         },
         annotate=False,
     ),
