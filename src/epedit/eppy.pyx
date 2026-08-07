@@ -6,6 +6,7 @@ from .idf cimport (
     IDFObject as CoreIDFObject,
     IDF as CoreIDF,
 )
+from .utils cimport get_continuous_digits_indices
 
 cdef str shared_iddname = ""
 cdef CoreIDD shared_idd
@@ -35,13 +36,20 @@ cdef void build_field_key_to_name_dict():
                     field_name.lower().replace(" ","_").replace("-","").replace("/","").replace("*","")
                 ] = field_name
 
-    print(field_key_to_name['BuildingSurface:Detailed'.upper()])
-
 
 cdef str resolve_field_key_to_field_name(str class_name, str field_key):
-    if field_key in field_key_to_name[class_name.upper()]:
-        return field_key_to_name[class_name.upper()][field_key.lower()]
+    cdef str base_field_key
+    cdef int start_idx, end_idx
+    class_name = class_name.upper()
+    field_key = field_key.lower()
+    if field_key in field_key_to_name[class_name]:
+        return field_key_to_name[class_name][field_key]
     else:
+        start_idx, end_idx = get_continuous_digits_indices(field_key.encode("utf-8"))
+        if start_idx > -1:
+            base_field_key = field_key[:start_idx] + "1" + field_key[end_idx:]
+            if base_field_key in field_key_to_name[class_name]:
+                return field_key_to_name[class_name][base_field_key].replace("1", field_key[start_idx: end_idx])
         return field_key.replace("_", " ")
 
 
@@ -52,14 +60,15 @@ cdef class IDFObject:
         self.core_obj = core_obj
 
     def __getattr__(self, str name):
-        print(name)
         cdef str field_name = resolve_field_key_to_field_name(self.core_obj.class_name, name)
         return self.core_obj[field_name]
 
     def __setattr__(self, str name, object value):
-        print(name)
         cdef str field_name = resolve_field_key_to_field_name(self.core_obj.class_name, name)
         self.core_obj[field_name] = value
+
+    def __repr__(self):
+        return repr(self.core_obj)
 
 
 cdef class IDFObjectsProxy:
@@ -123,6 +132,9 @@ cdef class IDF:
         return IDFObject(core_obj)
 
     # ——— Export ——————
+
+    def __repr__(self):
+        return repr(self.core_idf)
 
     def printidf(self):
         """Print the IDF."""
