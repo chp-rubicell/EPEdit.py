@@ -38,6 +38,29 @@ idd = IDD.from_file("Energy+.idd")
 idf = IDF.from_file(idd, "input.idf")
 ```
 
+### Iterate over objects
+
+```python
+# Iterate over objects using idf[classname]
+for sch_type_limits in idf["ScheduleTypeLimits"]:
+    print(sch_type_limits["Name"])
+```
+```
+Any Number
+Fraction
+Temperature
+On/Off
+Control Type
+Humidity
+Number
+```
+
+```python
+# or idf.get_objects(classname)
+for sch_type_limits in idf.get_objects("ScheduleTypeLimits"):
+    print(sch_type_limits["Name"])
+```
+
 ### Find and update objects
 
 ```python

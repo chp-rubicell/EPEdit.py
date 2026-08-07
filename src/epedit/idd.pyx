@@ -190,7 +190,7 @@ cdef ExtPattern extract_prefix_suffix(const string& name) noexcept nogil:
         extpat.prefix = name.substr(0, start_idx)
         extpat.suffix = name.substr(end_idx)
     else:
-        extpat.prefix = name + <const char*>b""
+        extpat.prefix = name + <const char*>b" "
         extpat.suffix = <const char*>b""
 
     extpat.search_prefix = to_lower(extpat.prefix)
