@@ -516,9 +516,14 @@ cdef class IDF:
                 return obj
         return None
 
-    def add_object(self, str class_name, dict initial_values=None, bint default_values=True) -> IDFObject:
+    def add_object(self, str class_name, object initial_values=None, bint default_values=True) -> IDFObject:
         """
         Add object to IDF
+
+        Args:
+            class_name (str): class name (case-insensitive)
+            initial_values (None | list | dict): [value] or {field_idx: value} or {field_name: value}
+            default_values (bool): Whether to include default values
 
         Returns:
             IDFObject: Generated IDFObject

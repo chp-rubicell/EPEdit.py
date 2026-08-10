@@ -123,9 +123,14 @@ class IDF:
         """Get object by first field (likely name)"""
         ...
 
-    def add_object(self, class_name: str, initial_values: dict|None = None, default_values: bool = True) -> IDFObject:
+    def add_object(self, class_name: str, initial_values: None|list|dict = None, default_values: bool = True) -> IDFObject:
         """
         Add object to IDF
+
+        Args:
+            class_name (str): class name (case-insensitive)
+            initial_values (None | list | dict): [value] or {field_idx: value} or {field_name: value}
+            default_values (bool): Whether to include default values
 
         Returns:
             IDFObject: Generated IDFObject
