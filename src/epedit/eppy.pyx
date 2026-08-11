@@ -17,7 +17,7 @@ cdef void build_field_key_to_name_dict():
     if len(field_key_to_name) > 0:
         return
 
-    cdef int i, j
+    cdef size_t i, j
     cdef str class_search_key, field_name
     cdef ClassDef* cls
     cdef FieldDef* field
