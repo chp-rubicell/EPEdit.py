@@ -147,7 +147,7 @@ cdef class IDFObject:
         cdef c_IDD* c_idd_ptr = &idd.c_idd
 
         if c_idd_ptr.class_map.find(search_key) == c_idd_ptr.class_map.end():
-            raise ValueError(f"Unknown class: {class_name}")
+            raise ValueError(f"Unknown class: '{class_name}'")
 
         cdef size_t class_idx = c_idd_ptr.class_map[search_key]
         cdef ClassDef* cls = &c_idd_ptr.ordered_classes[class_idx]
@@ -455,7 +455,7 @@ cdef class IDF:
             search_key = to_upper(c_object.class_name)
 
             if c_idd_ptr.class_map.find(search_key) == c_idd_ptr.class_map.end():
-                raise ValueError(f"IDF parsing error: Unknown class: {c_object.class_name.decode('utf-8')}")
+                raise ValueError(f"IDF parsing error: Unknown class: '{c_object.class_name.decode('utf-8')}'")
 
             class_idx = c_idd_ptr.class_map.at(search_key)
 
