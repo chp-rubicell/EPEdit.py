@@ -55,6 +55,39 @@ cdef FormatConfig MINIMAL_FORMAT_CONFIG = FormatConfig(
 )
 
 
+# * Helper functions
+
+cdef inline object convert_field_value(const FieldDef* field, const string& val) noexcept:
+    """
+    Get field value by key
+
+    Args:
+        key (int | str): field index or field name (case-insensitive)
+
+    Returns:
+        str | int | float: field value based on field_type
+    """
+    if field == NULL:
+        return val.decode("utf-8")
+
+    if val.empty():
+        # If int or float type return None
+        if field.field_type == FIELDTYPE_INTEGER or field.field_type == FIELDTYPE_REAL:
+            return None
+        return ""
+
+    if field.autosizable and equal_fold(val, <const char*>b"autosize"):
+        return "Autosize"
+    elif field.autocalculatable and equal_fold(val, <const char*>b"autocalculate"):
+        return "Autocalculate"
+    elif field.field_type == FIELDTYPE_INTEGER:
+        return stoi(val)
+    elif field.field_type == FIELDTYPE_REAL:
+        return stod(val)
+
+    return val.decode("utf-8")
+
+
 # * C-level IDFObject definition
 
 # C level temporary object for fast processing
@@ -181,27 +214,17 @@ cdef class IDFObject:
         cdef int idx = resolve_key_to_field_index(cls, key)
         cdef const FieldDef* field = get_field_def(cls, <size_t>idx)
 
-        cdef const string* val_ptr = NULL
-        if idx < <int>self.values.size():
-            val_ptr = &self.values[idx]
+        if idx >= <int>self.values.size():
+            return convert_field_value(field, <const char*>b"")
 
-        # If field has not been entered or is an empty value ""
-        if val_ptr == NULL or val_ptr.empty():
-            # If int or float type return None
-            if field.field_type == FIELDTYPE_INTEGER or field.field_type == FIELDTYPE_REAL:
-                return None
-            return ""
+        return convert_field_value(field, self.values[idx])
 
-        if field.autosizable and equal_fold(deref(val_ptr), <const char*>b"autosize"):
-            return "Autosize"
-        elif field.autocalculatable and equal_fold(deref(val_ptr), <const char*>b"autocalculate"):
-            return "Autocalculate"
-        elif field.field_type == FIELDTYPE_INTEGER:
-            return stoi(deref(val_ptr))
-        elif field.field_type == FIELDTYPE_REAL:
-            return stod(deref(val_ptr))
-
-        return deref(val_ptr).decode("utf-8")
+    def get_values(self):
+        cdef int i
+        cdef list values = [None] * self.values.size()
+        for i in range(self.values.size()):
+            values[i] = self[i]
+        return values
 
     # Set field by field index using raw string value
     cdef int set_string_by_index(self, int field_idx, const string& value) except -1 nogil:
