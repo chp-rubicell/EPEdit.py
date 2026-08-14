@@ -220,8 +220,8 @@ cdef class IDFObject:
         return convert_field_value(field, self.values[idx])
 
     def get_values(self):
-        cdef int i
-        cdef list values = [None] * self.values.size()
+        cdef size_t i
+        cdef list values = [None] * <Py_ssize_t>self.values.size()
         for i in range(self.values.size()):
             values[i] = self[i]
         return values
