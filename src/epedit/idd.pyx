@@ -407,6 +407,7 @@ cdef class IDD:
     # ——— Initializations ——————
 
     def __init__(self):
+        """IDD cannot be instantiated directly. Use IDD.from_file()."""
         # Prevent user from directly instantiating using IDD()
         raise TypeError("IDD cannot be instantiated directly. Use IDD.from_file().")
 
@@ -475,6 +476,15 @@ cdef class IDD:
     # ——— Helper functions ——————
 
     def get_class_name(self, int index) -> str:
+        """
+        Get class name from index
+
+        Args:
+            index (int): class index
+
+        Returns:
+            str: class name
+        """
         if index < 0 or index >= <int>self.c_idd.ordered_classes.size():
             raise IndexError("Class index out of range.")
 

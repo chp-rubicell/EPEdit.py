@@ -120,6 +120,12 @@ cdef int parse_idf(Lexer lexer, vector[c_IDFObject]& c_idf_objects) except -1 no
             current_obj.values.clear()
             last_text.clear()
 
+        else:
+            with gil:
+                raise ValueError(f"IDF parsing error (Line {lexer.line_num}): unrecognized token type '{tok.type}'.")
+
+    # TODO: version check
+
     return 0
 
 
@@ -380,6 +386,7 @@ cdef class IDF:
     # ——— Initializations ——————
 
     def __init__(self):
+        """IDF cannot be instantiated directly. Use IDF.from_file() or IDF.from_string()."""
         # Prevent user from directly instantiating using IDF()
         raise TypeError("IDF cannot be instantiated directly. Use IDF.from_file() or IDF.from_string().")
 
@@ -472,6 +479,24 @@ cdef class IDF:
                 self.objects[py_search_key] = [obj]
 
         self.next_obj_idx = c_idf_objects.size()  # update index for next object
+
+    # ——— IDF information ——————
+
+    def get_class_names(self) -> list:
+        """
+        Get list of class names
+
+        Returns:
+            list[str]: class names
+        """
+        cdef list names = []
+        cdef list obj_list
+        cdef IDFObject obj
+        for obj_list in self.objects.values():
+            if obj_list:  # if at least one object exists
+                obj = obj_list[0]
+                names.append(obj.class_name)
+        return names
 
     # ——— IDF manipulation API (Create, Update, Delete) ——————
 

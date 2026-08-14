@@ -10,9 +10,13 @@ class IDD:
     @property
     def num_classes(self) -> int:
         """Returns the total number of classes parsed."""
-        return self.c_idd.ordered_classes.size()
+        ...
 
     # ——— Initializations ——————
+
+    def __init__(self):
+        """IDD cannot be instantiated directly. Use IDD.from_file()."""
+        ...
 
     @classmethod
     def from_file(cls, filepath: str|PathLike, encoding: str|None = None) -> IDD:

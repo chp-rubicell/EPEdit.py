@@ -64,6 +64,10 @@ class IDF:
 
     # ——— Initializations ——————
 
+    def __init__(self):
+        """IDF cannot be instantiated directly. Use IDF.from_file() or IDF.from_string()."""
+        ...
+
     @classmethod
     def from_file(cls, idd: IDD, filepath: str|PathLike, encoding: str|None = None) -> IDF:
         """
@@ -93,6 +97,17 @@ class IDF:
         """
         ...
 
+    # ——— IDF information ——————
+
+    def get_class_names(self) -> list[str]:
+        """
+        Get list of class names
+
+        Returns:
+            list[str]: class names
+        """
+        ...
+
     # ——— IDF manipulation API (Create, Update, Delete) ——————
 
     def __getitem__(self, class_name: str) -> IDFObjectTuple:
@@ -105,7 +120,7 @@ class IDF:
         Returns:
             IDFObjectTuple[IDFObject, ...]: tuple of IDFObjects (references)
         """
-        return self.get_objects(class_name)
+        ...
 
     def get_objects(self, class_name: str) -> IDFObjectTuple:
         """
@@ -117,7 +132,7 @@ class IDF:
         Returns:
             IDFObjectTuple[IDFObject, ...]: tuple of IDFObjects (references)
         """
-        return IDFObjectTuple(self.objects.get(class_name.upper(), []))
+        ...
 
     def get_object_by_name(self, class_name: str, obj_name:str) -> IDFObject|None:
         """Get object by first field (likely name)"""
