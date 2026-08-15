@@ -221,7 +221,7 @@ cdef class IDFObject:
             key (int | str): field index or field name (case-insensitive)
 
         Returns:
-            str | int | float: field value based on field_type
+            str | int | float | None: field value based on field_type
         """
         cdef const ClassDef* cls = self.get_class_def()
         cdef int idx = resolve_key_to_field_index(cls, key)
@@ -233,10 +233,20 @@ cdef class IDFObject:
         return convert_field_value(field, self.values[idx])
 
     def get_values(self):
+        """
+        Get all field values as list
+
+        Returns:
+            list[str | int | float | None]: list of field values based on field_types
+        """
+        cdef const ClassDef* cls = self.get_class_def()
         cdef size_t i
         cdef list values = [None] * <Py_ssize_t>self.values.size()
         for i in range(self.values.size()):
-            values[i] = self[i]
+            values[i] = convert_field_value(
+                get_field_def(cls, <size_t>i),
+                self.values[i]
+            )
         return values
 
     # Set field by field index using raw string value

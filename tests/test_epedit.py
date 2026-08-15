@@ -69,6 +69,8 @@ def test_idf_get_and_set_values(idf: IDF):
     assert type(idf["SimulationControl"][0]["Maximum Number of HVAC Sizing Simulation Passes"]).__name__ == "int"
     assert idf["SimulationControl"][0]["Maximum Number of HVAC Sizing Simulation Passes"] == 1
 
+    assert obj.get_values() == ['Building_Roof', 'Roof', 'IEAD Non-res Roof', 'TopFloor_Plenum', '', 'Outdoors', '', 'SunExposed', 'WindExposed', 'Autocalculate', '4', 49.911, 0.0, 11.8872, 49.911, 33.2738, 11.8872, 0.0, 33.2738, 11.8872, 0.0, 0.0, 11.8872]
+
     # ——— Set value test ——————
 
     obj["Vertex 10 X-coordinate"] = 10

@@ -21,7 +21,16 @@ class IDFObject:
             key (int | str): field index or field name (case-insensitive)
 
         Returns:
-            str | int | float: field value based on field_type
+            str | int | float | None: field value based on field_type
+        """
+        ...
+
+    def get_values(self) -> list[str|int|float|None]:
+        """
+        Get all field values as list
+
+        Returns:
+            list[str | int | float | None]: list of field values based on field_types
         """
         ...
 
@@ -53,7 +62,7 @@ class IDFObject:
 
 # * Tuple of IDFObjects for usability (error handling)
 
-class IDFObjectTuple(tuple):
+class IDFObjectTuple(tuple[IDFObject, ...]):
     """tuple of IDFObjects with custom error messages"""
     ...
 

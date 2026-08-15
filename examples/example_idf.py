@@ -20,6 +20,7 @@ def example_idf():
     print(type(obj["Number of Vertices"]), repr(obj["Number of Vertices"]))
     print(type(obj["Vertex 1 X-coordinate"]), repr(obj["Vertex 1 X-coordinate"]))
     print(type(obj["Vertex 10 X-coordinate"]), repr(obj["Vertex 10 X-coordinate"]))
+    print(obj.get_values())
 
     print()
     print("== Set value test ====")
