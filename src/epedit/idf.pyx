@@ -58,7 +58,7 @@ cdef FormatConfig MINIMAL_FORMAT_CONFIG = FormatConfig(
 
 # * Helper functions
 
-cdef inline object convert_field_value(const FieldDef* field, const string& val) noexcept:
+cdef inline object convert_field_value(const FieldDef* field, const string& val):
     """
     Get field value by key
 
