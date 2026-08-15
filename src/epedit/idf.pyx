@@ -2,6 +2,7 @@
 
 from cython.operator cimport dereference as deref
 # from libc.stdlib cimport atof, atoi  # replaced with stof, stoi
+from libc.stdlib cimport strtol, strtod
 from libcpp.string cimport string
 from libcpp.vector cimport vector
 from libcpp.utility cimport move
@@ -21,9 +22,9 @@ from .utils cimport (
     any_to_string, get_current_time, read_utf8_bytes
 )
 
-cdef extern from "<string>" namespace "std" nogil:
-    double stod(const string& str) except +
-    int stoi(const string& str) except +
+# cdef extern from "<string>" namespace "std" nogil:
+#     double stod(const string& str) except +
+#     int stoi(const string& str) except +
 
 
 # * Export config definition
@@ -76,14 +77,26 @@ cdef inline object convert_field_value(const FieldDef* field, const string& val)
             return None
         return ""
 
+    cdef char* end_ptr  # for strtol, strtod
+    cdef long c_int_val
+    cdef double c_double_val
+
     if field.autosizable and equal_fold(val, <const char*>b"autosize"):
         return "Autosize"
     elif field.autocalculatable and equal_fold(val, <const char*>b"autocalculate"):
         return "Autocalculate"
     elif field.field_type == FIELDTYPE_INTEGER:
-        return stoi(val)
+        c_int_val = strtol(val.c_str(), &end_ptr, 10)
+        if deref(end_ptr) == b'\0':  # if null, parsing was successful
+            return c_int_val
+        else:  # parsing failed, return value as str
+            return val.decode("utf-8")
     elif field.field_type == FIELDTYPE_REAL:
-        return stod(val)
+        c_double_val = strtod(val.c_str(), &end_ptr)
+        if deref(end_ptr) == b'\0':  # if null, parsing was successful
+            return c_double_val
+        else:  # parsing failed, return value as str
+            return val.decode("utf-8")
 
     return val.decode("utf-8")
 

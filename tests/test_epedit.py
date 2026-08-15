@@ -66,6 +66,8 @@ def test_idf_get_and_set_values(idf: IDF):
     assert obj["Vertex 1 X-coordinate"] == 49.911
     assert type(obj["Vertex 10 X-coordinate"]).__name__ == "NoneType"
     assert obj["Vertex 10 X-coordinate"] is None
+    assert type(idf["SimulationControl"][0]["Maximum Number of HVAC Sizing Simulation Passes"]).__name__ == "int"
+    assert idf["SimulationControl"][0]["Maximum Number of HVAC Sizing Simulation Passes"] == 1
 
     # ——— Set value test ——————
 
