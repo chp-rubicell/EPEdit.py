@@ -1,11 +1,13 @@
 # distutils: language = c++
 
-from cython.operator cimport dereference as deref
+from cython.operator cimport dereference as deref, preincrement as inc
 # from libc.stdlib cimport atof, atoi  # replaced with stof, stoi
 from libc.stdlib cimport strtol, strtod
+from libcpp.algorithm cimport sort
 from libcpp.string cimport string
-from libcpp.vector cimport vector
+from libcpp.unordered_set cimport unordered_set
 from libcpp.utility cimport move
+from libcpp.vector cimport vector
 from libcpp cimport bool as cbool
 
 from .lexer cimport (
@@ -186,8 +188,15 @@ cdef class IDFObject:
     # ——— Initializations ——————
 
     # C-level initialization
-    cdef void c_init(self, IDD idd, size_t class_idx, vector[string]& values) noexcept:
+    cdef void c_init(
+        self,
+        IDD             idd,
+        IDF             parent_idf,
+        size_t          class_idx,
+        vector[string]& values,
+    ) noexcept:
         self.idd = idd
+        self.parent_idf = parent_idf
         self.class_idx = class_idx
         self.c_class_name = self.get_class_def().name
         self.class_name = self.c_class_name.decode("utf-8")
@@ -209,7 +218,7 @@ cdef class IDFObject:
             empty_values.resize(cls.min_fields, <const char*>b"")
             # empty_values.reserve(cls.min_fields)  # maybe?
 
-        self.c_init(idd, class_idx, empty_values)
+        self.c_init(idd, None, class_idx, empty_values)
 
     # ——— Retrieve or update field values ——————
 
@@ -251,17 +260,61 @@ cdef class IDFObject:
 
     # Set field by field index using raw string value
     cdef int set_string_by_index(self, int field_idx, const string& value) except -1 nogil:
-        if field_idx >= <int>self.values.size():
+        cdef string old_value
+
+        if field_idx < <int>self.values.size():
+            # cache old value for registry update
+            old_value = self.values[field_idx]
+        else:
             if value.empty():
                 # If value is an empty string, don't resize self.values and ignore
                 return 0
             # Resize self.values
             self.values.resize(field_idx+1, <const char*>b"")
 
+        if old_value == value:
+            return 0  # no change
+
         cdef const ClassDef* cls = self.get_class_def()
+        cdef const FieldDef* field = get_field_def(cls, field_idx)
+        cdef size_t i
+
+        # Update registry
+        if self.parent_idf is not None and field != NULL:
+            # Update targets
+            for i in range(field.references.size()):
+                if not old_value.empty():
+                    self.parent_idf.unregister_target(
+                        field.references[i],
+                        old_value,
+                        self.obj_idx,
+                        field_idx,
+                    )
+                if not value.empty():
+                    self.parent_idf.register_target(
+                        field.references[i],
+                        value,
+                        self.obj_idx,
+                        field_idx,
+                    )
+            # Update referencers
+            for i in range(field.object_lists.size()):
+                if not old_value.empty():
+                    self.parent_idf.unregister_referencer(
+                        field.object_lists[i],
+                        old_value,
+                        self.obj_idx,
+                        field_idx,
+                    )
+                if not value.empty():
+                    self.parent_idf.register_referencer(
+                        field.object_lists[i],
+                        value,
+                        self.obj_idx,
+                        field_idx,
+                    )
 
         # TODO value validity check
-        # cdef const FieldDef* field = get_field_def(cls, field_idx)
 
         self.values[field_idx] = value
         return 0
@@ -332,6 +385,34 @@ cdef class IDFObject:
 
         if trim_empty_trails:
             self.trim_trailing_empty_fields()
+
+    # ——— Get references ——————
+
+    def get_referenced_objects(self, key=None):
+        """
+        Return objects referenced by this object.
+        If key is None, search for all fields.
+
+        Args:
+            key (int | str): field index or field name (case-insensitive)
+
+        Returns:
+            IDFObjectTuple[IDFObject, ...]: tuple of IDFObjects (references)
+        """
+        pass
+
+    def get_referencing_objects(self, key=None):
+        """
+        Return objects that are referencing this object.
+        If key is None, search for all fields.
+
+        Args:
+            key (int | str): field index or field name (case-insensitive)
+
+        Returns:
+            IDFObjectTuple[IDFObject, ...]: tuple of IDFObjects (references)
+        """
+        pass
 
     # ——— Export ——————
 
@@ -439,7 +520,7 @@ cdef class IDF:
     # C-level initialization
     cdef int c_init(self, IDD idd, bytes idf_content) except -1:
         self.idd = idd
-        self.objects = {}
+        self.objects_temp = []
 
         # Initialize lexer
         cdef Lexer lexer = Lexer.__new__(Lexer)
@@ -502,6 +583,10 @@ cdef class IDF:
         cdef IDFObject obj
         cdef size_t idx
 
+        cdef size_t field_idx
+        cdef const FieldDef* field
+        cdef size_t i  # for iterating through references and object_lists
+
         for idx in range(c_idf_objects.size()):
             c_object = &c_idf_objects[idx]
 
@@ -515,16 +600,63 @@ cdef class IDF:
             # Create IDFObject without __init__()
             obj = IDFObject.__new__(IDFObject)
             # Initialize using C-level initialization
-            obj.c_init(self.idd, class_idx, c_object.values)
-            obj.obj_idx = idx  # add order index
+            obj.c_init(self.idd, self, class_idx, c_object.values)
+            obj.obj_idx = len(self.objects_temp) + idx  # add order index
 
-            py_search_key = self.idd.py_class_names_upper[class_idx]
-            if py_search_key in self.objects:
-                self.objects[py_search_key].append(obj)
-            else:
-                self.objects[py_search_key] = [obj]
+            self.objects_temp.append(obj)
+            self.objects_index_map[search_key].push_back(obj.obj_idx)
 
-        self.next_obj_idx = c_idf_objects.size()  # update index for next object
+            # Add to registry
+            for field_idx in range(obj.values.size()):
+                if obj.values[field_idx].empty(): continue
+
+                field = get_field_def(
+                    &self.idd.c_idd.ordered_classes[class_idx],
+                    field_idx,
+                )
+
+                if field == NULL: continue
+
+                for i in range(field.references.size()):
+                    self.register_target(
+                        field.references[i],
+                        obj.values[field_idx],
+                        obj.obj_idx,
+                        <int>field_idx,
+                    )
+                for i in range(field.object_lists.size()):
+                    self.register_referencer(
+                        field.object_lists[i],
+                        obj.values[field_idx],
+                        obj.obj_idx,
+                        <int>field_idx,
+                    )
+
+    # ——— Update reference registry ——————
+
+    cdef void register_target(self, const string& tag, const string& val, size_t obj_idx, int field_idx) noexcept nogil:
+        self.targets[tag][to_upper(val)].push_back(FieldLoc(obj_idx, field_idx))
+
+    cdef void register_referencer(self, const string& tag, const string& val, size_t obj_idx, int field_idx) noexcept nogil:
+        self.referencers[tag][to_upper(val)].push_back(FieldLoc(obj_idx, field_idx))
+
+    cdef void unregister_target(self, const string& tag, const string& val, size_t obj_idx, int field_idx) noexcept nogil:
+        cdef vector[FieldLoc]* locs = &self.targets[tag][to_upper(val)]
+        cdef size_t i
+        for i in range(locs.size()):
+            if locs.at(i).first == obj_idx and locs.at(i).second == field_idx:
+                deref(locs)[i] = locs.back()  # move last item to overwrite this item
+                locs.pop_back()  # remove the last item (currently ith item)
+                break
+
+    cdef void unregister_referencer(self, const string& tag, const string& val, size_t obj_idx, int field_idx) noexcept nogil:
+        cdef vector[FieldLoc]* locs = &self.referencers[tag][to_upper(val)]
+        cdef size_t i
+        for i in range(locs.size()):
+            if locs.at(i).first == obj_idx and locs.at(i).second == field_idx:
+                deref(locs)[i] = locs.back()  # move last item to overwrite this item
+                locs.pop_back()  # remove the last item (currently ith item)
+                break
 
     # ——— IDF information ——————
 
@@ -535,13 +667,24 @@ cdef class IDF:
         Returns:
             list[str]: class names
         """
-        cdef list names = []
-        cdef list obj_list
-        cdef IDFObject obj
-        for obj_list in self.objects.values():
-            if obj_list:  # if at least one object exists
-                obj = obj_list[0]
-                names.append(obj.class_name)
+        cdef vector[size_t] obj_indices  # obj_idx of first objects in each class
+        obj_indices.reserve(self.objects_index_map.size())  # preallocate by map size
+
+        # C++ iterator
+        cdef unordered_map[string, vector[size_t]].const_iterator it = self.objects_index_map.const_begin()
+
+        while it != self.objects_index_map.const_end():
+            # deref(it).second -> vector[size_t]
+            if not deref(it).second.empty():
+                obj_indices.push_back(deref(it).second.front())
+            inc(it)  # move to next item
+
+        cdef size_t i
+        cdef list names = [""] * <Py_ssize_t>obj_indices.size()  # prepare list for storing results
+
+        for i in range(obj_indices.size()):
+            names[i] = self.objects_temp[obj_indices[i]].class_name
+
         return names
 
     # ——— IDF manipulation API (Create, Update, Delete) ——————
@@ -573,7 +716,37 @@ cdef class IDF:
 
     # For internal use, invisible to user
     cdef list get_objects_raw(self, str class_name):
-        return self.objects.get(class_name.upper(), [])
+        cdef string search_key = to_upper(class_name.encode("utf-8"))
+
+        # Search unordered_map as read-only
+        cdef unordered_map[string, vector[size_t]].const_iterator it = self.objects_index_map.find(search_key)
+
+        # If not found or empty, return emtpy list
+        if it == self.objects_index_map.end() or deref(it).second.empty():
+            return []
+
+        cdef size_t total_size = deref(it).second.size()
+
+        # Else, create a list of IDFObjects
+        cdef list objs = [None] * <Py_ssize_t>total_size
+
+        cdef size_t valid_count = 0
+        cdef size_t i, obj_idx
+        cdef IDFObject obj
+
+        for i in range(total_size):
+            obj_idx = deref(it).second[i]
+            obj = self.objects_temp[obj_idx]
+
+            if obj is None: continue  # ignore tombstones (removed)
+
+            objs[valid_count] = obj
+            valid_count += 1
+
+        if valid_count < total_size:
+            del objs[valid_count:]
+
+        return objs
 
     def get_object_by_name(self, str class_name, str obj_name) -> IDFObject|None:
         """Get object by first field (likely name)"""
@@ -599,8 +772,24 @@ cdef class IDF:
         Returns:
             IDFObject: Generated IDFObject
         """
-        cdef IDFObject new_obj = IDFObject(self.idd, class_name)
-        cdef const ClassDef* cls = new_obj.get_class_def()
+        cdef string search_key = to_upper(class_name.encode("utf-8"))
+
+        if self.idd.c_idd.class_map.find(search_key) == self.idd.c_idd.class_map.end():
+            raise ValueError(f"Unknown class: '{class_name}'")
+
+        # IDFObject Initialization
+        cdef size_t class_idx = self.idd.c_idd.class_map[search_key]
+        cdef ClassDef* cls = &self.idd.c_idd.ordered_classes[class_idx]
+
+        cdef vector[string] empty_values
+        if cls.min_fields > 0:
+            empty_values.resize(cls.min_fields, <const char*>b"")
+            # empty_values.reserve(cls.min_fields)  # maybe?
+
+        # Create IDFObject without __init__()
+        cdef IDFObject new_obj = IDFObject.__new__(IDFObject)
+        # Initialize using C-level initialization
+        new_obj.c_init(self.idd, self, class_idx, empty_values)
 
         # Apply default values
         cdef size_t i
@@ -617,40 +806,49 @@ cdef class IDF:
         new_obj.update(initial_values, trim_empty_trails=True)
 
         # Apply obj_idx
-        new_obj.obj_idx = self.next_obj_idx
-        self.next_obj_idx += 1
+        new_obj.obj_idx = len(self.objects_temp)
 
-        cdef str py_search_key = class_name.upper()
-        if py_search_key in self.objects:
-            self.objects[py_search_key].append(new_obj)
-        else:
-            self.objects[py_search_key] = [new_obj]
+        self.objects_temp.append(new_obj)
+        self.objects_index_map[search_key].push_back(new_obj.obj_idx)
 
         return new_obj
 
-    def remove_object(self, IDFObject obj) -> bool:
+    def remove_object(self, IDFObject obj):
         """
         Remove object from IDF
 
         Returns:
             bool: True if successfully removed, False if object was not found.
         """
-        cdef str py_search_key = obj.class_name.upper()
+        # Check if the object is part of this IDF
+        if (
+            obj.parent_idf is not self
+            or obj.obj_idx > <size_t>len(self.objects_temp)
+            or self.objects_temp[obj.obj_idx] is not obj
+        ):
+            raise ValueError("Error: The object belongs to a different IDF model or is detached.")
 
-        if py_search_key not in self.objects:
-            return False
+        # Remove from objects (make tombstone)
+        self.objects_temp[obj.obj_idx] = None
 
-        cdef list objs = self.objects[py_search_key]
+        # Remove from objects_index_map
+        cdef unordered_map[string, vector[size_t]].iterator it = self.objects_index_map.find(to_upper(obj.c_class_name))
 
-        try:
-            objs.remove(obj)
-            # If no obj left in class, remove key:
-            if not objs:
-                del self.objects[py_search_key]
-            return True
+        if it == self.objects_index_map.end():
+            raise ValueError("Error: The object belongs to a different IDF model or is detached.")
 
-        except ValueError:
-            return False
+        cdef size_t i
+        for i in range(deref(it).second.size()):
+            # deref(it).second -> vector[size_t] of obj_idx
+            if deref(it).second[i] == obj.obj_idx:
+                # use std::vector::erase
+                deref(it).second.erase(deref(it).second.begin() + i)
+                break
+
+        # TODO unregister
+
+        # Remove reference to this IDF
+        obj.parent_idf = None
 
     def remove_all_objects(self, str class_name) -> int:
         """
@@ -659,14 +857,34 @@ cdef class IDF:
         Returns:
             int: Number of objects removed. 0 if class was not found.
         """
-        cdef str py_search_key = class_name.upper()
+        cdef string search_key = to_upper(class_name.encode("utf-8"))
 
-        cdef list removed = self.objects.pop(py_search_key, None)
+        cdef unordered_map[string, vector[size_t]].iterator it = self.objects_index_map.find(search_key)
 
-        if removed is None:
-            return 0  # None were found
+        # If key was not found or the vector is empty
+        if it == self.objects_index_map.end() or deref(it).second.empty():
+            return 0
 
-        return len(removed)
+        cdef size_t i, obj_idx
+        cdef IDFObject obj
+        cdef int removed_count = 0
+
+        for i in range(deref(it).second.size()):
+            obj_idx = deref(it).second[i]
+            obj = self.objects_temp[obj_idx]
+
+            if obj is None: continue  # ignore tombstones (removed)
+
+            # TODO unregister
+
+            self.objects_temp[obj_idx] = None  # tombstone
+            obj.parent_idf = None  # remove reference to this IDF
+            removed_count += 1
+
+        # Remove search_key in map
+        self.objects_index_map.erase(it)
+
+        return removed_count
 
     # ——— Export ——————
 
@@ -677,25 +895,26 @@ cdef class IDF:
         cbool preserve_order=False,
     ) noexcept:
 
-        cdef list all_objs  # for preserve_order option
-        cdef list objs = []
         cdef IDFObject obj
 
-        cdef size_t i
+        cdef size_t i, j, obj_idx
         cdef const ClassDef* cls
-        cdef str py_search_key
+        cdef string search_key
         cdef string current_group
 
         # Estimate buffer size
-        cdef size_t total_objects = 0
-        for objs in self.objects.values():
-            total_objects += len(objs)
+        cdef unordered_map[string, vector[size_t]].const_iterator it = self.objects_index_map.const_begin()
+        cdef size_t total_obj_count = 0
+
+        while it != self.objects_index_map.const_end():
+            total_obj_count += deref(it).second.size()
+            inc(it)
 
         cdef size_t size_per_obj = 800
         if config.compact:
             size_per_obj = 160
 
-        cdef size_t estimated_size = out_buffer.size() + (total_objects*size_per_obj) + 4096  # 4KB padding
+        cdef size_t estimated_size = out_buffer.size() + (total_obj_count*size_per_obj) + 4096  # 4KB padding
 
         if out_buffer.capacity() < estimated_size:
             out_buffer.reserve(estimated_size)
@@ -703,14 +922,8 @@ cdef class IDF:
         # Write to buffer
         if preserve_order:
             # Preserve original object order
-            all_objs = []
-            for objs in self.objects.values():
-                all_objs.extend(objs)
-
-            # Sort based on object indices
-            all_objs.sort(key=lambda x: x.obj_idx)
-
-            for obj in all_objs:
+            for obj in self.objects_temp:
+                if obj is None: continue  # ignore tombstones (removed)
                 out_buffer.push_back(<char>b'\n')
                 obj.write_to_buffer(out_buffer, config)
 
@@ -718,9 +931,12 @@ cdef class IDF:
             # Group by class
             for i in range(self.idd.c_idd.ordered_classes.size()):
                 cls = &self.idd.c_idd.ordered_classes[i]
-                py_search_key = to_upper(cls.name).decode("utf-8")
+                search_key = to_upper(cls.name)
 
-                if py_search_key not in self.objects:
+                it = self.objects_index_map.find(search_key)
+
+                # Continue if no key or list is empty
+                if it == self.objects_index_map.end() or deref(it).second.empty():
                     continue
 
                 # Add group separator if changed
@@ -732,7 +948,10 @@ cdef class IDF:
                         out_buffer.append(<const char*>b"***\n")
 
                 # Write objects
-                for obj in self.objects[py_search_key]:
+                for j in range(deref(it).second.size()):
+                    obj_idx = deref(it).second[j]
+                    obj = self.objects_temp[obj_idx]
+                    if obj is None: continue  # ignore tombstones (removed)
                     # Add newline
                     out_buffer.push_back(<char>b'\n')
                     # Write IDFObject

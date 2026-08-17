@@ -105,6 +105,10 @@ cdef void parse_field_property(ClassDef& cls, FieldDef& field, const string& val
             field.field_type = FIELDTYPE_ALPHA
         elif after == <const char*>b"choice":
             field.field_type = FIELDTYPE_CHOICE
+        elif after == <const char*>b"object-list":
+            field.field_type = FIELDTYPE_OBJLIST
+        elif after == <const char*>b"node":
+            field.field_type = FIELDTYPE_NODE
         else:
             field.field_type = FIELDTYPE_DEFAULT
         return
@@ -112,6 +116,16 @@ cdef void parse_field_property(ClassDef& cls, FieldDef& field, const string& val
     after, found = cut_prefix(val, <const char*>b"\\key ")
     if found:
         field.choices.push_back(trim_string(after))
+        return
+
+    after, found = cut_prefix(val, <const char*>b"\\reference ")
+    if found:
+        field.references.push_back(trim_string(after))
+        return
+
+    after, found = cut_prefix(val, <const char*>b"\\object-list ")
+    if found:
+        field.object_lists.push_back(trim_string(after))
         return
 
     # TODO: add more later
@@ -423,15 +437,6 @@ cdef class IDD:
         # Parse IDD
         with nogil:
             parse_idd(lexer, self.c_idd)
-
-        # Precache Python str of uppercase class names
-        cdef size_t i
-        cdef const ClassDef* cls
-        cdef size_t num_classes = self.c_idd.ordered_classes.size()
-        self.py_class_names_upper = [None] * <int>num_classes
-        for i in range(num_classes):
-            cls = &self.c_idd.ordered_classes[i]
-            self.py_class_names_upper[i] = to_upper(cls.name).decode("utf-8")
 
         # Update version info
         self.version = self.c_idd.version.decode("utf-8")

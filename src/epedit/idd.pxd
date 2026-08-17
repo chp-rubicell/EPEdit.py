@@ -29,6 +29,8 @@ cdef enum FieldType:
     FIELDTYPE_REAL    = 2
     FIELDTYPE_ALPHA   = 3
     FIELDTYPE_CHOICE  = 4
+    FIELDTYPE_OBJLIST = 5
+    FIELDTYPE_NODE    = 6
 
 # IDD field definition (ex. Outside_Boundary_Condition)
 cdef struct FieldDef:
@@ -40,6 +42,8 @@ cdef struct FieldDef:
     cbool          autocalculatable
     FieldType      field_type  # enum (alpha, real, integer, choice, etc.)
     vector[string] choices  # possible values for "\type choice"
+    vector[string] references  # \reference tags
+    vector[string] object_lists  # \object-list tags
 
 # IDD class definition (ex. Building, Zone)
 cdef struct ClassDef:
@@ -65,7 +69,6 @@ cdef int parse_idd(Lexer lexer, c_IDD& c_idd) except -1 nogil
 cdef class IDD:
     cdef c_IDD c_idd
     cdef cbool initialized  # to check if already initialized
-    cdef list  py_class_names_upper  # precache Python str of uppercase class names
     cdef readonly str version
 
     cdef int c_init(self, bytes idd_content) except -1

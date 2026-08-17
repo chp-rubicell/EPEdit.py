@@ -54,6 +54,34 @@ class IDFObject:
         """
         ...
 
+    # ——— Get references ——————
+
+    def get_referenced_objects(self, key=None) -> IDFObjectTuple:
+        """
+        Return objects referenced by this object.
+        If key is None, search for all fields.
+
+        Args:
+            key (int | str): field index or field name (case-insensitive)
+
+        Returns:
+            IDFObjectTuple[IDFObject, ...]: tuple of IDFObjects (references)
+        """
+        ...
+
+    def get_referencing_objects(self, key=None) -> IDFObjectTuple:
+        """
+        Return objects that are referencing this object.
+        If key is None, search for all fields.
+
+        Args:
+            key (int | str): field index or field name (case-insensitive)
+
+        Returns:
+            IDFObjectTuple[IDFObject, ...]: tuple of IDFObjects (references)
+        """
+        ...
+
     # ——— Export ——————
 
     def __repr__(self):
@@ -161,7 +189,7 @@ class IDF:
         """
         ...
 
-    def remove_object(self, obj: IDFObject) -> bool:
+    def remove_object(self, obj: IDFObject):
         """
         Remove object from IDF
 
