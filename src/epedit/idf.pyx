@@ -601,7 +601,7 @@ cdef class IDF:
             obj = IDFObject.__new__(IDFObject)
             # Initialize using C-level initialization
             obj.c_init(self.idd, self, class_idx, c_object.values)
-            obj.obj_idx = len(self.objects_temp) + idx  # add order index
+            obj.obj_idx = len(self.objects_temp)  # add order index
 
             self.objects_temp.append(obj)
             self.objects_index_map[search_key].push_back(obj.obj_idx)

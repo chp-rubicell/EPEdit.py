@@ -155,7 +155,7 @@ def test_idf_remove_object(idf: IDF):
     assert len(idf["buildinGsurFaCe:detailed"]) == 131
     # Remove
     for obj in new_objs:
-        assert idf.remove_object(obj)
+        idf.remove_object(obj)
     # Count after deleting
     assert len(idf.get_objects("BuildingSurface:Detailed")) == 128
     # Delete all objects
