@@ -54,9 +54,9 @@ cdef class IDF:
 
     # Registry for object references
     # {TagName: {ObjName: [FieldLoc], ...}, ...}
-    # ex. targets["ZoneNames"]["Office 1"] -> [FieldLoc]
+    # ex. targets["ZoneNames"]["OFFICE 1"] -> [FieldLoc]
     #     (should be only one, but used vector for safety and validity check)
-    # ex. referencers["ZoneNames"]["Office 1"] -> [FieldLoc that references target]
+    # ex. referencers["ZoneNames"]["OFFICE 1"] -> [FieldLoc that references target]
     cdef unordered_map[string, unordered_map[string, vector[FieldLoc]]] targets
     cdef unordered_map[string, unordered_map[string, vector[FieldLoc]]] referencers
 
