@@ -211,7 +211,7 @@ cdef class IDFObject:
             raise ValueError(f"Unknown class: '{class_name}'")
 
         cdef size_t class_idx = c_idd_ptr.class_map[search_key]
-        cdef ClassDef* cls = &c_idd_ptr.ordered_classes[class_idx]
+        cdef const ClassDef* cls = &c_idd_ptr.ordered_classes[class_idx]
 
         cdef vector[string] empty_values
         if cls.min_fields > 0:
@@ -874,7 +874,7 @@ cdef class IDF:
 
         # IDFObject Initialization
         cdef size_t class_idx = self.idd.c_idd.class_map[search_key]
-        cdef ClassDef* cls = &self.idd.c_idd.ordered_classes[class_idx]
+        cdef const ClassDef* cls = &self.idd.c_idd.ordered_classes[class_idx]
 
         cdef vector[string] empty_values
         if cls.min_fields > 0:
@@ -940,7 +940,30 @@ cdef class IDF:
                 deref(it).second.erase(deref(it).second.begin() + i)
                 break
 
-        # TODO unregister
+        # Unregister references
+        cdef const ClassDef* cls = obj.get_class_def()
+        cdef size_t field_idx
+        cdef const FieldDef* field
+        for field_idx in range(obj.values.size()):
+            if obj.values[field_idx].empty():
+                continue
+            field = get_field_def(cls, field_idx)
+            if field == NULL:
+                continue
+            for i in range(field.references.size()):
+                self.unregister_target(
+                    field.references[i],
+                    obj.values[field_idx],
+                    obj.obj_idx,
+                    <int>field_idx,
+                )
+            for i in range(field.object_lists.size()):
+                self.unregister_referencer(
+                    field.object_lists[i],
+                    obj.values[field_idx],
+                    obj.obj_idx,
+                    <int>field_idx,
+                )
 
         # Remove reference to this IDF
         obj.parent_idf = None
