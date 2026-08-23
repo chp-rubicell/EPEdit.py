@@ -459,7 +459,55 @@ cdef class IDFObject:
         Returns:
             IDFObjectTuple[IDFObject, ...]: tuple of IDFObjects (references)
         """
-        pass
+        cdef const ClassDef* cls = self.get_class_def()
+        cdef int field_idx = resolve_key_to_field_index(cls, key)
+        cdef const FieldDef* field = get_field_def(cls, <size_t>field_idx)
+
+        if field == NULL or self.parent_idf is None or field_idx >= <int>self.values.size():
+            return IDFObjectTuple([])
+
+        cdef string upper_val = to_upper(self.values[field_idx])
+        if upper_val.empty():
+            return IDFObjectTuple([])
+
+        # Iterator for searching
+        cdef unordered_map[string, unordered_map[string, vector[FieldLoc]]].const_iterator tag_it
+        cdef unordered_map[string, vector[FieldLoc]].const_iterator val_it
+
+        # Store temporary search results in C-level
+        cdef size_t i
+        cdef vector[size_t] referencer_indices
+        cdef size_t tag_idx
+
+        for tag_idx in range(field.references.size()):
+            # Find tag
+            tag_it = self.parent_idf.referencers.find(field.references[tag_idx])
+            if tag_it != self.parent_idf.referencers.end():
+                # Find value
+                val_it = deref(tag_it).second.find(upper_val)
+                if val_it != deref(tag_it).second.end():
+                    for i in range(deref(val_it).second.size()):
+                        # only save obj_idx, discard field_idx
+                        referencer_indices.push_back(deref(val_it).second[i].first)
+        if referencer_indices.empty():
+            return IDFObjectTuple([])
+
+        # Convert results for Python
+        cdef list result = [None] * <Py_ssize_t>referencer_indices.size()
+        cdef size_t valid_count = 0
+        cdef IDFObject obj
+
+        for i in range(referencer_indices.size()):
+            obj = self.parent_idf.objects_temp[referencer_indices[i]]
+            if obj is not None:  # ignore tombstones (removed)
+                result[valid_count] = obj
+                valid_count += 1
+
+        # Remove empty list elements in-place
+        if valid_count < referencer_indices.size():
+            del result[valid_count:]
+
+        return IDFObjectTuple(result)
 
     # ——— Export ——————
 
