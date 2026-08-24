@@ -260,11 +260,10 @@ cdef class IDFObject:
 
     # Set field by field index using raw string value
     cdef int set_string_by_index(self, int field_idx, const string& value) except -1 nogil:
-        cdef string old_value
 
         if field_idx < <int>self.values.size():
-            # cache old value for registry update
-            old_value = self.values[field_idx]
+            if self.values[field_idx] == value:
+                return 0  # no change
         else:
             if value.empty():
                 # If value is an empty string, don't resize self.values and ignore
@@ -272,41 +271,38 @@ cdef class IDFObject:
             # Resize self.values
             self.values.resize(field_idx+1, <const char*>b"")
 
-        if old_value == value:
-            return 0  # no change
-
         cdef const ClassDef* cls = self.get_class_def()
         cdef const FieldDef* field = get_field_def(cls, field_idx)
         cdef size_t i
 
         # Update registry
         if self.parent_idf is not None and field != NULL:
-            # Update targets
-            for i in range(field.references.size()):
-                if not old_value.empty():
+            # Update for old value
+            if not self.values[field_idx].empty():
+                for i in range(field.references.size()):
                     self.parent_idf.unregister_target(
                         field.references[i],
-                        old_value,
+                        self.values[field_idx],
                         self.obj_idx,
                         field_idx,
                     )
-                if not value.empty():
+                for i in range(field.object_lists.size()):
+                    self.parent_idf.unregister_referencer(
+                        field.object_lists[i],
+                        self.values[field_idx],
+                        self.obj_idx,
+                        field_idx,
+                    )
+            # Update for new value
+            if not value.empty():
+                for i in range(field.references.size()):
                     self.parent_idf.register_target(
                         field.references[i],
                         value,
                         self.obj_idx,
                         field_idx,
                     )
-            # Update referencers
-            for i in range(field.object_lists.size()):
-                if not old_value.empty():
-                    self.parent_idf.unregister_referencer(
-                        field.object_lists[i],
-                        old_value,
-                        self.obj_idx,
-                        field_idx,
-                    )
-                if not value.empty():
+                for i in range(field.object_lists.size()):
                     self.parent_idf.register_referencer(
                         field.object_lists[i],
                         value,
@@ -887,6 +883,13 @@ cdef class IDF:
         # Initialize using C-level initialization
         new_obj.c_init(self.idd, self, class_idx, empty_values)
 
+        # Apply obj_idx
+        new_obj.obj_idx = len(self.objects_temp)
+
+        # Add new object to IDF
+        self.objects_temp.append(new_obj)
+        self.objects_index_map[search_key].push_back(new_obj.obj_idx)
+
         # Apply default values
         cdef size_t i
         cdef size_t default_idx
@@ -900,12 +903,6 @@ cdef class IDF:
 
         # Apply initial values
         new_obj.update(initial_values, trim_empty_trails=True)
-
-        # Apply obj_idx
-        new_obj.obj_idx = len(self.objects_temp)
-
-        self.objects_temp.append(new_obj)
-        self.objects_index_map[search_key].push_back(new_obj.obj_idx)
 
         return new_obj
 
