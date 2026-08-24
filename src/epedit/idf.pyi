@@ -56,7 +56,7 @@ class IDFObject:
 
     # ——— Get references ——————
 
-    def get_referenced_objects(self, key=None) -> IDFObjectTuple:
+    def get_referenced_object(self, key=None) -> IDFObject|None:
         """
         Return objects referenced by this object.
         ex. (BuildingSurface:Detailed)["Zone Name"] -> (Zone)
@@ -65,14 +65,14 @@ class IDFObject:
             key (int | str): field index or field name (case-insensitive)
 
         Returns:
-            IDFObjectTuple[IDFObject, ...]: tuple of IDFObjects (references)
+            IDFObject | None: referenced IDFObject
         """
         ...
 
     def get_referencing_objects(self, key=None) -> IDFObjectTuple:
         """
         Return objects that are referencing this object.
-        ex. (Zone)["Name"] -> (BuildingSurface:Detailed), (People), (Lights), (Sizing:Zone), ...
+        ex. (Zone)["Name"] -> [(BuildingSurface:Detailed), (People), (Lights), (Sizing:Zone), ...]
 
         Args:
             key (int | str): field index or field name (case-insensitive)
@@ -190,12 +190,7 @@ class IDF:
         ...
 
     def remove_object(self, obj: IDFObject):
-        """
-        Remove object from IDF
-
-        Returns:
-            bool: True if successfully removed, False if object was not found.
-        """
+        """Remove object from IDF"""
         ...
 
     def remove_all_objects(self, class_name: str) -> int:

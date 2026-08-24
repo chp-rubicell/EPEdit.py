@@ -31,13 +31,13 @@ cdef class IDFObject:
     cdef size_t          obj_idx  # for preserve_order option (readonly for Python sort() function)
 
     cdef inline const ClassDef* get_class_def(self) noexcept nogil
-    cdef void c_init(
+    cdef int c_init(
         self,
         IDD             idd,
         IDF             parent_idf,
         size_t          class_idx,
         vector[string]& values,
-    ) noexcept
+    ) except -1
     cdef int set_string_by_index(self, int field_idx, const string& value) except -1 nogil
     cdef int set_by_index(self, int field_idx, object value) except -1
     cdef void trim_trailing_empty_fields(self) nogil

@@ -170,7 +170,7 @@ cdef int parse_idf(Lexer lexer, vector[c_IDFObject]& c_idf_objects) except -1 no
             with gil:
                 raise ValueError(f"IDF parsing error (Line {lexer.line_num}): unrecognized token type '{tok.type}'.")
 
-    # TODO: version check
+    # TODO version check
 
     return 0
 
@@ -186,19 +186,22 @@ cdef class IDFObject:
     # ——— Initializations ——————
 
     # C-level initialization
-    cdef void c_init(
+    cdef int c_init(
         self,
         IDD             idd,
         IDF             parent_idf,
         size_t          class_idx,
         vector[string]& values,
-    ) noexcept:
+    ) except -1:
         self.idd = idd
         self.parent_idf = parent_idf
+        if class_idx >= idd.c_idd.ordered_classes.size():
+            raise ValueError(f"Class index out of bounds: {class_idx}")
         self.class_idx = class_idx
         self.c_class_name = self.get_class_def().name
         self.class_name = self.c_class_name.decode("utf-8")
         self.values = move(values)
+        return 0
 
     def __init__(self, IDD idd, str class_name):
         """Python-level initialization"""
@@ -382,7 +385,7 @@ cdef class IDFObject:
 
     # ——— Get references ——————
 
-    def get_referenced_objects(self, key):
+    def get_referenced_object(self, key):
         """
         Return objects referenced by this object.
         ex. (BuildingSurface:Detailed)["Zone Name"] -> (Zone)
@@ -391,27 +394,26 @@ cdef class IDFObject:
             key (int | str): field index or field name (case-insensitive)
 
         Returns:
-            IDFObjectTuple[IDFObject, ...]: tuple of IDFObjects (references)
+            IDFObject | None: referenced IDFObject
         """
         cdef const ClassDef* cls = self.get_class_def()
         cdef int field_idx = resolve_key_to_field_index(cls, key)
         cdef const FieldDef* field = get_field_def(cls, <size_t>field_idx)
 
         if field == NULL or self.parent_idf is None or field_idx >= <int>self.values.size():
-            return IDFObjectTuple([])
+            return None
 
         cdef string upper_val = to_upper(self.values[field_idx])
         if upper_val.empty():
-            return IDFObjectTuple([])
+            return None
 
         # Iterator for searching
         cdef unordered_map[string, unordered_map[string, vector[FieldLoc]]].const_iterator tag_it
         cdef unordered_map[string, vector[FieldLoc]].const_iterator val_it
 
         # Store temporary search results in C-level
-        cdef size_t i
-        cdef vector[size_t] target_indices
-        cdef size_t tag_idx
+        cdef size_t tag_idx, i
+        cdef IDFObject obj
 
         for tag_idx in range(field.object_lists.size()):
             # Find tag
@@ -421,32 +423,19 @@ cdef class IDFObject:
                 val_it = deref(tag_it).second.find(upper_val)
                 if val_it != deref(tag_it).second.end():
                     for i in range(deref(val_it).second.size()):
-                        # only save obj_idx, discard field_idx
-                        target_indices.push_back(deref(val_it).second[i].first)
-        if target_indices.empty():
-            return IDFObjectTuple([])
+                        obj = self.parent_idf.objects_temp[
+                            deref(val_it).second[i].first  # obj_idx
+                        ]
+                        # if not tombstone (removed)
+                        if obj is not None:
+                            return obj
 
-        # Convert results for Python
-        cdef list result = [None] * <Py_ssize_t>target_indices.size()
-        cdef size_t valid_count = 0
-        cdef IDFObject obj
-
-        for i in range(target_indices.size()):
-            obj = self.parent_idf.objects_temp[target_indices[i]]
-            if obj is not None:  # ignore tombstones (removed)
-                result[valid_count] = obj
-                valid_count += 1
-
-        # Remove empty list elements in-place
-        if valid_count < target_indices.size():
-            del result[valid_count:]
-
-        return IDFObjectTuple(result)
+        return None
 
     def get_referencing_objects(self, key):
         """
         Return objects that are referencing this object.
-        ex. (Zone)["Name"] -> (BuildingSurface:Detailed), (People), (Lights), (Sizing:Zone), ...
+        ex. (Zone)["Name"] -> [(BuildingSurface:Detailed), (People), (Lights), (Sizing:Zone), ...]
 
         Args:
             key (int | str): field index or field name (case-insensitive)
@@ -731,21 +720,57 @@ cdef class IDF:
         self.referencers[tag][to_upper(val)].push_back(FieldLoc(obj_idx, field_idx))
 
     cdef void unregister_target(self, const string& tag, const string& val, size_t obj_idx, int field_idx) noexcept nogil:
-        cdef vector[FieldLoc]* locs = &self.targets[tag][to_upper(val)]
+        # Search for tag
+        cdef unordered_map[string, unordered_map[string, vector[FieldLoc]]].iterator tag_it = self.targets.find(tag)
+        if tag_it == self.targets.end():
+            return
+
+        # Search for value
+        cdef unordered_map[string, vector[FieldLoc]].iterator val_it = deref(tag_it).second.find(to_upper(val))
+        if val_it == deref(tag_it).second.end():
+            return
+
+        # Search for field
+        cdef vector[FieldLoc]* locs = &deref(val_it).second
         cdef size_t i
         for i in range(locs.size()):
-            if locs.at(i).first == obj_idx and locs.at(i).second == field_idx:
+            if deref(locs)[i].first == obj_idx and deref(locs)[i].second == field_idx:
                 deref(locs)[i] = locs.back()  # move last item to overwrite this item
                 locs.pop_back()  # remove the last item (currently ith item)
+
+                # Cleanup if empty
+                if locs.empty():
+                    deref(tag_it).second.erase(val_it)
+                    if deref(tag_it).second.empty():
+                        self.targets.erase(tag_it)
+
                 break
 
     cdef void unregister_referencer(self, const string& tag, const string& val, size_t obj_idx, int field_idx) noexcept nogil:
-        cdef vector[FieldLoc]* locs = &self.referencers[tag][to_upper(val)]
+        # Search for tag
+        cdef unordered_map[string, unordered_map[string, vector[FieldLoc]]].iterator tag_it = self.referencers.find(tag)
+        if tag_it == self.referencers.end():
+            return
+
+        # Search for value
+        cdef unordered_map[string, vector[FieldLoc]].iterator val_it = deref(tag_it).second.find(to_upper(val))
+        if val_it == deref(tag_it).second.end():
+            return
+
+        # Search for field
+        cdef vector[FieldLoc]* locs = &deref(val_it).second
         cdef size_t i
         for i in range(locs.size()):
-            if locs.at(i).first == obj_idx and locs.at(i).second == field_idx:
+            if deref(locs)[i].first == obj_idx and deref(locs)[i].second == field_idx:
                 deref(locs)[i] = locs.back()  # move last item to overwrite this item
                 locs.pop_back()  # remove the last item (currently ith item)
+
+                # Cleanup if empty
+                if locs.empty():
+                    deref(tag_it).second.erase(val_it)
+                    if deref(tag_it).second.empty():
+                        self.referencers.erase(tag_it)
+
                 break
 
     # ——— IDF information ——————
@@ -840,6 +865,7 @@ cdef class IDF:
 
     def get_object_by_name(self, str class_name, str obj_name) -> IDFObject|None:
         """Get object by first field (likely name)"""
+        # TODO consider dealing with duplicate names?
         cdef string c_obj_name = obj_name.encode("utf-8")
         cdef list candidates = self.get_objects_raw(class_name)
         cdef IDFObject obj
@@ -905,12 +931,7 @@ cdef class IDF:
         return new_obj
 
     def remove_object(self, IDFObject obj):
-        """
-        Remove object from IDF
-
-        Returns:
-            bool: True if successfully removed, False if object was not found.
-        """
+        """Remove object from IDF"""
         # Check if the object is part of this IDF
         if (
             obj.parent_idf is not self
