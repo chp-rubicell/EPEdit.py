@@ -53,6 +53,7 @@ setup(
             'wraparound': False,  # minus indexing
         },
         annotate=False,
+        force=True,
     ),
     cmdclass={"build_ext": CustomBuildExt},  # connected compiler detection class
     zip_safe=False,
