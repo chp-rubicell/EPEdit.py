@@ -3,9 +3,7 @@
 from cython.operator cimport dereference as deref, preincrement as inc
 # from libc.stdlib cimport atof, atoi  # replaced with stof, stoi
 from libc.stdlib cimport strtol, strtod
-from libcpp.algorithm cimport sort
 from libcpp.string cimport string
-from libcpp.unordered_set cimport unordered_set
 from libcpp.utility cimport move
 from libcpp.vector cimport vector
 from libcpp cimport bool as cbool
@@ -20,7 +18,7 @@ from .idd cimport (
     find_field_index, resolve_key_to_field_index, get_field_name, get_field_def,
 )
 from .utils cimport (
-    to_lower, to_upper, equal_fold, trim_string,
+    to_lower, to_upper, equal_fold, trim_string, trim_newlines,
     any_to_string, get_current_time, read_utf8_bytes
 )
 
@@ -1143,7 +1141,7 @@ cdef class IDF:
 
         cdef string out_buffer
         self.write_to_buffer(out_buffer, config, preserve_order)
-        return trim_string(out_buffer).decode("utf-8")
+        return trim_newlines(out_buffer).decode("utf-8")
 
     def save(
         self,

@@ -55,6 +55,14 @@ cdef inline string trim_string(const string& s) noexcept nogil:
     cdef size_t last = s.find_last_not_of(b" \t\r\n")
     return s.substr(first, (last - first + 1))
 
+# Remove leading and trailing newlines (\r, \n) from a C++ string.
+cdef inline string trim_newlines(const string& s) noexcept nogil:
+    cdef size_t first = s.find_first_not_of(b"\r\n")
+    if first == npos:
+        return <const char*>b""
+    cdef size_t last = s.find_last_not_of(b"\r\n")
+    return s.substr(first, (last - first + 1))
+
 # Similar to Go's strings.HasPrefix()
 cdef inline cbool has_prefix(const string&s, const string& prefix) noexcept nogil:
     cdef size_t p_len = prefix.length()

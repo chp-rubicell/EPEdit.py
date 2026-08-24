@@ -103,6 +103,8 @@ def debug_equal_fold(str a, str b):
     return equal_fold(a.encode("utf-8"), b.encode("utf-8"))
 def debug_trim_string(str s):
     return trim_string((<str>s).encode("utf-8")).decode("utf-8")
+def debug_trim_newlines(str s):
+    return trim_newlines((<str>s).encode("utf-8")).decode("utf-8")
 def debug_has_prefix(str s, str prefix):
     return has_prefix(
         (<str>s).encode("utf-8"),

@@ -1,5 +1,6 @@
 # distutils: language = c++
 
+from cython.operator cimport dereference as deref
 from libc.stdlib cimport atoi
 from libcpp.string cimport string, npos
 from libcpp.vector cimport vector
@@ -314,6 +315,9 @@ cdef int parse_idd(Lexer lexer, c_IDD& c_idd) except -1 nogil:
 
         # 1. Handle EOF and errors
         if tok.type == TOKEN_EOF:
+            if state == STATE_IN_CLASS or not last_text.empty():
+                with gil:
+                    raise ValueError(f"IDD parsing error (Line {lexer.line_num}): Unexpected EOF. Missing ';' at the end of class definition.")
             break
         elif tok.type == TOKEN_ERROR:
             # Raise Python exception (requires GIL)
@@ -357,6 +361,9 @@ cdef int parse_idd(Lexer lexer, c_IDD& c_idd) except -1 nogil:
             if state == STATE_LOOKING_FOR_CLASS:
                 # No current active class -> create new class
                 # last_text is the new class name
+                if last_text.empty():
+                    with gil:
+                        raise ValueError(f"IDD parsing error (Line {lexer.line_num}): Empty class name.")
                 add_new_class(
                     c_idd,
                     last_text,
@@ -399,7 +406,14 @@ cdef int parse_idd(Lexer lexer, c_IDD& c_idd) except -1 nogil:
         build_indices(c_idd.ordered_classes[i])
 
     # Add version info (default value of the first field in Version class)
-    c_idd.version = c_idd.ordered_classes[c_idd.class_map[<const char*>b"VERSION"]].fields[0].default_val
+    cdef unordered_map[string, size_t].const_iterator ver_it = c_idd.class_map.find(<const char*>b"VERSION")
+    cdef size_t ver_class_idx
+    if ver_it != c_idd.class_map.end():
+        # if version class exists
+        ver_class_idx = deref(ver_it).second
+        # if version class has at least one field
+        if not c_idd.ordered_classes[ver_class_idx].fields.empty():
+            c_idd.version = c_idd.ordered_classes[ver_class_idx].fields[0].default_val
 
     return 0
 
