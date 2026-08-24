@@ -49,7 +49,7 @@ cdef class IDFObject:
 
 cdef class IDF:
     cdef IDD idd
-    cdef list objects_temp  # obj_idx -> IDFObject | None
+    cdef list objects  # obj_idx -> IDFObject | None
     cdef unordered_map[string, vector[size_t]] objects_index_map  # {CLASSNAME: [obj_idx,...],...}
 
     # Registry for object references

@@ -423,7 +423,7 @@ cdef class IDFObject:
                 val_it = deref(tag_it).second.find(upper_val)
                 if val_it != deref(tag_it).second.end():
                     for i in range(deref(val_it).second.size()):
-                        obj = self.parent_idf.objects_temp[
+                        obj = self.parent_idf.objects[
                             deref(val_it).second[i].first  # obj_idx
                         ]
                         # if not tombstone (removed)
@@ -482,7 +482,7 @@ cdef class IDFObject:
         cdef IDFObject obj
 
         for i in range(referencer_indices.size()):
-            obj = self.parent_idf.objects_temp[referencer_indices[i]]
+            obj = self.parent_idf.objects[referencer_indices[i]]
             if obj is not None:  # ignore tombstones (removed)
                 result[valid_count] = obj
                 valid_count += 1
@@ -599,7 +599,7 @@ cdef class IDF:
     # C-level initialization
     cdef int c_init(self, IDD idd, bytes idf_content) except -1:
         self.idd = idd
-        self.objects_temp = []
+        self.objects = []
 
         # Initialize lexer
         cdef Lexer lexer = Lexer.__new__(Lexer)
@@ -680,9 +680,9 @@ cdef class IDF:
             obj = IDFObject.__new__(IDFObject)
             # Initialize using C-level initialization
             obj.c_init(self.idd, self, class_idx, c_object.values)
-            obj.obj_idx = len(self.objects_temp)  # add order index
+            obj.obj_idx = len(self.objects)  # add order index
 
-            self.objects_temp.append(obj)
+            self.objects.append(obj)
             self.objects_index_map[search_key].push_back(obj.obj_idx)
 
             # Add to registry
@@ -798,7 +798,7 @@ cdef class IDF:
         cdef list names = [""] * <Py_ssize_t>obj_indices.size()  # prepare list for storing results
 
         for i in range(obj_indices.size()):
-            names[i] = self.objects_temp[obj_indices[i]].class_name
+            names[i] = self.objects[obj_indices[i]].class_name
 
         return names
 
@@ -851,7 +851,7 @@ cdef class IDF:
 
         for i in range(total_size):
             obj_idx = deref(it).second[i]
-            obj = self.objects_temp[obj_idx]
+            obj = self.objects[obj_idx]
 
             if obj is None: continue  # ignore tombstones (removed)
 
@@ -908,10 +908,10 @@ cdef class IDF:
         new_obj.c_init(self.idd, self, class_idx, empty_values)
 
         # Apply obj_idx
-        new_obj.obj_idx = len(self.objects_temp)
+        new_obj.obj_idx = len(self.objects)
 
         # Add new object to IDF
-        self.objects_temp.append(new_obj)
+        self.objects.append(new_obj)
         self.objects_index_map[search_key].push_back(new_obj.obj_idx)
 
         # Apply default values
@@ -935,13 +935,13 @@ cdef class IDF:
         # Check if the object is part of this IDF
         if (
             obj.parent_idf is not self
-            or obj.obj_idx >= <size_t>len(self.objects_temp)
-            or self.objects_temp[obj.obj_idx] is not obj
+            or obj.obj_idx >= <size_t>len(self.objects)
+            or self.objects[obj.obj_idx] is not obj
         ):
             raise ValueError("Error: The object belongs to a different IDF model or is detached.")
 
         # Remove from objects (make tombstone)
-        self.objects_temp[obj.obj_idx] = None
+        self.objects[obj.obj_idx] = None
 
         # Remove from objects_index_map
         cdef unordered_map[string, vector[size_t]].iterator it = self.objects_index_map.find(to_upper(obj.c_class_name))
@@ -1006,7 +1006,7 @@ cdef class IDF:
 
         for i in range(deref(it).second.size()):
             obj_idx = deref(it).second[i]
-            obj = self.objects_temp[obj_idx]
+            obj = self.objects[obj_idx]
 
             if obj is None: continue  # ignore tombstones (removed)
 
@@ -1036,7 +1036,7 @@ cdef class IDF:
                         <int>field_idx,
                     )
 
-            self.objects_temp[obj_idx] = None  # tombstone
+            self.objects[obj_idx] = None  # tombstone
             obj.parent_idf = None  # remove reference to this IDF
             removed_count += 1
 
@@ -1081,7 +1081,7 @@ cdef class IDF:
         # Write to buffer
         if preserve_order:
             # Preserve original object order
-            for obj in self.objects_temp:
+            for obj in self.objects:
                 if obj is None: continue  # ignore tombstones (removed)
                 out_buffer.push_back(<char>b'\n')
                 obj.write_to_buffer(out_buffer, config)
@@ -1109,7 +1109,7 @@ cdef class IDF:
                 # Write objects
                 for j in range(deref(it).second.size()):
                     obj_idx = deref(it).second[j]
-                    obj = self.objects_temp[obj_idx]
+                    obj = self.objects[obj_idx]
                     if obj is None: continue  # ignore tombstones (removed)
                     # Add newline
                     out_buffer.push_back(<char>b'\n')
