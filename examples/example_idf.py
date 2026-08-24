@@ -143,6 +143,44 @@ def example_idf_tuple():
 
     print(zones[0])
 
+def example_idf_references():
+    idd = IDD.from_file("./idds/V24-2-0-Energy+.idd")
+    idf = IDF.from_file(idd, "./files/RefBldgMediumOfficeNew2004_Chicago.idf")
+
+    surf = idf["BuildingSurface:Detailed"][0]
+    print(surf.get_referenced_object("Zone Name"))
+
+    zone = idf["Zone"][0]
+    referencers = zone.get_referencing_objects("Name")
+    print(len(referencers))
+    # print(referencers)
+
+    print()
+    print("== Add object ====")
+
+    surf["Zone Name"] = "test"
+    print(surf.get_referenced_object("Zone Name"))
+    idf.add_object("Zone", ["test"])
+    print(surf.get_referenced_object("Zone Name"))
+
+    print()
+    print("== Remove object ====")
+
+    idf.remove_object(referencers[0])
+    print(sorted(set(obj.class_name for obj in zone.get_referencing_objects("Name"))))
+    print(len(zone.get_referencing_objects("Name")))
+
+    referencer_count = len(zone.get_referencing_objects("Name"))
+    referencing_surfs_count = len([
+        obj
+        for obj in zone.get_referencing_objects("Name")
+        if obj.class_name.lower() == "BuildingSurface:Detailed".lower()
+    ])
+    idf.remove_all_objects("BuildingSurface:Detailed")
+    print(referencer_count)
+    print(referencing_surfs_count)
+    print(referencer_count - referencing_surfs_count == len(zone.get_referencing_objects("Name")))
+
 def measure_idf_format_size():
     idd = IDD.from_file("./idds/V24-2-0-Energy+.idd")
     idf = IDF.from_file(idd, "./files/RefBldgMediumOfficeNew2004_Chicago.idf")
@@ -182,8 +220,9 @@ def example_save():
     idf.save("./files/ExportTest.idf")
 
 if __name__ == "__main__":
-    example_idf()
+    # example_idf()
     # example_idf_format()
     # example_idf_tuple()
+    example_idf_references()
     # measure_idf_format_size()
     # example_save()

@@ -12,6 +12,7 @@ def example_utils():
     print(repr(utils.debug_to_upper("ssd!@SFD")))
     print(repr(utils.debug_equal_fold("ssd!@SFD가", "SsD!@sfD가")))
     print(repr(utils.debug_trim_string("  A$ test\n\t")))
+    print(repr(utils.debug_trim_newlines("\n\r  A$ test\n\t\n")))
 
     print()
     print("== has_prefix test ====")

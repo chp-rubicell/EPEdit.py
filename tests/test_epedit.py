@@ -13,14 +13,16 @@ def idd():
     """Load IDD"""
     return IDD.from_file(str(TEST_DIR/"data/V24-2-0-Energy+.idd"))
 
-@pytest.fixture(scope="module")
+# @pytest.fixture(scope="module")
+@pytest.fixture
 def idf(idd: IDD):
     return IDF.from_file(
         idd,
         str(TEST_DIR/"data/RefBldgMediumOfficeNew2004_Chicago.idf")
     )
 
-@pytest.fixture(scope="module")
+# @pytest.fixture(scope="module")
+@pytest.fixture
 def idf_simple(idd: IDD):
     return IDF.from_file(
         idd,
@@ -169,3 +171,41 @@ IDF_FMT_COMPACT_EXAMPLE = "Version,24.2;\n\nSimulationControl,YES,YES,YES,YES,NO
 def test_idf_format_output(idf_simple: IDF):
     assert idf_simple.format(0, 4, 24) == IDF_FMT_DEFAULT_EXAMPLE
     assert idf_simple.format(compact=True) == IDF_FMT_COMPACT_EXAMPLE
+
+
+def test_idf_references(idf: IDF):
+
+    # ——— Basics ——————
+    surf = idf["BuildingSurface:Detailed"][0]
+    ref_zone = surf.get_referenced_object("Zone Name")
+    assert ref_zone.class_name == "Zone"
+    assert ref_zone["Name"] == surf["Zone Name"]
+
+    zone = idf["Zone"][0]
+    referencers = zone.get_referencing_objects("Name")
+    assert len(referencers) == 15
+    # print(referencers)
+
+    # ——— Add object ——————
+    surf["Zone Name"] = "test"
+    assert surf.get_referenced_object("Zone Name") is None
+    idf.add_object("Zone", ["test"])
+    ref_zone = surf.get_referenced_object("Zone Name")
+    assert ref_zone.class_name == "Zone"
+    assert ref_zone["Name"] == "test"
+
+    # ——— Remove object ——————
+    idf.remove_object(referencers[0])
+    assert sorted(set(obj.class_name for obj in zone.get_referencing_objects("Name"))) \
+            == ['BuildingSurface:Detailed', 'ElectricEquipment', 'InternalMass', 'Lights', 'People', 'Sizing:Zone', 'WaterUse:Equipment', 'ZoneControl:Thermostat', 'ZoneHVAC:EquipmentConnections']
+
+    referencer_count = len(zone.get_referencing_objects("Name"))
+    assert referencer_count == 14
+    referencing_surfs_count = len([
+        obj
+        for obj in zone.get_referencing_objects("Name")
+        if obj.class_name.lower() == "BuildingSurface:Detailed".lower()
+    ])
+    assert referencing_surfs_count == 5
+    idf.remove_all_objects("BuildingSurface:Detailed")
+    assert referencer_count - referencing_surfs_count == len(zone.get_referencing_objects("Name"))
