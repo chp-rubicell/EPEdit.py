@@ -59,7 +59,7 @@ class IDFObject:
     def get_referenced_objects(self, key=None) -> IDFObjectTuple:
         """
         Return objects referenced by this object.
-        If key is None, search for all fields.
+        ex. (BuildingSurface:Detailed)["Zone Name"] -> (Zone)
 
         Args:
             key (int | str): field index or field name (case-insensitive)
@@ -72,7 +72,7 @@ class IDFObject:
     def get_referencing_objects(self, key=None) -> IDFObjectTuple:
         """
         Return objects that are referencing this object.
-        If key is None, search for all fields.
+        ex. (Zone)["Name"] -> (BuildingSurface:Detailed), (People), (Lights), (Sizing:Zone), ...
 
         Args:
             key (int | str): field index or field name (case-insensitive)

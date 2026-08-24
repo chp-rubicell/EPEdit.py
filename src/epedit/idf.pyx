@@ -391,6 +391,7 @@ cdef class IDFObject:
     def get_referenced_objects(self, key):
         """
         Return objects referenced by this object.
+        ex. (BuildingSurface:Detailed)["Zone Name"] -> (Zone)
 
         Args:
             key (int | str): field index or field name (case-insensitive)
@@ -448,10 +449,10 @@ cdef class IDFObject:
 
         return IDFObjectTuple(result)
 
-    def get_referencing_objects(self, key=None):
+    def get_referencing_objects(self, key):
         """
         Return objects that are referencing this object.
-        If key is None, search for all fields.
+        ex. (Zone)["Name"] -> (BuildingSurface:Detailed), (People), (Lights), (Sizing:Zone), ...
 
         Args:
             key (int | str): field index or field name (case-insensitive)
@@ -918,7 +919,7 @@ cdef class IDF:
         # Check if the object is part of this IDF
         if (
             obj.parent_idf is not self
-            or obj.obj_idx > <size_t>len(self.objects_temp)
+            or obj.obj_idx >= <size_t>len(self.objects_temp)
             or self.objects_temp[obj.obj_idx] is not obj
         ):
             raise ValueError("Error: The object belongs to a different IDF model or is detached.")
@@ -928,7 +929,6 @@ cdef class IDF:
 
         # Remove from objects_index_map
         cdef unordered_map[string, vector[size_t]].iterator it = self.objects_index_map.find(to_upper(obj.c_class_name))
-
         if it == self.objects_index_map.end():
             raise ValueError("Error: The object belongs to a different IDF model or is detached.")
 
@@ -978,13 +978,14 @@ cdef class IDF:
         cdef string search_key = to_upper(class_name.encode("utf-8"))
 
         cdef unordered_map[string, vector[size_t]].iterator it = self.objects_index_map.find(search_key)
-
         # If key was not found or the vector is empty
         if it == self.objects_index_map.end() or deref(it).second.empty():
             return 0
 
-        cdef size_t i, obj_idx
+        cdef size_t i, j, obj_idx, field_idx
         cdef IDFObject obj
+        cdef const ClassDef* cls = NULL  # get pointer from the first object
+        cdef const FieldDef* field
         cdef int removed_count = 0
 
         for i in range(deref(it).second.size()):
@@ -993,7 +994,31 @@ cdef class IDF:
 
             if obj is None: continue  # ignore tombstones (removed)
 
-            # TODO unregister
+            # Get ClassDef*
+            if cls == NULL:
+                cls = obj.get_class_def()
+
+            # Unregister references
+            for field_idx in range(obj.values.size()):
+                if obj.values[field_idx].empty():
+                    continue
+                field = get_field_def(cls, field_idx)
+                if field == NULL:
+                    continue
+                for j in range(field.references.size()):
+                    self.unregister_target(
+                        field.references[j],
+                        obj.values[field_idx],
+                        obj.obj_idx,
+                        <int>field_idx,
+                    )
+                for j in range(field.object_lists.size()):
+                    self.unregister_referencer(
+                        field.object_lists[j],
+                        obj.values[field_idx],
+                        obj.obj_idx,
+                        <int>field_idx,
+                    )
 
             self.objects_temp[obj_idx] = None  # tombstone
             obj.parent_idf = None  # remove reference to this IDF
