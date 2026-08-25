@@ -46,12 +46,12 @@ print(building)
 obj = idf.add_object(
     "RunPeriod",
     {
-        "Name":                      "New Annual Run",
-        "Begin Month":               1,
-        "Begin Day of Month":        1,
-        "End Month":                 12,
-        "End Day of Month":          31,
-        "Day of Week for Start Day": "Monday",
+        "Name"                      : "New Annual Run",
+        "Begin Month"               : 1,
+        "Begin Day of Month"        : 1,
+        "End Month"                 : 12,
+        "End Day of Month"          : 31,
+        "Day of Week for Start Day" : "Monday",
     },
 )
 
@@ -59,11 +59,11 @@ obj = idf.add_object(
 obj = idf.add_object(
     "Material",
     {
-    "Name":          "New Insulation",
-    "Thickness":     0.05,
-    "Conductivity":  0.0314,
-    "Density":       265,
-    "Specific Heat": 836.8,
+        "Name"          : "New Insulation",
+        "Thickness"     : 0.05,
+        "Conductivity"  : 0.0314,
+        "Density"       : 265,
+        "Specific Heat" : 836.8,
     },
     False,
 )

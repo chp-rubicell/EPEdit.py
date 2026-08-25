@@ -38,12 +38,12 @@ from epedit import IDD, IDF
 
 ### Open IDD and IDF files
 
-**Load the EnergyPlus IDD schema.**
+**Load the EnergyPlus IDD schema**
 ```python
 idd = IDD.from_file("Energy+.idd")
 ```
 
-**Load an existing IDF file using the parsed IDD.**
+**Load an existing IDF file using the parsed IDD**
 ```python
 idf = IDF.from_file(idd, "input.idf")
 ```
@@ -73,18 +73,18 @@ for sch_type_limits in idf.get_objects("ScheduleTypeLimits"):
 
 ### Find and update objects
 
-**Find an object by class name and object name.**
+**Find an object by class name and object name**
 ```python
 building = idf.get_object_by_name("Building", "My Building")
 ```
 
-**Update fields by their IDD field names.**
+**Update fields by their IDD field names**
 ```python
 building["North Axis"] = 0.0
 building["Terrain"] = "City"
 ```
 
-**Update multiple fields.**
+**Update multiple fields**
 ```python
 building.update({
     "Maximum Number of Warmup Days": 50,
@@ -108,31 +108,31 @@ Building,
 
 ### Add new objects
 
-**Add a new object with initial field values.**
+**Add a new object with initial field values**
 ```python
 obj = idf.add_object(
     "RunPeriod",
     {
-        "Name":                      "New Annual Run",
-        "Begin Month":               1,
-        "Begin Day of Month":        1,
-        "End Month":                 12,
-        "End Day of Month":          31,
-        "Day of Week for Start Day": "Monday",
+        "Name"                      : "New Annual Run",
+        "Begin Month"               : 1,
+        "Begin Day of Month"        : 1,
+        "End Month"                 : 12,
+        "End Day of Month"          : 31,
+        "Day of Week for Start Day" : "Monday",
     },
 )
 ```
 
-**Add a new object without default values.**
+**Add a new object without default values**
 ```python
 obj = idf.add_object(
     "Material",
     {
-        "Name":          "New Insulation",
-        "Thickness":     0.05,
-        "Conductivity":  0.0314,
-        "Density":       265,
-        "Specific Heat": 836.8,
+        "Name"          : "New Insulation",
+        "Thickness"     : 0.05,
+        "Conductivity"  : 0.0314,
+        "Density"       : 265,
+        "Specific Heat" : 836.8,
     },
     False,
 )
@@ -146,7 +146,7 @@ success = idf.remove_object(obj)
 ```
 
 ### Find referenced/referencing objects
-**Find a referenced object.**
+**Find referenced object**
 ```python
 surf = idf["BuildingSurface:Detailed"][0]
 print(surf)
@@ -170,7 +170,7 @@ Zone,
     ...
 </pre>
 
-**Find referencing objects.**
+**Find referencing objects**
 ```python
 referencers = zone.get_referencing_objects("Name")
 print(len(referencers))
