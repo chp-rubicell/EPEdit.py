@@ -69,7 +69,7 @@ cdef int parse_idd(Lexer lexer, c_IDD& c_idd) except -1 nogil
 cdef class IDD:
     cdef c_IDD c_idd
     cdef cbool initialized  # to check if already initialized
-    cdef readonly str version
+    cdef readonly str version  # IDD version
 
     cdef int c_init(self, bytes idd_content) except -1
 

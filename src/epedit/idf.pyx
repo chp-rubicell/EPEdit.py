@@ -1186,9 +1186,7 @@ cdef class IDF:
             field_size (int): Minimum size for field values
             compact (bint, optional): Whether to enable compact output. Overrides other style settings
             preserve_order (bint, optional): Whether to preserve object order
-
-        Returns:
-            str: IDF str
+            include_timestamp (bint, optional): Whether to include timestamp
         """
         cdef const FormatConfig* config
         cdef FormatConfig temp_config

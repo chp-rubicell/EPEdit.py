@@ -240,6 +240,7 @@ class IDF:
         *,
         compact          : bool = False,
         preserve_order   : bool = False,
+        include_timestamp: bool = True,
     ):
         """
         Convert IDF to str with format config
@@ -249,10 +250,8 @@ class IDF:
             class_indent_size (int): Indent for class names
             field_indent_size (int): Indent for fields
             field_size (int): Minimum size for field values
-            compact (bint, optional): Whether to enable compact output. Overrides other style settings
-            preserve_order (bint, optional): Whether to preserve object order
-
-        Returns:
-            str: IDF str
+            compact (bool, optional): Whether to enable compact output. Overrides other style settings
+            preserve_order (bool, optional): Whether to preserve object order
+            include_timestamp (bool, optional): Whether to include timestamp
         """
         ...

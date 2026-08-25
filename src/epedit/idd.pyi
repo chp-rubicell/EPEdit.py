@@ -8,8 +8,13 @@ class IDD:
     # ——— Properties ——————
 
     @property
+    def version(self) -> str:
+        """IDD version"""
+        ...
+
+    @property
     def num_classes(self) -> int:
-        """Returns the total number of classes parsed."""
+        """Total number of parsed classes"""
         ...
 
     # ——— Initializations ——————

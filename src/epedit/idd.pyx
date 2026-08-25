@@ -429,7 +429,7 @@ cdef class IDD:
 
     @property
     def num_classes(self) -> int:
-        """Returns the total number of classes parsed."""
+        """Total number of parsed classes"""
         return self.c_idd.ordered_classes.size()
 
     # ——— Initializations ——————
