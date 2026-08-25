@@ -133,6 +133,42 @@ obj = idf.get_object_by_name("RunPeriod", "annual")
 success = idf.remove_object(obj)
 ```
 
+### Find referenced/referencing objects
+```python
+# Find referenced object
+surf = idf["BuildingSurface:Detailed"][0]
+print(surf)
+zone = surf.get_referenced_object("Zone Name")
+print(zone)
+```
+<pre>
+BuildingSurface:Detailed,
+    Building_Roof,           !- Name
+    Roof,                    !- Surface Type
+    IEAD Non-res Roof,       !- Construction Name
+    <b>TopFloor_Plenum</b>,         !- Zone Name
+    ...
+</pre>
+<pre>
+Zone,
+    <b>TopFloor_Plenum</b>,         !- Name
+    0.0000,                  !- Direction of Relative North {deg}
+    0.0000,                  !- X Origin {m}
+    0.0000,                  !- Y Origin {m}
+    ...
+</pre>
+
+```python
+# Find referencing object
+referencers = zone.get_referencing_objects("Name")
+print(len(referencers))
+print(set(obj.class_name for obj in zone.get_referencing_objects("Name")))
+```
+```
+12
+{'AirLoopHVAC:ReturnPlenum', 'BuildingSurface:Detailed', 'ZoneInfiltration:DesignFlowRate'}
+```
+
 ### Save IDF files
 ```python
 # Save the modified IDF file.

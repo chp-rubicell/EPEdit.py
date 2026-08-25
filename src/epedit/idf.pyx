@@ -26,6 +26,8 @@ from .utils cimport (
 #     double stod(const string& str) except +
 #     int stoi(const string& str) except +
 
+# TODO add node reference support
+
 
 # * Export config definition
 

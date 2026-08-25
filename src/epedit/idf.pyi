@@ -56,7 +56,7 @@ class IDFObject:
 
     # ——— Get references ——————
 
-    def get_referenced_object(self, key=None) -> IDFObject|None:
+    def get_referenced_object(self, key) -> IDFObject|None:
         """
         Return objects referenced by this object.
         ex. (BuildingSurface:Detailed)["Zone Name"] -> (Zone)
@@ -69,7 +69,7 @@ class IDFObject:
         """
         ...
 
-    def get_referencing_objects(self, key=None) -> IDFObjectTuple:
+    def get_referencing_objects(self, key) -> IDFObjectTuple:
         """
         Return objects that are referencing this object.
         ex. (Zone)["Name"] -> [(BuildingSurface:Detailed), (People), (Lights), (Sizing:Zone), ...]

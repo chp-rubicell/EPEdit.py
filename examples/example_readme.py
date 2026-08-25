@@ -74,6 +74,19 @@ obj = idf.add_object(
 obj = idf.get_object_by_name("RunPeriod", "annual")
 success = idf.remove_object(obj)
 
+# * Find referenced/referencing objects
+
+# Find referenced object
+surf = idf["BuildingSurface:Detailed"][0]
+print(surf)
+zone = surf.get_referenced_object("Zone Name")
+print(zone)
+
+# Find referencing object
+referencers = zone.get_referencing_objects("Name")
+print(len(referencers))
+print(set(obj.class_name for obj in zone.get_referencing_objects("Name")))
+
 # * Save IDF files
 
 # Save the modified IDF file.
