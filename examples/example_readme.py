@@ -13,13 +13,16 @@ idd = IDD.from_file("idds/V24-2-0-Energy+.idd")
 # Load an existing IDF file using the parsed IDD.
 idf = IDF.from_file(idd, "files/input.idf")
 
+# Load IDF from string
+idf_from_str = IDF.from_string(idd, "Version, 24.2;")
+
 # * Iterate over objects
 
 # Iterate over objects using idf[classname]
 for sch_type_limits in idf["ScheduleTypeLimits"]:
     print(sch_type_limits["Name"])
 
-# or idf.get_objects(classname)
+# ... or idf.get_objects(classname)
 for sch_type_limits in idf.get_objects("ScheduleTypeLimits"):
     print(sch_type_limits["Name"])
 
@@ -90,4 +93,4 @@ print(set(obj.class_name for obj in referencers))
 # * Save IDF files
 
 # Save the modified IDF file.
-# idf.save("files/output.idf")
+idf.save("files/output.idf")

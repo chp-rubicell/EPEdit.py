@@ -48,6 +48,11 @@ idd = IDD.from_file("Energy+.idd")
 idf = IDF.from_file(idd, "input.idf")
 ```
 
+**Load IDF from string**
+```python
+idf = IDF.from_string(idd, "Version, 24.2;")
+```
+
 ### Iterate over objects
 
 **Iterate over objects using `idf[classname]`**
@@ -65,7 +70,7 @@ Humidity
 Number
 ```
 
-**...or `idf.get_objects(classname)`**
+**... or `idf.get_objects(classname)`**
 ```python
 for sch_type_limits in idf.get_objects("ScheduleTypeLimits"):
     print(sch_type_limits["Name"])
