@@ -32,6 +32,10 @@ def idf_simple(idd: IDD):
 
 # * IDD test
 
+def test_idd_empty():
+    assert IDD.from_string("").version == ""
+    assert IDD.from_string("Version,\n\\memo Specifies the EnergyPlus version of the IDF file.\n\\unique-object\n\\format singleLine\nA1 ; \\field Version Identifier\n\\default 24.2\n").version == "24.2"
+
 def test_idd_parser(idd: IDD):
     assert idd.num_classes == 848
 

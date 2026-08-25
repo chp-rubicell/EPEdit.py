@@ -30,22 +30,28 @@ See [`examples/example_readme.py`](https://github.com/chp-rubicell/EPEdit.py/blo
 > [!NOTE]
 > To use *EPEdit.py* with minimal changes to an existing [*eppy*](https://github.com/santoshphilip/eppy) codebase, see [eppy compatibility mode](#eppy-compatibility-mode).
 
-### Open IDD and IDF files
+### Import
 
 ```python
 from epedit import IDD, IDF
+```
 
-# Load the EnergyPlus IDD schema.
+### Open IDD and IDF files
+
+**Load the EnergyPlus IDD schema.**
+```python
 idd = IDD.from_file("Energy+.idd")
+```
 
-# Load an existing IDF file using the parsed IDD.
+**Load an existing IDF file using the parsed IDD.**
+```python
 idf = IDF.from_file(idd, "input.idf")
 ```
 
 ### Iterate over objects
 
+**Iterate over objects using `idf[classname]`**
 ```python
-# Iterate over objects using idf[classname]
 for sch_type_limits in idf["ScheduleTypeLimits"]:
     print(sch_type_limits["Name"])
 ```
@@ -59,28 +65,33 @@ Humidity
 Number
 ```
 
+**...or `idf.get_objects(classname)`**
 ```python
-# or idf.get_objects(classname)
 for sch_type_limits in idf.get_objects("ScheduleTypeLimits"):
     print(sch_type_limits["Name"])
 ```
 
 ### Find and update objects
 
+**Find an object by class name and object name.**
 ```python
-# Find an object by class name and object name.
 building = idf.get_object_by_name("Building", "My Building")
+```
 
-# Update fields by their IDD field names.
+**Update fields by their IDD field names.**
+```python
 building["North Axis"] = 0.0
 building["Terrain"] = "City"
+```
 
-# Update multiple fields
+**Update multiple fields.**
+```python
 building.update({
     "Maximum Number of Warmup Days": 50,
     "Minimum Number of Warmup Days": 5,
 })
-
+```
+```python
 print(building)
 ```
 ```
@@ -97,8 +108,8 @@ Building,
 
 ### Add new objects
 
+**Add a new object with initial field values.**
 ```python
-# Add a new object with initial field values.
 obj = idf.add_object(
     "RunPeriod",
     {
@@ -110,8 +121,10 @@ obj = idf.add_object(
         "Day of Week for Start Day": "Monday",
     },
 )
+```
 
-# Add a new object without default values.
+**Add a new object without default values.**
+```python
 obj = idf.add_object(
     "Material",
     {
@@ -128,14 +141,13 @@ obj = idf.add_object(
 ### Remove objects
 
 ```python
-# Remove an object
 obj = idf.get_object_by_name("RunPeriod", "annual")
 success = idf.remove_object(obj)
 ```
 
 ### Find referenced/referencing objects
+**Find a referenced object.**
 ```python
-# Find referenced object
 surf = idf["BuildingSurface:Detailed"][0]
 print(surf)
 zone = surf.get_referenced_object("Zone Name")
@@ -158,11 +170,11 @@ Zone,
     ...
 </pre>
 
+**Find referencing objects.**
 ```python
-# Find referencing object
 referencers = zone.get_referencing_objects("Name")
 print(len(referencers))
-print(set(obj.class_name for obj in zone.get_referencing_objects("Name")))
+print(set(obj.class_name for obj in referencers))
 ```
 ```
 12
@@ -171,7 +183,6 @@ print(set(obj.class_name for obj in zone.get_referencing_objects("Name")))
 
 ### Save IDF files
 ```python
-# Save the modified IDF file.
 idf.save("output.idf")
 ```
 

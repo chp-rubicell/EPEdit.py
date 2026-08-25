@@ -82,12 +82,12 @@ print(surf)
 zone = surf.get_referenced_object("Zone Name")
 print(zone)
 
-# Find referencing object
+# Find referencing objects
 referencers = zone.get_referencing_objects("Name")
 print(len(referencers))
-print(set(obj.class_name for obj in zone.get_referencing_objects("Name")))
+print(set(obj.class_name for obj in referencers))
 
 # * Save IDF files
 
 # Save the modified IDF file.
-idf.save("files/output.idf")
+# idf.save("files/output.idf")
