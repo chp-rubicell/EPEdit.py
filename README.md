@@ -82,7 +82,7 @@ building = idf.get_object_by_name("Building", "My Building")
 building["North Axis"] = 0.0
 building["Terrain"] = "City"
 
-# Update fields by their indices.
+# Update fields by their indices
 building[5] = "FullExterior"
 
 # Update multiple fields
