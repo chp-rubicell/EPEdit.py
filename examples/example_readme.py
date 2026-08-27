@@ -7,10 +7,10 @@ from epedit import IDD, IDF
 
 # * Open IDD and IDF files
 
-# Load the EnergyPlus IDD schema.
+# Load the EnergyPlus IDD schema
 idd = IDD.from_file("idds/V24-2-0-Energy+.idd")
 
-# Load an existing IDF file using the parsed IDD.
+# Load an existing IDF file using the parsed IDD
 idf = IDF.from_file(idd, "files/input.idf")
 
 # Load IDF from string
@@ -28,14 +28,14 @@ for sch_type_limits in idf.get_objects("ScheduleTypeLimits"):
 
 # * Find and update objects
 
-# Find an object by class name and object name.
+# Find an object by class name and object name
 building = idf.get_object_by_name("Building", "My Building")
 
-# Update fields by their IDD field names.
+# Update fields by their names
 building["North Axis"] = 0.0
 building["Terrain"] = "City"
 
-# Update fields by their indices.
+# Update fields by their indices
 building[5] = "FullExterior"
 
 # Update multiple fields
@@ -48,7 +48,7 @@ print(building)
 
 # * Add new objects
 
-# Add a new object with initial field values.
+# Add a new object with initial field values
 obj = idf.add_object(
     "RunPeriod",
     {
@@ -61,7 +61,7 @@ obj = idf.add_object(
     },
 )
 
-# Add a new object without default values.
+# Add a new object without default values
 obj = idf.add_object(
     "Material",
     {

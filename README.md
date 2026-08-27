@@ -78,7 +78,7 @@ for sch_type_limits in idf.get_objects("ScheduleTypeLimits"):
 # Find an object by class name and object name
 building = idf.get_object_by_name("Building", "My Building")
 
-# Update fields by their IDD field names
+# Update fields by their names
 building["North Axis"] = 0.0
 building["Terrain"] = "City"
 

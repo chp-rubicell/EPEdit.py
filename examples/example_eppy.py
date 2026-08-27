@@ -9,10 +9,10 @@ from epedit.eppy import IDF
 
 # * Open IDF files
 
-# Load the EnergyPlus IDD schema.
+# Load the EnergyPlus IDD schema
 IDF.setiddname("idds/V24-2-0-Energy+.idd")
 
-# Load an existing IDF file.
+# Load an existing IDF file
 idf = IDF("files/input.idf")
 
 # * Iterate over objects
@@ -23,10 +23,10 @@ for sch_type_limits in idf.idfobjects["ScheduleTypeLimits"]:
 
 # * Find and update objects
 
-# Find an object by class name and object name.
+# Find an object by class name and object name
 building = idf.getobject("Building", "My Building")
 
-# Update fields by their IDD field names.
+# Update fields by their names
 building.North_Axis = 0.0
 building.Terrain = "City"
 
@@ -34,7 +34,7 @@ print(building)
 
 # * Add new objects
 
-# Add a new object with initial field values.
+# Add a new object with initial field values
 obj = idf.newidfobject(
     "RunPeriod",
     Name                      = "New Annual Run",
@@ -45,7 +45,7 @@ obj = idf.newidfobject(
     Day_of_Week_for_Start_Day = "Monday",
 )
 
-# Add a new object without default values.
+# Add a new object without default values
 obj = idf.newidfobject(
     "Material",
     defaultvalues = False,
