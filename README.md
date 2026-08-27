@@ -62,15 +62,15 @@ for sch_type_limits in idf["ScheduleTypeLimits"]:
 for sch_type_limits in idf.get_objects("ScheduleTypeLimits"):
     print(sch_type_limits["Name"])
 ```
-```
-Any Number
-Fraction
-Temperature
-On/Off
-Control Type
-Humidity
-Number
-```
+> ```
+> Any Number
+> Fraction
+> Temperature
+> On/Off
+> Control Type
+> Humidity
+> Number
+> ```
 
 ### Find and update objects
 
@@ -90,17 +90,17 @@ building.update({
 
 print(building)
 ```
-```
-Building,
-    My Building,             !- Name
-    0.0,                     !- North Axis {deg}
-    City,                    !- Terrain
-    0.0400,                  !- Loads Convergence Tolerance Value {W}
-    0.2000,                  !- Temperature Convergence Tolerance Value {deltaC}
-    FullInteriorAndExterior, !- Solar Distribution
-    50,                      !- Maximum Number of Warmup Days
-    5;                       !- Minimum Number of Warmup Days
-```
+> ```
+> Building,
+>     My Building,             !- Name
+>     0.0,                     !- North Axis {deg}
+>     City,                    !- Terrain
+>     0.0400,                  !- Loads Convergence Tolerance Value {W}
+>     0.2000,                  !- Temperature Convergence Tolerance Value {deltaC}
+>     FullInteriorAndExterior, !- Solar Distribution
+>     50,                      !- Maximum Number of Warmup Days
+>     5;                       !- Minimum Number of Warmup Days
+> ```
 
 ### Add new objects
 
@@ -150,22 +150,22 @@ print(surf)
 zone = surf.get_referenced_object("Zone Name")
 print(zone)
 ```
-<pre>
-BuildingSurface:Detailed,
-    Building_Roof,           !- Name
-    Roof,                    !- Surface Type
-    IEAD Non-res Roof,       !- Construction Name
-    <b>TopFloor_Plenum</b>,         !- Zone Name
-    ...
-</pre>
-<pre>
-Zone,
-    <b>TopFloor_Plenum</b>,         !- Name
-    0.0000,                  !- Direction of Relative North {deg}
-    0.0000,                  !- X Origin {m}
-    0.0000,                  !- Y Origin {m}
-    ...
-</pre>
+> <pre>
+> BuildingSurface:Detailed,
+>     Building_Roof,           !- Name
+>     Roof,                    !- Surface Type
+>     IEAD Non-res Roof,       !- Construction Name
+>     <b>TopFloor_Plenum</b>,         !- Zone Name
+>     ...
+> </pre>
+> <pre>
+> Zone,
+>     <b>TopFloor_Plenum</b>,         !- Name
+>     0.0000,                  !- Direction of Relative North {deg}
+>     0.0000,                  !- X Origin {m}
+>     0.0000,                  !- Y Origin {m}
+>     ...
+> </pre>
 
 ```python
 # Find referencing objects
@@ -173,10 +173,10 @@ referencers = zone.get_referencing_objects("Name")
 print(len(referencers))
 print(set(obj.class_name for obj in referencers))
 ```
-```
-12
-{'AirLoopHVAC:ReturnPlenum', 'BuildingSurface:Detailed', 'ZoneInfiltration:DesignFlowRate'}
-```
+> ```
+> 12
+> {'AirLoopHVAC:ReturnPlenum', 'BuildingSurface:Detailed', 'ZoneInfiltration:DesignFlowRate'}
+> ```
 
 ### Save IDF files
 ```python
