@@ -189,7 +189,7 @@ class IDF:
         """
         ...
 
-    def remove_object(self, obj: IDFObject):
+    def remove_object(self, obj: IDFObject) -> None:
         """Remove object from IDF"""
         ...
 
