@@ -82,6 +82,9 @@ building = idf.get_object_by_name("Building", "My Building")
 building["North Axis"] = 0.0
 building["Terrain"] = "City"
 
+# Update fields by their indices.
+building[5] = "FullExterior"
+
 # Update multiple fields
 building.update({
     "Maximum Number of Warmup Days": 50,
@@ -90,17 +93,17 @@ building.update({
 
 print(building)
 ```
-> ```
+> <pre>
 > Building,
 >     My Building,             !- Name
->     0.0,                     !- North Axis {deg}
->     City,                    !- Terrain
+>     <b>0.0</b>,                     !- North Axis {deg}
+>     <b>City</b>,                    !- Terrain
 >     0.0400,                  !- Loads Convergence Tolerance Value {W}
 >     0.2000,                  !- Temperature Convergence Tolerance Value {deltaC}
->     FullInteriorAndExterior, !- Solar Distribution
->     50,                      !- Maximum Number of Warmup Days
->     5;                       !- Minimum Number of Warmup Days
-> ```
+>     <b>FullExterior</b>,            !- Solar Distribution
+>     <b>50</b>,                      !- Maximum Number of Warmup Days
+>     <b>5</b>;                       !- Minimum Number of Warmup Days
+> </pre>
 
 ### Add new objects
 
